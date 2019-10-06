@@ -91,6 +91,31 @@ export interface UploadPaperMandateVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetMember
+// ====================================================
+
+export interface GetMember_member {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  language: Language;
+}
+
+export interface GetMember {
+  member: GetMember_member | null;
+}
+
+export interface GetMemberVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetMembers
 // ====================================================
 

@@ -8,6 +8,7 @@ import Login from '../../pages/auth/login/Login';
 import Logout from '../../pages/auth/logout/Logout';
 import OAuth from '../../pages/auth/oauth/OAuth';
 import Members from '../../pages/members/Members';
+import Member from '../../pages/member/Member';
 
 const Main = () => {
     return (
@@ -21,6 +22,7 @@ const Main = () => {
                     <AuthRoute exact path="/logout" component={Logout} />
 
                     <AdminRoute exact path="/members" component={Members} />
+                    <AdminRoute exact path="/members/:memberId" component={Member} />
                 </Switch>
             </ErrorBoundary>
         </main>
