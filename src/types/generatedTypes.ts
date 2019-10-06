@@ -94,6 +94,20 @@ export interface UploadPaperMandateVariables {
 // GraphQL query operation: GetMember
 // ====================================================
 
+export interface GetMember_member_mandates {
+  __typename: "DigitalMandate" | "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+}
+
 export interface GetMember_member {
   __typename: "Member";
   id: string;
@@ -101,6 +115,7 @@ export interface GetMember_member {
   lastName: string;
   email: string;
   language: Language;
+  mandates: GetMember_member_mandates[];
 }
 
 export interface GetMember {
@@ -119,6 +134,20 @@ export interface GetMemberVariables {
 // GraphQL query operation: GetMembers
 // ====================================================
 
+export interface GetMembers_members_mandates {
+  __typename: "DigitalMandate" | "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+}
+
 export interface GetMembers_members {
   __typename: "Member";
   id: string;
@@ -126,6 +155,7 @@ export interface GetMembers_members {
   lastName: string;
   email: string;
   language: Language;
+  mandates: GetMembers_members_mandates[];
 }
 
 export interface GetMembers {
@@ -225,6 +255,28 @@ export interface FileFragment {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL fragment: MandateFragment
+// ====================================================
+
+export interface MandateFragment {
+  __typename: "DigitalMandate" | "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: MemberFragment
 // ====================================================
 
@@ -279,6 +331,15 @@ export interface UserFragment {
 export enum Language {
   EN = "EN",
   NL = "NL",
+}
+
+export enum MandateStatus {
+  ACCEPTED = "ACCEPTED",
+  CANCELLED = "CANCELLED",
+  ERROR = "ERROR",
+  INVALID = "INVALID",
+  REJECTED = "REJECTED",
+  UNACCEPTED = "UNACCEPTED",
 }
 
 export enum ProviderType {

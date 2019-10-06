@@ -1,7 +1,12 @@
 # import '../fragments/Member.graphql'
+# import '../fragments/Mandate.graphql'
 
 query GetMember($id: String!) {
     member(id: $id) {
         ...MemberFragment
+
+        mandates(status: ACCEPTED) {
+            ...MandateFragment
+        }
     }
 }

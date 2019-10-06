@@ -4,6 +4,7 @@ import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
 import {Container, Header, Loader, Table} from 'semantic-ui-react';
 
+import HasMandate from '../../components/member/HasMandate';
 import TableSelectableRow from '../../components/table/TableSelectableRow';
 import GetMembers from '../../queries/GetMembers.graphql';
 import {GetMembers as GetMembersType} from '../../types/generatedTypes';
@@ -31,6 +32,7 @@ const Members = () => {
                             <Table.HeaderCell>{t('members:member.lastName', 'Last name')}</Table.HeaderCell>
                             <Table.HeaderCell>{t('members:member.email', 'Email address')}</Table.HeaderCell>
                             <Table.HeaderCell>{t('members:member.language', 'Language')}</Table.HeaderCell>
+                            <Table.HeaderCell>{t('members:member.hasMandate', 'Has mandate')}</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
@@ -40,6 +42,7 @@ const Members = () => {
                                 <Table.Cell>{member.lastName}</Table.Cell>
                                 <Table.Cell>{member.email}</Table.Cell>
                                 <Table.Cell>{member.language}</Table.Cell>
+                                <Table.Cell><HasMandate member={member} /></Table.Cell>
                             </TableSelectableRow>
                         ))}
                     </Table.Body>

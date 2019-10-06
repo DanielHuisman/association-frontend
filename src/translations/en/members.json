@@ -2,6 +2,7 @@
   "member": {
     "email": "Email address",
     "firstName": "First name",
+    "hasMandate": "Has mandate",
     "language": "Language",
     "lastName": "Last name"
   },

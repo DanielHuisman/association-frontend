@@ -2,6 +2,7 @@
   "member": {
     "email": "E-mailadres",
     "firstName": "Voornaam",
+    "hasMandate": "Has mandate",
     "language": "Taal",
     "lastName": "Achternaam"
   },

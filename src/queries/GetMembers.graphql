@@ -1,7 +1,12 @@
 # import '../fragments/Member.graphql'
+# import '../fragments/Mandate.graphql'
 
 query GetMembers {
     members {
         ...MemberFragment
+
+        mandates(status: ACCEPTED) {
+            ...MandateFragment
+        }
     }
 }

@@ -1,0 +1,17 @@
+{
+  "mandate": {
+    "acceptedAt": "Accepted at",
+    "bic": "BIC",
+    "iban": "IBAN",
+    "mandateId": "Identifier",
+    "reason": "Reason",
+    "type": "Type",
+    "types": {
+      "digital": "Digital mandate",
+      "paper": "Paper mandate"
+    }
+  },
+  "mandates": {
+    "header": "Mandates"
+  }
+}

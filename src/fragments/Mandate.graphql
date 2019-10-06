@@ -1,0 +1,12 @@
+fragment MandateFragment on Mandate {
+    id
+    mandateId
+    status
+    createdAt
+    acceptedAt
+    bic
+    iban
+    reason
+    isFirstTransaction
+    errorMessage
+}
