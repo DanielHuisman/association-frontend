@@ -31,7 +31,8 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
         <Container>
             {loading && <Loader active />}
 
-            {data && (
+            {data && !data.mandate && <>Not found</>}
+            {data && data.mandate && (
                 <>
                     <Helmet title={t('mandates:mandate.header', 'Mandate')} />
                     <Header size="huge">{t('mandates:mandate.header', 'Mandate')}</Header>

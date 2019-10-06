@@ -30,7 +30,8 @@ const Member = ({match}: RouteComponentProps<IRouteParams>) => {
         <Container>
             {loading && <Loader active />}
 
-            {data && (
+            {data && !data.member && <>Not found</>}
+            {data && data.member && (
                 <>
                     <Helmet title={`${data.member.firstName} ${data.member.lastName}`} />
                     <Header size="huge">{data.member.firstName} {data.member.lastName}</Header>

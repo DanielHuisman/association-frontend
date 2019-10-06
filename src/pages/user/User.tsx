@@ -28,7 +28,8 @@ const User = ({match}: RouteComponentProps<IRouteParams>) => {
         <Container>
             {loading && <Loader active />}
 
-            {data && (
+            {data && !data.user && <>Not found</>}
+            {data && data.user && (
                 <>
                     <Helmet title={data.user.name} />
                     <Header size="huge">{data.user.name}</Header>
