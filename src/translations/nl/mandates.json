@@ -2,6 +2,18 @@
   "mandate": {
     "acceptedAt": "Accepted at",
     "bic": "BIC",
+    "createdAt": "Created at",
+    "details": {
+      "address": "Address",
+      "association": "Association details",
+      "city": "City",
+      "creditorId": "Creditor ID",
+      "mandate": "Mandate details",
+      "member": "Member details",
+      "name": "Name",
+      "postalCode": "Postal code"
+    },
+    "header": "Mandate",
     "iban": "IBAN",
     "mandateId": "Identifier",
     "reason": "Reason",

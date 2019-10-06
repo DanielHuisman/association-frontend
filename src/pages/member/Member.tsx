@@ -6,6 +6,7 @@ import {RouteComponentProps} from 'react-router';
 import {Container, Header, Loader, Table} from 'semantic-ui-react';
 import moment from 'moment';
 
+import TableSelectableRow from '../../components/table/TableSelectableRow';
 import GetMember from '../../queries/GetMember.graphql';
 import {GetMember as GetMemberType} from '../../types/generatedTypes';
 
@@ -34,7 +35,7 @@ const Member = ({match}: RouteComponentProps<IRouteParams>) => {
                     <Helmet title={`${data.member.firstName} ${data.member.lastName}`} />
                     <Header size="huge">{data.member.firstName} {data.member.lastName}</Header>
 
-                    <Table definition stackable>
+                    <Table compact definition selectable stackable>
                         <Table.Body>
                             <Table.Row>
                                 <Table.Cell>{t('members:member.firstName', 'First name')}</Table.Cell>
@@ -57,7 +58,7 @@ const Member = ({match}: RouteComponentProps<IRouteParams>) => {
 
                     <Header size="large">{t('mandates:mandates.header', 'Mandates')}</Header>
                     {data.member.mandates.length > 0 && (
-                        <Table stackable>
+                        <Table selectable stackable>
                             <Table.Header>
                                 <Table.Row>
                                     <Table.HeaderCell>{t('mandates:mandate.mandateId', 'Identifier')}</Table.HeaderCell>
@@ -70,7 +71,7 @@ const Member = ({match}: RouteComponentProps<IRouteParams>) => {
                             </Table.Header>
                             <Table.Body>
                                 {data.member.mandates.map((mandate) => (
-                                    <Table.Row key={mandate.id}>
+                                    <TableSelectableRow key={mandate.id} to={`/mandates/${mandate.id}`}>
                                         <Table.Cell>{mandate.mandateId}</Table.Cell>
                                         <Table.Cell>{mandate.reason}</Table.Cell>
                                         <Table.Cell>
@@ -81,7 +82,7 @@ const Member = ({match}: RouteComponentProps<IRouteParams>) => {
                                         <Table.Cell>{mandate.iban}</Table.Cell>
                                         <Table.Cell>{mandate.bic}</Table.Cell>
                                         <Table.Cell>{moment(mandate.acceptedAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
-                                    </Table.Row>
+                                    </TableSelectableRow>
                                 ))}
                             </Table.Body>
                         </Table>

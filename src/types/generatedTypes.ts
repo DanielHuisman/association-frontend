@@ -91,6 +91,46 @@ export interface UploadPaperMandateVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetMandate
+// ====================================================
+
+export interface GetMandate_mandate_member {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  language: Language;
+}
+
+export interface GetMandate_mandate {
+  __typename: "DigitalMandate" | "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  member: GetMandate_mandate_member;
+}
+
+export interface GetMandate {
+  mandate: GetMandate_mandate | null;
+}
+
+export interface GetMandateVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetMember
 // ====================================================
 

@@ -11,6 +11,8 @@ import Users from '../../pages/users/Users';
 import User from '../../pages/user/User';
 import Members from '../../pages/members/Members';
 import Member from '../../pages/member/Member';
+// import Mandates from '../../pages/mandates/Mandates';
+import Mandate from '../../pages/mandate/Mandate';
 
 const Main = () => {
     return (
@@ -28,6 +30,9 @@ const Main = () => {
 
                     <AdminRoute exact path="/members" component={Members} />
                     <AdminRoute exact path="/members/:memberId" component={Member} />
+
+                    {/* <AdminRoute exact path="/mandates" component={Mandates} /> */}
+                    <AdminRoute exact path="/mandates/:mandateId" component={Mandate} />
                 </Switch>
             </ErrorBoundary>
         </main>
