@@ -1,4 +1,9 @@
 {
+  "user": {
+    "email": "Email address",
+    "name": "Name",
+    "role": "Role"
+  },
   "users": {
     "header": "Users"
   }

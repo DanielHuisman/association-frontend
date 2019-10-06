@@ -27,9 +27,9 @@ const Users = () => {
                 <Table selectable stackable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>Name</Table.HeaderCell>
-                            <Table.HeaderCell>Email address</Table.HeaderCell>
-                            <Table.HeaderCell>Role</Table.HeaderCell>
+                            <Table.HeaderCell>{t('users:user.name', 'Name')}</Table.HeaderCell>
+                            <Table.HeaderCell>{t('users:user.email', 'Email address')}</Table.HeaderCell>
+                            <Table.HeaderCell>{t('users:user.role', 'Role')}</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>

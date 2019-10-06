@@ -1,4 +1,10 @@
 {
+  "member": {
+    "email": "Email address",
+    "firstName": "First name",
+    "language": "Language",
+    "lastName": "Last name"
+  },
   "members": {
     "header": "Members"
   }

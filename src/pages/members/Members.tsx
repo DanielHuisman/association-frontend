@@ -27,10 +27,10 @@ const Members = () => {
                 <Table selectable stackable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>First name</Table.HeaderCell>
-                            <Table.HeaderCell>Last name</Table.HeaderCell>
-                            <Table.HeaderCell>Email address</Table.HeaderCell>
-                            <Table.HeaderCell>Language</Table.HeaderCell>
+                            <Table.HeaderCell>{t('members:member.firstName', 'First name')}</Table.HeaderCell>
+                            <Table.HeaderCell>{t('members:member.lastName', 'Last name')}</Table.HeaderCell>
+                            <Table.HeaderCell>{t('members:member.email', 'Email address')}</Table.HeaderCell>
+                            <Table.HeaderCell>{t('members:member.language', 'Language')}</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>

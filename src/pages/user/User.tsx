@@ -1,6 +1,7 @@
 import React from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import {Helmet} from 'react-helmet';
+import {useTranslation} from 'react-i18next';
 import {RouteComponentProps} from 'react-router';
 import {Container, Header, Loader, Table} from 'semantic-ui-react';
 
@@ -12,6 +13,7 @@ interface IRouteParams {
 }
 
 const User = ({match}: RouteComponentProps<IRouteParams>) => {
+    const {t} = useTranslation();
     const {loading, data, error} = useQuery<GetUserType>(GetUser, {
         variables: {
             id: match.params.userId
@@ -34,15 +36,15 @@ const User = ({match}: RouteComponentProps<IRouteParams>) => {
                     <Table definition stackable>
                         <Table.Body>
                             <Table.Row>
-                                <Table.Cell>Name</Table.Cell>
+                                <Table.Cell>{t('users:user.name', 'Name')}</Table.Cell>
                                 <Table.Cell>{data.user.name}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
-                                <Table.Cell>Email address</Table.Cell>
+                                <Table.Cell>{t('users:user.email', 'Email address')}</Table.Cell>
                                 <Table.Cell>{data.user.email}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
-                                <Table.Cell>Role</Table.Cell>
+                                <Table.Cell>{t('users:user.role', 'Role')}</Table.Cell>
                                 <Table.Cell>{data.user.role}</Table.Cell>
                             </Table.Row>
                         </Table.Body>

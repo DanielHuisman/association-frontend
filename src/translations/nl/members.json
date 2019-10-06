@@ -1,5 +1,11 @@
 {
+  "member": {
+    "email": "E-mailadres",
+    "firstName": "Voornaam",
+    "language": "Taal",
+    "lastName": "Achternaam"
+  },
   "members": {
-    "header": "Members"
+    "header": "Leden"
   }
 }

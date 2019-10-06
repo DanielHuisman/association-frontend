@@ -1,4 +1,5 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 import {Link, NavLink} from 'react-router-dom';
 import {Menu, Icon} from 'semantic-ui-react';
 
@@ -9,24 +10,28 @@ interface IProps {
     onClick?: () => void;
 }
 
-const Base = ({user, onClick}: IProps) => (
-    <>
-        <Menu.Item as={Link} to="/" header onClick={onClick}>
-            J&SV Exaltio
-        </Menu.Item>
-        {user && user.role === Role.ADMIN && (
-            <>
-                <Menu.Item as={NavLink} to="/users" onClick={onClick}>
-                    <Icon name="users" />
-                    Users
-                </Menu.Item>
-                <Menu.Item as={NavLink} to="/members" onClick={onClick}>
-                    <Icon name="users" />
-                    Members
-                </Menu.Item>
-            </>
-        )}
-    </>
-);
+const Base = ({user, onClick}: IProps) => {
+    const {t} = useTranslation();
+
+    return (
+        <>
+            <Menu.Item as={Link} to="/" header onClick={onClick}>
+                J&SV Exaltio
+            </Menu.Item>
+            {user && user.role === Role.ADMIN && (
+                <>
+                    <Menu.Item as={NavLink} to="/users" onClick={onClick}>
+                        <Icon name="users" />
+                        {t('users:users.header')}
+                    </Menu.Item>
+                    <Menu.Item as={NavLink} to="/members" onClick={onClick}>
+                        <Icon name="users" />
+                        {t('members:members.header')}
+                    </Menu.Item>
+                </>
+            )}
+        </>
+    );
+};
 
 export default Base;
