@@ -20,7 +20,7 @@ const Main = () => {
                     <Route exact path="/oauth/:providerType" component={OAuth} />
                     <AuthRoute exact path="/logout" component={Logout} />
 
-                    <AdminRoute path="/members" component={Members} />
+                    <AdminRoute exact path="/members" component={Members} />
                 </Switch>
             </ErrorBoundary>
         </main>

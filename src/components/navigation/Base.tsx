@@ -14,16 +14,18 @@ const Base = ({user, onClick}: IProps) => (
         <Menu.Item as={Link} to="/" header onClick={onClick}>
             J&SV Exaltio
         </Menu.Item>
-        {user && user.role === Role.ADMIN && <>
-            <Menu.Item as={NavLink} to="/users" exact onClick={onClick}>
-                <Icon name="users" />
-                Users
-            </Menu.Item>
-            <Menu.Item as={NavLink} to="/members" exact onClick={onClick}>
-                <Icon name="users" />
-                Members
-            </Menu.Item>
-        </>}
+        {user && user.role === Role.ADMIN && (
+            <>
+                <Menu.Item as={NavLink} to="/users" onClick={onClick}>
+                    <Icon name="users" />
+                    Users
+                </Menu.Item>
+                <Menu.Item as={NavLink} to="/members" onClick={onClick}>
+                    <Icon name="users" />
+                    Members
+                </Menu.Item>
+            </>
+        )}
     </>
 );
 

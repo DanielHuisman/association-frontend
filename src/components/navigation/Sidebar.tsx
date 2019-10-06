@@ -27,22 +27,26 @@ const Sidebar = ({user, visible, children, onHide}: IProps) => (
             <Menu.Menu>
                 <Base user={user} onClick={onHide} />
 
-                {!user && <>
-                    <Menu.Item as={NavLink} to="/login">
-                        <Icon name="sign-in" />
-                        Sign in
-                    </Menu.Item>
-                </>}
+                {!user && (
+                    <>
+                        <Menu.Item as={NavLink} to="/login">
+                            <Icon name="sign-in" />
+                            Sign in
+                        </Menu.Item>
+                    </>
+                )}
 
-                {user && <>
-                    <Menu.Item>
-                        {user.name}
-                    </Menu.Item>
-                    <Menu.Item as="a" href="/logout">
-                        <Icon name="sign-out" />
-                        Sign out
-                    </Menu.Item>
-                </>}
+                {user && (
+                    <>
+                        <Menu.Item>
+                            {user.name}
+                        </Menu.Item>
+                        <Menu.Item as="a" href="/logout">
+                            <Icon name="sign-out" />
+                            Sign out
+                        </Menu.Item>
+                    </>
+                )}
             </Menu.Menu>
         </SESidebar>
         <SESidebar.Pusher>

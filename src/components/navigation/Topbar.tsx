@@ -28,22 +28,26 @@ const Topbar = ({user, onSidebar}: IProps) => (
                     <Base user={user} />
                 </Menu.Menu>
 
-                {!user && <Menu.Menu position="right">
-                    <Menu.Item as={NavLink} to="/login">
-                        <Icon name="sign-in" />
-                        Sign in
-                    </Menu.Item>
-                </Menu.Menu>}
+                {!user && (
+                    <Menu.Menu position="right">
+                        <Menu.Item as={NavLink} to="/login">
+                            <Icon name="sign-in" />
+                            Sign in
+                        </Menu.Item>
+                    </Menu.Menu>
+                )}
 
-                {user && <Menu.Menu position="right">
-                    <Menu.Item fitted="vertically">
-                        {user.name}
-                    </Menu.Item>
-                    <Menu.Item as={NavLink} to="/logout">
-                        <Icon name="sign-out" />
-                        Sign out
-                    </Menu.Item>
-                </Menu.Menu>}
+                {user && (
+                    <Menu.Menu position="right">
+                        <Menu.Item fitted="vertically">
+                            {user.name}
+                        </Menu.Item>
+                        <Menu.Item as={NavLink} to="/logout">
+                            <Icon name="sign-out" />
+                            Sign out
+                        </Menu.Item>
+                    </Menu.Menu>
+                )}
             </Menu>
         </Responsive>
     </>

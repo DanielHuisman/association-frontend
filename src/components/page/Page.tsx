@@ -1,19 +1,19 @@
 import React from 'react';
-import {Query, QueryProps, QueryResult, MutationFn, MutationResult} from 'react-apollo';
+import {Query, QueryComponentOptions, QueryResult, MutationFunction, MutationResult} from 'react-apollo';
 import {Loader} from 'semantic-ui-react';
 
 import {MutationPage, IMutationPageProps} from './MutationPage';
 
 interface IProps<QueryType, MutationType> extends Omit<IMutationPageProps<MutationType>, 'children'> {
-    query: QueryProps['query'];
-    queryVariables?: QueryProps['variables'];
-    queryProps?: Partial<QueryProps>;
+    query: QueryComponentOptions['query'];
+    queryVariables?: QueryComponentOptions['variables'];
+    queryProps?: Partial<QueryComponentOptions>;
     children: (
         queryResult: QueryResult<QueryType>,
-        mutateFn: MutationFn<MutationType>,
+        mutateFn: MutationFunction<MutationType>,
         mutationResult: MutationResult<MutationType>,
         ...args: any[]
-    ) => React.ReactNode;
+    ) => JSX.Element | null;
 }
 
 export {
@@ -56,7 +56,7 @@ export const Page = <QueryType, MutationType = any>({
                         defaultBehaviour={defaultBehaviour}
                         loader={loader}
                     >
-                        {(mutateFn: MutationFn<MutationType>, mutationResult: MutationResult<MutationType>) => {
+                        {(mutateFn: MutationFunction<MutationType>, mutationResult: MutationResult<MutationType>) => {
                             return children(queryResult, mutateFn, mutationResult);
                         }}
                     </MutationPage>

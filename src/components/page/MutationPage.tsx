@@ -1,5 +1,5 @@
 import React from 'react';
-import {Mutation, MutationProps, MutationFn, MutationResult} from 'react-apollo';
+import {Mutation, MutationComponentOptions, MutationFunction, MutationResult} from 'react-apollo';
 import {useTranslation} from 'react-i18next';
 import {Message, Loader} from 'semantic-ui-react';
 
@@ -8,18 +8,18 @@ import {translateError} from '../../util';
 export type ResultFn<MutationType> = (mutationResult: MutationResult<MutationType>) => React.ReactNode;
 
 interface IProps<MutationType> {
-    mutation?: MutationProps['mutation'];
-    mutationVariables?: MutationProps['variables'];
-    mutationProps?: Partial<MutationProps>;
+    mutation?: MutationComponentOptions['mutation'];
+    mutationVariables?: MutationComponentOptions['variables'];
+    mutationProps?: Partial<MutationComponentOptions>;
     success?: string | ResultFn<MutationType>;
     failure?: string | ResultFn<MutationType>;
     defaultBehaviour?: boolean;
     loader?: boolean;
     children: (
-        mutateFn: MutationFn<MutationType>,
+        mutateFn: MutationFunction<MutationType>,
         mutationResult: MutationResult<MutationType>,
         ...args: any[]
-    ) => React.ReactNode;
+    ) => JSX.Element | null;
 }
 
 export {
@@ -43,28 +43,36 @@ export const MutationPage = <MutationType, X = any>({
         // TODO: remove annotation and unnecessary mutation typing once react-apollo? is fixed
         // @ts-ignore
         <Mutation<MutationType> mutation={mutation} variables={mutationVariables} {...mutationProps}>
-            {(mutateFn: MutationFn<MutationType>, mutationResult: MutationResult<MutationType>) => {
+            {(mutateFn: MutationFunction<MutationType>, mutationResult: MutationResult<MutationType>) => {
                 if (defaultBehaviour) {
                     const {loading, data, error} = mutationResult;
 
                     return (
                         <>
-                            {data && success && <>
-                                {typeof success === 'string' && <Message success>
-                                    <b>{success}</b>
-                                </Message>}
-                                {typeof success !== 'string' && success(mutationResult)}
-                            </>}
+                            {data && success && (
+                                <>
+                                    {typeof success === 'string' && (
+                                        <Message success>
+                                            <b>{success}</b>
+                                        </Message>
+                                    )}
+                                    {typeof success !== 'string' && success(mutationResult)}
+                                </>
+                            )}
 
-                            {error && failure && <>
-                                {typeof failure === 'string' && <Message error>
-                                    <Message.Header>
-                                        {failure}
-                                    </Message.Header>
-                                    {translateError(t, error)}
-                                </Message>}
-                                {typeof failure !== 'string' && failure(mutationResult)}
-                            </>}
+                            {error && failure && (
+                                <>
+                                    {typeof failure === 'string' && (
+                                        <Message error>
+                                            <Message.Header>
+                                                {failure}
+                                            </Message.Header>
+                                            {translateError(t, error)}
+                                        </Message>
+                                    )}
+                                    {typeof failure !== 'string' && failure(mutationResult)}
+                                </>
+                            )}
 
                             <Loader active={loader && loading} inline />
 

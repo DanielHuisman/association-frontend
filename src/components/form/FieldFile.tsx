@@ -25,11 +25,13 @@ const FieldInput = ({field, form: {touched, errors, isSubmitting, setFieldValue}
                 {...props}
             />
 
-            {touched[field.name] && !!errors[field.name] && <Message
-                content={errors[field.name]}
-                error
-                visible
-            />}
+            {touched[field.name] && !!errors[field.name] && (
+                <Message
+                    content={errors[field.name]}
+                    error
+                    visible
+                />
+            )}
         </Form.Field>
     );
 };
