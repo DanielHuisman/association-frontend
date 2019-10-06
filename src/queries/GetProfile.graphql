@@ -1,0 +1,12 @@
+# import '../fragments/User.graphql'
+# import '../fragments/Provider.graphql'
+
+query GetProfile {
+    me {
+        ...UserFragment
+
+        providers {
+            ...ProviderFragment
+        }
+    }
+}

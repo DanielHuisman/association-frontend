@@ -1,0 +1,6 @@
+mutation OAuthAuthenticate($type: ProviderType!, $redirectUri: String!, $code: String!, $userId: String) {
+    oauthAuthenticate(type: $type, redirectUri: $redirectUri, code: $code, userId: $userId) {
+        accessToken
+        expiresIn
+    }
+}

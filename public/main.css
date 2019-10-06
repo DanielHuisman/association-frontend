@@ -1,0 +1,51 @@
+html, body {
+    margin: 0px;
+}
+
+main {
+    padding-top: 80px;
+    padding-bottom: 32px;
+}
+
+:global(.no-wrap) {
+    white-space: nowrap;
+}
+
+/* Add compact option to Semantic UI Grid (https://github.com/Semantic-Org/Semantic-UI/issues/2968#issuecomment-414727481) */
+:global(.ui.compact.grid .row:not(:first-child), .ui.grid .compact.row) {
+    padding-top: 0;
+}
+
+:global(.ui.compact.grid .row:not(:last-child), .ui.grid .compact.row) {
+    padding-bottom: 0;
+}
+
+:global(.ui.compact.grid .column:not(:first-child), .ui.grid .compact.row .column:not(:first-child), .ui.grid .compact.column) {
+    padding-left: 0;
+}
+
+:global(.ui.compact.grid .column:not(:last-child), .ui.grid .compact.row .column:not(:last-child), .ui.grid .compact.column) {
+    padding-right: 0;
+}
+
+/* Support icon groups in headers */
+:global(.ui.header > .icons) {
+    display: table-cell;
+    opacity: 1;
+    font-size: 1.5em;
+    padding-top: 0;
+    vertical-align: middle;
+}
+
+:global(.ui.header>.icons+.content) {
+    padding-left: .75rem;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* Support left-sided icons in vertical menu's */
+:global(.ui.vertical.menu .item>i.icon.left) {
+    float: left !important;
+    margin-left: 0em !important;
+    margin-right: 0.5em !important;
+}

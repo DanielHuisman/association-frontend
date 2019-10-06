@@ -1,0 +1,10 @@
+{
+    "plugins": [
+        ["i18next-extract", {
+            "outputPath": "src/translations/{{locale}}/{{ns}}.json",
+            "locales": ["en", "nl"],
+            "useI18nextDefaultValue": ["en", "nl"],
+            "discardOldKeys": false
+        }]
+    ]
+}

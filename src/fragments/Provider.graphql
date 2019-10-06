@@ -1,0 +1,5 @@
+fragment ProviderFragment on Provider {
+    id
+    type
+    email
+}
