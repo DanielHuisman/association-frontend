@@ -1,18 +1,15 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Icon} from 'semantic-ui-react';
-import {MemberFragment, MandateFragment} from 'generatedTypes';
 
 interface IProps {
-    member: MemberFragment & {
-        mandates: MandateFragment[]
-    };
+    value: boolean;
 }
 
-const HasMandate = ({member}: IProps) => {
+const YesNo = ({value = false}: IProps) => {
     const {t} = useTranslation();
 
-    return member.mandates.length > 0 ? (
+    return value ? (
         <>
             <Icon name="check" color="green" />
             {t('general:general.yes', 'Yes')}
@@ -25,4 +22,4 @@ const HasMandate = ({member}: IProps) => {
     );
 };
 
-export default HasMandate;
+export default YesNo;

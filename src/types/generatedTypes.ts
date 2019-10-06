@@ -94,7 +94,7 @@ export interface UploadPaperMandateVariables {
 // GraphQL query operation: GetMandate
 // ====================================================
 
-export interface GetMandate_mandate_member {
+export interface GetMandate_mandate_DigitalMandate_member {
   __typename: "Member";
   id: string;
   firstName: string;
@@ -103,8 +103,8 @@ export interface GetMandate_mandate_member {
   language: Language;
 }
 
-export interface GetMandate_mandate {
-  __typename: "DigitalMandate" | "PaperMandate";
+export interface GetMandate_mandate_DigitalMandate {
+  __typename: "DigitalMandate";
   id: string;
   mandateId: string;
   status: MandateStatus;
@@ -115,8 +115,52 @@ export interface GetMandate_mandate {
   reason: string;
   isFirstTransaction: boolean;
   errorMessage: string | null;
-  member: GetMandate_mandate_member;
+  member: GetMandate_mandate_DigitalMandate_member;
 }
+
+export interface GetMandate_mandate_PaperMandate_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetMandate_mandate_PaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetMandate_mandate_PaperMandate_member {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  language: Language;
+}
+
+export interface GetMandate_mandate_PaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: GetMandate_mandate_PaperMandate_generatedFile | null;
+  uploadedFile: GetMandate_mandate_PaperMandate_uploadedFile | null;
+  member: GetMandate_mandate_PaperMandate_member;
+}
+
+export type GetMandate_mandate = GetMandate_mandate_DigitalMandate | GetMandate_mandate_PaperMandate;
 
 export interface GetMandate {
   mandate: GetMandate_mandate | null;
@@ -134,8 +178,8 @@ export interface GetMandateVariables {
 // GraphQL query operation: GetMember
 // ====================================================
 
-export interface GetMember_member_mandates {
-  __typename: "DigitalMandate" | "PaperMandate";
+export interface GetMember_member_mandates_DigitalMandate {
+  __typename: "DigitalMandate";
   id: string;
   mandateId: string;
   status: MandateStatus;
@@ -147,6 +191,40 @@ export interface GetMember_member_mandates {
   isFirstTransaction: boolean;
   errorMessage: string | null;
 }
+
+export interface GetMember_member_mandates_PaperMandate_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetMember_member_mandates_PaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetMember_member_mandates_PaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: GetMember_member_mandates_PaperMandate_generatedFile | null;
+  uploadedFile: GetMember_member_mandates_PaperMandate_uploadedFile | null;
+}
+
+export type GetMember_member_mandates = GetMember_member_mandates_DigitalMandate | GetMember_member_mandates_PaperMandate;
 
 export interface GetMember_member {
   __typename: "Member";
@@ -174,8 +252,8 @@ export interface GetMemberVariables {
 // GraphQL query operation: GetMembers
 // ====================================================
 
-export interface GetMembers_members_mandates {
-  __typename: "DigitalMandate" | "PaperMandate";
+export interface GetMembers_members_mandates_DigitalMandate {
+  __typename: "DigitalMandate";
   id: string;
   mandateId: string;
   status: MandateStatus;
@@ -187,6 +265,40 @@ export interface GetMembers_members_mandates {
   isFirstTransaction: boolean;
   errorMessage: string | null;
 }
+
+export interface GetMembers_members_mandates_PaperMandate_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetMembers_members_mandates_PaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetMembers_members_mandates_PaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: GetMembers_members_mandates_PaperMandate_generatedFile | null;
+  uploadedFile: GetMembers_members_mandates_PaperMandate_uploadedFile | null;
+}
+
+export type GetMembers_members_mandates = GetMembers_members_mandates_DigitalMandate | GetMembers_members_mandates_PaperMandate;
 
 export interface GetMembers_members {
   __typename: "Member";
@@ -298,8 +410,8 @@ export interface FileFragment {
 // GraphQL fragment: MandateFragment
 // ====================================================
 
-export interface MandateFragment {
-  __typename: "DigitalMandate" | "PaperMandate";
+export interface MandateFragment_DigitalMandate {
+  __typename: "DigitalMandate";
   id: string;
   mandateId: string;
   status: MandateStatus;
@@ -310,6 +422,70 @@ export interface MandateFragment {
   reason: string;
   isFirstTransaction: boolean;
   errorMessage: string | null;
+}
+
+export interface MandateFragment_PaperMandate_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface MandateFragment_PaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface MandateFragment_PaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: MandateFragment_PaperMandate_generatedFile | null;
+  uploadedFile: MandateFragment_PaperMandate_uploadedFile | null;
+}
+
+export type MandateFragment = MandateFragment_DigitalMandate | MandateFragment_PaperMandate;
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: PaperMandateFragment
+// ====================================================
+
+export interface PaperMandateFragment_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface PaperMandateFragment_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface PaperMandateFragment {
+  __typename: "PaperMandate";
+  generatedFile: PaperMandateFragment_generatedFile | null;
+  uploadedFile: PaperMandateFragment_uploadedFile | null;
 }
 
 /* tslint:disable */

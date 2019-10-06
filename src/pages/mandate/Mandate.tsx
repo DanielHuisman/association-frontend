@@ -7,6 +7,7 @@ import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
 import MandateType from '../../components/mandate/MandateType';
+import YesNo from '../../components/util/YesNo';
 import GetMandate from '../../queries/GetMandate.graphql';
 import {GetMandate as GetMandateType} from '../../types/generatedTypes';
 
@@ -51,13 +52,53 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                                 <Table.Cell>{data.mandate.reason}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
+                                <Table.Cell>{t('mandates:mandate.status', 'Status')}</Table.Cell>
+                                <Table.Cell>{data.mandate.status}</Table.Cell>
+                            </Table.Row>
+                            {data.mandate.errorMessage && (
+                                <Table.Row>
+                                    <Table.Cell>{t('mandates:mandate.error message', 'Error message')}</Table.Cell>
+                                    <Table.Cell>{data.mandate.errorMessage}</Table.Cell>
+                                </Table.Row>
+                            )}
+                            <Table.Row>
                                 <Table.Cell>{t('mandates:mandate.createdAt', 'Created at')}</Table.Cell>
                                 <Table.Cell>{moment(data.mandate.createdAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
                             </Table.Row>
+                            {data.mandate.acceptedAt && (
+                                <Table.Row>
+                                    <Table.Cell>{t('mandates:mandate.acceptedAt', 'Accepted at')}</Table.Cell>
+                                    <Table.Cell>{moment(data.mandate.acceptedAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
+                                </Table.Row>
+                            )}
                             <Table.Row>
-                                <Table.Cell>{t('mandates:mandate.acceptedAt', 'Accepted at')}</Table.Cell>
-                                <Table.Cell>{moment(data.mandate.acceptedAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
+                                <Table.Cell>{t('mandates:mandate.isFirstTransaction', 'Is first transaction')}</Table.Cell>
+                                <Table.Cell><YesNo value={data.mandate.isFirstTransaction} /></Table.Cell>
                             </Table.Row>
+                            {data.mandate.__typename === 'PaperMandate' && (
+                                <>
+                                    {data.mandate.generatedFile && (
+                                    <Table.Row>
+                                        <Table.Cell>{t('mandates:mandate.generatedFile', 'Generated file')}</Table.Cell>
+                                        <Table.Cell>
+                                            <Button as="a" href={data.mandate.generatedFile.url} target="file" color="blue" size="tiny">
+                                                {t('general:general.download', 'Download')}
+                                            </Button>
+                                        </Table.Cell>
+                                    </Table.Row>
+                                )}
+                                {data.mandate.uploadedFile && (
+                                    <Table.Row>
+                                        <Table.Cell>{t('mandates:mandate.uploadedFile', 'Uploaded file')}</Table.Cell>
+                                        <Table.Cell>
+                                            <Button as="a" href={data.mandate.uploadedFile.url} target="file" color="blue" size="tiny">
+                                            {t('general:general.download', 'Download')}
+                                            </Button>
+                                        </Table.Cell>
+                                    </Table.Row>
+                                )}
+                                </>
+                            )}
                         </Table.Body>
                     </Table>
 

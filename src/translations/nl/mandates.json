@@ -13,15 +13,20 @@
       "name": "Name",
       "postalCode": "Postal code"
     },
+    "error message": "Error message",
+    "generatedFile": "Generated file",
     "header": "Mandate",
     "iban": "IBAN",
+    "isFirstTransaction": "Is first transaction",
     "mandateId": "Identifier",
     "reason": "Reason",
+    "status": "Status",
     "type": "Type",
     "types": {
       "digital": "Digital mandate",
       "paper": "Paper mandate"
-    }
+    },
+    "uploadedFile": "Uploaded file"
   },
   "mandates": {
     "header": "Mandates"

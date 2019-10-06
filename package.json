@@ -55,6 +55,8 @@
     },
     "devDependencies": {
         "@babel/core": "^7.6.2",
+        "@graphql-codegen/cli": "^1.8.1",
+        "@graphql-codegen/fragment-matcher": "^1.8.1",
         "apollo": "^2.19.0",
         "babel-plugin-i18next-extract": "^0.2.6",
         "graphql-tag": "^2.10.0",
