@@ -7,6 +7,8 @@ import ErrorPage from '../../pages/error/Error';
 import Login from '../../pages/auth/login/Login';
 import Logout from '../../pages/auth/logout/Logout';
 import OAuth from '../../pages/auth/oauth/OAuth';
+import Users from '../../pages/users/Users';
+import User from '../../pages/user/User';
 import Members from '../../pages/members/Members';
 import Member from '../../pages/member/Member';
 
@@ -20,6 +22,9 @@ const Main = () => {
                     <NoAuthRoute exact path="/login" component={Login} />
                     <Route exact path="/oauth/:providerType" component={OAuth} />
                     <AuthRoute exact path="/logout" component={Logout} />
+
+                    <AdminRoute exact path="/users" component={Users} />
+                    <AdminRoute exact path="/users/:userId" component={User} />
 
                     <AdminRoute exact path="/members" component={Members} />
                     <AdminRoute exact path="/members/:memberId" component={Member} />

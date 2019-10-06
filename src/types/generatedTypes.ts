@@ -165,6 +165,50 @@ export interface GetProfile {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetUser
+// ====================================================
+
+export interface GetUser_user {
+  __typename: "User";
+  id: string;
+  name: string;
+  email: string;
+  role: Role;
+}
+
+export interface GetUser {
+  user: GetUser_user | null;
+}
+
+export interface GetUserVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetUsers
+// ====================================================
+
+export interface GetUsers_users {
+  __typename: "User";
+  id: string;
+  name: string;
+  email: string;
+  role: Role;
+}
+
+export interface GetUsers {
+  users: GetUsers_users[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: FileFragment
 // ====================================================
 
