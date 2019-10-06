@@ -56,34 +56,36 @@ const Member = ({match}: RouteComponentProps<IRouteParams>) => {
                     </Table>
 
                     <Header size="large">{t('mandates:mandates.header', 'Mandates')}</Header>
-                    {data.member.mandates.length > 0 && <Table stackable>
-                        <Table.Header>
-                            <Table.Row>
-                                <Table.HeaderCell>{t('mandates:mandate.mandateId', 'Identifier')}</Table.HeaderCell>
-                                <Table.HeaderCell>{t('mandates:mandate.reason', 'Reason')}</Table.HeaderCell>
-                                <Table.HeaderCell>{t('mandates:mandate.type', 'Type')}</Table.HeaderCell>
-                                <Table.HeaderCell>{t('mandates:mandate.iban', 'IBAN')}</Table.HeaderCell>
-                                <Table.HeaderCell>{t('mandates:mandate.bic', 'BIC')}</Table.HeaderCell>
-                                <Table.HeaderCell>{t('mandates:mandate.acceptedAt', 'Accepted at')}</Table.HeaderCell>
-                            </Table.Row>
-                        </Table.Header>
-                        <Table.Body>
-                            {data.member.mandates.map((mandate) => (
-                                <Table.Row key={mandate.id}>
-                                    <Table.Cell>{mandate.mandateId}</Table.Cell>
-                                    <Table.Cell>{mandate.reason}</Table.Cell>
-                                    <Table.Cell>
-                                        {mandate.__typename === 'DigitalMandate' ?
-                                            t('mandates:mandate.types.digital', 'Digital mandate') :
-                                            t('mandates:mandate.types.paper', 'Paper mandate')}
-                                    </Table.Cell>
-                                    <Table.Cell>{mandate.iban}</Table.Cell>
-                                    <Table.Cell>{mandate.bic}</Table.Cell>
-                                    <Table.Cell>{moment(mandate.acceptedAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
+                    {data.member.mandates.length > 0 && (
+                        <Table stackable>
+                            <Table.Header>
+                                <Table.Row>
+                                    <Table.HeaderCell>{t('mandates:mandate.mandateId', 'Identifier')}</Table.HeaderCell>
+                                    <Table.HeaderCell>{t('mandates:mandate.reason', 'Reason')}</Table.HeaderCell>
+                                    <Table.HeaderCell>{t('mandates:mandate.type', 'Type')}</Table.HeaderCell>
+                                    <Table.HeaderCell>{t('mandates:mandate.iban', 'IBAN')}</Table.HeaderCell>
+                                    <Table.HeaderCell>{t('mandates:mandate.bic', 'BIC')}</Table.HeaderCell>
+                                    <Table.HeaderCell>{t('mandates:mandate.acceptedAt', 'Accepted at')}</Table.HeaderCell>
                                 </Table.Row>
-                            ))}
-                        </Table.Body>
-                    </Table>}
+                            </Table.Header>
+                            <Table.Body>
+                                {data.member.mandates.map((mandate) => (
+                                    <Table.Row key={mandate.id}>
+                                        <Table.Cell>{mandate.mandateId}</Table.Cell>
+                                        <Table.Cell>{mandate.reason}</Table.Cell>
+                                        <Table.Cell>
+                                            {mandate.__typename === 'DigitalMandate' ?
+                                                t('mandates:mandate.types.digital', 'Digital mandate') :
+                                                t('mandates:mandate.types.paper', 'Paper mandate')}
+                                        </Table.Cell>
+                                        <Table.Cell>{mandate.iban}</Table.Cell>
+                                        <Table.Cell>{mandate.bic}</Table.Cell>
+                                        <Table.Cell>{moment(mandate.acceptedAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
+                                    </Table.Row>
+                                ))}
+                            </Table.Body>
+                        </Table>
+                    )}
                 </>
             )}
         </Container>
