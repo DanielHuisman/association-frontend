@@ -29,10 +29,10 @@ const Main = () => {
                     <AdminRoute exact path="/users/:userId" component={User} />
 
                     <AdminRoute exact path="/members" component={Members} />
-                    <AdminRoute exact path="/members/:memberId" component={Member} />
+                    <Route exact path="/members/:memberId" component={Member} />
 
                     {/* <AdminRoute exact path="/mandates" component={Mandates} /> */}
-                    <AdminRoute exact path="/mandates/:mandateId" component={Mandate} />
+                    <Route exact path="/mandates/:mandateId" component={Mandate} />
                 </Switch>
             </ErrorBoundary>
         </main>
