@@ -91,6 +91,27 @@ export interface UploadPaperMandateVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetMembers
+// ====================================================
+
+export interface GetMembers_members {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  language: Language;
+}
+
+export interface GetMembers {
+  members: GetMembers_members[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetProfile
 // ====================================================
 
@@ -135,6 +156,23 @@ export interface FileFragment {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL fragment: MemberFragment
+// ====================================================
+
+export interface MemberFragment {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  language: Language;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: ProviderFragment
 // ====================================================
 
@@ -168,6 +206,11 @@ export interface UserFragment {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export enum Language {
+  EN = "EN",
+  NL = "NL",
+}
 
 export enum ProviderType {
   GOOGLE = "GOOGLE",

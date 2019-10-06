@@ -1,0 +1,7 @@
+fragment MemberFragment on Member {
+    id
+    firstName
+    lastName
+    email
+    language
+}
