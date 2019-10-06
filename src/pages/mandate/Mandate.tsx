@@ -61,6 +61,37 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                         </Table.Body>
                     </Table>
 
+                    <Header size="large">{t('mandates:mandate.details.member', 'Member details')}</Header>
+                    <Table compact definition selectable stackable>
+                        <Table.Body>
+                            <Table.Row>
+                                <Table.Cell>{t('mandates:mandate.details.name', 'Name')}</Table.Cell>
+                                <Table.Cell>{data.mandate.member.firstName} {data.mandate.member.lastName}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('mandates:mandate.details.address', 'Address')}</Table.Cell>
+                                <Table.Cell><i>Unknown</i></Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('mandates:mandate.details.postalCode', 'Postal code')}</Table.Cell>
+                                <Table.Cell><i>Unknown</i></Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('mandates:mandate.details.city', 'City')}</Table.Cell>
+                                <Table.Cell><i>Unknown</i></Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('mandates:mandate.iban', 'IBAN')}</Table.Cell>
+                                <Table.Cell>{data.mandate.iban}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('mandates:mandate.bic', 'BIC')}</Table.Cell>
+                                <Table.Cell>{data.mandate.bic}</Table.Cell>
+                            </Table.Row>
+                        </Table.Body>
+                    </Table>
+                    <Button as={Link} to={`/members/${data.mandate.member.id}`} color="blue">View member</Button>
+
                     <Header size="large">{t('mandates:mandate.details.association', 'Association details')}</Header>
                     <Table compact definition selectable stackable>
                         <Table.Body>
@@ -94,37 +125,6 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                             </Table.Row>
                         </Table.Body>
                     </Table>
-
-                    <Header size="large">{t('mandates:mandate.details.member', 'Member details')}</Header>
-                    <Table compact definition selectable stackable>
-                        <Table.Body>
-                            <Table.Row>
-                                <Table.Cell>{t('mandates:mandate.details.name', 'Name')}</Table.Cell>
-                                <Table.Cell>{data.mandate.member.firstName} {data.mandate.member.lastName}</Table.Cell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.Cell>{t('mandates:mandate.details.address', 'Address')}</Table.Cell>
-                                <Table.Cell><i>Unknown</i></Table.Cell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.Cell>{t('mandates:mandate.details.postalCode', 'Postal code')}</Table.Cell>
-                                <Table.Cell><i>Unknown</i></Table.Cell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.Cell>{t('mandates:mandate.details.city', 'City')}</Table.Cell>
-                                <Table.Cell><i>Unknown</i></Table.Cell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.Cell>{t('mandates:mandate.iban', 'IBAN')}</Table.Cell>
-                                <Table.Cell>{data.mandate.iban}</Table.Cell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.Cell>{t('mandates:mandate.bic', 'BIC')}</Table.Cell>
-                                <Table.Cell>{data.mandate.bic}</Table.Cell>
-                            </Table.Row>
-                        </Table.Body>
-                    </Table>
-                    <Button as={Link} to={`/members/${data.mandate.member.id}`} color="blue">View member</Button>
                 </>
             )}
         </Container>
