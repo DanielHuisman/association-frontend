@@ -100,7 +100,16 @@ export interface GetMandate_mandate_DigitalMandate_member {
   firstName: string;
   lastName: string;
   email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
   language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
 }
 
 export interface GetMandate_mandate_DigitalMandate {
@@ -140,7 +149,16 @@ export interface GetMandate_mandate_PaperMandate_member {
   firstName: string;
   lastName: string;
   email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
   language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
 }
 
 export interface GetMandate_mandate_PaperMandate {
@@ -232,7 +250,16 @@ export interface GetMember_member {
   firstName: string;
   lastName: string;
   email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
   language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
   mandates: GetMember_member_mandates[];
 }
 
@@ -306,7 +333,16 @@ export interface GetMembers_members {
   firstName: string;
   lastName: string;
   email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
   language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
   mandates: GetMembers_members_mandates[];
 }
 
@@ -502,7 +538,16 @@ export interface MemberFragment {
   firstName: string;
   lastName: string;
   email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
   language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
 }
 
 /* tslint:disable */
@@ -558,6 +603,12 @@ export enum MandateStatus {
   UNACCEPTED = "UNACCEPTED",
 }
 
+export enum Pronouns {
+  HE_HIM = "HE_HIM",
+  SHE_HER = "SHE_HER",
+  THEY_THEM = "THEY_THEM",
+}
+
 export enum ProviderType {
   GOOGLE = "GOOGLE",
 }
@@ -565,6 +616,15 @@ export enum ProviderType {
 export enum Role {
   ADMIN = "ADMIN",
   USER = "USER",
+}
+
+export enum StudentType {
+  HBO_OTHER = "HBO_OTHER",
+  HBO_SAXION = "HBO_SAXION",
+  MBO = "MBO",
+  UNIVERSITY_OTHER = "UNIVERSITY_OTHER",
+  UNIVERSITY_UT = "UNIVERSITY_UT",
+  WORKING = "WORKING",
 }
 
 export interface PaperMandateFileCreateInput {

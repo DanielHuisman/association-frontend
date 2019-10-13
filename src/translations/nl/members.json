@@ -1,10 +1,36 @@
 {
   "member": {
+    "address": "Adres",
+    "birthdate": "Geboortedatum",
+    "city": "City",
     "email": "E-mailadres",
+    "endOfMembership": "Einde lidmaatschap",
     "firstName": "Voornaam",
-    "hasMandate": "Has mandate",
+    "hasMandate": "Heeft incassomachtiging",
     "language": "Taal",
-    "lastName": "Achternaam"
+    "languages": {
+      "NL": "Nederlands",
+      "EN": "Engels"
+    },
+    "lastName": "Achternaam",
+    "phoneNumber": "Telefoonnummer",
+    "postalCode": "Postcode",
+    "pronouns": "Gewenste voornaamwoorden",
+    "pronounTypes": {
+      "HE_HIM": "Hij/hem",
+      "SHE_HER": "Zij/haar",
+      "THEY_THEM": "Hen/hun"
+    },
+    "startOfMembership": "Begin lidmaatschap",
+    "studentType": "Soort student",
+    "studentTypes": {
+      "HBO_OTHER": "Hoger beroepsonderwijs (HBO) - Overig",
+      "HBO_SAXION": "Hoger beroepsonderwijs (HBO) - Saxion",
+      "MBO": "Middelbaar beroepsonderwijs (MBO)",
+      "UNIVERSITY_OTHER": "Universiteit - Overig",
+      "UNIVERSITY_UT": "Universiteit - Universiteit Twente",
+      "WORKING": "Werkende"
+    }
   },
   "members": {
     "header": "Leden"

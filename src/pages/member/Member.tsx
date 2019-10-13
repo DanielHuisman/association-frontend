@@ -51,8 +51,46 @@ const Member = ({match}: RouteComponentProps<IRouteParams>) => {
                                 <Table.Cell>{data.member.email}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
+                                <Table.Cell>{t('members:member.address', 'Address')}</Table.Cell>
+                                <Table.Cell>{data.member.address}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('members:member.postalCode', 'Postal code')}</Table.Cell>
+                                <Table.Cell>{data.member.postalCode}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('members:member.city', 'City')}</Table.Cell>
+                                <Table.Cell>{data.member.city}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('members:member.phoneNumber', 'Phone number')}</Table.Cell>
+                                <Table.Cell>{data.member.phoneNumber}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('members:member.birthdate', 'Date of birth')}</Table.Cell>
+                                <Table.Cell>{moment(data.member.birthdate).format('YYYY-MM-DD')}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('members:member.startOfMembership', 'Start of membership')}</Table.Cell>
+                                <Table.Cell>{moment(data.member.startOfMembership).format('YYYY-MM-DD')}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('members:member.endOfMembership', 'End of membership')}</Table.Cell>
+                                <Table.Cell>
+                                    {data.member.endOfMembership ? moment(data.member.endOfMembership).format('YYYY-MM-DD') : <i>Still a member</i>}
+                                </Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
                                 <Table.Cell>{t('members:member.language', 'Language')}</Table.Cell>
-                                <Table.Cell>{data.member.language}</Table.Cell>
+                                <Table.Cell>{t(`members:member.languages.${data.member.language}`)}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('members:member.pronouns', 'Prefered ponouns')}</Table.Cell>
+                                <Table.Cell>{t(`members:member.pronounTypes.${data.member.pronouns}`)}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('members:member.studentType', 'Student type')}</Table.Cell>
+                                <Table.Cell>{t(`members:member.studentTypes.${data.member.studentType}`)}</Table.Cell>
                             </Table.Row>
                         </Table.Body>
                     </Table>

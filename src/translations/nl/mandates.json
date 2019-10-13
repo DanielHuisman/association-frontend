@@ -1,34 +1,34 @@
 {
   "mandate": {
-    "acceptedAt": "Accepted at",
+    "acceptedAt": "Geaccepteerd op",
     "bic": "BIC",
-    "createdAt": "Created at",
+    "createdAt": "Aangemaakt op",
     "details": {
-      "address": "Address",
-      "association": "Association details",
-      "city": "City",
-      "creditorId": "Creditor ID",
-      "mandate": "Mandate details",
-      "member": "Member details",
-      "name": "Name",
-      "postalCode": "Postal code"
+      "address": "Adres",
+      "association": "Gegevens vereniging",
+      "city": "Stad",
+      "creditorId": "Crediteur ID",
+      "mandate": "Gegevens incassomachtiging",
+      "member": "Gegevens lid",
+      "name": "Naam",
+      "postalCode": "Postcode"
     },
-    "error message": "Error message",
-    "generatedFile": "Generated file",
-    "header": "Mandate",
+    "error message": "Foutmelding",
+    "generatedFile": "Gegenereerde bestand",
+    "header": "Incassomachtiging",
     "iban": "IBAN",
-    "isFirstTransaction": "Is first transaction",
-    "mandateId": "Identifier",
-    "reason": "Reason",
+    "isFirstTransaction": "Is eerste transactie",
+    "mandateId": "Identificatiecode",
+    "reason": "Reden",
     "status": "Status",
     "type": "Type",
     "types": {
-      "digital": "Digital mandate",
-      "paper": "Paper mandate"
+      "digital": "Digitale incassomachtiging",
+      "paper": "Papieren incassomachtiging"
     },
-    "uploadedFile": "Uploaded file"
+    "uploadedFile": "Geüploade bestand"
   },
   "mandates": {
-    "header": "Mandates"
+    "header": "Incassomachtigingen"
   }
 }

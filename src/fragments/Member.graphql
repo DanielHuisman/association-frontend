@@ -3,5 +3,14 @@ fragment MemberFragment on Member {
     firstName
     lastName
     email
+    address
+    postalCode
+    city
+    phoneNumber
+    birthdate
+    startOfMembership
+    endOfMembership
     language
+    pronouns
+    studentType
 }

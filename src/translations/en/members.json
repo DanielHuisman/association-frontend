@@ -1,10 +1,36 @@
 {
   "member": {
+    "address": "Address",
+    "birthdate": "Date of birth",
+    "city": "City",
     "email": "Email address",
+    "endOfMembership": "End of membership",
     "firstName": "First name",
     "hasMandate": "Has mandate",
     "language": "Language",
-    "lastName": "Last name"
+    "languages": {
+      "NL": "Dutch",
+      "EN": "English"
+    },
+    "lastName": "Last name",
+    "phoneNumber": "Phone number",
+    "postalCode": "Postal code",
+    "pronouns": "Prefered ponouns",
+    "pronounTypes": {
+      "HE_HIM": "He/him",
+      "SHE_HER": "She/her",
+      "THEY_THEM": "They/them"
+    },
+    "startOfMembership": "Start of membership",
+    "studentType": "Student type",
+    "studentTypes": {
+      "HBO_OTHER": "Higher Vocational Education (HBO) - Other",
+      "HBO_SAXION": "Higher Vocational Education (HBO) - Saxion",
+      "MBO": "Intermediate Vocational Education (MBO)",
+      "UNIVERSITY_OTHER": "University - Other",
+      "UNIVERSITY_UT": "University - University of Twente",
+      "WORKING": "Working"
+    }
   },
   "members": {
     "header": "Members"
