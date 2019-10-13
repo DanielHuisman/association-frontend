@@ -9,18 +9,18 @@
     "hasMandate": "Has mandate",
     "language": "Language",
     "languages": {
-      "NL": "Dutch",
-      "EN": "English"
+      "EN": "English",
+      "NL": "Dutch"
     },
     "lastName": "Last name",
     "phoneNumber": "Phone number",
     "postalCode": "Postal code",
-    "pronouns": "Prefered ponouns",
     "pronounTypes": {
       "HE_HIM": "He/him",
       "SHE_HER": "She/her",
       "THEY_THEM": "They/them"
     },
+    "pronouns": "Prefered pronouns",
     "startOfMembership": "Start of membership",
     "studentType": "Student type",
     "studentTypes": {

@@ -85,7 +85,7 @@ const Member = ({match}: RouteComponentProps<IRouteParams>) => {
                                 <Table.Cell>{t(`members:member.languages.${data.member.language}`)}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
-                                <Table.Cell>{t('members:member.pronouns', 'Prefered ponouns')}</Table.Cell>
+                                <Table.Cell>{t('members:member.pronouns', 'Prefered pronouns')}</Table.Cell>
                                 <Table.Cell>{t(`members:member.pronounTypes.${data.member.pronouns}`)}</Table.Cell>
                             </Table.Row>
                             <Table.Row>

@@ -30,5 +30,8 @@
   },
   "mandates": {
     "header": "Mandates"
+  },
+  "sign": {
+    "header": "Sign mandate"
   }
 }

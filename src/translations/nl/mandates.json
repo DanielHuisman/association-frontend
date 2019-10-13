@@ -30,5 +30,8 @@
   },
   "mandates": {
     "header": "Incassomachtigingen"
+  },
+  "sign": {
+    "header": "Incassomachtiging tekenen"
   }
 }
