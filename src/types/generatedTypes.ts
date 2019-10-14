@@ -193,6 +193,104 @@ export interface GetMandateVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetMandates
+// ====================================================
+
+export interface GetMandates_mandates_DigitalMandate_member {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
+  language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
+}
+
+export interface GetMandates_mandates_DigitalMandate {
+  __typename: "DigitalMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  member: GetMandates_mandates_DigitalMandate_member;
+}
+
+export interface GetMandates_mandates_PaperMandate_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetMandates_mandates_PaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetMandates_mandates_PaperMandate_member {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
+  language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
+}
+
+export interface GetMandates_mandates_PaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: GetMandates_mandates_PaperMandate_generatedFile | null;
+  uploadedFile: GetMandates_mandates_PaperMandate_uploadedFile | null;
+  member: GetMandates_mandates_PaperMandate_member;
+}
+
+export type GetMandates_mandates = GetMandates_mandates_DigitalMandate | GetMandates_mandates_PaperMandate;
+
+export interface GetMandates {
+  mandates: GetMandates_mandates[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetMember
 // ====================================================
 

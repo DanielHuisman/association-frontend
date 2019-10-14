@@ -19,6 +19,7 @@
     "iban": "IBAN",
     "isFirstTransaction": "Is first transaction",
     "mandateId": "Identifier",
+    "member": "Member",
     "reason": "Reason",
     "status": "Status",
     "type": "Type",

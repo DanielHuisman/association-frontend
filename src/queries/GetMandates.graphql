@@ -1,0 +1,12 @@
+# import '../fragments/Mandate.graphql'
+# import '../fragments/Member.graphql'
+
+query GetMandates {
+    mandates {
+        ...MandateFragment
+
+        member {
+            ...MemberFragment
+        }
+    }
+}

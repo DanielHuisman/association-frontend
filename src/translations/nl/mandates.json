@@ -19,6 +19,7 @@
     "iban": "IBAN",
     "isFirstTransaction": "Is eerste transactie",
     "mandateId": "Identificatiecode",
+    "member": "Lid",
     "reason": "Reden",
     "status": "Status",
     "type": "Type",
