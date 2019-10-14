@@ -7,7 +7,7 @@ import {Container, Header, Loader, Table} from 'semantic-ui-react';
 import TableSelectableRow from '../../components/table/TableSelectableRow';
 import YesNo from '../../components/util/YesNo';
 import GetMembers from '../../queries/GetMembers.graphql';
-import {GetMembers as GetMembersType} from '../../types/generatedTypes';
+import {GetMembers as GetMembersType, MandateStatus} from '../../types/generatedTypes';
 
 const Members = () => {
     const {t} = useTranslation();
@@ -41,8 +41,10 @@ const Members = () => {
                                 <Table.Cell>{member.firstName}</Table.Cell>
                                 <Table.Cell>{member.lastName}</Table.Cell>
                                 <Table.Cell>{member.email}</Table.Cell>
-                                <Table.Cell>{member.language}</Table.Cell>
-                                <Table.Cell><YesNo value={member.mandates.length > 0} /></Table.Cell>
+                                <Table.Cell>{t(`members:member.languages.${member.language}`)}</Table.Cell>
+                                <Table.Cell>
+                                    <YesNo value={member.mandates.filter((mandate) => mandate.status === MandateStatus.ACCEPTED).length > 0} />
+                                </Table.Cell>
                             </TableSelectableRow>
                         ))}
                     </Table.Body>
