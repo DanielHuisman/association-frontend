@@ -5,6 +5,7 @@ import {Helmet} from 'react-helmet';
 
 import GetProfile from '../../queries/GetProfile.graphql';
 import {GetProfile as GetProfileType} from '../../types/generatedTypes';
+import {UserProvider} from '../authentication/UserContext';
 import Sidebar from '../navigation/Sidebar';
 
 import Header from './Header';
@@ -21,13 +22,15 @@ const App = () => {
                     const user = loading || error ? null : data.me;
 
                     return (
-                        <Sidebar user={user} visible={isSidebarVisible} onHide={() => setSidebarVisible(false)}>
-                            <Helmet titleTemplate="%s | J&SV Exaltio" defaultTitle="J&SV Exaltio" />
+                        <UserProvider value={user}>
+                            <Sidebar user={user} visible={isSidebarVisible} onHide={() => setSidebarVisible(false)}>
+                                <Helmet titleTemplate="%s | J&SV Exaltio" defaultTitle="J&SV Exaltio" />
 
-                            <Header user={user} onSidebar={() => setSidebarVisible(true)} />
-                            <Main />
-                            <Footer />
-                        </Sidebar>
+                                <Header user={user} onSidebar={() => setSidebarVisible(true)} />
+                                <Main />
+                                <Footer />
+                            </Sidebar>
+                        </UserProvider>
                     );
                 }}
             </Query>

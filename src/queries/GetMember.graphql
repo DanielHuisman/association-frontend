@@ -5,7 +5,7 @@ query GetMember($id: String!) {
     member(id: $id) {
         ...MemberFragment
 
-        mandates(status: ACCEPTED) {
+        mandates {
             ...MandateFragment
         }
     }
