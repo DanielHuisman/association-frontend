@@ -3,6 +3,27 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: CreateDigitalMandate
+// ====================================================
+
+export interface CreateDigitalMandate_createDigitalMandate {
+  __typename: "DigitalMandateCreateResponse";
+  redirectUrl: string;
+}
+
+export interface CreateDigitalMandate {
+  createDigitalMandate: CreateDigitalMandate_createDigitalMandate;
+}
+
+export interface CreateDigitalMandateVariables {
+  data: DigitalMandateCreateInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: OAuthAuthenticate
 // ====================================================
 
@@ -84,6 +105,27 @@ export interface UploadPaperMandate {
 export interface UploadPaperMandateVariables {
   data: PaperMandateFileCreateInput;
   file: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetBanks
+// ====================================================
+
+export interface GetBanks_banks {
+  __typename: "Bank";
+  id: string;
+  bic: string;
+  country: string;
+  name: string;
+  isActive: boolean;
+}
+
+export interface GetBanks {
+  banks: GetBanks_banks[];
 }
 
 /* tslint:disable */
@@ -525,6 +567,23 @@ export interface GetUsers {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL fragment: BankFragment
+// ====================================================
+
+export interface BankFragment {
+  __typename: "Bank";
+  id: string;
+  bic: string;
+  country: string;
+  name: string;
+  isActive: boolean;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: FileFragment
 // ====================================================
 
@@ -723,6 +782,15 @@ export enum StudentType {
   UNIVERSITY_OTHER = "UNIVERSITY_OTHER",
   UNIVERSITY_UT = "UNIVERSITY_UT",
   WORKING = "WORKING",
+}
+
+export interface DigitalMandateCreateInput {
+  member: MemberWhereInput;
+  bic: string;
+}
+
+export interface MemberWhereInput {
+  id: string;
 }
 
 export interface PaperMandateFileCreateInput {

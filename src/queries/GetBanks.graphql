@@ -1,0 +1,7 @@
+# import '../fragments/Bank.graphql'
+
+query GetBanks {
+    banks {
+        ...BankFragment
+    }
+}

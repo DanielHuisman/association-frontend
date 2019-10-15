@@ -1,0 +1,5 @@
+mutation CreateDigitalMandate($data: DigitalMandateCreateInput!) {
+    createDigitalMandate(data: $data) {
+        redirectUrl
+    }
+}

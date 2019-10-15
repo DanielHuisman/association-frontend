@@ -1,0 +1,7 @@
+fragment BankFragment on Bank {
+    id
+    bic
+    country
+    name
+    isActive
+}
