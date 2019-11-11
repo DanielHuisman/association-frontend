@@ -21,7 +21,7 @@ const OAuthButton = ({type, name, icon, ...props}: IProps) => {
     return (
         <Mutation<OAuthAuthorizeType>
             mutation={OAuthAuthorize}
-            variables={{type, redirectUri: `/oauth/${type.toLocaleLowerCase()}`}}
+            variables={{type, redirectUri: `${window.location.origin}/oauth/${type.toLocaleLowerCase()}`}}
             onCompleted={handleCompleted}
         >
             {(authorize, {loading, error}) => {

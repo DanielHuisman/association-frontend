@@ -28,7 +28,7 @@ const OAuth = ({match, history}: RouteComponentProps<IMatchParams>) => {
                     mutation: OAuthAuthenticate,
                     variables: {
                         type: provider,
-                        redirectUri: `/oauth/${provider.toLowerCase()}`,
+                        redirectUri: `${window.location.origin}/oauth/${provider.toLowerCase()}`,
                         code: params.code || '',
                         userId: localStorage.getItem('oauthUserId')
                     }
