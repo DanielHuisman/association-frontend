@@ -46,7 +46,11 @@ const Mandates = () => {
                                 <Table.Cell><MandateType mandate={mandate} /></Table.Cell>
                                 <Table.Cell>{mandate.member.firstName} {mandate.member.lastName}</Table.Cell>
                                 <Table.Cell>{moment(mandate.createdAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
-                                <Table.Cell>{mandate.acceptedAt ? moment(mandate.acceptedAt).format('YYYY-MM-DD HH:mm') : <i>Never</i>}</Table.Cell>
+                                <Table.Cell>
+                                    {mandate.acceptedAt ?
+                                        moment(mandate.acceptedAt).format('YYYY-MM-DD HH:mm') :
+                                        <i>{t('general:date.never', 'Never')}</i>}
+                                </Table.Cell>
                                 <Table.Cell><YesNo value={mandate.isFirstTransaction} /></Table.Cell>
                             </TableSelectableRow>
                         ))}

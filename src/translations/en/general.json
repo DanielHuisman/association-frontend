@@ -1,4 +1,7 @@
 {
+  "date": {
+    "never": "Never"
+  },
   "general": {
     "download": "Download",
     "yes": "Yes"

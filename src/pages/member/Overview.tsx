@@ -120,7 +120,11 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                                         </Table.Cell>
                                         <Table.Cell>{mandate.iban}</Table.Cell>
                                         <Table.Cell>{mandate.bic}</Table.Cell>
-                                        <Table.Cell>{moment(mandate.acceptedAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
+                                        <Table.Cell>
+                                            {mandate.acceptedAt ?
+                                                moment(mandate.acceptedAt).format('YYYY-MM-DD HH:mm') :
+                                                <i>{t('general:date.never', 'Never')}</i>}
+                                        </Table.Cell>
                                     </TableSelectableRow>
                                 ))}
                             </Table.Body>
