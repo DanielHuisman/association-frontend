@@ -28,6 +28,10 @@ const Base = ({user, onClick}: IProps) => {
                         <Icon name="users" />
                         {t('members:members.header')}
                     </Menu.Item>
+                    <Menu.Item as={NavLink} to="/mandates" onClick={onClick}>
+                        <Icon name="signup" />
+                        {t('mandates:mandates.header')}
+                    </Menu.Item>
                 </>
             )}
         </>
