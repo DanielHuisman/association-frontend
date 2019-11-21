@@ -12,7 +12,7 @@ interface IRouteParams {
     memberId: string;
 }
 
-const Intro = ({match}: RouteComponentProps<IRouteParams>) => {
+const Intro = ({match, history}: RouteComponentProps<IRouteParams>) => {
     return (
         <>
             <p className={styles.text}>
@@ -71,7 +71,7 @@ const Intro = ({match}: RouteComponentProps<IRouteParams>) => {
                                 </Trans>
                             </p>
 
-                            <PaperMandateForm memberId={match.params.memberId} />
+                            <PaperMandateForm memberId={match.params.memberId} history={history} />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

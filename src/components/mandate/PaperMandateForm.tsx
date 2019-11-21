@@ -13,6 +13,7 @@ import {MutationFormPage} from '../page';
 
 interface IProps {
     memberId: string;
+    history: RouteComponentProps['history'];
 }
 
 interface IValues {
@@ -29,7 +30,7 @@ const schema = Yup.object().shape({
         .test('is-valid-bic', 'Invalid BIC.', isValidBIC)
 });
 
-const DigitalMandateForm = ({memberId, history}: IProps & RouteComponentProps<{}>) => {
+const PaperMandateForm = ({memberId, history}: IProps) => {
     const {t} = useTranslation();
 
     return (
@@ -78,4 +79,4 @@ const DigitalMandateForm = ({memberId, history}: IProps & RouteComponentProps<{}
     );
 };
 
-export default DigitalMandateForm;
+export default PaperMandateForm;
