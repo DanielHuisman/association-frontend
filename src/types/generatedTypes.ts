@@ -3,75 +3,6 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: CreateDigitalMandate
-// ====================================================
-
-export interface CreateDigitalMandate_createDigitalMandate {
-  __typename: "DigitalMandateCreateResponse";
-  redirectUrl: string;
-}
-
-export interface CreateDigitalMandate {
-  createDigitalMandate: CreateDigitalMandate_createDigitalMandate;
-}
-
-export interface CreateDigitalMandateVariables {
-  data: DigitalMandateCreateInput;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: CreatePaperMandate
-// ====================================================
-
-export interface CreatePaperMandate_createPaperMandate_generatedFile {
-  __typename: "File";
-  id: string;
-  name: string;
-  url: string;
-  mimeType: string;
-}
-
-export interface CreatePaperMandate_createPaperMandate_uploadedFile {
-  __typename: "File";
-  id: string;
-  name: string;
-  url: string;
-  mimeType: string;
-}
-
-export interface CreatePaperMandate_createPaperMandate {
-  __typename: "PaperMandate";
-  id: string;
-  mandateId: string;
-  status: MandateStatus;
-  createdAt: any;
-  acceptedAt: any | null;
-  bic: string;
-  iban: string | null;
-  reason: string;
-  isFirstTransaction: boolean;
-  errorMessage: string | null;
-  generatedFile: CreatePaperMandate_createPaperMandate_generatedFile | null;
-  uploadedFile: CreatePaperMandate_createPaperMandate_uploadedFile | null;
-}
-
-export interface CreatePaperMandate {
-  createPaperMandate: CreatePaperMandate_createPaperMandate;
-}
-
-export interface CreatePaperMandateVariables {
-  data: PaperMandateCreateInput;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL mutation operation: OAuthAuthenticate
 // ====================================================
 
@@ -153,27 +84,6 @@ export interface UploadPaperMandate {
 export interface UploadPaperMandateVariables {
   data: PaperMandateFileCreateInput;
   file: any;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: GetBanks
-// ====================================================
-
-export interface GetBanks_banks {
-  __typename: "Bank";
-  id: string;
-  bic: string;
-  country: string;
-  name: string;
-  isActive: boolean;
-}
-
-export interface GetBanks {
-  banks: GetBanks_banks[];
 }
 
 /* tslint:disable */
@@ -615,23 +525,6 @@ export interface GetUsers {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: BankFragment
-// ====================================================
-
-export interface BankFragment {
-  __typename: "Bank";
-  id: string;
-  bic: string;
-  country: string;
-  name: string;
-  isActive: boolean;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL fragment: FileFragment
 // ====================================================
 
@@ -830,21 +723,6 @@ export enum StudentType {
   UNIVERSITY_OTHER = "UNIVERSITY_OTHER",
   UNIVERSITY_UT = "UNIVERSITY_UT",
   WORKING = "WORKING",
-}
-
-export interface DigitalMandateCreateInput {
-  member: MemberWhereInput;
-  bic: string;
-}
-
-export interface MemberWhereInput {
-  id: string;
-}
-
-export interface PaperMandateCreateInput {
-  member: MemberWhereInput;
-  bic: string;
-  iban: string;
 }
 
 export interface PaperMandateFileCreateInput {
