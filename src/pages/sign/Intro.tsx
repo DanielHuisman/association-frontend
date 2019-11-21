@@ -4,6 +4,7 @@ import {RouteComponentProps} from 'react-router-dom';
 import {Segment, Grid, Header} from 'semantic-ui-react';
 
 import DigitalMandateForm from '../../components//mandate/DigitalMandateForm';
+import PaperMandateForm from '../../components//mandate/PaperMandateForm';
 
 import styles from './Sign.css';
 
@@ -51,7 +52,6 @@ const Intro = ({match}: RouteComponentProps<IRouteParams>) => {
                                 </Trans>
                             </p>
 
-                            {/* TODO: add bank selection form */}
                             <DigitalMandateForm memberId={match.params.memberId} />
                         </Grid.Column>
                     </Grid.Row>
@@ -71,7 +71,7 @@ const Intro = ({match}: RouteComponentProps<IRouteParams>) => {
                                 </Trans>
                             </p>
 
-                            {/* TODO: add bank details form */}
+                            <PaperMandateForm memberId={match.params.memberId} />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

@@ -24,6 +24,54 @@ export interface CreateDigitalMandateVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: CreatePaperMandate
+// ====================================================
+
+export interface CreatePaperMandate_createPaperMandate_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface CreatePaperMandate_createPaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface CreatePaperMandate_createPaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: CreatePaperMandate_createPaperMandate_generatedFile | null;
+  uploadedFile: CreatePaperMandate_createPaperMandate_uploadedFile | null;
+}
+
+export interface CreatePaperMandate {
+  createPaperMandate: CreatePaperMandate_createPaperMandate;
+}
+
+export interface CreatePaperMandateVariables {
+  data: PaperMandateCreateInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: OAuthAuthenticate
 // ====================================================
 
@@ -791,6 +839,12 @@ export interface DigitalMandateCreateInput {
 
 export interface MemberWhereInput {
   id: string;
+}
+
+export interface PaperMandateCreateInput {
+  member: MemberWhereInput;
+  bic: string;
+  iban: string;
 }
 
 export interface PaperMandateFileCreateInput {

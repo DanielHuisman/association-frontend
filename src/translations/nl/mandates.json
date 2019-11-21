@@ -34,9 +34,12 @@
   },
   "sign": {
     "digital": {
-      "bank": "Select a bank",
-      "submit": "Continue"
+      "bank": "Selecteer een bank",
+      "submit": "Volgende"
     },
-    "header": "Incassomachtiging tekenen"
+    "header": "Incassomachtiging tekenen",
+    "paper": {
+      "submit": "Volgende"
+    }
   }
 }

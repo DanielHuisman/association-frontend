@@ -1,0 +1,7 @@
+# import '../fragments/Mandate.graphql'
+
+mutation CreatePaperMandate($data: PaperMandateCreateInput!) {
+    createPaperMandate(data: $data) {
+        ...MandateFragment
+    }
+}

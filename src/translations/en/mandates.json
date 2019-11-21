@@ -37,6 +37,9 @@
       "bank": "Select a bank",
       "submit": "Continue"
     },
-    "header": "Sign mandate"
+    "header": "Sign mandate",
+    "paper": {
+      "submit": "Continue"
+    }
   }
 }
