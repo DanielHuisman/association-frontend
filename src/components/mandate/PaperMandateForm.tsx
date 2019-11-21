@@ -1,18 +1,15 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
+import {RouteComponentProps} from 'react-router-dom';
 import {Field} from 'formik';
 import * as Yup from 'yup';
 import {isValidBIC, isValidIBAN} from 'ibantools';
 import {Icon} from 'semantic-ui-react';
 
-import GetBanks from '../../queries/GetBanks.graphql';
 import CreatePaperMandate from '../../mutations/CreatePaperMandate.graphql';
-import {
-    GetBanks as GetBanksType,
-    CreatePaperMandate as CreatePaperMandateType
-} from '../../types/generatedTypes';
+import {CreatePaperMandate as CreatePaperMandateType} from '../../types/generatedTypes';
 import {Form, FieldInput, SubmitButton} from '../form';
-import {FormPage} from '../page';
+import {MutationFormPage} from '../page';
 
 interface IProps {
     memberId: string;
@@ -32,12 +29,11 @@ const schema = Yup.object().shape({
         .test('is-valid-bic', 'Invalid BIC.', isValidBIC)
 });
 
-const DigitalMandateForm = ({memberId}: IProps) => {
+const DigitalMandateForm = ({memberId, history}: IProps & RouteComponentProps<{}>) => {
     const {t} = useTranslation();
 
     return (
-        <FormPage<GetBanksType, CreatePaperMandateType, IValues>
-            query={GetBanks}
+        <MutationFormPage<CreatePaperMandateType, IValues>
             mutation={CreatePaperMandate}
 
             data={(values) => {
@@ -54,9 +50,9 @@ const DigitalMandateForm = ({memberId}: IProps) => {
                 };
             }}
         >
-            {(handleSubmit, queryResult, mutationResult) => {
+            {(handleSubmit, mutationResult) => {
                 if (mutationResult.data && mutationResult.data.createPaperMandate) {
-                    // TODO: process result
+                    history.push(`/members/${memberId}/mandates/sign/paper`);
                 }
 
                 return (
@@ -78,7 +74,7 @@ const DigitalMandateForm = ({memberId}: IProps) => {
                     </Form>
                 );
             }}
-        </FormPage>
+        </MutationFormPage>
     );
 };
 
