@@ -37,6 +37,7 @@ const PaperMandateForm = ({memberId, history}: IProps) => {
         <MutationFormPage<CreatePaperMandateType, IValues>
             mutation={CreatePaperMandate}
 
+            loader={false}
             data={(values) => {
                 return {
                     variables: {
