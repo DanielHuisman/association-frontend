@@ -33,6 +33,10 @@
     "header": "Incassomachtigingen"
   },
   "sign": {
+    "digital": {
+      "bank": "Select a bank",
+      "submit": "Continue"
+    },
     "header": "Incassomachtiging tekenen"
   }
 }

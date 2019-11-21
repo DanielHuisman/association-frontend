@@ -1,10 +1,17 @@
 import React from 'react';
 import {Trans} from 'react-i18next';
+import {RouteComponentProps} from 'react-router-dom';
 import {Segment, Grid, Header} from 'semantic-ui-react';
+
+import DigitalMandateForm from '../../components//mandate/DigitalMandateForm';
 
 import styles from './Sign.css';
 
-const Intro = () => {
+interface IRouteParams {
+    memberId: string;
+}
+
+const Intro = ({match}: RouteComponentProps<IRouteParams>) => {
     return (
         <>
             <p className={styles.text}>
@@ -45,6 +52,7 @@ const Intro = () => {
                             </p>
 
                             {/* TODO: add bank selection form */}
+                            <DigitalMandateForm memberId={match.params.memberId} />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
