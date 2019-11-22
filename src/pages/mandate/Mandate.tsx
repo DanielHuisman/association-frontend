@@ -9,7 +9,7 @@ import moment from 'moment';
 import MandateType from '../../components/mandate/MandateType';
 import YesNo from '../../components/util/YesNo';
 import GetMandate from '../../queries/GetMandate.graphql';
-import {GetMandate as GetMandateType} from '../../types/generatedTypes';
+import {GetMandate as GetMandateType, MandateStatus} from '../../types/generatedTypes';
 
 interface IRouteParams {
     mandateId: string;
@@ -102,6 +102,21 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                             )}
                         </Table.Body>
                     </Table>
+
+                    {data.mandate.__typename === 'PaperMandate' && (
+                        <>
+                            {data.mandate.status === MandateStatus.UNACCEPTED && data.mandate.uploadedFile && (
+                                <>
+                                    <Button color="green">
+                                        {t(' mandates:mandate.review.accept', 'Accept')}
+                                    </Button>
+                                    <Button color="red">
+                                        {t(' mandates:mandate.review.reject', 'Reject')}
+                                    </Button>
+                                </>
+                            )}
+                        </>
+                    )}
 
                     <Header size="large">{t('mandates:mandate.details.member', 'Member details')}</Header>
                     <Table compact definition selectable stackable>
