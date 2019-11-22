@@ -101,6 +101,7 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                             <Table.Header>
                                 <Table.Row>
                                     <Table.HeaderCell>{t('mandates:mandate.mandateId', 'Identifier')}</Table.HeaderCell>
+                                    <Table.HeaderCell>{t('mandates:mandate.status', 'Status')}</Table.HeaderCell>
                                     <Table.HeaderCell>{t('mandates:mandate.reason', 'Reason')}</Table.HeaderCell>
                                     <Table.HeaderCell>{t('mandates:mandate.type', 'Type')}</Table.HeaderCell>
                                     <Table.HeaderCell>{t('mandates:mandate.iban', 'IBAN')}</Table.HeaderCell>
@@ -112,6 +113,7 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                                 {data.member.mandates.map((mandate) => (
                                     <TableSelectableRow key={mandate.id} to={`/mandates/${mandate.id}`}>
                                         <Table.Cell>{mandate.mandateId}</Table.Cell>
+                                        <Table.Cell>{mandate.status}</Table.Cell>
                                         <Table.Cell>{mandate.reason}</Table.Cell>
                                         <Table.Cell>
                                             {mandate.__typename === 'DigitalMandate' ?

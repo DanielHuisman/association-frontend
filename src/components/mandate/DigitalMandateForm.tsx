@@ -2,7 +2,7 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Field} from 'formik';
 import * as Yup from 'yup';
-import {Icon} from 'semantic-ui-react';
+import {Loader, Icon} from 'semantic-ui-react';
 
 import GetBanks from '../../queries/GetBanks.graphql';
 import CreateDigitalMandate from '../../mutations/CreateDigitalMandate.graphql';
@@ -33,6 +33,7 @@ const DigitalMandateForm = ({memberId}: IProps) => {
             query={GetBanks}
             mutation={CreateDigitalMandate}
 
+            loader={false}
             data={(values) => {
                 return {
                     variables: {
@@ -47,6 +48,10 @@ const DigitalMandateForm = ({memberId}: IProps) => {
             }}
         >
             {(handleSubmit, queryResult, mutationResult) => {
+                if (queryResult.loading) {
+                    return <Loader active={true} />;
+                }
+                
                 const options = queryResult.data.banks.map((bank) => ({
                     key: bank.bic,
                     value: bank.bic,
