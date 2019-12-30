@@ -30,7 +30,8 @@
       "UNIVERSITY_OTHER": "University - Other",
       "UNIVERSITY_UT": "University - University of Twente",
       "WORKING": "Working"
-    }
+    },
+    "checkInfo": "This is your membership information, please check if everything is correct. If something is incorrect or you would like to change something, please contact the board."
   },
   "members": {
     "header": "Members"

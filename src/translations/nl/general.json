@@ -6,5 +6,7 @@
     "download": "Downloaden",
     "no": "Nee",
     "yes": "Ja"
-  }
+  },
+  "notFound": "Niet gevonden",
+  "unknown": "Onbekend"
 }

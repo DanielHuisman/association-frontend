@@ -52,16 +52,17 @@ const DigitalMandateForm = ({memberId}: IProps) => {
                     return <Loader active={true} />;
                 }
 
+                if (mutationResult.data && mutationResult.data.createDigitalMandate) {
+                    // Redirect to bank environment
+                    window.location.href = mutationResult.data.createDigitalMandate.redirectUrl;
+                    return <Loader active={true} />;
+                }
+
                 const options = queryResult.data.banks.map((bank) => ({
                     key: bank.bic,
                     value: bank.bic,
                     text: bank.name
                 }));
-
-                if (mutationResult.data && mutationResult.data.createDigitalMandate) {
-                    // Redirect to bank environment
-                    window.location.href = mutationResult.data.createDigitalMandate.redirectUrl;
-                }
 
                 return (
                     <Form<IValues>
@@ -75,10 +76,10 @@ const DigitalMandateForm = ({memberId}: IProps) => {
                         {mutationResult.error && (
                             <Message error visible>
                                 <Message.Header>
-                                    {t('mandates:sign.digital.error.header', 'Failed to redirect to bank')}
+                                    {t('mandates:sign.digital.redirect.error.header', 'Failed to redirect to bank')}
                                 </Message.Header>
                                 <Message.Content>
-                                    {t('mandates:sign.digital.error.description', 'An error occurred, try again later or contact the board.')}
+                                    {t('mandates:sign.digital.redirect.error.description', 'An error occurred, try again later or contact the board.')}
                                 </Message.Content>
                             </Message>
                         )}

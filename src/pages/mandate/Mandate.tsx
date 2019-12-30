@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
@@ -6,10 +6,11 @@ import {Link, RouteComponentProps} from 'react-router-dom';
 import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
+import {UserContext} from '../../components/authentication/UserContext';
 import MandateType from '../../components/mandate/MandateType';
 import YesNo from '../../components/util/YesNo';
 import GetMandate from '../../queries/GetMandate.graphql';
-import {GetMandate as GetMandateType, MandateStatus} from '../../types/generatedTypes';
+import {GetMandate as GetMandateType, MandateStatus, Role} from '../../types/generatedTypes';
 
 interface IRouteParams {
     mandateId: string;
@@ -17,6 +18,7 @@ interface IRouteParams {
 
 const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
     const {t} = useTranslation();
+    const user = useContext(UserContext);
     const {loading, data, error} = useQuery<GetMandateType>(GetMandate, {
         variables: {
             id: match.params.mandateId
@@ -31,7 +33,7 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
         <Container>
             {loading && <Loader active />}
 
-            {data && !data.mandate && <>Not found</>}
+            {data && !data.mandate && <>{t('general:notFound', 'Not found')}</>}
             {data && data.mandate && (
                 <>
                     <Helmet title={t('mandates:mandate.header', 'Mandate')} />
@@ -103,7 +105,7 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                         </Table.Body>
                     </Table>
 
-                    {data.mandate.__typename === 'PaperMandate' && (
+                    {user && user.role === Role.ADMIN && data.mandate.__typename === 'PaperMandate' && (
                         <>
                             {data.mandate.status === MandateStatus.UNACCEPTED && data.mandate.uploadedFile && (
                                 <>
@@ -127,15 +129,15 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>{t('mandates:mandate.details.address', 'Address')}</Table.Cell>
-                                <Table.Cell><i>Unknown</i></Table.Cell>
+                                <Table.Cell>{data.mandate.member.address}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>{t('mandates:mandate.details.postalCode', 'Postal code')}</Table.Cell>
-                                <Table.Cell><i>Unknown</i></Table.Cell>
+                                <Table.Cell>{data.mandate.member.postalCode}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>{t('mandates:mandate.details.city', 'City')}</Table.Cell>
-                                <Table.Cell><i>Unknown</i></Table.Cell>
+                                <Table.Cell>{data.mandate.member.city}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>{t('mandates:mandate.iban', 'IBAN')}</Table.Cell>
@@ -147,7 +149,12 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                             </Table.Row>
                         </Table.Body>
                     </Table>
-                    <Button as={Link} to={`/members/${data.mandate.member.id}`} color="blue">View member</Button>
+
+                    {user && user.role === Role.ADMIN && (
+                        <Button as={Link} to={`/members/${data.mandate.member.id}`} color="blue">
+                            {t('mandates:mandate.viewMember', 'View member')}
+                        </Button>
+                    )}
 
                     <Header size="large">{t('mandates:mandate.details.association', 'Association details')}</Header>
                     <Table compact definition selectable stackable>

@@ -7,7 +7,6 @@
     "no": "No",
     "yes": "Yes"
   },
-  "genral": {
-    "no": "No"
-  }
+  "notFound": "Not found",
+  "unknown": "Unknown"
 }

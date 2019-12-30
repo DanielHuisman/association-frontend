@@ -31,19 +31,34 @@
       "digital": "Digital mandate",
       "paper": "Paper mandate"
     },
-    "uploadedFile": "Uploaded file"
+    "uploadedFile": "Uploaded file",
+    "viewMember": "View member"
   },
   "mandates": {
-    "header": "Mandates"
+    "header": "Mandates",
+    "none": "Member has no mandates."
   },
   "sign": {
+    "button": "Sign a mandate",
     "digital": {
       "bank": "Select a bank",
       "error": {
-        "description": "An error occurred, try again later or contact the board.",
-        "header": "Failed to redirect to bank"
+        "description": "An error occurred or the mandate was cancelled. Please try again, possibly using a different method. If you continue to have this problem, please contact the board.",
+        "header": "Failed to sign a mandate"
       },
-      "submit": "Continue"
+      "redirect": {
+        "error": {
+          "description": "An error occurred, try again later or contact the board.",
+          "header": "Failed to redirect to bank"
+        }
+      },
+      "required": "You haven't signed a mandate yet. Please sign a mandate, so J&SV Exaltio will be able to deduct the yearly membership fee from your bank account.",
+      "submit": "Continue",
+      "success": {
+        "button": "View mandate details",
+        "description": "Thank you for signing a mandate. You don't need to take any further action.",
+        "header": "Successfully signed a mandate"
+      }
     },
     "header": "Sign mandate",
     "paper": {

@@ -31,19 +31,34 @@
       "digital": "Digitale incassomachtiging",
       "paper": "Papieren incassomachtiging"
     },
-    "uploadedFile": "Geüploade bestand"
+    "uploadedFile": "Geüploade bestand",
+    "viewMember": "View member"
   },
   "mandates": {
-    "header": "Incassomachtigingen"
+    "header": "Incassomachtigingen",
+    "none": "Lid heeft geen incassomachtigingen."
   },
   "sign": {
+    "button": "Teken een incassomachtiging",
     "digital": {
       "bank": "Selecteer een bank",
       "error": {
-        "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
-        "header": "Doorsturen naar bank is misukt"
+        "description": "Er is een fout opgetreden of de incassomachtiging is geannuleerd. Probeer het opnieuw, mogelijk met een andere methode. Neem contact op met het bestuur als dit probleem blijft aanhouden.",
+        "header": "Tekenen van incassomachtiging is mislukt"
       },
-      "submit": "Volgende"
+      "redirect": {
+        "error": {
+          "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
+          "header": "Doorsturen naar bank is misukt"
+        }
+      },
+      "required": "Je hebt nog geen incassomachtiging getekend. Teken een incasosmachtiging zodat J&SV Exaltio de contributie van je bankrekening kan afscrijven.",
+      "submit": "Volgende",
+      "success": {
+        "button": "Bekijk incassomachtiging",
+        "description": "Bedankt voor het tekenen van een incassomachtiging. Je hoeft verder niets meer te doen.",
+        "header": "Incassomachtiging is succesvol getekend"
+      }
     },
     "header": "Incassomachtiging tekenen",
     "paper": {

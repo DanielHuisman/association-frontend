@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import {Helmet} from 'react-helmet';
-import {useTranslation} from 'react-i18next';
-import {RouteComponentProps} from 'react-router';
-import {Container, Header, Loader, Table} from 'semantic-ui-react';
+import {useTranslation, Trans} from 'react-i18next';
+import {Link, RouteComponentProps} from 'react-router-dom';
+import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
+import {UserContext} from '../../components/authentication/UserContext';
 import TableSelectableRow from '../../components/table/TableSelectableRow';
 import GetMember from '../../queries/GetMember.graphql';
 import {GetMember as GetMemberType} from '../../types/generatedTypes';
@@ -22,6 +23,8 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
         }
     });
 
+    const user = useContext(UserContext);
+
     if (error) {
         throw error;
     }
@@ -30,11 +33,20 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
         <Container>
             {loading && <Loader active />}
 
-            {data && !data.member && <>Not found</>}
+            {data && !data.member && <>{t('general:notFound', 'Not found')}</>}
             {data && data.member && (
                 <>
                     <Helmet title={`${data.member.firstName} ${data.member.lastName}`} />
                     <Header size="huge">{data.member.firstName} {data.member.lastName}</Header>
+
+                    {!user && (
+                        <p>
+                            <Trans i18nKey="members:member.checkInfo">
+                                This is your membership information, please check if everything is correct.
+                                If something is incorrect or you would like to change something, please contact the board.
+                            </Trans>
+                        </p>
+                    )}
 
                     <Table compact definition selectable stackable>
                         <Table.Body>
@@ -131,6 +143,25 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                                 ))}
                             </Table.Body>
                         </Table>
+                    )}
+
+                    {!user && data.member.mandates.length === 0 && (
+                        <>
+                            <p>
+                                <Trans i18nKey="mandates:sign.required">
+                                    You haven't signed a mandate yet. Please sign a mandate,
+                                    so J&SV Exaltio will be able to deduct the yearly membership fee from your bank account.
+                                </Trans>
+                            </p>
+
+                            <Button as={Link} to={`${match.path}/mandates/sign`} color="blue">
+                                {t('mandates:sign.button', 'Sign a mandate')}
+                            </Button>
+                        </>
+                    )}
+
+                    {user && data.member.mandates.length === 0 && (
+                        <p>{t('mandates:mandates.none', 'Member has no mandates.')}</p>
                     )}
                 </>
             )}
