@@ -61,6 +61,13 @@
       }
     },
     "header": "Incassomachtiging tekenen",
+    "intro": {
+      "recommended": "AANBEVOLEN",
+      "text1": "Door een incassomachtiging te tekenen kan J&SV Exaltio automatisch de jaarlijkse contributie afschrijven van je bankrekening. Je ontvangt automatisch een e-mail ter informatie voordat de transactie plaats vindt. Om dit te doen maken we gebruik van een SEPA incasso, waarvoor je toestemming nodig hebben via een incassomachtiging.",
+      "text2": "Er zijn twee methodes om de machtiging te tekenen: Via de online omgeving van je bank (methode A) of door een formulier uit te printen en dan ondertekend te uploaden (methode B). We bevelen je methode A aan gezien deze het meest veiligst is. Echter wordt deze methode enkel ondersteund door Nederlandse banken. Indien je bank er niet tussen staat maak dan gebruik van methode B. Houdt er rekening mee dat een aantal banken alleen tijdens bank uren beschikbaar zijn om digitaal een machtiging te ondertekenen. Indien het tekenen 's avonds faalt maak dan gebruik van methode B of probeer het overdag nogmaals.",
+      "digital": "Om een incassomachtiging te tekenen word je doorgestuurd naar de online omgeving van je bank. Hier kan je met de inloggegevens van je bank de incassomachtiging bevestigen.",
+      "paper": "Om een incassomachtiging te tekenen dien je jouw gegevens in te vullen, het formulier uit te printen, te ondertekenen, in te scannen en daarna te uploaden"
+    },
     "paper": {
       "error": {
         "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Trans} from 'react-i18next';
+import {Trans, useTranslation} from 'react-i18next';
 import {RouteComponentProps} from 'react-router-dom';
 import {Segment, Grid, Header} from 'semantic-ui-react';
 
@@ -13,6 +13,8 @@ interface IRouteParams {
 }
 
 const Intro = ({match, history}: RouteComponentProps<IRouteParams>) => {
+    const {t} = useTranslation();
+
     return (
         <>
             <p className={styles.text}>
@@ -39,7 +41,7 @@ const Intro = ({match, history}: RouteComponentProps<IRouteParams>) => {
                             <Header size="huge" textAlign="center">
                                 A.
                                 <Header.Subheader>
-                                    RECOMMENDED
+                                    {t('mandates:sign.intro.recommended', 'RECOMMENDED')}
                                 </Header.Subheader>
                             </Header>
                         </Grid.Column>
