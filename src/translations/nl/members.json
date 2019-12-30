@@ -2,6 +2,7 @@
   "member": {
     "address": "Adres",
     "birthdate": "Geboortedatum",
+    "checkInfo": "Dit is je lidmaatschapsinformatie, controleer a.u.b. of alles correct is. Als iets incorrect is of je iets wil wijzigen, kun je contact opnemen met het bestuur.",
     "city": "City",
     "email": "E-mailadres",
     "endOfMembership": "Einde lidmaatschap",
@@ -30,8 +31,7 @@
       "UNIVERSITY_OTHER": "Universiteit - Overig",
       "UNIVERSITY_UT": "Universiteit - Universiteit Twente",
       "WORKING": "Werkende"
-    },
-    "checkInfo": "Dit is je lidmaatschapsinformatie, controleer a.u.b. of alles correct is. Als iets incorrect is of je iets wil wijzigen, kun je contact opnemen met het bestuur.",
+    }
   },
   "members": {
     "header": "Leden"

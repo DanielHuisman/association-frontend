@@ -62,11 +62,11 @@
     },
     "header": "Sign mandate",
     "intro": {
+      "digital": "To sign a mandate you will be redirected to your online bank environment. Here you will sign in with the credentials provided by your bank to confirm you want to sign a mandate.",
+      "paper": "To sign a mandate you need to fill in your details, print out the form and reupload it with your signature on it.",
       "recommended": "RECOMMENDED",
       "text1": "Once a year J&SV Exaltio will automatically deduct your membership fee from your bank account. You will receive an email notification before the transaction takes place. To do this we use SEPA Direct Debit, for which we require your permission in the form of a SEPA eMandate.",
-      "text2": "There are two ways to sign the mandate: via your online bank environment or by printing out a form and reuploading it with your signature. We recommend using method A, because it's the most secure. However, method A only supports most Dutch banks. If your bank is not listed below, please us method B. Unfortunately, some banks are only available during office hours. If signing the mandate fails during the evening, you can try again during office hours or use method B.",
-      "digital": "To sign a mandate you will be redirected to your online bank environment. Here you will sign in with the credentials provided by your bank to confirm you want to sign a mandate.",
-      "paper": "To sign a mandate you need to fill in your details, print out the form and reupload it with your signature on it."
+      "text2": "There are two ways to sign the mandate: via your online bank environment or by printing out a form and reuploading it with your signature. We recommend using method A, because it's the most secure. However, method A only supports most Dutch banks. If your bank is not listed below, please us method B. Unfortunately, some banks are only available during office hours. If signing the mandate fails during the evening, you can try again during office hours or use method B."
     },
     "paper": {
       "error": {
