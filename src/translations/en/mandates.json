@@ -21,6 +21,10 @@
     "mandateId": "Identifier",
     "member": "Member",
     "reason": "Reason",
+    "review": {
+      "accept": "Accept",
+      "reject": "Reject"
+    },
     "status": "Status",
     "type": "Type",
     "types": {
@@ -35,10 +39,18 @@
   "sign": {
     "digital": {
       "bank": "Select a bank",
+      "error": {
+        "description": "An error occurred, try again later or contact the board.",
+        "header": "Failed to redirect to bank"
+      },
       "submit": "Continue"
     },
     "header": "Sign mandate",
     "paper": {
+      "error": {
+        "description": "An error occurred, try again later or contact the board.",
+        "header": "Failed to create mandate"
+      },
       "submit": "Continue"
     }
   }

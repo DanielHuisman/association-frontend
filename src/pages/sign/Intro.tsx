@@ -17,9 +17,8 @@ const Intro = ({match, history}: RouteComponentProps<IRouteParams>) => {
         <>
             <p className={styles.text}>
                 <Trans i18nKey="mandates:sign.intro.text1">
-                    {/* TODO: change this text */}
-                    On the first day of every month VCK will automatically deduct your membership fee and/or rent for devices from your bank account.
-                    You will receive an email notification each month before the transaction takes place.
+                    Once a year J&SV Exaltio will automatically deduct your membership fee from your bank account.
+                    You will receive an email notification before the transaction takes place.
                     To do this we use SEPA Direct Debit, for which we require your permission in the form of a SEPA eMandate.
                 </Trans>
             </p>

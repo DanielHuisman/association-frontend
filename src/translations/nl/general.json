@@ -4,9 +4,7 @@
   },
   "general": {
     "download": "Downloaden",
+    "no": "Nee",
     "yes": "Ja"
-  },
-  "genral": {
-    "no": "Nee"
   }
 }

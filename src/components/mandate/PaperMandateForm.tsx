@@ -4,7 +4,7 @@ import {RouteComponentProps} from 'react-router-dom';
 import {Field} from 'formik';
 import * as Yup from 'yup';
 import {isValidBIC, isValidIBAN} from 'ibantools';
-import {Icon} from 'semantic-ui-react';
+import {Message, Icon} from 'semantic-ui-react';
 
 import CreatePaperMandate from '../../mutations/CreatePaperMandate.graphql';
 import {CreatePaperMandate as CreatePaperMandateType} from '../../types/generatedTypes';
@@ -66,6 +66,17 @@ const PaperMandateForm = ({memberId, history}: IProps) => {
                         validationSchema={schema}
                         onSubmit={handleSubmit}
                     >
+                        {mutationResult.error && (
+                            <Message error visible>
+                                <Message.Header>
+                                    {t('mandates:sign.paper.error.header', 'Failed to create mandate')}
+                                </Message.Header>
+                                <Message.Content>
+                                    {t('mandates:sign.paper.error.description', 'An error occurred, try again later or contact the board.')}
+                                </Message.Content>
+                            </Message>
+                        )}
+
                         <Field component={FieldInput} name="iban" type="text" label={t('mandates:mandate.iban', 'IBAN')} />
                         <Field component={FieldInput} name="bic" type="text" label={t('mandates:mandate.bic', 'BIC')} />
 

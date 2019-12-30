@@ -17,7 +17,7 @@ const YesNo = ({value = false}: IProps) => {
     ) : (
         <>
             <Icon name="times" color="red" />
-            {t('general:genral.no', 'No')}
+            {t('general:general.no', 'No')}
         </>
     );
 };

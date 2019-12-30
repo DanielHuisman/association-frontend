@@ -108,10 +108,10 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                             {data.mandate.status === MandateStatus.UNACCEPTED && data.mandate.uploadedFile && (
                                 <>
                                     <Button color="green">
-                                        {t(' mandates:mandate.review.accept', 'Accept')}
+                                        {t('mandates:mandate.review.accept', 'Accept')}
                                     </Button>
                                     <Button color="red">
-                                        {t(' mandates:mandate.review.reject', 'Reject')}
+                                        {t('mandates:mandate.review.reject', 'Reject')}
                                     </Button>
                                 </>
                             )}

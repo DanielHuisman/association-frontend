@@ -2,7 +2,7 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Field} from 'formik';
 import * as Yup from 'yup';
-import {Loader, Icon} from 'semantic-ui-react';
+import {Loader, Icon, Message} from 'semantic-ui-react';
 
 import GetBanks from '../../queries/GetBanks.graphql';
 import CreateDigitalMandate from '../../mutations/CreateDigitalMandate.graphql';
@@ -51,7 +51,7 @@ const DigitalMandateForm = ({memberId}: IProps) => {
                 if (queryResult.loading) {
                     return <Loader active={true} />;
                 }
-                
+
                 const options = queryResult.data.banks.map((bank) => ({
                     key: bank.bic,
                     value: bank.bic,
@@ -72,6 +72,17 @@ const DigitalMandateForm = ({memberId}: IProps) => {
                         validationSchema={schema}
                         onSubmit={handleSubmit}
                     >
+                        {mutationResult.error && (
+                            <Message error visible>
+                                <Message.Header>
+                                    {t('mandates:sign.digital.error.header', 'Failed to redirect to bank')}
+                                </Message.Header>
+                                <Message.Content>
+                                    {t('mandates:sign.digital.error.description', 'An error occurred, try again later or contact the board.')}
+                                </Message.Content>
+                            </Message>
+                        )}
+
                         <Field component={FieldDropdown} name="bic" label={t('mandates:sign.digital.bank', 'Select a bank')} options={options} />
 
                         <SubmitButton color="blue">

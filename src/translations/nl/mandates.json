@@ -21,6 +21,10 @@
     "mandateId": "Identificatiecode",
     "member": "Lid",
     "reason": "Reden",
+    "review": {
+      "accept": "Accepteren",
+      "reject": "Weigeren"
+    },
     "status": "Status",
     "type": "Type",
     "types": {
@@ -35,10 +39,18 @@
   "sign": {
     "digital": {
       "bank": "Selecteer een bank",
+      "error": {
+        "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
+        "header": "Doorsturen naar bank is misukt"
+      },
       "submit": "Volgende"
     },
     "header": "Incassomachtiging tekenen",
     "paper": {
+      "error": {
+        "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
+        "header": "Incassomachtiging aanmaken is mislukt"
+      },
       "submit": "Volgende"
     }
   }
