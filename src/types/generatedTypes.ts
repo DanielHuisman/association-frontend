@@ -802,6 +802,7 @@ export enum Language {
 export enum MandateStatus {
   ACCEPTED = "ACCEPTED",
   CANCELLED = "CANCELLED",
+  CREATED = "CREATED",
   ERROR = "ERROR",
   INVALID = "INVALID",
   REJECTED = "REJECTED",

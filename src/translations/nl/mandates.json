@@ -69,11 +69,28 @@
       "text2": "Er zijn twee methodes om de machtiging te tekenen: Via de online omgeving van je bank (methode A) of door een formulier uit te printen en dan ondertekend te uploaden (methode B). We bevelen je methode A aan gezien deze het meest veiligst is. Echter wordt deze methode enkel ondersteund door Nederlandse banken. Indien je bank er niet tussen staat maak dan gebruik van methode B. Houdt er rekening mee dat een aantal banken alleen tijdens bank uren beschikbaar zijn om digitaal een machtiging te ondertekenen. Indien het tekenen 's avonds faalt maak dan gebruik van methode B of probeer het overdag nogmaals."
     },
     "paper": {
+      "download": "Download incassomachtiging",
       "error": {
         "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
         "header": "Incassomachtiging aanmaken is mislukt"
       },
-      "submit": "Volgende"
+      "requirements": {
+        "header": "Vereisten",
+        "line1": "Onderteken het formulier met een geldige handtekening.",
+        "line2": "Vul de datum en locatie in.",
+        "line3": "De foto of scan dient duidelijk leesbaar te zijn.",
+        "line4": "Het document dient voor te komen in de gehele foto of scan met zo min mogelijk marge.",
+        "line5": "De scan of foto dient een PDF, PNG of JPG bestand te zien (maximum grootte 5 MB)."
+      },
+      "submit": "Volgende",
+      "upload": {
+        "error": {
+          "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
+          "header": "Incassomachtiging uploaden is mislukt"
+        },
+        "header": "Upload",
+        "submit": "Upload incassomachtiging"
+      }
     }
   }
 }

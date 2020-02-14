@@ -6,7 +6,7 @@ import {Container, Loader} from 'semantic-ui-react';
 import {UserContext} from '../../components/authentication/UserContext';
 import GetMember from '../../queries/GetMember.graphql';
 import {GetMember as GetMemberType, Role} from '../../types/generatedTypes';
-import {hasPendingMandate, hasAcceptedMandate} from '../../util';
+import {hasPendingPaperMandates, hasAcceptedMandates} from '../../util';
 import Sign from '../sign/Sign';
 
 import Overview from './Overview';
@@ -32,9 +32,9 @@ const Member = ({history, match, location}: RouteComponentProps<IRouteParams>) =
         if (data && data.member) {
             // Check if the member should be redirected to sign a mandate
             if (!location.pathname.includes('/mandates/') && !(user && user.role === Role.ADMIN)) {
-                if (hasPendingMandate(data.member)) {
+                if (hasPendingPaperMandates(data.member)) {
                     history.push(`${match.url}/mandates/sign/paper`);
-                } else if (hasAcceptedMandate(data.member)) {
+                } else if (!hasAcceptedMandates(data.member)) {
                     history.push(`${match.url}/mandates/sign`);
                 }
             }

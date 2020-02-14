@@ -69,11 +69,28 @@
       "text2": "There are two ways to sign the mandate: via your online bank environment or by printing out a form and reuploading it with your signature. We recommend using method A, because it's the most secure. However, method A only supports most Dutch banks. If your bank is not listed below, please us method B. Unfortunately, some banks are only available during office hours. If signing the mandate fails during the evening, you can try again during office hours or use method B."
     },
     "paper": {
+      "download": "Download mandate form",
       "error": {
         "description": "An error occurred, try again later or contact the board.",
         "header": "Failed to create mandate"
       },
-      "submit": "Continue"
+      "requirements": {
+        "header": "Requirements",
+        "line1": "Sign the document with a valid signature.",
+        "line2": "Fill in the date and location.",
+        "line3": "The photo or scan has to be clearly readable.",
+        "line4": "The document should take up the entire photo or scan with as little margin as possible.",
+        "line5": "The scan of the photo should be a PDF, PNG or JPG file (maximum size 5 MB)."
+      },
+      "submit": "Continue",
+      "upload": {
+        "error": {
+          "description": "An error occurred, try again later or contact the board.",
+          "header": "Failed to upload mandate form"
+        },
+        "header": "Upload",
+        "submit": "Upload mandate form"
+      }
     }
   }
 }
