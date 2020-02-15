@@ -24,10 +24,10 @@ interface IValues {
 const schema = Yup.object().shape({
     iban: Yup.string()
         .required('This field is required.')
-        .test('is-valid-iban', 'Invalid IBAN.', isValidIBAN),
+        .test('is-valid-iban', 'Invalid IBAN.', (s?: string) => s && isValidIBAN(s)),
     bic: Yup.string()
         .required('This field is required.')
-        .test('is-valid-bic', 'Invalid BIC.', isValidBIC)
+        .test('is-valid-bic', 'Invalid BIC.', (s?: string) => s && isValidBIC(s))
 });
 
 const PaperMandateForm = ({memberId, history}: IProps) => {

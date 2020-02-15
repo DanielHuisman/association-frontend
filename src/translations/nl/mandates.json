@@ -23,6 +23,7 @@
     "reason": "Reden",
     "review": {
       "accept": "Accepteren",
+      "reason": "Reden",
       "reject": "Weigeren"
     },
     "status": "Status",
@@ -36,7 +37,15 @@
   },
   "mandates": {
     "header": "Incassomachtigingen",
-    "none": "Lid heeft geen incassomachtigingen."
+    "menu": {
+      "all": "Alle",
+      "review": "Klaar voor beoordeling"
+    },
+    "none": "Lid heeft geen incassomachtigingen.",
+    "review": {
+      "none": "Geen incassomachtiging om te beoordelen.",
+      "text": "De volgende incassomachtigingen moeten worden beoordeeld."
+    }
   },
   "sign": {
     "button": "Teken een incassomachtiging",

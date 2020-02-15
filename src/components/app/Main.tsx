@@ -32,6 +32,7 @@ const Main = () => {
                     <Route path="/members/:memberId" component={Member} />
 
                     <AdminRoute exact path="/mandates" component={Mandates} />
+                    <AdminRoute exact path="/mandates/review" component={Mandates} />
                     <Route path="/mandates/:mandateId" component={Mandate} />
                 </Switch>
             </ErrorBoundary>

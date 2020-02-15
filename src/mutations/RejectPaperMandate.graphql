@@ -1,0 +1,7 @@
+# import '../fragments/Mandate.graphql'
+
+mutation RejectPaperMandate($id: String!, $reason: String!) {
+    rejectPaperMandate(mandate: {id: $id}, reason: $reason) {
+        ...MandateFragment
+    }
+}

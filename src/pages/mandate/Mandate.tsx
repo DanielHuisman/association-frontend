@@ -8,6 +8,8 @@ import moment from 'moment';
 
 import {UserContext} from '../../components/authentication/UserContext';
 import MandateType from '../../components/mandate/MandateType';
+import AcceptButton from '../../components/mandate/AcceptButton';
+import RejectButton from '../../components/mandate/RejectButton';
 import YesNo from '../../components/util/YesNo';
 import GetMandate from '../../queries/GetMandate.graphql';
 import {GetMandate as GetMandateType, MandateStatus, Role} from '../../types/generatedTypes';
@@ -109,12 +111,8 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                         <>
                             {data.mandate.status === MandateStatus.UNACCEPTED && data.mandate.uploadedFile && (
                                 <>
-                                    <Button color="green">
-                                        {t('mandates:mandate.review.accept', 'Accept')}
-                                    </Button>
-                                    <Button color="red">
-                                        {t('mandates:mandate.review.reject', 'Reject')}
-                                    </Button>
+                                    <AcceptButton mandateId={data.mandate.id} />
+                                    <RejectButton mandateId={data.mandate.id} />
                                 </>
                             )}
                         </>

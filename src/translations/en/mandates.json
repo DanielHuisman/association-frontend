@@ -23,6 +23,7 @@
     "reason": "Reason",
     "review": {
       "accept": "Accept",
+      "reason": "Reason",
       "reject": "Reject"
     },
     "status": "Status",
@@ -36,7 +37,15 @@
   },
   "mandates": {
     "header": "Mandates",
-    "none": "Member has no mandates."
+    "menu": {
+      "all": "All",
+      "review": "Ready for review"
+    },
+    "none": "Member has no mandates.",
+    "review": {
+      "none": "No mandates to review.",
+      "text": "These mandates need to be reviewed."
+    }
   },
   "sign": {
     "button": "Sign a mandate",

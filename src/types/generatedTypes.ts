@@ -3,6 +3,54 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: AcceptPaperMandate
+// ====================================================
+
+export interface AcceptPaperMandate_acceptPaperMandate_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface AcceptPaperMandate_acceptPaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface AcceptPaperMandate_acceptPaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: AcceptPaperMandate_acceptPaperMandate_generatedFile | null;
+  uploadedFile: AcceptPaperMandate_acceptPaperMandate_uploadedFile | null;
+}
+
+export interface AcceptPaperMandate {
+  acceptPaperMandate: AcceptPaperMandate_acceptPaperMandate;
+}
+
+export interface AcceptPaperMandateVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: CreateDigitalMandate
 // ====================================================
 
@@ -128,6 +176,55 @@ export interface OAuthUnlink {
 
 export interface OAuthUnlinkVariables {
   type: ProviderType;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: RejectPaperMandate
+// ====================================================
+
+export interface RejectPaperMandate_rejectPaperMandate_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface RejectPaperMandate_rejectPaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface RejectPaperMandate_rejectPaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: RejectPaperMandate_rejectPaperMandate_generatedFile | null;
+  uploadedFile: RejectPaperMandate_rejectPaperMandate_uploadedFile | null;
+}
+
+export interface RejectPaperMandate {
+  rejectPaperMandate: RejectPaperMandate_rejectPaperMandate;
+}
+
+export interface RejectPaperMandateVariables {
+  id: string;
+  reason: string;
 }
 
 /* tslint:disable */
@@ -536,6 +633,73 @@ export interface GetMembers_members {
 
 export interface GetMembers {
   members: GetMembers_members[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetPaperMandates
+// ====================================================
+
+export interface GetPaperMandates_paperMandates_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetPaperMandates_paperMandates_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetPaperMandates_paperMandates_member {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
+  language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
+}
+
+export interface GetPaperMandates_paperMandates {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: GetPaperMandates_paperMandates_generatedFile | null;
+  uploadedFile: GetPaperMandates_paperMandates_uploadedFile | null;
+  member: GetPaperMandates_paperMandates_member;
+}
+
+export interface GetPaperMandates {
+  paperMandates: GetPaperMandates_paperMandates[];
+}
+
+export interface GetPaperMandatesVariables {
+  status?: MandateStatus | null;
 }
 
 /* tslint:disable */

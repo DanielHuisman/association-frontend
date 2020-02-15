@@ -31,10 +31,10 @@ const Member = ({history, match, location}: RouteComponentProps<IRouteParams>) =
     useEffect(() => {
         if (data && data.member) {
             // Check if the member should be redirected to sign a mandate
-            if (!location.pathname.includes('/mandates/') && !(user && user.role === Role.ADMIN)) {
-                if (hasPendingPaperMandates(data.member)) {
+            if (!user || user.role !== Role.ADMIN) {
+                if (hasPendingPaperMandates(data.member) && !location.pathname.includes('/mandates/sign/paper')) {
                     history.push(`${match.url}/mandates/sign/paper`);
-                } else if (!hasAcceptedMandates(data.member)) {
+                } else if (!hasAcceptedMandates(data.member) && !location.pathname.includes('/mandates/')) {
                     history.push(`${match.url}/mandates/sign`);
                 }
             }

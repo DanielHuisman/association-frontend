@@ -32,7 +32,7 @@ const Paper = ({history, match}: RouteComponentProps<IRouteParams>) => {
 
     useEffect(() => {
         if (data && !hasPendingPaperMandates(data.member)) {
-            history.push(`/members/${match.params.memberId}/mandates`);
+            history.push(`/members/${match.params.memberId}`);
         }
     });
 
@@ -40,7 +40,7 @@ const Paper = ({history, match}: RouteComponentProps<IRouteParams>) => {
 
     return (
         <>
-            {paperMandate.status === MandateStatus.UNACCEPTED && (
+            {paperMandate && paperMandate.status === MandateStatus.UNACCEPTED && (
                 <p>
                     <Trans i18nKey="mandates:sign.paper.pending">
                         Thank you for signing and uploading the mandate form. The board will review it within in few days.
@@ -49,7 +49,7 @@ const Paper = ({history, match}: RouteComponentProps<IRouteParams>) => {
                 </p>
             )}
 
-            {paperMandate.status === MandateStatus.CREATED && (
+            {paperMandate && paperMandate.status === MandateStatus.CREATED && (
                 <>
                     <p>
                         <Trans i18nKey="mandates:sign.paper.instructions">
@@ -65,11 +65,21 @@ const Paper = ({history, match}: RouteComponentProps<IRouteParams>) => {
 
                     <Header size="medium">{t('mandates:sign.paper.requirements.header', 'Requirements')}</Header>
                     <List bulleted>
-                        <List.Item>{t('mandates:sign.paper.requirements.line1', 'Sign the document with a valid signature.')}</List.Item>
-                        <List.Item>{t('mandates:sign.paper.requirements.line2', 'Fill in the date and location.')}</List.Item>
-                        <List.Item>{t('mandates:sign.paper.requirements.line3', 'The photo or scan has to be clearly readable.')}</List.Item>
-                        <List.Item>{t('mandates:sign.paper.requirements.line4', 'The document should take up the entire photo or scan with as little margin as possible.')}</List.Item>
-                        <List.Item>{t('mandates:sign.paper.requirements.line5', 'The scan of the photo should be a PDF, PNG or JPG file (maximum size 5 MB).')}</List.Item>
+                        <List.Item>
+                            {t('mandates:sign.paper.requirements.line1', 'Sign the document with a valid signature.')}
+                        </List.Item>
+                        <List.Item>
+                            {t('mandates:sign.paper.requirements.line2', 'Fill in the date and location.')}
+                        </List.Item>
+                        <List.Item>
+                            {t('mandates:sign.paper.requirements.line3', 'The photo or scan has to be clearly readable.')}
+                        </List.Item>
+                        <List.Item>
+                            {t('mandates:sign.paper.requirements.line4', 'The document should take up the entire photo or scan with as little margin as possible.')}
+                        </List.Item>
+                        <List.Item>
+                            {t('mandates:sign.paper.requirements.line5', 'The scan of the photo should be a PDF, PNG or JPG file (maximum size 5 MB).')}
+                        </List.Item>
                     </List>
 
                     <Header size="medium">{t('mandates:sign.paper.upload.header', 'Upload')}</Header>

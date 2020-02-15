@@ -1,0 +1,12 @@
+# import '../fragments/Mandate.graphql'
+# import '../fragments/Member.graphql'
+
+query GetPaperMandates($status: MandateStatus) {
+    paperMandates(status: $status) {
+        ...MandateFragment
+
+        member {
+            ...MemberFragment
+        }
+    }
+}
