@@ -53,6 +53,7 @@
   },
   "sign": {
     "button": "Sign a mandate",
+    "required": "You haven't signed a mandate yet. Please sign a mandate, so J&SV Exaltio will be able to deduct the yearly membership fee from your bank account.",
     "digital": {
       "bank": "Select a bank",
       "error": {
@@ -65,7 +66,6 @@
           "header": "Failed to redirect to bank"
         }
       },
-      "required": "You haven't signed a mandate yet. Please sign a mandate, so J&SV Exaltio will be able to deduct the yearly membership fee from your bank account.",
       "submit": "Continue",
       "success": {
         "button": "View mandate details",
@@ -87,6 +87,7 @@
         "description": "An error occurred, try again later or contact the board.",
         "header": "Failed to create mandate"
       },
+      "instructions": "You need to download the mandate form, print it out and sign it with your signature. Afterwards, you can make a photo of the form or scan it using a scanner. If you are unable to print, photograph or scan the mandate form, please contact the board.",
       "pending": "Thank you for signing and uploading the mandate form. The board will review it within in few days. You will receive an email when the mandate has been reviewed.",
       "requirements": {
         "header": "Requirements",
