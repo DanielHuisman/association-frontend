@@ -8,6 +8,8 @@ interface IProps extends FieldProps {
     placeholder?: string;
 }
 
+export type FieldInputProps = IProps;
+
 const FieldInput = ({field, form: {touched, errors, isSubmitting}, type, label, placeholder, ...props}: IProps) => (
     <Form.Field error={touched[field.name] && !!errors[field.name]}>
         {label && <label>{label}</label>}

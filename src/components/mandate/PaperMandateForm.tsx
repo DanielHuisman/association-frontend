@@ -9,7 +9,7 @@ import {Message, Icon} from 'semantic-ui-react';
 import GetMember from '../../queries/GetMember.graphql';
 import CreatePaperMandate from '../../mutations/CreatePaperMandate.graphql';
 import {CreatePaperMandate as CreatePaperMandateType} from '../../types/generatedTypes';
-import {Form, FieldInput, SubmitButton} from '../form';
+import {Form, FieldInput, FieldInputProps, SubmitButton} from '../form';
 import {MutationFormPage} from '../page';
 
 interface IProps {
@@ -30,6 +30,36 @@ const schema = Yup.object().shape({
         .required('This field is required.')
         .test('is-valid-bic', 'Invalid BIC.', (s?: string) => s && isValidBIC(s))
 });
+
+const BIC_LOOKUP = {
+    abna: 'ABNANL2A',
+    asnb: 'ASNBNL21',
+    bunq: 'BUNQNL2A',
+    ingb: 'INGBNL2A',
+    knab: 'KNABNL2H',
+    rabo: 'RABONL2U',
+    rbrb: 'RBRBNL2A',
+    snsb: 'SNSBNL2A',
+    trio: 'TRIONL2U'
+};
+
+const FieldIBAN = (props: FieldInputProps) => (
+    <FieldInput
+        {...props}
+        field={{
+            ...props.field,
+            onChange: (event: React.ChangeEvent<any>) => {
+                props.field.onChange(event);
+
+                const iban: string = event.target.value.replace(/\s/g, '').toLowerCase();
+                const bic = BIC_LOOKUP[iban.substring(4, 8)];
+                if (bic && props.form.values.bic.length === 0) {
+                    props.form.setFieldValue('bic', bic);
+                }
+            }
+        }}
+    />
+);
 
 const PaperMandateForm = ({memberId, history}: IProps) => {
     const {t} = useTranslation();
@@ -87,7 +117,7 @@ const PaperMandateForm = ({memberId, history}: IProps) => {
                             </Message>
                         )}
 
-                        <Field component={FieldInput} name="iban" type="text" label={t('mandates:mandate.iban', 'IBAN')} />
+                        <Field component={FieldIBAN} name="iban" type="text" label={t('mandates:mandate.iban', 'IBAN')} />
                         <Field component={FieldInput} name="bic" type="text" label={t('mandates:mandate.bic', 'BIC')} />
 
                         <SubmitButton color="blue">
