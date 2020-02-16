@@ -12,6 +12,8 @@ import GetMember from '../../queries/GetMember.graphql';
 import {GetMember as GetMemberType, MandateStatus} from '../../types/generatedTypes';
 import {hasAcceptedMandates} from '../../util';
 
+import styles from './Member.css';
+
 interface IRouteParams {
     memberId: string;
 }
@@ -41,7 +43,7 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                     <Header size="huge">{data.member.firstName} {data.member.lastName}</Header>
 
                     {!user && (
-                        <p>
+                        <p className={styles.text}>
                             <Trans i18nKey="members:member.checkInfo">
                                 This is your membership information, please check if everything is correct.
                                 If something is incorrect or you would like to change something, please contact the board.
@@ -112,7 +114,7 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
 
                     {!user && !hasAcceptedMandates(data.member) && (
                         <>
-                            <p>
+                            <p className={styles.text}>
                                 <Trans i18nKey="mandates:sign.required">
                                     You haven't signed a mandate yet. Please sign a mandate,
                                     so J&SV Exaltio will be able to deduct the yearly membership fee from your bank account.
@@ -126,7 +128,7 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                     )}
 
                     {user && data.member.mandates.length === 0 && (
-                        <p>{t('mandates:mandates.none', 'Member has no mandates.')}</p>
+                        <p className={styles.text}>{t('mandates:mandates.none', 'Member has no mandates.')}</p>
                     )}
 
                     {data.member.mandates.length > 0 && (

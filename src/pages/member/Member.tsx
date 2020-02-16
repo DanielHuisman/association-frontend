@@ -1,5 +1,6 @@
 import React, {useEffect, useContext} from 'react';
 import {useQuery} from '@apollo/react-hooks';
+import {useTranslation} from 'react-i18next';
 import {RouteComponentProps, Switch, Route} from 'react-router-dom';
 import {Container, Loader} from 'semantic-ui-react';
 
@@ -27,6 +28,7 @@ const Member = ({history, match, location}: RouteComponentProps<IRouteParams>) =
     }
 
     const user = useContext(UserContext);
+    const {i18n} = useTranslation();
 
     useEffect(() => {
         if (data && data.member) {
@@ -34,6 +36,11 @@ const Member = ({history, match, location}: RouteComponentProps<IRouteParams>) =
             if (!user || user.role !== Role.ADMIN) {
                 if (hasPendingPaperMandates(data.member) && !location.pathname.includes('/mandates/sign/paper')) {
                     history.push(`${match.url}/mandates/sign/paper`);
+                }
+
+                // Change user language if needed
+                if (i18n.language !== data.member.language.toLowerCase()) {
+                    i18n.changeLanguage(data.member.language.toLowerCase());
                 }
             }
         }
