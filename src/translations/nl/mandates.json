@@ -53,7 +53,6 @@
   },
   "sign": {
     "button": "Teken een incassomachtiging",
-    "required": "Je hebt nog geen incassomachtiging getekend. Teken een incasosmachtiging zodat J&SV Exaltio de contributie van je bankrekening kan afscrijven.",
     "digital": {
       "bank": "Selecteer een bank",
       "error": {
@@ -106,6 +105,7 @@
         "header": "Upload",
         "submit": "Upload incassomachtiging"
       }
-    }
+    },
+    "required": "Je hebt nog geen incassomachtiging getekend. Teken een incasosmachtiging zodat J&SV Exaltio de contributie van je bankrekening kan afscrijven."
   }
 }

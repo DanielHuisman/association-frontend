@@ -165,11 +165,11 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>{t('mandates:mandate.details.address', 'Address')}</Table.Cell>
-                                <Table.Cell>Postbus 217</Table.Cell>
+                                <Table.Cell>Postbus 70000</Table.Cell>
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>{t('mandates:mandate.details.postalCode', 'Postal code')}</Table.Cell>
-                                <Table.Cell>7500AE</Table.Cell>
+                                <Table.Cell>7500KB</Table.Cell>
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>{t('mandates:mandate.details.city', 'City')}</Table.Cell>

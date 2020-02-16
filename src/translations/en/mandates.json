@@ -53,7 +53,6 @@
   },
   "sign": {
     "button": "Sign a mandate",
-    "required": "You haven't signed a mandate yet. Please sign a mandate, so J&SV Exaltio will be able to deduct the yearly membership fee from your bank account.",
     "digital": {
       "bank": "Select a bank",
       "error": {
@@ -106,6 +105,7 @@
         "header": "Upload",
         "submit": "Upload mandate form"
       }
-    }
+    },
+    "required": "You haven't signed a mandate yet. Please sign a mandate, so J&SV Exaltio will be able to deduct the yearly membership fee from your bank account."
   }
 }
