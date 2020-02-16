@@ -17,12 +17,16 @@
     "generatedFile": "Gegenereerde bestand",
     "header": "Incassomachtiging",
     "iban": "IBAN",
+    "invalidate": "Incassomachtiging ongeldig maken",
     "isFirstTransaction": "Is eerste transactie",
     "mandateId": "Identificatiecode",
     "member": "Lid",
     "reason": "Reden",
     "review": {
       "accept": "Accepteren",
+      "error": {
+        "header": "Incassomachtiging weigeren mislukt"
+      },
       "reason": "Reden",
       "reject": "Weigeren"
     },
@@ -83,6 +87,7 @@
         "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
         "header": "Incassomachtiging aanmaken is mislukt"
       },
+      "pending": "Bedankt voor het uploaden van de incassomachtiging. Het bestuur zal de incassomachtiging binnen een paar dagen beoordelen. Je ontvangt een e-mail zodra de incassomachtiging is beoordeeld.",
       "requirements": {
         "header": "Vereisten",
         "line1": "Onderteken het formulier met een geldige handtekening.",

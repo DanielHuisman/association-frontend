@@ -10,6 +10,7 @@ import {UserContext} from '../../components/authentication/UserContext';
 import MandateType from '../../components/mandate/MandateType';
 import AcceptButton from '../../components/mandate/AcceptButton';
 import RejectButton from '../../components/mandate/RejectButton';
+import InvalidateButton from '../../components/mandate/InvalidateButton';
 import YesNo from '../../components/util/YesNo';
 import GetMandate from '../../queries/GetMandate.graphql';
 import {GetMandate as GetMandateType, MandateStatus, Role} from '../../types/generatedTypes';
@@ -107,14 +108,15 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                         </Table.Body>
                     </Table>
 
-                    {user && user.role === Role.ADMIN && data.mandate.__typename === 'PaperMandate' && (
+                    {user && user.role === Role.ADMIN && (
                         <>
-                            {data.mandate.status === MandateStatus.UNACCEPTED && data.mandate.uploadedFile && (
+                            {data.mandate.__typename === 'PaperMandate' && data.mandate.status === MandateStatus.UNACCEPTED && data.mandate.uploadedFile && (
                                 <>
                                     <AcceptButton mandateId={data.mandate.id} />
                                     <RejectButton mandateId={data.mandate.id} />
                                 </>
                             )}
+                            {data.mandate.status === MandateStatus.ACCEPTED && <InvalidateButton mandateId={data.mandate.id} />}
                         </>
                     )}
 

@@ -1,7 +1,7 @@
-# import '../fragments/File.graphql'
+# import '../fragments/Mandate.graphql'
 
 mutation UploadPaperMandate($data: PaperMandateFileCreateInput!, $file: Upload!) {
     uploadPaperMandate(data: $data, file: $file) {
-        ...FileFragment
+        ...MandateFragment
     }
 }

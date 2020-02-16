@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import {isValidBIC, isValidIBAN} from 'ibantools';
 import {Message, Icon} from 'semantic-ui-react';
 
+import GetMember from '../../queries/GetMember.graphql';
 import CreatePaperMandate from '../../mutations/CreatePaperMandate.graphql';
 import {CreatePaperMandate as CreatePaperMandateType} from '../../types/generatedTypes';
 import {Form, FieldInput, SubmitButton} from '../form';
@@ -36,6 +37,15 @@ const PaperMandateForm = ({memberId, history}: IProps) => {
     return (
         <MutationFormPage<CreatePaperMandateType, IValues>
             mutation={CreatePaperMandate}
+            mutationProps={{
+                refetchQueries: [{
+                    query: GetMember,
+                    variables: {
+                        id: memberId
+                    }
+                }],
+                awaitRefetchQueries: true
+            }}
 
             loader={false}
             data={(values) => {

@@ -51,6 +51,54 @@ export interface AcceptPaperMandateVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: CancelPaperMandate
+// ====================================================
+
+export interface CancelPaperMandate_cancelPaperMandate_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface CancelPaperMandate_cancelPaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface CancelPaperMandate_cancelPaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: CancelPaperMandate_cancelPaperMandate_generatedFile | null;
+  uploadedFile: CancelPaperMandate_cancelPaperMandate_uploadedFile | null;
+}
+
+export interface CancelPaperMandate {
+  cancelPaperMandate: CancelPaperMandate_cancelPaperMandate;
+}
+
+export interface CancelPaperMandateVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: CreateDigitalMandate
 // ====================================================
 
@@ -113,6 +161,70 @@ export interface CreatePaperMandate {
 
 export interface CreatePaperMandateVariables {
   data: PaperMandateCreateInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: InvalidateMandate
+// ====================================================
+
+export interface InvalidateMandate_invalidateMandate_DigitalMandate {
+  __typename: "DigitalMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+}
+
+export interface InvalidateMandate_invalidateMandate_PaperMandate_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface InvalidateMandate_invalidateMandate_PaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface InvalidateMandate_invalidateMandate_PaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: InvalidateMandate_invalidateMandate_PaperMandate_generatedFile | null;
+  uploadedFile: InvalidateMandate_invalidateMandate_PaperMandate_uploadedFile | null;
+}
+
+export type InvalidateMandate_invalidateMandate = InvalidateMandate_invalidateMandate_DigitalMandate | InvalidateMandate_invalidateMandate_PaperMandate;
+
+export interface InvalidateMandate {
+  invalidateMandate: InvalidateMandate_invalidateMandate;
+}
+
+export interface InvalidateMandateVariables {
+  id: string;
 }
 
 /* tslint:disable */
@@ -235,12 +347,36 @@ export interface RejectPaperMandateVariables {
 // GraphQL mutation operation: UploadPaperMandate
 // ====================================================
 
-export interface UploadPaperMandate_uploadPaperMandate {
+export interface UploadPaperMandate_uploadPaperMandate_generatedFile {
   __typename: "File";
   id: string;
   name: string;
   url: string;
   mimeType: string;
+}
+
+export interface UploadPaperMandate_uploadPaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface UploadPaperMandate_uploadPaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: UploadPaperMandate_uploadPaperMandate_generatedFile | null;
+  uploadedFile: UploadPaperMandate_uploadPaperMandate_uploadedFile | null;
 }
 
 export interface UploadPaperMandate {

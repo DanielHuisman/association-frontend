@@ -9,7 +9,8 @@ import moment from 'moment';
 import {UserContext} from '../../components/authentication/UserContext';
 import TableSelectableRow from '../../components/table/TableSelectableRow';
 import GetMember from '../../queries/GetMember.graphql';
-import {GetMember as GetMemberType} from '../../types/generatedTypes';
+import {GetMember as GetMemberType, MandateStatus} from '../../types/generatedTypes';
+import {hasAcceptedMandates} from '../../util';
 
 interface IRouteParams {
     memberId: string;
@@ -108,6 +109,26 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                     </Table>
 
                     <Header size="large">{t('mandates:mandates.header', 'Mandates')}</Header>
+
+                    {!user && !hasAcceptedMandates(data.member) && (
+                        <>
+                            <p>
+                                <Trans i18nKey="mandates:sign.required">
+                                    You haven't signed a mandate yet. Please sign a mandate,
+                                    so J&SV Exaltio will be able to deduct the yearly membership fee from your bank account.
+                                </Trans>
+                            </p>
+
+                            <Button as={Link} to={`${match.url}/mandates/sign`} color="blue">
+                                {t('mandates:sign.button', 'Sign a mandate')}
+                            </Button>
+                        </>
+                    )}
+
+                    {user && data.member.mandates.length === 0 && (
+                        <p>{t('mandates:mandates.none', 'Member has no mandates.')}</p>
+                    )}
+
                     {data.member.mandates.length > 0 && (
                         <Table selectable stackable>
                             <Table.Header>
@@ -122,46 +143,30 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
-                                {data.member.mandates.map((mandate) => (
-                                    <TableSelectableRow key={mandate.id} to={`/mandates/${mandate.id}`}>
-                                        <Table.Cell>{mandate.mandateId}</Table.Cell>
-                                        <Table.Cell>{mandate.status}</Table.Cell>
-                                        <Table.Cell>{mandate.reason}</Table.Cell>
-                                        <Table.Cell>
-                                            {mandate.__typename === 'DigitalMandate' ?
-                                                t('mandates:mandate.types.digital', 'Digital mandate') :
-                                                t('mandates:mandate.types.paper', 'Paper mandate')}
-                                        </Table.Cell>
-                                        <Table.Cell>{mandate.iban}</Table.Cell>
-                                        <Table.Cell>{mandate.bic}</Table.Cell>
-                                        <Table.Cell>
-                                            {mandate.acceptedAt ?
-                                                moment(mandate.acceptedAt).format('YYYY-MM-DD HH:mm') :
-                                                <i>{t('general:date.never', 'Never')}</i>}
-                                        </Table.Cell>
-                                    </TableSelectableRow>
-                                ))}
+                                {data.member.mandates
+                                    .filter((mandate) => user || ![MandateStatus.CANCELLED, MandateStatus.INVALID].includes(mandate.status))
+                                    .map((mandate) => (
+                                        <TableSelectableRow key={mandate.id} to={`/mandates/${mandate.id}`}>
+                                            <Table.Cell>{mandate.mandateId}</Table.Cell>
+                                            <Table.Cell>{mandate.status}</Table.Cell>
+                                            <Table.Cell>{mandate.reason}</Table.Cell>
+                                            <Table.Cell>
+                                                {mandate.__typename === 'DigitalMandate' ?
+                                                    t('mandates:mandate.types.digital', 'Digital mandate') :
+                                                    t('mandates:mandate.types.paper', 'Paper mandate')}
+                                            </Table.Cell>
+                                            <Table.Cell>{mandate.iban}</Table.Cell>
+                                            <Table.Cell>{mandate.bic}</Table.Cell>
+                                            <Table.Cell>
+                                                {mandate.acceptedAt ?
+                                                    moment(mandate.acceptedAt).format('YYYY-MM-DD HH:mm') :
+                                                    <i>{t('general:date.never', 'Never')}</i>}
+                                            </Table.Cell>
+                                        </TableSelectableRow>
+                                    ))
+                                }
                             </Table.Body>
                         </Table>
-                    )}
-
-                    {!user && data.member.mandates.length === 0 && (
-                        <>
-                            <p>
-                                <Trans i18nKey="mandates:sign.required">
-                                    You haven't signed a mandate yet. Please sign a mandate,
-                                    so J&SV Exaltio will be able to deduct the yearly membership fee from your bank account.
-                                </Trans>
-                            </p>
-
-                            <Button as={Link} to={`${match.path}/mandates/sign`} color="blue">
-                                {t('mandates:sign.button', 'Sign a mandate')}
-                            </Button>
-                        </>
-                    )}
-
-                    {user && data.member.mandates.length === 0 && (
-                        <p>{t('mandates:mandates.none', 'Member has no mandates.')}</p>
                     )}
                 </>
             )}

@@ -3,8 +3,10 @@ import {Mutation} from 'react-apollo';
 import {useTranslation} from 'react-i18next';
 import {Button, Icon} from 'semantic-ui-react';
 
+import GetMandates from '../../queries/GetMandates.graphql';
+import GetPaperMandates from '../../queries/GetPaperMandates.graphql';
 import RejectPaperMandate from '../../mutations/RejectPaperMandate.graphql';
-import {RejectPaperMandate as RejectPaperMandateType} from '../../types/generatedTypes';
+import {RejectPaperMandate as RejectPaperMandateType, MandateStatus} from '../../types/generatedTypes';
 
 import RejectModal, {IValues} from './RejectModal';
 
@@ -19,8 +21,16 @@ const AcceptButton = ({mandateId}: IProps) => {
         <Mutation<RejectPaperMandateType>
             mutation={RejectPaperMandate}
             variables={{id: mandateId}}
+            refetchQueries={[{
+                query: GetMandates
+            }, {
+                query: GetPaperMandates,
+                variables: {
+                    status: MandateStatus.UNACCEPTED
+                }
+            }]}
         >
-            {(reject, {loading}) => {
+            {(reject, {loading, error}) => {
                 return (
                     <RejectModal
                         trigger={(
@@ -29,6 +39,7 @@ const AcceptButton = ({mandateId}: IProps) => {
                                 {t('mandates:mandate.review.reject', 'Reject')}
                             </Button>
                         )}
+                        error={error}
                         onSubmit={(data: IValues) => reject({
                             variables: data
                         })}

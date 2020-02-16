@@ -17,12 +17,16 @@
     "generatedFile": "Generated file",
     "header": "Mandate",
     "iban": "IBAN",
+    "invalidate": "Invalidate mandate",
     "isFirstTransaction": "Is first transaction",
     "mandateId": "Identifier",
     "member": "Member",
     "reason": "Reason",
     "review": {
       "accept": "Accept",
+      "error": {
+        "header": "Failed to reject mandate"
+      },
       "reason": "Reason",
       "reject": "Reject"
     },
@@ -83,6 +87,7 @@
         "description": "An error occurred, try again later or contact the board.",
         "header": "Failed to create mandate"
       },
+      "pending": "Thank you for signing and uploading the mandate form. The board will review it within in few days. You will receive an email when the mandate has been reviewed.",
       "requirements": {
         "header": "Requirements",
         "line1": "Sign the document with a valid signature.",
