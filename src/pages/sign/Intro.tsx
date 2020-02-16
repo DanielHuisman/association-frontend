@@ -1,9 +1,9 @@
 import React from 'react';
-import {Trans, useTranslation} from 'react-i18next';
+import {Trans} from 'react-i18next';
 import {RouteComponentProps} from 'react-router-dom';
-import {Segment, Grid, Header} from 'semantic-ui-react';
+import {Segment, Grid} from 'semantic-ui-react';
 
-import DigitalMandateForm from '../../components//mandate/DigitalMandateForm';
+// import DigitalMandateForm from '../../components//mandate/DigitalMandateForm';
 import PaperMandateForm from '../../components//mandate/PaperMandateForm';
 
 import styles from './Sign.css';
@@ -13,7 +13,7 @@ interface IRouteParams {
 }
 
 const Intro = ({match, history}: RouteComponentProps<IRouteParams>) => {
-    const {t} = useTranslation();
+    // const {t} = useTranslation();
 
     return (
         <>
@@ -21,20 +21,20 @@ const Intro = ({match, history}: RouteComponentProps<IRouteParams>) => {
                 <Trans i18nKey="mandates:sign.intro.text1">
                     Once a year J&SV Exaltio will automatically deduct your membership fee from your bank account.
                     You will receive an email notification before the transaction takes place.
-                    To do this we use SEPA Direct Debit, for which we require your permission in the form of a SEPA eMandate.
+                    To do this we use SEPA Direct Debit, for which we require your permission in the form of a SEPA mandate.
                 </Trans>
             </p>
 
-            <p className={styles.text}>
+            {/* <p className={styles.text}>
                 <Trans i18nKey="mandates:sign.intro.text2">
                     There are two ways to sign the mandate: via your online bank environment or by printing out a form and reuploading it with your signature.
                     We recommend using method A, because it's the most secure. However, method A only supports most Dutch banks.
                     If your bank is not listed below, please us method B. Unfortunately, some banks are only available during office hours.
                     If signing the mandate fails during the evening, you can try again during office hours or use method B.
                 </Trans>
-            </p>
+            </p> */}
 
-            <Segment className={styles.segment}>
+            {/* <Segment className={styles.segment}>
                 <Grid>
                     <Grid.Row>
                         <Grid.Column width={3}>
@@ -57,15 +57,16 @@ const Intro = ({match, history}: RouteComponentProps<IRouteParams>) => {
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
-            </Segment>
+            </Segment> */}
 
             <Segment className={styles.segment}>
                 <Grid>
                     <Grid.Row>
-                        <Grid.Column width={3}>
+                        {/* <Grid.Column width={3}>
                             <Header size="huge" textAlign="center">B.</Header>
                         </Grid.Column>
-                        <Grid.Column width={13}>
+                        <Grid.Column width={13}> */}
+                        <Grid.Column width={16}>
                             <p className={styles.text}>
                                 <Trans i18nKey="mandates:sign.intro.paper">
                                     To sign a mandate you need to fill in your details, print out the form and reupload it with your signature on it.

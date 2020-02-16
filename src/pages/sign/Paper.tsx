@@ -9,6 +9,8 @@ import GetMember from '../../queries/GetMember.graphql';
 import {GetMember as GetMemberType, MandateStatus, MandateFragment_PaperMandate} from '../../types/generatedTypes';
 import {hasPendingPaperMandates, getPendingPaperMandates} from '../../util';
 
+import styles from './Sign.css';
+
 interface IRouteParams {
     memberId: string;
 }
@@ -41,7 +43,7 @@ const Paper = ({history, match}: RouteComponentProps<IRouteParams>) => {
     return (
         <>
             {paperMandate && paperMandate.status === MandateStatus.UNACCEPTED && (
-                <p>
+                <p className={styles.text}>
                     <Trans i18nKey="mandates:sign.paper.pending">
                         Thank you for signing and uploading the mandate form. The board will review it within in few days.
                         You will receive an email when the mandate has been reviewed.
@@ -51,7 +53,7 @@ const Paper = ({history, match}: RouteComponentProps<IRouteParams>) => {
 
             {paperMandate && paperMandate.status === MandateStatus.CREATED && (
                 <>
-                    <p>
+                    <p className={styles.text}>
                         <Trans i18nKey="mandates:sign.paper.instructions">
                             You need to download the mandate form, print it out and sign it with your signature.
                             Afterwards, you can make a photo of the form or scan it using a scanner.
@@ -63,8 +65,8 @@ const Paper = ({history, match}: RouteComponentProps<IRouteParams>) => {
                         {t('mandates:sign.paper.download', 'Download mandate form')}
                     </Button>
 
-                    <Header size="medium">{t('mandates:sign.paper.requirements.header', 'Requirements')}</Header>
-                    <List bulleted>
+                    <Header size="large">{t('mandates:sign.paper.requirements.header', 'Requirements')}</Header>
+                    <List size="large" bulleted>
                         <List.Item>
                             {t('mandates:sign.paper.requirements.line1', 'Sign the document with a valid signature.')}
                         </List.Item>
@@ -82,8 +84,8 @@ const Paper = ({history, match}: RouteComponentProps<IRouteParams>) => {
                         </List.Item>
                     </List>
 
-                    <Header size="medium">{t('mandates:sign.paper.upload.header', 'Upload')}</Header>
-                    <PaperMandateUploadForm paperMandateId={paperMandate.id} history={history} />
+                    <Header size="large">{t('mandates:sign.paper.upload.header', 'Upload')}</Header>
+                    <PaperMandateUploadForm paperMandateId={paperMandate.id} />
                 </>
             )}
         </>
