@@ -125,7 +125,7 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                         <Table.Body>
                             <Table.Row>
                                 <Table.Cell>{t('mandates:mandate.details.name', 'Name')}</Table.Cell>
-                                <Table.Cell>{data.mandate.member.firstName} {data.mandate.member.lastName}</Table.Cell>
+                                <Table.Cell>{data.mandate.member.initials} {data.mandate.member.lastName}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>{t('mandates:mandate.details.address', 'Address')}</Table.Cell>

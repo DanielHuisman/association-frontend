@@ -36,7 +36,7 @@ const MandateTable = ({mandates}: IProps) => {
                         <Table.Cell>{mandate.mandateId}</Table.Cell>
                         <Table.Cell><MandateType mandate={mandate} /></Table.Cell>
                         <Table.Cell>{mandate.status}</Table.Cell>
-                        <Table.Cell>{mandate.member.firstName} {mandate.member.lastName}</Table.Cell>
+                        <Table.Cell>{mandate.member.initials} {mandate.member.lastName}</Table.Cell>
                         <Table.Cell>{moment(mandate.createdAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
                         <Table.Cell>
                             {mandate.acceptedAt ?
