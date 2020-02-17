@@ -29,6 +29,7 @@ const Members = () => {
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>{t('members:member.firstName', 'First name')}</Table.HeaderCell>
+                            <Table.HeaderCell>{t('members:member.initials', 'Initials')}</Table.HeaderCell>
                             <Table.HeaderCell>{t('members:member.lastName', 'Last name')}</Table.HeaderCell>
                             <Table.HeaderCell>{t('members:member.email', 'Email address')}</Table.HeaderCell>
                             <Table.HeaderCell>{t('members:member.language', 'Language')}</Table.HeaderCell>
@@ -39,6 +40,7 @@ const Members = () => {
                         {data.members.map((member) => (
                             <TableSelectableRow key={member.id} to={`/members/${member.id}`}>
                                 <Table.Cell>{member.firstName}</Table.Cell>
+                                <Table.Cell>{member.initials}</Table.Cell>
                                 <Table.Cell>{member.lastName}</Table.Cell>
                                 <Table.Cell>{member.email}</Table.Cell>
                                 <Table.Cell>{t(`members:member.languages.${member.language}`)}</Table.Cell>
