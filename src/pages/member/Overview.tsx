@@ -58,6 +58,10 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                                 <Table.Cell>{data.member.firstName}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
+                                <Table.Cell>{t('members:member.initials', 'Initials')}</Table.Cell>
+                                <Table.Cell>{data.member.initials}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
                                 <Table.Cell>{t('members:member.lastName', 'Last name')}</Table.Cell>
                                 <Table.Cell>{data.member.lastName}</Table.Cell>
                             </Table.Row>

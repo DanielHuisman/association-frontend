@@ -1,6 +1,7 @@
 fragment MemberFragment on Member {
     id
     firstName
+    initials
     lastName
     email
     address

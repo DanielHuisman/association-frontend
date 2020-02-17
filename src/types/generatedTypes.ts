@@ -421,6 +421,7 @@ export interface GetMandate_mandate_DigitalMandate_member {
   __typename: "Member";
   id: string;
   firstName: string;
+  initials: string;
   lastName: string;
   email: string;
   address: string;
@@ -470,6 +471,7 @@ export interface GetMandate_mandate_PaperMandate_member {
   __typename: "Member";
   id: string;
   firstName: string;
+  initials: string;
   lastName: string;
   email: string;
   address: string;
@@ -523,6 +525,7 @@ export interface GetMandates_mandates_DigitalMandate_member {
   __typename: "Member";
   id: string;
   firstName: string;
+  initials: string;
   lastName: string;
   email: string;
   address: string;
@@ -572,6 +575,7 @@ export interface GetMandates_mandates_PaperMandate_member {
   __typename: "Member";
   id: string;
   firstName: string;
+  initials: string;
   lastName: string;
   email: string;
   address: string;
@@ -669,6 +673,7 @@ export interface GetMember_member {
   __typename: "Member";
   id: string;
   firstName: string;
+  initials: string;
   lastName: string;
   email: string;
   address: string;
@@ -752,6 +757,7 @@ export interface GetMembers_members {
   __typename: "Member";
   id: string;
   firstName: string;
+  initials: string;
   lastName: string;
   email: string;
   address: string;
@@ -799,6 +805,7 @@ export interface GetPaperMandates_paperMandates_member {
   __typename: "Member";
   id: string;
   firstName: string;
+  initials: string;
   lastName: string;
   email: string;
   address: string;
@@ -1041,6 +1048,7 @@ export interface MemberFragment {
   __typename: "Member";
   id: string;
   firstName: string;
+  initials: string;
   lastName: string;
   email: string;
   address: string;
