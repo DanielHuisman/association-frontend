@@ -35,6 +35,7 @@
     }
   },
   "members": {
-    "header": "Members"
+    "header": "Members",
+    "withMandate": "Members with mandate:"
   }
 }

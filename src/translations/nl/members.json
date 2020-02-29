@@ -35,6 +35,7 @@
     }
   },
   "members": {
-    "header": "Leden"
+    "header": "Leden",
+    "withMandate": "Leden met incassomachtiging:"
   }
 }
