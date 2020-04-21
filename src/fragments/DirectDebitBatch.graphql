@@ -1,0 +1,7 @@
+fragment DirectDebitBatchFragment on DirectDebitBatch {
+    id
+    createdAt
+    updatedAt
+    batchId
+    sequenceType
+}

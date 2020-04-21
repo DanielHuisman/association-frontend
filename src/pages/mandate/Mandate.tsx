@@ -84,25 +84,25 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                             {data.mandate.__typename === 'PaperMandate' && (
                                 <>
                                     {data.mandate.generatedFile && (
-                                    <Table.Row>
-                                        <Table.Cell>{t('mandates:mandate.generatedFile', 'Generated file')}</Table.Cell>
-                                        <Table.Cell>
-                                            <Button as="a" href={data.mandate.generatedFile.url} target="file" color="blue" size="tiny">
+                                        <Table.Row>
+                                            <Table.Cell>{t('mandates:mandate.generatedFile', 'Generated file')}</Table.Cell>
+                                            <Table.Cell>
+                                                <Button as="a" href={data.mandate.generatedFile.url} target="file" color="blue" size="tiny">
+                                                    {t('general:general.download', 'Download')}
+                                                </Button>
+                                            </Table.Cell>
+                                        </Table.Row>
+                                    )}
+                                    {data.mandate.uploadedFile && (
+                                        <Table.Row>
+                                            <Table.Cell>{t('mandates:mandate.uploadedFile', 'Uploaded file')}</Table.Cell>
+                                            <Table.Cell>
+                                                <Button as="a" href={data.mandate.uploadedFile.url} target="file" color="blue" size="tiny">
                                                 {t('general:general.download', 'Download')}
-                                            </Button>
-                                        </Table.Cell>
-                                    </Table.Row>
-                                )}
-                                {data.mandate.uploadedFile && (
-                                    <Table.Row>
-                                        <Table.Cell>{t('mandates:mandate.uploadedFile', 'Uploaded file')}</Table.Cell>
-                                        <Table.Cell>
-                                            <Button as="a" href={data.mandate.uploadedFile.url} target="file" color="blue" size="tiny">
-                                            {t('general:general.download', 'Download')}
-                                            </Button>
-                                        </Table.Cell>
-                                    </Table.Row>
-                                )}
+                                                </Button>
+                                            </Table.Cell>
+                                        </Table.Row>
+                                    )}
                                 </>
                             )}
                         </Table.Body>

@@ -1,10 +1,29 @@
 {
   "directDebit": {
+    "amount": "Amount",
     "collectionDate": "Collection date",
     "createdAt": "Created at",
+    "details": "Direct debit details",
+    "file": "XML file",
+    "fileInfo": "This file should be uploaded to the bank for processing.",
+    "header": "Direct debit",
+    "instructionCount": "Instructions",
+    "intructions": "Direct debit instructions",
     "messageId": "Identifier",
+    "noInstructions": "There are no instructions.",
+    "noWarnings": "There are no warnings.",
     "status": "Status",
-    "updatedAt": "Updated at"
+    "updatedAt": "Updated at",
+    "warnings": "Direct debit warnings"
+  },
+  "directDebitBatch": {
+    "batchId": "Batch identifier",
+    "sequenceType": "Batch type"
+  },
+  "directDebitInstruction": {
+    "amount": "Amount",
+    "description": "Description",
+    "instructionId": "Identifier"
   },
   "directDebits": {
     "header": "Direct debits"

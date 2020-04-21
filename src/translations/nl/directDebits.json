@@ -1,10 +1,29 @@
 {
   "directDebit": {
+    "amount": "Amount",
     "collectionDate": "Incassodatum",
     "createdAt": "Aangemaakt op",
+    "details": "Gegevens incasso",
+    "file": "XML-bestand",
+    "fileInfo": "Dit bestand moet naar de bank geüpload worden.",
+    "header": "Incasso",
+    "instructionCount": "Instructions",
+    "intructions": "Incasso-instructies",
     "messageId": "Identificatiecode",
+    "noInstructions": "Er zijn geen instructies.",
+    "noWarnings": "Er zijn geen waarschuwingen.",
     "status": "Status",
-    "updatedAt": "Veranderd op"
+    "updatedAt": "Veranderd op",
+    "warnings": "Incassowaarschuwingen"
+  },
+  "directDebitBatch": {
+    "batchId": "Batch identificatiecode",
+    "sequenceType": "Batch type"
+  },
+  "directDebitInstruction": {
+    "amount": "Amount",
+    "description": "Beschrijving",
+    "instructionId": "Identificatiecode"
   },
   "directDebits": {
     "header": "Incasso's"

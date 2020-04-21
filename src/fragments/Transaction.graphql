@@ -1,0 +1,11 @@
+fragment TransactionFragment on Transaction {
+    id
+    createdAt
+    updatedAt
+    description
+    amount
+
+    ... on MembershipFeeTransaction {
+        year
+    }
+}

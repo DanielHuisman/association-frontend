@@ -1,0 +1,8 @@
+fragment DirectDebitInstructionFragment on DirectDebitInstruction {
+    id
+    createdAt
+    updatedAt
+    instructionId
+    description
+    amount
+}

@@ -1,0 +1,10 @@
+fragment DirectDebitWarningFragment on DirectDebitWarning {
+    id
+    createdAt
+    updatedAt
+    description
+
+    member {
+        id
+    }
+}

@@ -5,4 +5,6 @@ fragment DirectDebitFragment on DirectDebit {
     status
     messageId
     collectionDate
+    instructionCount
+    amount
 }

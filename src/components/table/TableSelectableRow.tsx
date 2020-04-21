@@ -6,7 +6,7 @@ import styles from './Table.css';
 
 interface IProps extends RouteComponentProps {
     to: string;
-    children: ReactNode[];
+    children: ReactNode | ReactNode[];
 }
 
 const TableSelectableRow = ({history, to, children}: IProps) => {

@@ -414,6 +414,168 @@ export interface GetBanks {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetDirectDebit
+// ====================================================
+
+export interface GetDirectDebit_directDebit_batches_instructions_mandate_DigitalMandate_member {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  initials: string;
+  lastName: string;
+  email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
+  language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
+}
+
+export interface GetDirectDebit_directDebit_batches_instructions_mandate_DigitalMandate {
+  __typename: "DigitalMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  member: GetDirectDebit_directDebit_batches_instructions_mandate_DigitalMandate_member;
+}
+
+export interface GetDirectDebit_directDebit_batches_instructions_mandate_PaperMandate_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetDirectDebit_directDebit_batches_instructions_mandate_PaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetDirectDebit_directDebit_batches_instructions_mandate_PaperMandate_member {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  initials: string;
+  lastName: string;
+  email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
+  language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
+}
+
+export interface GetDirectDebit_directDebit_batches_instructions_mandate_PaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: GetDirectDebit_directDebit_batches_instructions_mandate_PaperMandate_generatedFile | null;
+  uploadedFile: GetDirectDebit_directDebit_batches_instructions_mandate_PaperMandate_uploadedFile | null;
+  member: GetDirectDebit_directDebit_batches_instructions_mandate_PaperMandate_member;
+}
+
+export type GetDirectDebit_directDebit_batches_instructions_mandate = GetDirectDebit_directDebit_batches_instructions_mandate_DigitalMandate | GetDirectDebit_directDebit_batches_instructions_mandate_PaperMandate;
+
+export interface GetDirectDebit_directDebit_batches_instructions {
+  __typename: "DirectDebitInstruction";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  instructionId: string;
+  description: string;
+  amount: number;
+  mandate: GetDirectDebit_directDebit_batches_instructions_mandate;
+}
+
+export interface GetDirectDebit_directDebit_batches {
+  __typename: "DirectDebitBatch";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  batchId: string;
+  sequenceType: SequenceType;
+  instructions: GetDirectDebit_directDebit_batches_instructions[];
+}
+
+export interface GetDirectDebit_directDebit_warnings_member {
+  __typename: "Member";
+  id: string;
+}
+
+export interface GetDirectDebit_directDebit_warnings {
+  __typename: "DirectDebitWarning";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  description: string;
+  member: GetDirectDebit_directDebit_warnings_member | null;
+}
+
+export interface GetDirectDebit_directDebit_file {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetDirectDebit_directDebit {
+  __typename: "DirectDebit";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  status: DirectDebitStatus;
+  messageId: string;
+  collectionDate: any;
+  instructionCount: number;
+  amount: number;
+  batches: GetDirectDebit_directDebit_batches[];
+  warnings: GetDirectDebit_directDebit_warnings[];
+  file: GetDirectDebit_directDebit_file | null;
+}
+
+export interface GetDirectDebit {
+  directDebit: GetDirectDebit_directDebit | null;
+}
+
+export interface GetDirectDebitVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetDirectDebits
 // ====================================================
 
@@ -425,6 +587,8 @@ export interface GetDirectDebits_directDebits {
   status: DirectDebitStatus;
   messageId: string;
   collectionDate: any;
+  instructionCount: number;
+  amount: number;
 }
 
 export interface GetDirectDebits {
@@ -961,6 +1125,83 @@ export interface BankFragment {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL fragment: DirectDebitFragment
+// ====================================================
+
+export interface DirectDebitFragment {
+  __typename: "DirectDebit";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  status: DirectDebitStatus;
+  messageId: string;
+  collectionDate: any;
+  instructionCount: number;
+  amount: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: DirectDebitBatchFragment
+// ====================================================
+
+export interface DirectDebitBatchFragment {
+  __typename: "DirectDebitBatch";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  batchId: string;
+  sequenceType: SequenceType;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: DirectDebitInstructionFragment
+// ====================================================
+
+export interface DirectDebitInstructionFragment {
+  __typename: "DirectDebitInstruction";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  instructionId: string;
+  description: string;
+  amount: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: DirectDebitWarningFragment
+// ====================================================
+
+export interface DirectDebitWarningFragment_member {
+  __typename: "Member";
+  id: string;
+}
+
+export interface DirectDebitWarningFragment {
+  __typename: "DirectDebitWarning";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  description: string;
+  member: DirectDebitWarningFragment_member | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: FileFragment
 // ====================================================
 
@@ -1105,6 +1346,24 @@ export interface ProviderFragment {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL fragment: TransactionFragment
+// ====================================================
+
+export interface TransactionFragment {
+  __typename: "MembershipFeeTransaction";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  description: string;
+  amount: number;
+  year: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserFragment
 // ====================================================
 
@@ -1114,24 +1373,6 @@ export interface UserFragment {
   name: string;
   email: string;
   role: Role;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL fragment: DirectDebitFragment
-// ====================================================
-
-export interface DirectDebitFragment {
-  __typename: "DirectDebit";
-  id: string;
-  createdAt: any;
-  updatedAt: any;
-  status: DirectDebitStatus;
-  messageId: string;
-  collectionDate: any;
 }
 
 /* tslint:disable */
@@ -1178,6 +1419,13 @@ export enum ProviderType {
 export enum Role {
   ADMIN = "ADMIN",
   USER = "USER",
+}
+
+export enum SequenceType {
+  FINAL = "FINAL",
+  FIRST = "FIRST",
+  ONE_OFF = "ONE_OFF",
+  RECURRENT = "RECURRENT",
 }
 
 export enum StudentType {

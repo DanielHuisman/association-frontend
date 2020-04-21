@@ -14,6 +14,7 @@ import Member from '../../pages/member/Member';
 import Mandates from '../../pages/mandates/Mandates';
 import Mandate from '../../pages/mandate/Mandate';
 import DirectDebits from '../../pages/direct-debits/DirectDebits';
+import DirectDebit from '../../pages/direct-debit/DirectDebit';
 
 const Main = () => {
     return (
@@ -37,6 +38,7 @@ const Main = () => {
                     <Route path="/mandates/:mandateId" component={Mandate} />
 
                     <AdminRoute exact path="/direct-debits" component={DirectDebits} />
+                    <Route exact path="/direct-debits/:directDebitId" component={DirectDebit} />
                 </Switch>
             </ErrorBoundary>
         </main>
