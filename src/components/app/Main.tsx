@@ -13,6 +13,7 @@ import Members from '../../pages/members/Members';
 import Member from '../../pages/member/Member';
 import Mandates from '../../pages/mandates/Mandates';
 import Mandate from '../../pages/mandate/Mandate';
+import DirectDebits from '../../pages/direct-debits/DirectDebits';
 
 const Main = () => {
     return (
@@ -34,6 +35,8 @@ const Main = () => {
                     <AdminRoute exact path="/mandates" component={Mandates} />
                     <AdminRoute exact path="/mandates/review" component={Mandates} />
                     <Route path="/mandates/:mandateId" component={Mandate} />
+
+                    <AdminRoute exact path="/direct-debits" component={DirectDebits} />
                 </Switch>
             </ErrorBoundary>
         </main>

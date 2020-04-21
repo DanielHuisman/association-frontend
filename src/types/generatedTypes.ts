@@ -414,6 +414,28 @@ export interface GetBanks {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetDirectDebits
+// ====================================================
+
+export interface GetDirectDebits_directDebits {
+  __typename: "DirectDebit";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  status: DirectDebitStatus;
+  messageId: string;
+  collectionDate: any;
+}
+
+export interface GetDirectDebits {
+  directDebits: GetDirectDebits_directDebits[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetMandate
 // ====================================================
 
@@ -1098,9 +1120,35 @@ export interface UserFragment {
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL fragment: DirectDebitFragment
+// ====================================================
+
+export interface DirectDebitFragment {
+  __typename: "DirectDebit";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  status: DirectDebitStatus;
+  messageId: string;
+  collectionDate: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export enum DirectDebitStatus {
+  ACCEPTED = "ACCEPTED",
+  CANCELLED = "CANCELLED",
+  CREATED = "CREATED",
+  GENERATED = "GENERATED",
+  REJECTED = "REJECTED",
+}
 
 export enum Language {
   EN = "EN",

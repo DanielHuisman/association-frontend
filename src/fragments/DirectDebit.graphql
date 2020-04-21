@@ -1,0 +1,8 @@
+fragment DirectDebitFragment on DirectDebit {
+    id
+    createdAt
+    updatedAt
+    status
+    messageId
+    collectionDate
+}

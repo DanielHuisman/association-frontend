@@ -1,0 +1,12 @@
+{
+  "directDebit": {
+    "collectionDate": "Collection date",
+    "createdAt": "Created at",
+    "messageId": "Identifier",
+    "status": "Status",
+    "updatedAt": "Updated at"
+  },
+  "directDebits": {
+    "header": "Direct debits"
+  }
+}

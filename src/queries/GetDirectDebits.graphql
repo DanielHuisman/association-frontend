@@ -1,0 +1,7 @@
+# import '../fragments/DirectDebit.graphql'
+
+query GetDirectDebits {
+    directDebits {
+        ...DirectDebitFragment
+    }
+}

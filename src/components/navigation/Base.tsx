@@ -32,6 +32,10 @@ const Base = ({user, onClick}: IProps) => {
                         <Icon name="signup" />
                         {t('mandates:mandates.header')}
                     </Menu.Item>
+                    <Menu.Item as={NavLink} to="/direct-debits" onClick={onClick}>
+                        <Icon name="payment" />
+                        {t('directDebits:directDebits.header')}
+                    </Menu.Item>
                 </>
             )}
         </>

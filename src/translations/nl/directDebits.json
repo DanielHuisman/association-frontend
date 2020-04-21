@@ -1,0 +1,12 @@
+{
+  "directDebit": {
+    "collectionDate": "Incassodatum",
+    "createdAt": "Aangemaakt op",
+    "messageId": "Identificatiecode",
+    "status": "Status",
+    "updatedAt": "Veranderd op"
+  },
+  "directDebits": {
+    "header": "Incasso's"
+  }
+}

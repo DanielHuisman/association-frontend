@@ -1,4 +1,5 @@
 import auth from './auth.json';
+import directDebits from './directDebits.json';
 import general from './general.json';
 // import errors from './errors.json';
 import mandates from './mandates.json';
@@ -7,6 +8,7 @@ import users from './users.json';
 
 export default {
     auth,
+    directDebits,
     general,
     // errors
     mandates,

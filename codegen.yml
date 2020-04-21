@@ -1,4 +1,4 @@
-schema: http://localhost:5000/graphql
+schema: http://localhost:5003/graphql
 overwrite: true
 generates:
   src/generated/fragmentTypes.json:
