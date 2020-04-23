@@ -4,4 +4,6 @@ fragment DirectDebitBatchFragment on DirectDebitBatch {
     updatedAt
     batchId
     sequenceType
+    instructionCount
+    amount
 }

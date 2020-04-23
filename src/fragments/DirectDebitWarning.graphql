@@ -6,5 +6,7 @@ fragment DirectDebitWarningFragment on DirectDebitWarning {
 
     member {
         id
+        firstName
+        lastName
     }
 }

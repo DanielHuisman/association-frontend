@@ -523,12 +523,16 @@ export interface GetDirectDebit_directDebit_batches {
   updatedAt: any;
   batchId: string;
   sequenceType: SequenceType;
+  instructionCount: number;
+  amount: number;
   instructions: GetDirectDebit_directDebit_batches_instructions[];
 }
 
 export interface GetDirectDebit_directDebit_warnings_member {
   __typename: "Member";
   id: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface GetDirectDebit_directDebit_warnings {
@@ -1108,6 +1112,146 @@ export interface GetUsers {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetDirectDebitBatch
+// ====================================================
+
+export interface GetDirectDebitBatch_directDebitBatch_instructions_mandate_DigitalMandate_member {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  initials: string;
+  lastName: string;
+  email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
+  language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
+}
+
+export interface GetDirectDebitBatch_directDebitBatch_instructions_mandate_DigitalMandate {
+  __typename: "DigitalMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  member: GetDirectDebitBatch_directDebitBatch_instructions_mandate_DigitalMandate_member;
+}
+
+export interface GetDirectDebitBatch_directDebitBatch_instructions_mandate_PaperMandate_generatedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetDirectDebitBatch_directDebitBatch_instructions_mandate_PaperMandate_uploadedFile {
+  __typename: "File";
+  id: string;
+  name: string;
+  url: string;
+  mimeType: string;
+}
+
+export interface GetDirectDebitBatch_directDebitBatch_instructions_mandate_PaperMandate_member {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  initials: string;
+  lastName: string;
+  email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
+  language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
+}
+
+export interface GetDirectDebitBatch_directDebitBatch_instructions_mandate_PaperMandate {
+  __typename: "PaperMandate";
+  id: string;
+  mandateId: string;
+  status: MandateStatus;
+  createdAt: any;
+  acceptedAt: any | null;
+  bic: string;
+  iban: string | null;
+  reason: string;
+  isFirstTransaction: boolean;
+  errorMessage: string | null;
+  generatedFile: GetDirectDebitBatch_directDebitBatch_instructions_mandate_PaperMandate_generatedFile | null;
+  uploadedFile: GetDirectDebitBatch_directDebitBatch_instructions_mandate_PaperMandate_uploadedFile | null;
+  member: GetDirectDebitBatch_directDebitBatch_instructions_mandate_PaperMandate_member;
+}
+
+export type GetDirectDebitBatch_directDebitBatch_instructions_mandate = GetDirectDebitBatch_directDebitBatch_instructions_mandate_DigitalMandate | GetDirectDebitBatch_directDebitBatch_instructions_mandate_PaperMandate;
+
+export interface GetDirectDebitBatch_directDebitBatch_instructions {
+  __typename: "DirectDebitInstruction";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  instructionId: string;
+  description: string;
+  amount: number;
+  mandate: GetDirectDebitBatch_directDebitBatch_instructions_mandate;
+}
+
+export interface GetDirectDebitBatch_directDebitBatch_directDebit {
+  __typename: "DirectDebit";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  status: DirectDebitStatus;
+  messageId: string;
+  collectionDate: any;
+  instructionCount: number;
+  amount: number;
+}
+
+export interface GetDirectDebitBatch_directDebitBatch {
+  __typename: "DirectDebitBatch";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  batchId: string;
+  sequenceType: SequenceType;
+  instructionCount: number;
+  amount: number;
+  instructions: GetDirectDebitBatch_directDebitBatch_instructions[];
+  directDebit: GetDirectDebitBatch_directDebitBatch_directDebit;
+}
+
+export interface GetDirectDebitBatch {
+  directDebitBatch: GetDirectDebitBatch_directDebitBatch | null;
+}
+
+export interface GetDirectDebitBatchVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: BankFragment
 // ====================================================
 
@@ -1155,6 +1299,8 @@ export interface DirectDebitBatchFragment {
   updatedAt: any;
   batchId: string;
   sequenceType: SequenceType;
+  instructionCount: number;
+  amount: number;
 }
 
 /* tslint:disable */
@@ -1186,6 +1332,8 @@ export interface DirectDebitInstructionFragment {
 export interface DirectDebitWarningFragment_member {
   __typename: "Member";
   id: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface DirectDebitWarningFragment {

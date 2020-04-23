@@ -6,6 +6,7 @@ import {RouteComponentProps} from 'react-router-dom';
 import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
+import DirectDebitBatchTable from '../../components/direct-debits/DirectDebitBatchTable';
 import DirectDebitInstructionTable from '../../components/direct-debits/DirectDebitInstructionTable';
 import DirectDebitWarningTable from '../../components/direct-debits/DirectDebitWarningTable';
 import GetDirectDebit from '../../queries/GetDirectDebit.graphql';
@@ -84,13 +85,23 @@ const DirectDebit = ({match}: RouteComponentProps<IRouteParams>) => {
                         </Table.Body>
                     </Table>
 
+                    <Header size="large">{t('directDebits:directDebit.batches', 'Direct debit batches')}</Header>
+                    {data.directDebit.batches.length === 0 && <p>{t('directDebits:directDebit.noBatches', 'There are no batches.')}</p>}
+                    {data.directDebit.batches.length > 0 && (
+                        <DirectDebitBatchTable directDebitId={data.directDebit.id} batches={data.directDebit.batches} />
+                    )}
+
                     <Header size="large">{t('directDebits:directDebit.intructions', 'Direct debit instructions')}</Header>
                     {data.directDebit.batches.length === 0 && <p>{t('directDebits:directDebit.noInstructions', 'There are no instructions.')}</p>}
-                    {data.directDebit.batches.length > 0 && <DirectDebitInstructionTable directDebit={data.directDebit} />}
+                    {data.directDebit.batches.length > 0 && (
+                        <DirectDebitInstructionTable directDebitId={data.directDebit.id} batches={data.directDebit.batches} />
+                    )}
 
                     <Header size="large">{t('directDebits:directDebit.warnings', 'Direct debit warnings')}</Header>
                     {data.directDebit.warnings.length === 0 && <p>{t('directDebits:directDebit.noWarnings', 'There are no warnings.')}</p>}
-                    {data.directDebit.warnings.length > 0 && <DirectDebitWarningTable warnings={data.directDebit.warnings} />}
+                    {data.directDebit.warnings.length > 0 && (
+                        <DirectDebitWarningTable warnings={data.directDebit.warnings} />
+                    )}
                 </>
             )}
         </Container>

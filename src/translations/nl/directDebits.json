@@ -1,6 +1,7 @@
 {
   "directDebit": {
     "amount": "Amount",
+    "batches": "Incassobatches",
     "collectionDate": "Incassodatum",
     "createdAt": "Aangemaakt op",
     "details": "Gegevens incasso",
@@ -10,6 +11,7 @@
     "instructionCount": "Instructions",
     "intructions": "Incasso-instructies",
     "messageId": "Identificatiecode",
+    "noBatches": "Er zijn geen batches.",
     "noInstructions": "Er zijn geen instructies.",
     "noWarnings": "Er zijn geen waarschuwingen.",
     "status": "Status",
@@ -17,13 +19,21 @@
     "warnings": "Incassowaarschuwingen"
   },
   "directDebitBatch": {
-    "batchId": "Batch identificatiecode",
-    "sequenceType": "Batch type"
+    "batchId": "Identificatiecode",
+    "details": "Direct debit batch details",
+    "header": "Direct debit batch",
+    "sequenceType": "Reekstype",
+    "viewDirectDebit": "View direct debit"
   },
   "directDebitInstruction": {
     "amount": "Amount",
+    "batch": "Batch",
     "description": "Beschrijving",
     "instructionId": "Identificatiecode"
+  },
+  "directDebitWarning": {
+    "description": "Beschrijving",
+    "member": "Lid"
   },
   "directDebits": {
     "header": "Incasso's"

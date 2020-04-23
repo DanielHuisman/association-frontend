@@ -16,17 +16,21 @@ const DirectDebitWarningTable = ({warnings}: IProps) => {
         <Table selectable stackable>
             <Table.Header>
                 <Table.Row>
-                    <Table.HeaderCell>{t('directDebits:directDebitInstruction.instructionId', 'Identifier')}</Table.HeaderCell>
-                    <Table.HeaderCell>{t('directDebits:directDebitInstruction.description', 'Description')}</Table.HeaderCell>
-                    <Table.HeaderCell>{t('directDebits:directDebitBatch.batchId', 'Batch identifier')}</Table.HeaderCell>
-                    <Table.HeaderCell>{t('directDebits:directDebitBatch.sequenceType', 'Batch type')}</Table.HeaderCell>
+                    <Table.HeaderCell>{t('directDebits:directDebitWarning.description', 'Description')}</Table.HeaderCell>
+                    <Table.HeaderCell>{t('directDebits:directDebitWarning.member', 'Member')}</Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
             <Table.Body>
-                {warnings.map((warning) => (
+                {warnings.map((warning) => warning.member ? (
                     <TableSelectableRow key={warning.id} to={`/members/${warning.member.id}`}>
                         <Table.Cell>{warning.description}</Table.Cell>
+                        <Table.Cell>{warning.member.firstName} {warning.member.lastName}</Table.Cell>
                     </TableSelectableRow>
+                ) : (
+                    <Table.Row key={warning.id}>
+                        <Table.Cell>{warning.description}</Table.Cell>
+                        <Table.Cell>-</Table.Cell>
+                    </Table.Row>
                 ))}
             </Table.Body>
         </Table>
