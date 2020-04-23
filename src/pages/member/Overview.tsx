@@ -96,7 +96,10 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                             <Table.Row>
                                 <Table.Cell>{t('members:member.endOfMembership', 'End of membership')}</Table.Cell>
                                 <Table.Cell>
-                                    {data.member.endOfMembership ? moment(data.member.endOfMembership).format('YYYY-MM-DD') : <i>Still a member</i>}
+                                    {data.member.endOfMembership ?
+                                        moment(data.member.endOfMembership).format('YYYY-MM-DD') :
+                                        <i>{t('members:member.endOfMembershipNone', 'Still a member')}</i>
+                                    }
                                 </Table.Cell>
                             </Table.Row>
                             <Table.Row>

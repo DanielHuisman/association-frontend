@@ -4,8 +4,10 @@
     "birthdate": "Geboortedatum",
     "checkInfo": "Dit is je lidmaatschapsinformatie, controleer a.u.b. of alles correct is. Als iets incorrect is of je iets wil wijzigen, kun je contact opnemen met het bestuur.",
     "city": "City",
+    "details": "Member details",
     "email": "E-mailadres",
     "endOfMembership": "Einde lidmaatschap",
+    "endOfMembershipNone": "Still a member",
     "firstName": "Voornaam",
     "hasMandate": "Heeft incassomachtiging",
     "initials": "Initialen",
@@ -15,6 +17,7 @@
       "NL": "Nederlands"
     },
     "lastName": "Achternaam",
+    "name": "Name",
     "phoneNumber": "Telefoonnummer",
     "postalCode": "Postcode",
     "pronounTypes": {

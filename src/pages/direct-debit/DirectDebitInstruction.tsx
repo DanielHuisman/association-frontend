@@ -7,7 +7,6 @@ import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
 import TransactionTable from '../../components/transactions/TransactionTable';
-import MandateType from '../../components/mandate/MandateType';
 import GetDirectDebitInstruction from '../../queries/GetDirectDebitInstruction.graphql';
 import {GetDirectDebitInstruction as GetDirectDebitInstructionType} from '../../types/generatedTypes';
 import {formatCurrency} from '../../util';
@@ -101,10 +100,6 @@ const DirectDebitInstruction = ({match}: RouteComponentProps<IRouteParams>) => {
                         <   Table.Row>
                                 <Table.Cell>{t('mandates:mandate.mandateId', 'Identifier')}</Table.Cell>
                                 <Table.Cell>{data.directDebitInstruction.mandate.mandateId}</Table.Cell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.Cell>{t('mandates:mandate.type', 'Type')}</Table.Cell>
-                                <Table.Cell><MandateType mandate={data.directDebitInstruction.mandate} /></Table.Cell>
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>{t('mandates:mandate.status', 'Status')}</Table.Cell>

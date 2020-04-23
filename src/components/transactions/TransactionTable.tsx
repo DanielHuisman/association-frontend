@@ -23,6 +23,7 @@ const TransactionTable = ({transactions}: IProps) => {
                     <Table.HeaderCell>{t('transactions:transaction.type', 'Type')}</Table.HeaderCell>
                     <Table.HeaderCell>{t('transactions:transaction.description', 'Description')}</Table.HeaderCell>
                     <Table.HeaderCell>{t('transactions:transaction.amount', 'Amount')}</Table.HeaderCell>
+                    <Table.HeaderCell>{t('transactions:transaction.status', 'Status')}</Table.HeaderCell>
                     <Table.HeaderCell>{t('transactions:transaction.createdAt', 'Created at')}</Table.HeaderCell>
                     <Table.HeaderCell>{t('transactions:transaction.updatedAt', 'Updated at')}</Table.HeaderCell>
                 </Table.Row>
@@ -33,6 +34,7 @@ const TransactionTable = ({transactions}: IProps) => {
                         <Table.Cell><TransactionType transaction={transaction} /></Table.Cell>
                         <Table.Cell>{transaction.description}</Table.Cell>
                         <Table.Cell>{formatCurrency(transaction.amount)}</Table.Cell>
+                        <Table.Cell>-</Table.Cell>
                         <Table.Cell>{moment(transaction.createdAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
                         <Table.Cell>{moment(transaction.updatedAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
                     </TableSelectableRow>

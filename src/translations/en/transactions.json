@@ -3,11 +3,18 @@
     "amount": "Amount",
     "createdAt": "Created at",
     "description": "Description",
+    "details": "Transaction details",
+    "header": "Transaction",
+    "membershipFee": {
+      "year": "Membership fee year"
+    },
+    "status": "Status",
     "type": "Type",
     "types": {
       "membershipFee": "Membership fee",
       "other": "Other"
     },
-    "updatedAt": "Updated at"
+    "updatedAt": "Updated at",
+    "viewMember": "View member"
   }
 }

@@ -1,0 +1,27 @@
+# import '../fragments/DirectDebit.graphql'
+# import '../fragments/DirectDebitBatch.graphql'
+# import '../fragments/DirectDebitInstruction.graphql'
+# import '../fragments/Transaction.graphql'
+# import '../fragments/Member.graphql'
+
+query GetTransaction($id: String!) {
+    transaction(id: $id) {
+        ...TransactionFragment
+
+        member {
+            ...MemberFragment
+        }
+
+        instruction {
+            ...DirectDebitInstructionFragment
+
+            batch {
+                ...DirectDebitBatchFragment
+
+                directDebit {
+                    ...DirectDebitFragment
+                }
+            }
+        }
+    }
+}

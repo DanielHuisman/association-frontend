@@ -1403,6 +1403,88 @@ export interface GetUsers {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetTransaction
+// ====================================================
+
+export interface GetTransaction_transaction_member {
+  __typename: "Member";
+  id: string;
+  firstName: string;
+  initials: string;
+  lastName: string;
+  email: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  birthdate: any;
+  startOfMembership: any;
+  endOfMembership: any | null;
+  language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
+}
+
+export interface GetTransaction_transaction_instruction_batch_directDebit {
+  __typename: "DirectDebit";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  status: DirectDebitStatus;
+  messageId: string;
+  collectionDate: any;
+  instructionCount: number;
+  amount: number;
+}
+
+export interface GetTransaction_transaction_instruction_batch {
+  __typename: "DirectDebitBatch";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  batchId: string;
+  sequenceType: SequenceType;
+  instructionCount: number;
+  amount: number;
+  directDebit: GetTransaction_transaction_instruction_batch_directDebit;
+}
+
+export interface GetTransaction_transaction_instruction {
+  __typename: "DirectDebitInstruction";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  instructionId: string;
+  description: string;
+  amount: number;
+  batch: GetTransaction_transaction_instruction_batch;
+}
+
+export interface GetTransaction_transaction {
+  __typename: "MembershipFeeTransaction";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  description: string;
+  amount: number;
+  year: number;
+  member: GetTransaction_transaction_member;
+  instruction: GetTransaction_transaction_instruction | null;
+}
+
+export interface GetTransaction {
+  transaction: GetTransaction_transaction | null;
+}
+
+export interface GetTransactionVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: BankFragment
 // ====================================================
 
