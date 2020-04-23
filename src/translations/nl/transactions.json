@@ -1,20 +1,20 @@
 {
   "transaction": {
-    "amount": "Amount",
-    "createdAt": "Created at",
-    "description": "Description",
-    "details": "Transaction details",
-    "header": "Transaction",
+    "amount": "Bedrag",
+    "createdAt": "Aangemaakt op",
+    "description": "Beschrijving",
+    "details": "Gegevens transactie",
+    "header": "Transactie",
     "membershipFee": {
-      "year": "Membership fee year"
+      "year": "Contributiejaar"
     },
     "status": "Status",
     "type": "Type",
     "types": {
-      "membershipFee": "Membership fee",
-      "other": "Other"
+      "membershipFee": "Contributie",
+      "other": "Overig"
     },
-    "updatedAt": "Updated at",
-    "viewMember": "View member"
+    "updatedAt": "Veranderd op",
+    "viewMember": "Bekijk lid"
   }
 }
