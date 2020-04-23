@@ -19,17 +19,32 @@
     "warnings": "Direct debit warnings"
   },
   "directDebitBatch": {
+    "amount": "Amount",
     "batchId": "Identifier",
+    "createdAt": "Created at",
     "details": "Direct debit batch details",
+    "directDebit": "Direct debit",
     "header": "Direct debit batch",
+    "instructionCount": "Instructions",
     "sequenceType": "Sequence type",
+    "updatedAt": "Updated at",
     "viewDirectDebit": "View direct debit"
   },
   "directDebitInstruction": {
     "amount": "Amount",
     "batch": "Batch",
+    "createdAt": "Created at",
     "description": "Description",
-    "instructionId": "Identifier"
+    "details": "Direct debit instruction details",
+    "header": "Direct debit instruction",
+    "instructionId": "Identifier",
+    "noTransactions": "There are no transactions.",
+    "transactions": "Transactions",
+    "updatedAt": "Updated at",
+    "viewDirectDebit": "View direct debit",
+    "viewDirectDebitBatch": "View direct debit batch",
+    "viewMandate": "View mandate",
+    "viewMember": "View member"
   },
   "directDebitWarning": {
     "description": "Description",

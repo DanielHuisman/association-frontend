@@ -16,6 +16,7 @@ import Mandate from '../../pages/mandate/Mandate';
 import DirectDebits from '../../pages/direct-debits/DirectDebits';
 import DirectDebit from '../../pages/direct-debit/DirectDebit';
 import DirectDebitBatch from '../../pages/direct-debit/DirectDebitBatch';
+import DirectDebitInstruction from '../../pages/direct-debit/DirectDebitInstruction';
 
 const Main = () => {
     return (
@@ -41,6 +42,7 @@ const Main = () => {
                     <AdminRoute exact path="/direct-debits" component={DirectDebits} />
                     <Route exact path="/direct-debits/:directDebitId" component={DirectDebit} />
                     <Route exact path="/direct-debits/:directDebitId/batches/:directDebitBatchId" component={DirectDebitBatch} />
+                    <Route exact path="/direct-debits/:directDebitId/instructions/:directDebitInstructionId" component={DirectDebitInstruction} />
                 </Switch>
             </ErrorBoundary>
         </main>

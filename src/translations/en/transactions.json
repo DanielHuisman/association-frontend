@@ -1,0 +1,13 @@
+{
+  "transaction": {
+    "amount": "Amount",
+    "createdAt": "Created at",
+    "description": "Description",
+    "type": "Type",
+    "types": {
+      "membershipFee": "Membership fee",
+      "other": "Other"
+    },
+    "updatedAt": "Updated at"
+  }
+}

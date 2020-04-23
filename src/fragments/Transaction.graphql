@@ -5,7 +5,9 @@ fragment TransactionFragment on Transaction {
     description
     amount
 
-    ... on MembershipFeeTransaction {
-        year
-    }
+    ...MembershipFeeTransactionFragment
+}
+
+fragment MembershipFeeTransactionFragment on MembershipFeeTransaction {
+    year
 }

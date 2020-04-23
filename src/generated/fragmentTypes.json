@@ -6,10 +6,19 @@
         "name": "Mandate",
         "possibleTypes": [
           {
-            "name": "DigitalMandate"
+            "name": "PaperMandate"
           },
           {
-            "name": "PaperMandate"
+            "name": "DigitalMandate"
+          }
+        ]
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "Transaction",
+        "possibleTypes": [
+          {
+            "name": "MembershipFeeTransaction"
           }
         ]
       }

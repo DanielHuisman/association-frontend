@@ -12,6 +12,7 @@ import {GetDirectDebitBatch as GetDirectDebitBatchType} from '../../types/genera
 import {formatCurrency} from '../../util';
 
 interface IRouteParams {
+    directDebitId: string;
     directDebitBatchId: string;
 }
 
@@ -49,29 +50,23 @@ const DirectDebitBatch = ({match}: RouteComponentProps<IRouteParams>) => {
                                 <Table.Cell>{data.directDebitBatch.sequenceType}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
-                                <Table.Cell>{t('directDebits:directDebit.instructionCount', 'Instructions')}</Table.Cell>
+                                <Table.Cell>{t('directDebits:directDebitBatch.instructionCount', 'Instructions')}</Table.Cell>
                                 <Table.Cell>{data.directDebitBatch.instructionCount}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
-                                <Table.Cell>{t('directDebits:directDebit.amount', 'Amount')}</Table.Cell>
+                                <Table.Cell>{t('directDebits:directDebitBatch.amount', 'Amount')}</Table.Cell>
                                 <Table.Cell>{formatCurrency(data.directDebitBatch.amount)}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
-                                <Table.Cell>{t('directDebits:directDebit.createdAt', 'Created at')}</Table.Cell>
+                                <Table.Cell>{t('directDebits:directDebitBatch.createdAt', 'Created at')}</Table.Cell>
                                 <Table.Cell>{moment(data.directDebitBatch.createdAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
-                                <Table.Cell>{t('directDebits:directDebit.updatedAt', 'Updated at')}</Table.Cell>
+                                <Table.Cell>{t('directDebits:directDebitBatch.updatedAt', 'Updated at')}</Table.Cell>
                                 <Table.Cell>{moment(data.directDebitBatch.updatedAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
                             </Table.Row>
-                        </Table.Body>
-                    </Table>
-
-                    <Header size="large">{t('directDebits:directDebit.details', 'Direct debit details')}</Header>
-                    <Table compact definition selectable stackable>
-                        <Table.Body>
                             <Table.Row>
-                                <Table.Cell>{t('directDebits:directDebit.messageId', 'Identifier')}</Table.Cell>
+                                <Table.Cell>{t('directDebits:directDebitBatch.directDebit', 'Direct debit')}</Table.Cell>
                                 <Table.Cell>{data.directDebitBatch.directDebit.messageId}</Table.Cell>
                             </Table.Row>
                             <Table.Row>

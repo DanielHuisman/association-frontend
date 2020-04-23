@@ -19,17 +19,33 @@
     "warnings": "Incassowaarschuwingen"
   },
   "directDebitBatch": {
+    "amount": "Amount",
     "batchId": "Identificatiecode",
+    "createdAt": "Created at",
     "details": "Direct debit batch details",
+    "directDebit": "Direct debit",
     "header": "Direct debit batch",
+    "instructionCount": "Instructions",
     "sequenceType": "Reekstype",
+    "updatedAt": "Updated at",
     "viewDirectDebit": "View direct debit"
   },
   "directDebitInstruction": {
     "amount": "Amount",
     "batch": "Batch",
+    "createdAt": "Created at",
     "description": "Beschrijving",
-    "instructionId": "Identificatiecode"
+    "details": "Direct debit instruction details",
+    "directDebit": "Direct debit",
+    "header": "Direct debit instruction",
+    "instructionId": "Identificatiecode",
+    "noTransactions": "There are no transactions.",
+    "transactions": "Transactions",
+    "updatedAt": "Updated at",
+    "viewDirectDebit": "View direct debit",
+    "viewDirectDebitBatch": "View direct debit",
+    "viewMandate": "View mandate",
+    "viewMember": "View member"
   },
   "directDebitWarning": {
     "description": "Beschrijving",
