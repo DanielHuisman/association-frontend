@@ -15,9 +15,10 @@ interface IProps {
             }
         })[];
     })[];
+    showBatch?: boolean;
 }
 
-const DirectDebitInstructionTable = ({directDebitId, batches}: IProps) => {
+const DirectDebitInstructionTable = ({directDebitId, batches, showBatch = false}: IProps) => {
     const {t} = useTranslation();
 
     return (
@@ -28,8 +29,11 @@ const DirectDebitInstructionTable = ({directDebitId, batches}: IProps) => {
                     <Table.HeaderCell>{t('mandates:mandate.details.name')}</Table.HeaderCell>
                     <Table.HeaderCell>{t('directDebits:directDebitInstruction.description', 'Description')}</Table.HeaderCell>
                     <Table.HeaderCell>{t('directDebits:directDebitInstruction.amount', 'Amount')}</Table.HeaderCell>
-                    <Table.HeaderCell>{t('directDebits:directDebitInstruction.batch', 'Batch')}</Table.HeaderCell>
-                    <Table.HeaderCell>{t('directDebits:directDebitBatch.sequenceType', 'Batch type')}</Table.HeaderCell>
+                    {showBatch && (
+                        <>
+                            <Table.HeaderCell>{t('directDebits:directDebitBatch.sequenceType', 'Batch type')}</Table.HeaderCell>
+                        </>
+                    )}
                 </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -41,8 +45,11 @@ const DirectDebitInstructionTable = ({directDebitId, batches}: IProps) => {
                                 <Table.Cell>{instruction.mandate.member.initials} {instruction.mandate.member.lastName}</Table.Cell>
                                 <Table.Cell>{instruction.description}</Table.Cell>
                                 <Table.Cell>{formatCurrency(instruction.amount)}</Table.Cell>
-                                <Table.Cell>{batch.batchId}</Table.Cell>
-                                <Table.Cell>{batch.sequenceType}</Table.Cell>
+                                {showBatch && (
+                                    <>
+                                        <Table.Cell>{batch.sequenceType}</Table.Cell>
+                                    </>
+                                )}
                             </TableSelectableRow>
                         ))}
                     </React.Fragment>
