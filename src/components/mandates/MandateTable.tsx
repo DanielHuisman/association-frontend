@@ -9,9 +9,9 @@ import YesNo from '../../components/util/YesNo';
 import {MandateFragment, MemberFragment} from '../../types/generatedTypes';
 
 interface IProps {
-    mandates: Array<MandateFragment & {
+    mandates: (MandateFragment & {
         member: MemberFragment;
-    }>;
+    })[];
 }
 
 const MandateTable = ({mandates}: IProps) => {

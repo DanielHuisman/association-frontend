@@ -8,13 +8,13 @@ import {formatCurrency} from '../../util';
 
 interface IProps {
     directDebitId: string;
-    batches: Array<DirectDebitBatchFragment & {
-        instructions: Array<DirectDebitInstructionFragment & {
+    batches: (DirectDebitBatchFragment & {
+        instructions: (DirectDebitInstructionFragment & {
             mandate: MandateFragment & {
                 member: MemberFragment;
             }
-        }>;
-    }>;
+        })[];
+    })[];
 }
 
 const DirectDebitInstructionTable = ({directDebitId, batches}: IProps) => {
