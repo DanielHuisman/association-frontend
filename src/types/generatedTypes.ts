@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -48,6 +49,7 @@ export interface AcceptPaperMandateVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -96,6 +98,7 @@ export interface CancelPaperMandateVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -117,6 +120,7 @@ export interface CreateDigitalMandateVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -165,6 +169,7 @@ export interface CreatePaperMandateVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -229,6 +234,7 @@ export interface InvalidateMandateVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -254,6 +260,7 @@ export interface OAuthAuthenticateVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -271,6 +278,7 @@ export interface OAuthAuthorizeVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -292,6 +300,7 @@ export interface OAuthUnlinkVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -341,6 +350,7 @@ export interface RejectPaperMandateVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -390,6 +400,7 @@ export interface UploadPaperMandateVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -411,6 +422,7 @@ export interface GetBanks {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -577,6 +589,7 @@ export interface GetDirectDebitVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -717,6 +730,7 @@ export interface GetDirectDebitBatchVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -868,6 +882,7 @@ export interface GetDirectDebitInstructionVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -892,6 +907,7 @@ export interface GetDirectDebits {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -996,6 +1012,7 @@ export interface GetMandateVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1096,6 +1113,7 @@ export interface GetMandates {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1150,6 +1168,16 @@ export interface GetMember_member_mandates_PaperMandate {
 
 export type GetMember_member_mandates = GetMember_member_mandates_DigitalMandate | GetMember_member_mandates_PaperMandate;
 
+export interface GetMember_member_transactions {
+  __typename: "MembershipFeeTransaction";
+  id: string;
+  createdAt: any;
+  updatedAt: any;
+  description: string;
+  amount: number;
+  year: number;
+}
+
 export interface GetMember_member {
   __typename: "Member";
   id: string;
@@ -1168,6 +1196,7 @@ export interface GetMember_member {
   pronouns: Pronouns;
   studentType: StudentType;
   mandates: GetMember_member_mandates[];
+  transactions: GetMember_member_transactions[];
 }
 
 export interface GetMember {
@@ -1180,6 +1209,7 @@ export interface GetMemberVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1260,6 +1290,7 @@ export interface GetMembers {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1328,6 +1359,7 @@ export interface GetPaperMandatesVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1356,50 +1388,7 @@ export interface GetProfile {
 
 /* tslint:disable */
 /* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: GetUser
-// ====================================================
-
-export interface GetUser_user {
-  __typename: "User";
-  id: string;
-  name: string;
-  email: string;
-  role: Role;
-}
-
-export interface GetUser {
-  user: GetUser_user | null;
-}
-
-export interface GetUserVariables {
-  id: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: GetUsers
-// ====================================================
-
-export interface GetUsers_users {
-  __typename: "User";
-  id: string;
-  name: string;
-  email: string;
-  role: Role;
-}
-
-export interface GetUsers {
-  users: GetUsers_users[];
-}
-
-/* tslint:disable */
-/* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1482,6 +1471,53 @@ export interface GetTransactionVariables {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetUser
+// ====================================================
+
+export interface GetUser_user {
+  __typename: "User";
+  id: string;
+  name: string;
+  email: string;
+  role: Role;
+}
+
+export interface GetUser {
+  user: GetUser_user | null;
+}
+
+export interface GetUserVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetUsers
+// ====================================================
+
+export interface GetUsers_users {
+  __typename: "User";
+  id: string;
+  name: string;
+  email: string;
+  role: Role;
+}
+
+export interface GetUsers {
+  users: GetUsers_users[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1499,6 +1535,7 @@ export interface BankFragment {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1519,6 +1556,7 @@ export interface DirectDebitFragment {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1538,6 +1576,7 @@ export interface DirectDebitBatchFragment {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1556,6 +1595,7 @@ export interface DirectDebitInstructionFragment {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1580,6 +1620,7 @@ export interface DirectDebitWarningFragment {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1596,6 +1637,7 @@ export interface FileFragment {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1652,6 +1694,7 @@ export type MandateFragment = MandateFragment_DigitalMandate | MandateFragment_P
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1682,6 +1725,7 @@ export interface PaperMandateFragment {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1709,6 +1753,7 @@ export interface MemberFragment {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1724,6 +1769,7 @@ export interface ProviderFragment {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1742,6 +1788,7 @@ export interface TransactionFragment {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1755,6 +1802,7 @@ export interface MembershipFeeTransactionFragment {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -1771,6 +1819,7 @@ export interface UserFragment {
 
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 //==============================================================

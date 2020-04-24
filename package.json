@@ -35,7 +35,7 @@
         "apollo-link-http": "^1.5.17",
         "apollo-upload-client": "^13.0.0",
         "formik": "^2.1.4",
-        "graphql": "^15.0.0",
+        "graphql": "^14.6.0",
         "i18next": "^19.4.3",
         "i18next-browser-languagedetector": "^4.1.1",
         "ibantools": "^3.0.0",

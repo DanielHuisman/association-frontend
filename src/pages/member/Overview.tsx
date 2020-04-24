@@ -8,6 +8,7 @@ import moment from 'moment';
 
 import {UserContext} from '../../components/authentication/UserContext';
 import TableSelectableRow from '../../components/table/TableSelectableRow';
+import TransactionTable from '../../components/transactions/TransactionTable';
 import GetMember from '../../queries/GetMember.graphql';
 import {GetMember as GetMemberType, MandateStatus} from '../../types/generatedTypes';
 import {hasAcceptedMandates} from '../../util';
@@ -176,6 +177,14 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                                 }
                             </Table.Body>
                         </Table>
+                    )}
+
+                    <Header size="large">{t('directDebits:directDebitInstruction.transactions', 'Transactions')}</Header>
+                    {data.member.transactions.length === 0 && (
+                        <p>{t('directDebits:directDebitInstruction.noTransactions', 'There are no transactions.')}</p>
+                    )}
+                    {data.member.transactions.length > 0 && (
+                        <TransactionTable transactions={data.member.transactions} />
                     )}
                 </>
             )}
