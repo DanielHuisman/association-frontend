@@ -100,6 +100,66 @@ const Transaction = ({match}: RouteComponentProps<IRouteParams>) => {
                     <Button as={Link} to={`/members/${data.transaction.member.id}`} color="blue">
                         {t('transactions:transaction.viewMember', 'View member')}
                     </Button>
+
+                    <Header size="large">{t('directDebits:directDebitInstruction.details', 'Direct debit instruction details')}</Header>
+                    {!data.transaction.instruction && <p>{t('transactions:transaction:noInstruction', 'This transaction is not linked to a direct debit instruction.')}</p>}
+                    {data.transaction.instruction && (
+                        <>
+                            <Table compact definition selectable stackable>
+                                <Table.Body>
+                                    <Table.Row>
+                                        <Table.Cell>{t('directDebits:directDebitInstruction.instructionId', 'Identifier')}</Table.Cell>
+                                        <Table.Cell>{data.transaction.instruction.instructionId}</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell>{t('directDebits:directDebitInstruction.description', 'Description')}</Table.Cell>
+                                        <Table.Cell>{data.transaction.instruction.description}</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell>{t('directDebits:directDebitInstruction.amount', 'Amount')}</Table.Cell>
+                                        <Table.Cell>{formatCurrency(data.transaction.instruction.amount)}</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell>{t('directDebits:directDebitInstruction.batch', 'Batch')}</Table.Cell>
+                                        <Table.Cell>{data.transaction.instruction.batch.batchId}</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell>{t('directDebits:directDebitBatch.sequenceType', 'Sequence type')}</Table.Cell>
+                                        <Table.Cell>{data.transaction.instruction.batch.sequenceType}</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell>{t('directDebits:directDebitBatch.directDebit', 'Direct debit')}</Table.Cell>
+                                        <Table.Cell>{data.transaction.instruction.batch.directDebit.messageId}</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell>{t('directDebits:directDebit.collectionDate', 'Collection date')}</Table.Cell>
+                                        <Table.Cell>{moment(data.transaction.instruction.batch.directDebit.collectionDate).format('YYYY-MM-DD')}</Table.Cell>
+                                    </Table.Row>
+                                </Table.Body>
+                            </Table>
+                            <Button
+                                as={Link}
+                                to={`/direct-debits/${data.transaction.instruction.batch.directDebit.id}/instructions/${data.transaction.instruction.id}`}
+                                color="blue"
+                            >
+                                {t('transactions:transaction.viewDirectDebitInstruction', 'View direct debit instruction')}
+                            </Button>
+                            <Button
+                                as={Link}
+                                to={`/direct-debits/${data.transaction.instruction.batch.directDebit.id}/batches/${data.transaction.instruction.batch.id}`}
+                                color="blue"
+                            >
+                                {t('transactions:transaction.viewDirectDebitBatch', 'View direct debit batch')}
+                            </Button>
+                            <Button
+                                as={Link}
+                                to={`/direct-debits/${data.transaction.instruction.batch.directDebit.id}`}
+                                color="blue"
+                            >
+                                {t('transactions:transaction.viewDirectDebit', 'View direct debit')}
+                            </Button>
+                        </>
+                    )}
                 </>
             )}
         </Container>

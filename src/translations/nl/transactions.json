@@ -15,6 +15,10 @@
       "other": "Overig"
     },
     "updatedAt": "Veranderd op",
+    "viewDirectDebit": "Bekijk incasso",
+    "viewDirectDebitBatch": "Bekijk incassobatch",
+    "viewDirectDebitInstruction": "Bekijk incasso-instructie",
     "viewMember": "Bekijk lid"
-  }
+  },
+  "transaction:noInstruction": "This transaction is not linked to a direct debit instruction."
 }
