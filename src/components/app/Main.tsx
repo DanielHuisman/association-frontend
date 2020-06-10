@@ -1,5 +1,5 @@
 import React from 'react';
-import ErrorBoundary from 'react-error-boundary';
+import {ErrorBoundary} from 'react-error-boundary';
 import {Switch, Route} from 'react-router-dom';
 
 import {AuthRoute, NoAuthRoute, AdminRoute} from '../../components/authentication';

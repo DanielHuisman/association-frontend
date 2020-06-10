@@ -1,7 +1,8 @@
 import React from 'react';
+import {FallbackProps} from 'react-error-boundary';
 import {Container, Header} from 'semantic-ui-react';
 
-const Error = ({error}) => (
+const Error = ({error}: FallbackProps) => (
     <>
         <Container textAlign="center">
             <Header size="huge">

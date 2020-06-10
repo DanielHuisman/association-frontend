@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Query} from 'react-apollo';
-import ErrorBoundary from 'react-error-boundary';
+import {ErrorBoundary} from 'react-error-boundary';
 import {Helmet} from 'react-helmet';
 
 import GetProfile from '../../queries/GetProfile.graphql';
@@ -16,7 +16,7 @@ const App = () => {
     const [isSidebarVisible, setSidebarVisible] = useState(false);
 
     return (
-        <ErrorBoundary>
+        <ErrorBoundary fallback={<div />}>
             <Query<GetProfileType> query={GetProfile}>
                 {({loading, data, error}) => {
                     const user = loading || error ? null : data.me;
