@@ -9,8 +9,6 @@ fragment MemberFragment on Member {
     city
     phoneNumber
     birthdate
-    startOfMembership
-    endOfMembership
     language
     pronouns
     studentType

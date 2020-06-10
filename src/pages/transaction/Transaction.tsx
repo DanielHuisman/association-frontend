@@ -6,6 +6,7 @@ import {Link, RouteComponentProps} from 'react-router-dom';
 import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
+import MembershipType from '../../components/membership/MembershipType';
 import TransactionType from '../../components/transactions/TransactionType';
 import GetTransaction from '../../queries/GetTransaction.graphql';
 import {GetTransaction as GetTransactionType} from '../../types/generatedTypes';
@@ -83,15 +84,19 @@ const Transaction = ({match}: RouteComponentProps<IRouteParams>) => {
                                 <Table.Cell>{data.transaction.member.firstName} {data.transaction.member.lastName}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
-                                <Table.Cell>{t('members:member.startOfMembership', 'Start of membership')}</Table.Cell>
-                                <Table.Cell>{moment(data.transaction.member.startOfMembership).format('YYYY-MM-DD')}</Table.Cell>
+                                <Table.Cell>{t('members:membership.type', 'Membership type')}</Table.Cell>
+                                <Table.Cell><MembershipType membership={data.transaction.member.latestMembership} /></Table.Cell>
                             </Table.Row>
                             <Table.Row>
-                                <Table.Cell>{t('members:member.endOfMembership', 'End of membership')}</Table.Cell>
+                                <Table.Cell>{t('members:membership.startedAt', 'Start of membership')}</Table.Cell>
+                                <Table.Cell>{moment(data.transaction.member.latestMembership.startedAt).format('YYYY-MM-DD')}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>{t('members:membership.endedAt', 'End of membership')}</Table.Cell>
                                 <Table.Cell>
-                                    {data.transaction.member.endOfMembership ?
-                                        moment(data.transaction.member.endOfMembership).format('YYYY-MM-DD') :
-                                        <i>{t('members:member.endOfMembershipNone', 'Still a member')}</i>
+                                    {data.transaction.member.latestMembership.endedAt ?
+                                        moment(data.transaction.member.latestMembership.endedAt).format('YYYY-MM-DD') :
+                                        <i>{t('members:membership.endedAtNone', 'Still a member')}</i>
                                     }
                                 </Table.Cell>
                             </Table.Row>

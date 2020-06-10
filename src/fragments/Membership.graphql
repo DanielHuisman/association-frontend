@@ -1,0 +1,6 @@
+fragment MembershipFragment on Membership {
+    id
+    type
+    startedAt
+    endedAt
+}

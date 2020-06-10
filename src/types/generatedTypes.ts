@@ -441,8 +441,6 @@ export interface GetDirectDebit_directDebit_batches_instructions_mandate_Digital
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
@@ -491,8 +489,6 @@ export interface GetDirectDebit_directDebit_batches_instructions_mandate_PaperMa
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
@@ -608,8 +604,6 @@ export interface GetDirectDebitBatch_directDebitBatch_instructions_mandate_Digit
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
@@ -658,8 +652,6 @@ export interface GetDirectDebitBatch_directDebitBatch_instructions_mandate_Paper
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
@@ -783,8 +775,6 @@ export interface GetDirectDebitInstruction_directDebitInstruction_mandate_Digita
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
@@ -833,8 +823,6 @@ export interface GetDirectDebitInstruction_directDebitInstruction_mandate_PaperM
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
@@ -926,8 +914,6 @@ export interface GetMandate_mandate_DigitalMandate_member {
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
@@ -976,8 +962,6 @@ export interface GetMandate_mandate_PaperMandate_member {
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
@@ -1031,8 +1015,6 @@ export interface GetMandates_mandates_DigitalMandate_member {
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
@@ -1081,8 +1063,6 @@ export interface GetMandates_mandates_PaperMandate_member {
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
@@ -1119,6 +1099,14 @@ export interface GetMandates {
 // ====================================================
 // GraphQL query operation: GetMember
 // ====================================================
+
+export interface GetMember_member_memberships {
+  __typename: "Membership";
+  id: string;
+  type: MembershipType;
+  startedAt: any;
+  endedAt: any | null;
+}
 
 export interface GetMember_member_mandates_DigitalMandate {
   __typename: "DigitalMandate";
@@ -1190,11 +1178,10 @@ export interface GetMember_member {
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
+  memberships: GetMember_member_memberships[];
   mandates: GetMember_member_mandates[];
   transactions: GetMember_member_transactions[];
 }
@@ -1276,8 +1263,6 @@ export interface GetMembers_members {
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
@@ -1325,8 +1310,6 @@ export interface GetPaperMandates_paperMandates_member {
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
@@ -1395,6 +1378,14 @@ export interface GetProfile {
 // GraphQL query operation: GetTransaction
 // ====================================================
 
+export interface GetTransaction_transaction_member_latestMembership {
+  __typename: "Membership";
+  id: string;
+  type: MembershipType;
+  startedAt: any;
+  endedAt: any | null;
+}
+
 export interface GetTransaction_transaction_member {
   __typename: "Member";
   id: string;
@@ -1407,11 +1398,10 @@ export interface GetTransaction_transaction_member {
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
+  latestMembership: GetTransaction_transaction_member_latestMembership;
 }
 
 export interface GetTransaction_transaction_instruction_batch_directDebit {
@@ -1744,11 +1734,26 @@ export interface MemberFragment {
   city: string;
   phoneNumber: string;
   birthdate: any;
-  startOfMembership: any;
-  endOfMembership: any | null;
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: MembershipFragment
+// ====================================================
+
+export interface MembershipFragment {
+  __typename: "Membership";
+  id: string;
+  type: MembershipType;
+  startedAt: any;
+  endedAt: any | null;
 }
 
 /* tslint:disable */
@@ -1847,6 +1852,12 @@ export enum MandateStatus {
   INVALID = "INVALID",
   REJECTED = "REJECTED",
   UNACCEPTED = "UNACCEPTED",
+}
+
+export enum MembershipType {
+  EXTRAORDINARY = "EXTRAORDINARY",
+  HONORARY = "HONORARY",
+  NORMAL = "NORMAL",
 }
 
 export enum Pronouns {

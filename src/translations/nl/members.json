@@ -6,8 +6,6 @@
     "city": "City",
     "details": "Gegevens lid",
     "email": "E-mailadres",
-    "endOfMembership": "Einde lidmaatschap",
-    "endOfMembershipNone": "Nog lid",
     "firstName": "Voornaam",
     "hasMandate": "Heeft incassomachtiging",
     "initials": "Initialen",
@@ -26,7 +24,6 @@
       "THEY_THEM": "Hen/hun"
     },
     "pronouns": "Gewenste voornaamwoorden",
-    "startOfMembership": "Begin lidmaatschap",
     "studentType": "Soort student",
     "studentTypes": {
       "HBO_OTHER": "Hoger beroepsonderwijs (HBO) - Overig",
@@ -40,5 +37,19 @@
   "members": {
     "header": "Leden",
     "withMandate": "Leden met incassomachtiging:"
+  },
+  "membership": {
+    "endedAt": "Einde lidmaatschap",
+    "endedAtNone": "Nog lid",
+    "startedAt": "Begin lidmaatschap",
+    "type": "Lidmaatschapstype",
+    "types": {
+      "extraordinary": "Buitengewoon lid",
+      "honorary": "Erelid",
+      "normal": "Gewoon lid"
+    }
+  },
+  "memberships": {
+    "header": "Lidmaatschappen"
   }
 }

@@ -1,10 +1,15 @@
 # import '../fragments/Member.graphql'
+# import '../fragments/Membership.graphql'
 # import '../fragments/Mandate.graphql'
 # import '../fragments/Transaction.graphql'
 
 query GetMember($id: String!) {
     member(id: $id) {
         ...MemberFragment
+
+        memberships {
+            ...MembershipFragment
+        }
 
         mandates {
             ...MandateFragment

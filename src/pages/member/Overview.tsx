@@ -7,6 +7,7 @@ import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
 import {UserContext} from '../../components/authentication/UserContext';
+import MembershipType from '../../components/membership/MembershipType';
 import TableSelectableRow from '../../components/table/TableSelectableRow';
 import TransactionTable from '../../components/transactions/TransactionTable';
 import GetMember from '../../queries/GetMember.graphql';
@@ -91,19 +92,6 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                                 <Table.Cell>{moment(data.member.birthdate).format('YYYY-MM-DD')}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
-                                <Table.Cell>{t('members:member.startOfMembership', 'Start of membership')}</Table.Cell>
-                                <Table.Cell>{moment(data.member.startOfMembership).format('YYYY-MM-DD')}</Table.Cell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.Cell>{t('members:member.endOfMembership', 'End of membership')}</Table.Cell>
-                                <Table.Cell>
-                                    {data.member.endOfMembership ?
-                                        moment(data.member.endOfMembership).format('YYYY-MM-DD') :
-                                        <i>{t('members:member.endOfMembershipNone', 'Still a member')}</i>
-                                    }
-                                </Table.Cell>
-                            </Table.Row>
-                            <Table.Row>
                                 <Table.Cell>{t('members:member.language', 'Language')}</Table.Cell>
                                 <Table.Cell>{t(`members:member.languages.${data.member.language}`)}</Table.Cell>
                             </Table.Row>
@@ -115,6 +103,33 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                                 <Table.Cell>{t('members:member.studentType', 'Student type')}</Table.Cell>
                                 <Table.Cell>{t(`members:member.studentTypes.${data.member.studentType}`)}</Table.Cell>
                             </Table.Row>
+                        </Table.Body>
+                    </Table>
+
+                    <Header size="large">{t('members:memberships.header', 'Memberships')}</Header>
+                    <Table selectable stackable>
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell>{t('members:membership.type', 'Membership type')}</Table.HeaderCell>
+                                <Table.HeaderCell>{t('members:membership.startedAt', 'Start of membership')}</Table.HeaderCell>
+                                <Table.HeaderCell>{t('members:membership.endedAt', 'End of membership')}</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+                        <Table.Body>
+                            {data.member.memberships
+                                .map((membership) => (
+                                    <Table.Row key={membership.id}>
+                                        <Table.Cell><MembershipType membership={membership} /></Table.Cell>
+                                        <Table.Cell>{moment(membership.startedAt).format('YYYY-MM-DD')}</Table.Cell>
+                                        <Table.Cell>
+                                            {membership.endedAt ?
+                                                moment(membership.endedAt).format('YYYY-MM-DD') :
+                                                <i>{t('members:membership.endedAtNone', 'Still a member')}</i>
+                                            }
+                                        </Table.Cell>
+                                    </Table.Row>
+                                ))
+                            }
                         </Table.Body>
                     </Table>
 

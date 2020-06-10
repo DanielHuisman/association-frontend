@@ -6,8 +6,6 @@
     "city": "City",
     "details": "Member details",
     "email": "Email address",
-    "endOfMembership": "End of membership",
-    "endOfMembershipNone": "Still a member",
     "firstName": "First name",
     "hasMandate": "Has mandate",
     "initials": "Initials",
@@ -26,7 +24,6 @@
       "THEY_THEM": "They/them"
     },
     "pronouns": "Prefered pronouns",
-    "startOfMembership": "Start of membership",
     "studentType": "Student type",
     "studentTypes": {
       "HBO_OTHER": "Higher Vocational Education (HBO) - Other",
@@ -40,5 +37,19 @@
   "members": {
     "header": "Members",
     "withMandate": "Members with mandate:"
+  },
+  "membership": {
+    "endedAt": "End of membership",
+    "endedAtNone": "Still a member",
+    "startedAt": "Start of membership",
+    "type": "Membership type",
+    "types": {
+      "extraordinary": "Extraordinary member",
+      "honorary": "Honorary member",
+      "normal": "Regular member"
+    }
+  },
+  "memberships": {
+    "header": "Memberships"
   }
 }
