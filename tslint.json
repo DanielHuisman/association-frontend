@@ -23,5 +23,10 @@
         "jsx-no-multiline-js": false,
         "jsx-no-lambda": false
     },
-    "rulesDirectory": []
+    "rulesDirectory": [],
+    "linterOptions": {
+        "exclude": [
+            "src/generated/*"
+        ]
+    }
 }
