@@ -5,7 +5,7 @@ import {Header, List} from 'semantic-ui-react';
 
 import SmallContainer from '../../../components/container/SmallContainer';
 import OAuthButton from '../../../components/oauth/OAuthButton';
-import {ProviderType} from '../../../types/generatedTypes';
+import {ProviderType} from '../../../generated/graphql';
 
 import styles from './Login.css';
 

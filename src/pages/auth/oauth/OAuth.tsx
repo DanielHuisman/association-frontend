@@ -3,8 +3,8 @@ import {RouteComponentProps} from 'react-router-dom';
 import {Loader} from 'semantic-ui-react';
 
 import {client} from '../../../graphql';
+import {OAuthAuthenticateMutation, OAuthAuthenticateMutationVariables, ProviderType} from '../../../generated/graphql';
 import OAuthAuthenticate from '../../../mutations/OAuthAuthenticate.graphql';
-import {OAuthAuthenticate as OAuthAuthenticateType, ProviderType} from '../../../types/generatedTypes';
 import {useSimpleQueryParams} from '../../../util';
 
 interface IMatchParams {
@@ -24,7 +24,7 @@ const OAuth = ({match, history}: RouteComponentProps<IMatchParams>) => {
 
             // Authenticate with OAuth authorization code
             try {
-                const result = await client.mutate<OAuthAuthenticateType>({
+                const result = await client.mutate<OAuthAuthenticateMutation, OAuthAuthenticateMutationVariables>({
                     mutation: OAuthAuthenticate,
                     variables: {
                         type: provider,

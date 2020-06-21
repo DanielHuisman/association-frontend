@@ -4,14 +4,11 @@ import {Field} from 'formik';
 import * as Yup from 'yup';
 import {Loader, Icon, Message} from 'semantic-ui-react';
 
-import GetBanks from '../../queries/GetBanks.graphql';
-import CreateDigitalMandate from '../../mutations/CreateDigitalMandate.graphql';
-import {
-    GetBanks as GetBanksType,
-    CreateDigitalMandate as CreateDigitalMandateType
-} from '../../types/generatedTypes';
 import {Form, FieldDropdown, SubmitButton} from '../form';
 import {FormPage} from '../page';
+import {GetBanksQuery, CreateDigitalMandateMutation} from '../../generated/graphql';
+import GetBanks from '../../queries/GetBanks.graphql';
+import CreateDigitalMandate from '../../mutations/CreateDigitalMandate.graphql';
 
 interface IProps {
     memberId: string;
@@ -29,7 +26,7 @@ const DigitalMandateForm = ({memberId}: IProps) => {
     const {t} = useTranslation();
 
     return (
-        <FormPage<GetBanksType, CreateDigitalMandateType, IValues>
+        <FormPage<GetBanksQuery, CreateDigitalMandateMutation, IValues>
             query={GetBanks}
             mutation={CreateDigitalMandate}
 

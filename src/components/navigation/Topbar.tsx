@@ -3,10 +3,12 @@ import {useTranslation} from 'react-i18next';
 import {Link, NavLink} from 'react-router-dom';
 import {Responsive, Menu, Icon} from 'semantic-ui-react';
 
+import {UserFragment} from '../../generated/graphql';
+
 import Base from './Base';
 
 interface IProps {
-    user: any;
+    user?: UserFragment;
     onSidebar?: () => void;
 }
 

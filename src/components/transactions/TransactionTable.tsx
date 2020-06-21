@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import {UserContext} from '../../components/authentication/UserContext';
 import TableSelectableRow from '../../components/table/TableSelectableRow';
-import {TransactionFragment} from '../../types/generatedTypes';
+import {TransactionFragment} from '../../generated/graphql';
 import {formatCurrency} from '../../util';
 
 import TransactionType from './TransactionType';

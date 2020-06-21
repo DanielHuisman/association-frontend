@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-import {TransactionFragment} from '../../types/generatedTypes';
+import {TransactionFragment} from '../../generated/graphql';
 
 interface IProps {
     transaction: TransactionFragment;

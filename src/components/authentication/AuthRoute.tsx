@@ -1,20 +1,18 @@
 import React from 'react';
-import {Query} from 'react-apollo';
 import {Route, RouteProps, Redirect} from 'react-router-dom';
+import {useQuery} from '@apollo/react-hooks';
 
+import {GetProfileQuery, GetProfileQueryVariables} from '../../generated/graphql';
 import GetProfile from '../../queries/GetProfile.graphql';
-import {GetProfile as GetProfileType} from '../../types/generatedTypes';
 
-export const AuthRoute = (props: RouteProps) => (
-    <Query<GetProfileType> query={GetProfile}>
-        {({loading, data, error}) => {
-            if (loading) {
-                return null;
-            }
+export const AuthRoute = (props: RouteProps) => {
+    const {loading, data, error} = useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfile);
 
-            return !error && data.me ? <Route {...props} /> : <Redirect to="/login" />;
-        }}
-    </Query>
-);
+    if (loading) {
+        return null;
+    }
+
+    return !error && data.me ? <Route {...props} /> : <Redirect to="/login" />;
+};
 
 export default AuthRoute;

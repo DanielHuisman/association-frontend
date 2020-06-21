@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {Query} from 'react-apollo';
 import {ErrorBoundary} from 'react-error-boundary';
 import {Helmet} from 'react-helmet';
+import {useQuery} from '@apollo/react-hooks';
 
+import {GetProfileQuery, GetProfileQueryVariables} from '../../generated/graphql';
 import GetProfile from '../../queries/GetProfile.graphql';
-import {GetProfile as GetProfileType} from '../../types/generatedTypes';
 import {UserProvider} from '../authentication/UserContext';
 import Sidebar from '../navigation/Sidebar';
 
@@ -14,26 +14,20 @@ import Footer from './Footer';
 
 const App = () => {
     const [isSidebarVisible, setSidebarVisible] = useState(false);
+    const {loading, data, error} = useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfile);
 
+    const user = loading || error ? null : data.me;
     return (
         <ErrorBoundary fallback={<div />}>
-            <Query<GetProfileType> query={GetProfile}>
-                {({loading, data, error}) => {
-                    const user = loading || error ? null : data.me;
+            <UserProvider value={user}>
+                <Sidebar user={user} visible={isSidebarVisible} onHide={() => setSidebarVisible(false)}>
+                    <Helmet titleTemplate="%s | J&SV Exaltio" defaultTitle="J&SV Exaltio" />
 
-                    return (
-                        <UserProvider value={user}>
-                            <Sidebar user={user} visible={isSidebarVisible} onHide={() => setSidebarVisible(false)}>
-                                <Helmet titleTemplate="%s | J&SV Exaltio" defaultTitle="J&SV Exaltio" />
-
-                                <Header user={user} onSidebar={() => setSidebarVisible(true)} />
-                                <Main />
-                                <Footer />
-                            </Sidebar>
-                        </UserProvider>
-                    );
-                }}
-            </Query>
+                    <Header user={user} onSidebar={() => setSidebarVisible(true)} />
+                    <Main />
+                    <Footer />
+                </Sidebar>
+            </UserProvider>
         </ErrorBoundary>
     );
 };

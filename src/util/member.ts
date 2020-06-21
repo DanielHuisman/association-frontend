@@ -1,4 +1,4 @@
-import {MandateStatus, MemberFragment, MandateFragment} from '../types/generatedTypes';
+import {MemberFragment, MandateFragment, MandateStatus} from '../generated/graphql';
 
 export type MemberWithMandates = MemberFragment & {
     mandates: MandateFragment[];

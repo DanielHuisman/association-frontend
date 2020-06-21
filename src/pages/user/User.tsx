@@ -1,12 +1,12 @@
 import React from 'react';
-import {useQuery} from '@apollo/react-hooks';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
 import {RouteComponentProps} from 'react-router';
+import {useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table} from 'semantic-ui-react';
 
 import GetUser from '../../queries/GetUser.graphql';
-import {GetUser as GetUserType} from '../../types/generatedTypes';
+import {GetUserQuery, GetUserQueryVariables} from '../../generated/graphql';
 
 interface IRouteParams {
     userId: string;
@@ -14,7 +14,7 @@ interface IRouteParams {
 
 const User = ({match}: RouteComponentProps<IRouteParams>) => {
     const {t} = useTranslation();
-    const {loading, data, error} = useQuery<GetUserType>(GetUser, {
+    const {loading, data, error} = useQuery<GetUserQuery, GetUserQueryVariables>(GetUser, {
         variables: {
             id: match.params.userId
         }

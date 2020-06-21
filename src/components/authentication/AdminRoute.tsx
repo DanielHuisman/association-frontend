@@ -1,20 +1,18 @@
 import React from 'react';
-import {Query} from 'react-apollo';
 import {Route, RouteProps, Redirect} from 'react-router-dom';
+import {useQuery} from '@apollo/react-hooks';
 
+import {GetProfileQuery, GetProfileQueryVariables, Role} from '../../generated/graphql';
 import GetProfile from '../../queries/GetProfile.graphql';
-import {GetProfile as GetProfileType, Role} from '../../types/generatedTypes';
 
-export const AdminRoute = (props: RouteProps) => (
-    <Query<GetProfileType> query={GetProfile}>
-        {({loading, data, error}) => {
-            if (loading) {
-                return null;
-            }
+export const AdminRoute = (props: RouteProps) => {
+    const {loading, data, error} = useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfile);
 
-            return !error && data.me && data.me.role === Role.ADMIN ? <Route {...props} /> : <Redirect to="/unauthorized" />;
-        }}
-    </Query>
-);
+    if (loading) {
+        return null;
+    }
+
+    return !error && data.me && data.me.role === Role.ADMIN ? <Route {...props} /> : <Redirect to="/unauthorized" />;
+};
 
 export default AdminRoute;

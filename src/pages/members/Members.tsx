@@ -1,18 +1,18 @@
 import React from 'react';
-import {useQuery} from '@apollo/react-hooks';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
+import {useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table} from 'semantic-ui-react';
 
 import TableSelectableRow from '../../components/table/TableSelectableRow';
 import YesNo from '../../components/util/YesNo';
+import {GetMembersQuery, GetMembersQueryVariables} from '../../generated/graphql';
 import GetMembers from '../../queries/GetMembers.graphql';
-import {GetMembers as GetMembersType} from '../../types/generatedTypes';
 import {hasAcceptedMandates} from '../../util';
 
 const Members = () => {
     const {t} = useTranslation();
-    const {loading, data, error} = useQuery<GetMembersType>(GetMembers);
+    const {loading, data, error} = useQuery<GetMembersQuery, GetMembersQueryVariables>(GetMembers);
 
     if (error) {
         throw error;

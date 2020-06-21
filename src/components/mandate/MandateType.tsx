@@ -1,6 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {MandateFragment} from 'generatedTypes';
+
+import {MandateFragment} from '../../generated/graphql';
 
 interface IProps {
     mandate: MandateFragment;

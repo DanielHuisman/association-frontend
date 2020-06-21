@@ -1,16 +1,16 @@
 import React from 'react';
-import {useQuery} from '@apollo/react-hooks';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
+import {useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table} from 'semantic-ui-react';
 
 import TableSelectableRow from '../../components/table/TableSelectableRow';
+import {GetUsersQuery, GetUsersQueryVariables} from '../../generated/graphql';
 import GetUsers from '../../queries/GetUsers.graphql';
-import {GetUsers as GetUsersType} from '../../types/generatedTypes';
 
 const Users = () => {
     const {t} = useTranslation();
-    const {loading, data, error} = useQuery<GetUsersType>(GetUsers);
+    const {loading, data, error} = useQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsers);
 
     if (error) {
         throw error;

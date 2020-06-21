@@ -1,11 +1,12 @@
 import React from 'react';
-import {MutationFunction, MutationResult, MutationFunctionOptions} from 'react-apollo';
+import {MutationFunction, MutationResult} from '@apollo/react-common';
+import {MutationHookOptions} from '@apollo/react-hooks';
 import {FormikConfig} from 'formik';
 
 import {MutationPage, IMutationPageProps} from './MutationPage';
 
 interface IProps<MutationType, IValues> extends Omit<IMutationPageProps<MutationType>, 'children'> {
-    data: (values: IValues) => MutationFunctionOptions<MutationType>;
+    data: (values: IValues) => MutationHookOptions<MutationType>;
     children: (
         handleSubmit: FormikConfig<IValues>['onSubmit'],
         mutationResult: MutationResult<MutationType>,

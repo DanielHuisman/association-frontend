@@ -1,6 +1,7 @@
 import React from 'react';
-import {Mutation, MutationComponentOptions, MutationFunction, MutationResult} from 'react-apollo';
 import {useTranslation} from 'react-i18next';
+import {MutationFunction, MutationResult} from '@apollo/react-common';
+import {useMutation, MutationHookOptions} from '@apollo/react-hooks';
 import {Message, Loader} from 'semantic-ui-react';
 
 import {translateError} from '../../util';
@@ -8,9 +9,9 @@ import {translateError} from '../../util';
 export type ResultFn<MutationType> = (mutationResult: MutationResult<MutationType>) => React.ReactNode;
 
 interface IProps<MutationType> {
-    mutation?: MutationComponentOptions['mutation'];
-    mutationVariables?: MutationComponentOptions['variables'];
-    mutationProps?: Partial<MutationComponentOptions>;
+    mutation?: MutationHookOptions['mutation'];
+    mutationVariables?: MutationHookOptions['variables'];
+    mutationProps?: Partial<MutationHookOptions>;
     success?: string | ResultFn<MutationType>;
     failure?: string | ResultFn<MutationType>;
     defaultBehaviour?: boolean;
@@ -39,50 +40,47 @@ export const MutationPage = <MutationType, X = any>({
 }: IProps<MutationType>) => {
     const {t} = useTranslation();
 
-    return (
-        // TODO: remove annotation and unnecessary mutation typing once react-apollo? is fixed
-        // @ts-ignore
-        <Mutation<MutationType> mutation={mutation} variables={mutationVariables} {...mutationProps}>
-            {(mutateFn: MutationFunction<MutationType>, mutationResult: MutationResult<MutationType>) => {
-                if (defaultBehaviour) {
-                    const {loading, data, error} = mutationResult;
+    const [mutateFn, mutationResult] = useMutation<MutationType>(mutation, {
+        variables: mutationVariables,
+        ...mutationProps
+    });
 
-                    return (
-                        <>
-                            {data && success && (
-                                <>
-                                    {typeof success === 'string' && (
-                                        <Message success>
-                                            <b>{success}</b>
-                                        </Message>
-                                    )}
-                                    {typeof success !== 'string' && success(mutationResult)}
-                                </>
-                            )}
+    if (defaultBehaviour) {
+        const {loading, data, error} = mutationResult;
 
-                            {error && failure && (
-                                <>
-                                    {typeof failure === 'string' && (
-                                        <Message error>
-                                            <Message.Header>
-                                                {failure}
-                                            </Message.Header>
-                                            {translateError(t, error)}
-                                        </Message>
-                                    )}
-                                    {typeof failure !== 'string' && failure(mutationResult)}
-                                </>
-                            )}
+        return (
+            <>
+                {data && success && (
+                    <>
+                        {typeof success === 'string' && (
+                            <Message success>
+                                <b>{success}</b>
+                            </Message>
+                        )}
+                        {typeof success !== 'string' && success(mutationResult)}
+                    </>
+                )}
 
-                            <Loader active={loader && loading} inline />
+                {error && failure && (
+                    <>
+                        {typeof failure === 'string' && (
+                            <Message error>
+                                <Message.Header>
+                                    {failure}
+                                </Message.Header>
+                                {translateError(t, error)}
+                            </Message>
+                        )}
+                        {typeof failure !== 'string' && failure(mutationResult)}
+                    </>
+                )}
 
-                            {children(mutateFn, mutationResult)}
-                        </>
-                    );
-                }
+                <Loader active={loader && loading} inline />
 
-                return children(mutateFn, mutationResult);
-            }}
-        </Mutation>
-    );
+                {children(mutateFn, mutationResult)}
+            </>
+        );
+    }
+
+    return children(mutateFn, mutationResult);
 };

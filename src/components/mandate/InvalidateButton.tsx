@@ -1,10 +1,10 @@
 import React from 'react';
-import {Mutation} from 'react-apollo';
 import {useTranslation} from 'react-i18next';
+import {useMutation} from '@apollo/react-hooks';
 import {Button, Icon} from 'semantic-ui-react';
 
+import {InvalidateMandateMutation, InvalidateMandateMutationVariables} from '../../generated/graphql';
 import InvalidateMandate from '../../mutations/InvalidateMandate.graphql';
-import {InvalidateMandate as InvalidateMandateType} from '../../types/generatedTypes';
 
 interface IProps {
     mandateId: string;
@@ -13,20 +13,17 @@ interface IProps {
 const InvalidateButton = ({mandateId}: IProps) => {
     const {t} = useTranslation();
 
+    const [invalidate, {loading}] = useMutation<InvalidateMandateMutation, InvalidateMandateMutationVariables>(InvalidateMandate, {
+        variables: {
+            id: mandateId
+        }
+    });
+
     return (
-        <Mutation<InvalidateMandateType>
-            mutation={InvalidateMandate}
-            variables={{id: mandateId}}
-        >
-            {(invalidate, {loading}) => {
-                return (
-                    <Button color="red" onClick={() => invalidate()} disabled={loading}>
-                        <Icon name="times" />
-                        {t('mandates:mandate.invalidate', 'Invalidate mandate')}
-                    </Button>
-                );
-            }}
-        </Mutation>
+        <Button color="red" onClick={() => invalidate()} disabled={loading}>
+            <Icon name="times" />
+            {t('mandates:mandate.invalidate', 'Invalidate mandate')}
+        </Button>
     );
 };
 

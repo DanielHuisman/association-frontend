@@ -1,14 +1,14 @@
 import React from 'react';
-import {useQuery} from '@apollo/react-hooks';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
 import {Link, RouteComponentProps} from 'react-router-dom';
+import {useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
 import DirectDebitInstructionTable from '../../components/direct-debits/DirectDebitInstructionTable';
+import {GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables} from '../../generated/graphql';
 import GetDirectDebitBatch from '../../queries/GetDirectDebitBatch.graphql';
-import {GetDirectDebitBatch as GetDirectDebitBatchType} from '../../types/generatedTypes';
 import {formatCurrency} from '../../util';
 
 interface IRouteParams {
@@ -18,7 +18,7 @@ interface IRouteParams {
 
 const DirectDebitBatch = ({match}: RouteComponentProps<IRouteParams>) => {
     const {t} = useTranslation();
-    const {loading, data, error} = useQuery<GetDirectDebitBatchType>(GetDirectDebitBatch, {
+    const {loading, data, error} = useQuery<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>(GetDirectDebitBatch, {
         variables: {
             id: match.params.directDebitBatchId
         }

@@ -3,10 +3,10 @@ import {useTranslation} from 'react-i18next';
 import {Link, NavLink} from 'react-router-dom';
 import {Menu, Icon} from 'semantic-ui-react';
 
-import {Role} from '../../types/generatedTypes';
+import {UserFragment, Role} from '../../generated/graphql';
 
 interface IProps {
-    user?: any;
+    user?: UserFragment;
     onClick?: () => void;
 }
 

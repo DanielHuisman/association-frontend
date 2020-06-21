@@ -1,6 +1,6 @@
 import {createContext} from 'react';
 
-import {UserFragment} from '../../types/generatedTypes';
+import {UserFragment} from '../../generated/graphql';
 
 export const UserContext = createContext<UserFragment>(null);
 export const UserProvider = UserContext.Provider;

@@ -1,12 +1,12 @@
 import React, {useEffect, useContext} from 'react';
-import {useQuery} from '@apollo/react-hooks';
 import {useTranslation} from 'react-i18next';
 import {RouteComponentProps, Switch, Route} from 'react-router-dom';
+import {useQuery} from '@apollo/react-hooks';
 import {Container, Loader} from 'semantic-ui-react';
 
 import {UserContext} from '../../components/authentication/UserContext';
+import {GetMemberQuery, GetMandateQueryVariables, Role} from '../../generated/graphql';
 import GetMember from '../../queries/GetMember.graphql';
-import {GetMember as GetMemberType, Role} from '../../types/generatedTypes';
 import {hasPendingPaperMandates} from '../../util';
 import Sign from '../sign/Sign';
 
@@ -17,7 +17,7 @@ interface IRouteParams {
 }
 
 const Member = ({history, match, location}: RouteComponentProps<IRouteParams>) => {
-    const {loading, data, error} = useQuery<GetMemberType>(GetMember, {
+    const {loading, data, error} = useQuery<GetMemberQuery, GetMandateQueryVariables>(GetMember, {
         variables: {
             id: match.params.memberId
         }

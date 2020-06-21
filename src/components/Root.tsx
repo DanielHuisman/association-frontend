@@ -1,6 +1,6 @@
 import React from 'react';
-import {ApolloProvider} from 'react-apollo';
 import {Router} from 'react-router-dom';
+import {ApolloProvider} from '@apollo/react-hooks';
 import {createBrowserHistory} from 'history';
 
 import {client} from '../graphql';

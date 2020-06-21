@@ -5,10 +5,10 @@ import {Field} from 'formik';
 
 import {FieldFile} from '../../components/form';
 import CancelButton from '../../components/mandate/CancelButton';
-import UploadPaperMandate from '../../mutations/UploadPaperMandate.graphql';
-import {UploadPaperMandate as UploadPaperMandateType} from '../../types/generatedTypes';
 import {Form, SubmitButton} from '../form';
 import {MutationFormPage} from '../page';
+import {UploadPaperMandateMutation} from '../../generated/graphql';
+import UploadPaperMandate from '../../mutations/UploadPaperMandate.graphql';
 
 interface IProps {
     paperMandateId: string;
@@ -22,7 +22,7 @@ const PaperMandateForm = ({paperMandateId}: IProps) => {
     const {t} = useTranslation();
 
     return (
-        <MutationFormPage<UploadPaperMandateType, IValues>
+        <MutationFormPage<UploadPaperMandateMutation, IValues>
             mutation={UploadPaperMandate}
 
             loader={false}

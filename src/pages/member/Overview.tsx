@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
-import {useQuery} from '@apollo/react-hooks';
 import {Helmet} from 'react-helmet';
 import {useTranslation, Trans} from 'react-i18next';
 import {Link, RouteComponentProps} from 'react-router-dom';
+import {useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
@@ -10,8 +10,8 @@ import {UserContext} from '../../components/authentication/UserContext';
 import MembershipType from '../../components/membership/MembershipType';
 import TableSelectableRow from '../../components/table/TableSelectableRow';
 import TransactionTable from '../../components/transactions/TransactionTable';
+import {GetMemberQuery, GetMemberQueryVariables, MandateStatus} from '../../generated/graphql';
 import GetMember from '../../queries/GetMember.graphql';
-import {GetMember as GetMemberType, MandateStatus} from '../../types/generatedTypes';
 import {hasAcceptedMandates} from '../../util';
 
 import styles from './Member.css';
@@ -22,7 +22,7 @@ interface IRouteParams {
 
 const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
     const {t} = useTranslation();
-    const {loading, data, error} = useQuery<GetMemberType>(GetMember, {
+    const {loading, data, error} = useQuery<GetMemberQuery, GetMemberQueryVariables>(GetMember, {
         variables: {
             id: match.params.memberId
         }

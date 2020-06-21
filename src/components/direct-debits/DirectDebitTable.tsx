@@ -4,7 +4,7 @@ import {Table} from 'semantic-ui-react';
 import moment from 'moment';
 
 import TableSelectableRow from '../../components/table/TableSelectableRow';
-import {DirectDebitFragment} from '../../types/generatedTypes';
+import {DirectDebitFragment} from '../../generated/graphql';
 import {formatCurrency} from '../../util';
 
 interface IProps {

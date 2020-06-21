@@ -6,11 +6,11 @@ import * as Yup from 'yup';
 import {isValidBIC, isValidIBAN} from 'ibantools';
 import {Message, Icon} from 'semantic-ui-react';
 
-import GetMember from '../../queries/GetMember.graphql';
-import CreatePaperMandate from '../../mutations/CreatePaperMandate.graphql';
-import {CreatePaperMandate as CreatePaperMandateType} from '../../types/generatedTypes';
 import {Form, FieldInput, FieldInputProps, SubmitButton} from '../form';
 import {MutationFormPage} from '../page';
+import {CreatePaperMandateMutation} from '../../generated/graphql';
+import GetMember from '../../queries/GetMember.graphql';
+import CreatePaperMandate from '../../mutations/CreatePaperMandate.graphql';
 
 interface IProps {
     memberId: string;
@@ -65,7 +65,7 @@ const PaperMandateForm = ({memberId, history}: IProps) => {
     const {t} = useTranslation();
 
     return (
-        <MutationFormPage<CreatePaperMandateType, IValues>
+        <MutationFormPage<CreatePaperMandateMutation, IValues>
             mutation={CreatePaperMandate}
             mutationProps={{
                 refetchQueries: [{

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Modal, ModalProps} from 'semantic-ui-react';
 import {useTranslation} from 'react-i18next';
+import {Modal, ModalProps} from 'semantic-ui-react';
 
 interface IProps extends ModalProps {
     onConfirm: () => void;

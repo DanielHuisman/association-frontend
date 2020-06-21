@@ -4,12 +4,12 @@ import {useQuery} from '@apollo/react-hooks';
 import {Loader} from 'semantic-ui-react';
 
 import MandateTable from '../../components/mandates/MandateTable';
+import {GetPaperMandatesQuery, GetPaperMandatesQueryVariables, MandateStatus} from '../../generated/graphql';
 import GetPaperMandates from '../../queries/GetPaperMandates.graphql';
-import {GetPaperMandates as GetPaperMandatesType, MandateStatus} from '../../types/generatedTypes';
 
 const MandatesReviewList = () => {
     const {t} = useTranslation();
-    const {loading, data, error} = useQuery<GetPaperMandatesType>(GetPaperMandates, {
+    const {loading, data, error} = useQuery<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>(GetPaperMandates, {
         variables: {
             status: MandateStatus.UNACCEPTED
         }

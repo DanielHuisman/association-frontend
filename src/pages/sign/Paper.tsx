@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
-import {useQuery} from '@apollo/react-hooks';
 import {Trans, useTranslation} from 'react-i18next';
 import {RouteComponentProps} from 'react-router-dom';
+import {useQuery} from '@apollo/react-hooks';
 import {Loader, Header, List, Button, Icon} from 'semantic-ui-react';
 
 import PaperMandateUploadForm from '../../components/mandate/PaperMandateUploadForm';
+import {GetMemberQuery, GetMemberQueryVariables, MandateStatus, MandateFragment_PaperMandate_} from '../../generated/graphql';
 import GetMember from '../../queries/GetMember.graphql';
-import {GetMember as GetMemberType, MandateStatus, MandateFragment_PaperMandate} from '../../types/generatedTypes';
 import {hasPendingPaperMandates, getPendingPaperMandates} from '../../util';
 
 import styles from './Sign.css';
@@ -18,7 +18,7 @@ interface IRouteParams {
 const Paper = ({history, match}: RouteComponentProps<IRouteParams>) => {
     const {t} = useTranslation();
 
-    const {loading, data, error} = useQuery<GetMemberType>(GetMember, {
+    const {loading, data, error} = useQuery<GetMemberQuery, GetMemberQueryVariables>(GetMember, {
         variables: {
             id: match.params.memberId
         }
@@ -38,7 +38,7 @@ const Paper = ({history, match}: RouteComponentProps<IRouteParams>) => {
         }
     });
 
-    const paperMandate = getPendingPaperMandates(data.member)[0] as MandateFragment_PaperMandate;
+    const paperMandate = getPendingPaperMandates(data.member)[0] as MandateFragment_PaperMandate_;
 
     return (
         <>

@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {Table} from 'semantic-ui-react';
 
 import TableSelectableRow from '../../components/table/TableSelectableRow';
-import {DirectDebitBatchFragment} from '../../types/generatedTypes';
+import {DirectDebitBatchFragment} from '../../generated/graphql';
 import {formatCurrency} from '../../util';
 
 interface IProps {

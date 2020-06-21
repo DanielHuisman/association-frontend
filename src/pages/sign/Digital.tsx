@@ -3,7 +3,7 @@ import {Trans, useTranslation} from 'react-i18next';
 import {Link, RouteComponentProps} from 'react-router-dom';
 import {Message, Button} from 'semantic-ui-react';
 
-import {MandateStatus} from '../../types/generatedTypes';
+import {MandateStatus} from '../../generated/graphql';
 import {useSimpleQueryParams} from '../../util';
 
 interface IRouteParams {

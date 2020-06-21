@@ -6,7 +6,7 @@ import moment from 'moment';
 import MandateType from '../../components/mandate/MandateType';
 import TableSelectableRow from '../../components/table/TableSelectableRow';
 import YesNo from '../../components/util/YesNo';
-import {MandateFragment, MemberFragment} from '../../types/generatedTypes';
+import {MandateFragment, MemberFragment} from '../../generated/graphql';
 
 interface IProps {
     mandates: (MandateFragment & {

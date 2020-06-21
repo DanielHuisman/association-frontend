@@ -1,11 +1,12 @@
 import React from 'react';
-import {QueryResult, MutationFunction, MutationResult, MutationFunctionOptions} from 'react-apollo';
+import {QueryResult, MutationFunction, MutationResult} from '@apollo/react-common';
+import {MutationHookOptions} from '@apollo/react-hooks';
 import {FormikConfig} from 'formik';
 
 import {Page, IPageProps} from './Page';
 
 interface IProps<QueryType, MutationType, IValues> extends Omit<IPageProps<QueryType, MutationType>, 'children'> {
-    data: (values: IValues, queryResult: QueryResult<QueryType>) => MutationFunctionOptions<MutationType>;
+    data: (values: IValues, queryResult: QueryResult<QueryType>) => MutationHookOptions<MutationType>;
     children: (
         handleSubmit: FormikConfig<IValues>['onSubmit'],
         queryResult: QueryResult<QueryType>,

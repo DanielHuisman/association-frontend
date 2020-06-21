@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-import {MembershipFragment, MembershipType} from '../../types/generatedTypes';
+import {MembershipFragment, MembershipType} from '../../generated/graphql';
 
 interface IProps {
     membership: MembershipFragment;

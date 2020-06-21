@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {Table} from 'semantic-ui-react';
 
 import TableSelectableRow from '../../components/table/TableSelectableRow';
-import {DirectDebitWarningFragment} from '../../types/generatedTypes';
+import {DirectDebitWarningFragment} from '../../generated/graphql';
 
 interface IProps {
     warnings: DirectDebitWarningFragment[];
