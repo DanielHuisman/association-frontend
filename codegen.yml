@@ -10,7 +10,6 @@ generates:
             dedupeOperationSuffix: true
             exportFragmentSpreadSubTypes: true
             namingConvention: keep
-            reactApolloVersion: 3
             withComponent: false
             withHOC: false
             withHooks: true
