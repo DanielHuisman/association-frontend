@@ -76,7 +76,7 @@ const Base = ({user, sidebar = false, onClick}: IProps) => {
                             {t('general:join.header', 'Become a member')}
                         </Button>
                     </Menu.Item>
-                    <Menu.Item as={NavLink} exact to="/sign-in" onClick={onClick}>
+                    <Menu.Item as={NavLink} exact to="/login" onClick={onClick}>
                         {t('auth:login.header', 'Sign in')}
                     </Menu.Item>
                     <LanguageMenuItem />
@@ -88,7 +88,7 @@ const Base = ({user, sidebar = false, onClick}: IProps) => {
                         <Icon name="user" />
                         {user.name}
                     </Menu.Item>
-                    <Menu.Item as={NavLink} exact to="/sign-out" onClick={onClick}>
+                    <Menu.Item as={NavLink} exact to="/logout" onClick={onClick}>
                         {t('auth:logout.header', 'Sign out')}
                     </Menu.Item>
                     <LanguageMenuItem />
