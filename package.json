@@ -1,14 +1,13 @@
 {
-    "name": "exaltio-mandate-frontend",
-    "description": "Frontend for temporary Exaltio mandate system.",
+    "name": "frontend",
+    "description": "Frontend for the Exaltio website.",
     "version": "1.0.0",
     "license": "UNLICENSED",
     "private": true,
     "author": "Daniel Huisman <daniel@huisman.me> (https://danielhuisman.io)",
-    "repository": "git@ssh.danielhuisman.io:exaltio/exaltio-mandate-frontend.git",
+    "repository": "git@ssh.danielhuisman.io:exaltio/frontend.git",
     "keywords": [
         "exaltio",
-        "mandate",
         "frontend"
     ],
     "scripts": {

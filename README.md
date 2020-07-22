@@ -1,3 +1,3 @@
-# Exaltio Mandate Frontend
+# Exaltio Frontend
 
-Frontend for temporary Exaltio mandate system.
+Frontend for the Exaltio website.
