@@ -1,0 +1,11 @@
+# import './Translatable.graphql'
+
+fragment CommitteeFragment on Committee {
+    id
+    name {
+        ...TranslatableFragment
+    }
+    description {
+        ...TranslatableFragment
+    }
+}

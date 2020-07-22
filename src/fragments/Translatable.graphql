@@ -1,0 +1,4 @@
+fragment TranslatableFragment on Translatable {
+    en
+    nl
+}

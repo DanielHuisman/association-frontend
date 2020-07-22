@@ -50,9 +50,11 @@
         "react-google-recaptcha": "^2.1.0",
         "react-helmet": "^6.1.0",
         "react-i18next": "^11.7.0",
+        "react-markdown": "^4.3.1",
         "react-piwik": "^1.8.0",
         "react-router-dom": "^5.2.0",
         "react-router-query-params-hook": "^1.0.4",
+        "remark-sub-super": "^1.0.19",
         "semantic-ui-react": "^1.0.0",
         "yup": "^0.29.1"
     },

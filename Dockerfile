@@ -5,7 +5,7 @@ FROM node as build
 RUN mkdir -p /srv/app
 WORKDIR /srv/app
 
-# Copy package.json and yarn.lock to force Docker not to use the cache
+# Copy package.json and yarn.lock so dependencies can be cached
 COPY package.json /srv/app
 COPY yarn.lock /srv/app
 
@@ -23,6 +23,7 @@ FROM nginx:stable-alpine
 
 # Copy app from temporary build image to the final image
 COPY --from=build /srv/app/dist /var/www
+COPY --from=build /srv/app/media /var/www/media
 
 # Copy nginx config
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf

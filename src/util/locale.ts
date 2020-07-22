@@ -1,5 +1,16 @@
 import {ApolloError} from 'apollo-client';
 import {TFunction} from 'i18next';
+import {useTranslation} from 'react-i18next';
+
+import {TranslatableFragment} from '../generated/graphql';
+export const useTranslate = () => {
+    const {i18n} = useTranslation();
+
+    // NOTE: semi-ugly hack to always generate a translation
+    const translate = (translatable: TranslatableFragment) => translatable[i18n.language.slice(0, 2)] || translatable.en || translatable.nl;
+
+    return translate;
+};
 
 export const translateError = (t: TFunction, error: ApolloError) => {
     if (error.graphQLErrors.length === 0) {

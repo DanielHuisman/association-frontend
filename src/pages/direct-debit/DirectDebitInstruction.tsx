@@ -32,7 +32,7 @@ const DirectDebitInstruction = ({match}: RouteComponentProps<IRouteParams>) => {
         <Container>
             {loading && <Loader active />}
 
-            {data && !data.directDebitInstruction && <>{t('general:notFound', 'Not found')}</>}
+            {data && !data.directDebitInstruction && <>{t('general:notFound.text', 'Not found')}</>}
             {data && data.directDebitInstruction && (
                 <>
                     <Helmet title={t('directDebits:directDebitInstruction.header', 'Direct debit instruction')} />

@@ -3,7 +3,11 @@ import {ErrorBoundary} from 'react-error-boundary';
 import {Switch, Route} from 'react-router-dom';
 
 import {AuthRoute, NoAuthRoute, AdminRoute} from '../../components/authentication';
-import ErrorPage from '../../pages/error/Error';
+import Home from '../../pages/home/Home';
+import Association from '../../pages/association/Association';
+import Calendar from '../../pages/calendar/Calendar';
+import Contact from '../../pages/contact/Contact';
+import Join from '../../pages/join/Join';
 import Login from '../../pages/auth/login/Login';
 import Logout from '../../pages/auth/logout/Logout';
 import OAuth from '../../pages/auth/oauth/OAuth';
@@ -18,13 +22,24 @@ import DirectDebit from '../../pages/direct-debit/DirectDebit';
 import DirectDebitBatch from '../../pages/direct-debit/DirectDebitBatch';
 import DirectDebitInstruction from '../../pages/direct-debit/DirectDebitInstruction';
 import Transaction from '../../pages/transaction/Transaction';
+import ErrorPage from '../../pages/util/error/Error';
+import NotFound from '../../pages/util/not-found/NotFound';
 
-const Main = () => {
+interface IProps {
+    jumbotron?: boolean;
+}
+
+const Main = ({jumbotron = false}: IProps) => {
     return (
-        <main>
+        <main className={jumbotron ? 'jumbotron' : ''}>
             <ErrorBoundary FallbackComponent={ErrorPage}>
                 <Switch>
-                    {/* <Route exact path="/" component={Home} /> */}
+                    <Route exact path="/" component={Home} />
+
+                    <Route path="/association" component={Association} />
+                    <Route exact path="/calendar" component={Calendar} />
+                    <Route exact path="/contact" component={Contact} />
+                    <Route exact path="/join" component={Join} />
 
                     <NoAuthRoute exact path="/login" component={Login} />
                     <Route exact path="/oauth/:providerType" component={OAuth} />
@@ -46,6 +61,8 @@ const Main = () => {
                     <AdminRoute exact path="/direct-debits/:directDebitId/instructions/:directDebitInstructionId" component={DirectDebitInstruction} />
 
                     <AdminRoute exact path="/transactions/:transactionId" component={Transaction} />
+
+                    <Route component={NotFound} />
                 </Switch>
             </ErrorBoundary>
         </main>

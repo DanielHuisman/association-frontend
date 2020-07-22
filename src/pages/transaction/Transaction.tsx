@@ -32,7 +32,7 @@ const Transaction = ({match}: RouteComponentProps<IRouteParams>) => {
         <Container>
             {loading && <Loader active />}
 
-            {data && !data.transaction && <>{t('general:notFound', 'Not found')}</>}
+            {data && !data.transaction && <>{t('general:notFound.text', 'Not found')}</>}
             {data && data.transaction && (
                 <>
                     <Helmet title={t('transactions:transaction.header', 'Transaction')} />

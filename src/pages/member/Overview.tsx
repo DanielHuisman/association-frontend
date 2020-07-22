@@ -38,7 +38,7 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
         <Container>
             {loading && <Loader active />}
 
-            {data && !data.member && <>{t('general:notFound', 'Not found')}</>}
+            {data && !data.member && <>{t('general:notFound.text', 'Not found')}</>}
             {data && data.member && (
                 <>
                     <Helmet title={`${data.member.firstName} ${data.member.lastName}`} />

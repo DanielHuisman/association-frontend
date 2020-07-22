@@ -33,7 +33,7 @@ const DirectDebit = ({match}: RouteComponentProps<IRouteParams>) => {
         <Container>
             {loading && <Loader active />}
 
-            {data && !data.directDebit && <>{t('general:notFound', 'Not found')}</>}
+            {data && !data.directDebit && <>{t('general:notFound.text', 'Not found')}</>}
             {data && data.directDebit && (
                 <>
                     <Helmet title={t('directDebits:directDebit.header', 'Direct debit')} />

@@ -1,11 +1,10 @@
 import React from 'react';
-import {useTranslation} from 'react-i18next';
-import {NavLink} from 'react-router-dom';
-import {Sidebar as SESidebar, Menu, Icon} from 'semantic-ui-react';
+import {Sidebar as SESidebar, Menu} from 'semantic-ui-react';
 
 import {UserFragment} from '../../generated/graphql';
 
 import Base from './Base';
+import styles from './Navigation.css';
 
 interface IProps {
     user?: UserFragment;
@@ -14,52 +13,24 @@ interface IProps {
     onHide?: () => void;
 }
 
-const Sidebar = ({user, visible, children, onHide}: IProps) => {
-    const {t} = useTranslation();
-
-    return (
-        <SESidebar.Pushable>
-            <SESidebar
-                animation="overlay"
-                width="thin"
-                visible={visible}
-                onHide={onHide}
-                as={Menu}
-                size="huge"
-                icon="labeled"
-                vertical
-                inverted
-            >
-                <Menu.Menu>
-                    <Base user={user} onClick={onHide} />
-
-                    {!user && (
-                        <>
-                            <Menu.Item as={NavLink} to="/login">
-                                <Icon name="sign-in" />
-                                {t('auth:login.header', 'Sign in')}
-                            </Menu.Item>
-                        </>
-                    )}
-
-                    {user && (
-                        <>
-                            <Menu.Item>
-                                {user.name}
-                            </Menu.Item>
-                            <Menu.Item as="a" href="/logout">
-                                <Icon name="sign-out" />
-                                {t('auth:logout.header', 'Sign out')}
-                            </Menu.Item>
-                        </>
-                    )}
-                </Menu.Menu>
-            </SESidebar>
-            <SESidebar.Pusher>
-                {children}
-            </SESidebar.Pusher>
-        </SESidebar.Pushable>
-    );
-};
+const Sidebar = ({user, visible, children, onHide}: IProps) => (
+    <SESidebar.Pushable>
+        <SESidebar
+            className={styles.sidebar}
+            animation="overlay"
+            width="thin"
+            visible={visible}
+            onHide={onHide}
+            as={Menu}
+            size="huge"
+            vertical
+        >
+            <Base user={user} sidebar onClick={onHide} />
+        </SESidebar>
+        <SESidebar.Pusher>
+            {children}
+        </SESidebar.Pusher>
+    </SESidebar.Pushable>
+);
 
 export default Sidebar;

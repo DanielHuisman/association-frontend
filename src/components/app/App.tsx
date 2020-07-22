@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {ErrorBoundary} from 'react-error-boundary';
 import {Helmet} from 'react-helmet';
+import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {useQuery} from '@apollo/react-hooks';
 
 import {GetProfileQuery, GetProfileQueryVariables} from '../../generated/graphql';
@@ -12,11 +13,24 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 
-const App = () => {
+const App = ({location}: RouteComponentProps) => {
     const [isSidebarVisible, setSidebarVisible] = useState(false);
     const {loading, data, error} = useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfile);
 
     const user = loading || error ? null : data.me;
+
+    // useEffect(() => {
+    //     if (user) {
+    //         // Change user ID for Matomo tracking
+    //         matomo.push(['setUserId', user.id]);
+
+    //         // Change language to user preference
+    //         // if (i18n.language !== user.language.toLowerCase()) {
+    //         //     i18n.changeLanguage(user.language.toLowerCase());
+    //         // }
+    //     }
+    // }, [user]);
+
     return (
         <ErrorBoundary fallback={<div />}>
             <UserProvider value={user}>
@@ -24,7 +38,7 @@ const App = () => {
                     <Helmet titleTemplate="%s | J&SV Exaltio" defaultTitle="J&SV Exaltio" />
 
                     <Header user={user} onSidebar={() => setSidebarVisible(true)} />
-                    <Main />
+                    <Main jumbotron={location.pathname === '/'} />
                     <Footer />
                 </Sidebar>
             </UserProvider>
@@ -32,4 +46,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default withRouter(App);;

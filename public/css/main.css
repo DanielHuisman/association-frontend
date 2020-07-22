@@ -1,14 +1,15 @@
-html, body {
+:global(html, body) {
     margin: 0px;
 }
 
-main {
-    padding-top: 80px;
-    padding-bottom: 32px;
+:global(main) {
+    padding-top: 6em;
+    padding-bottom: 3em;
 }
 
-:global(.no-wrap) {
-    white-space: nowrap;
+:global(main.jumbotron) {
+    padding-top: 0em;
+    padding-bottom: 0em;
 }
 
 /* Add compact option to Semantic UI Grid (https://github.com/Semantic-Org/Semantic-UI/issues/2968#issuecomment-414727481) */
@@ -43,9 +44,25 @@ main {
     vertical-align: middle;
 }
 
-/* Support left-sided icons in vertical menu's */
-:global(.ui.vertical.menu .item>i.icon.left) {
-    float: left !important;
-    margin-left: 0em !important;
-    margin-right: 0.5em !important;
+:global(.ui.menu.vertical-compact .item) {
+    padding-top: 0.7em !important;
+    padding-bottom: 0.7em !important;
+}
+
+:global(.ui.sidebar) {
+    overflow-y: visible !important;
+}
+
+:global(.rainbow) {
+    width: 18rem;
+    height: 0.25rem;
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(90deg, #f00000, #f00000 16.67%, #ff8000 16.67%, #ff8000 33.33%, #ffff00 33.33%,#ffff00 50%, #007940 50%, #007940 66.67%, #4040ff 66.67%, #4040ff 83.33%, #a000c0 83.33%, #a000c0);
+}
+
+@media(max-width: 991px) {
+    :global(.rainbow) {
+        width: 15rem;
+    }
 }

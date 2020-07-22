@@ -1,0 +1,15 @@
+# import '../fragments/Committee.graphql'
+
+query GetCommittees {
+    committees(
+        orderBy: {
+            name: {
+                en: ASC
+            }
+        }
+    ) {
+        values {
+            ...CommitteeFragment
+        }
+    }
+}

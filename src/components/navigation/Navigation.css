@@ -1,0 +1,10 @@
+.sidebar {
+    overflow-y: visible !important;
+    font-size: 1.5em;
+}
+
+.sidebarLogo {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+}

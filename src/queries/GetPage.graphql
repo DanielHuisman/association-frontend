@@ -1,0 +1,11 @@
+# import '../fragments/Page.graphql'
+
+query GetPage($id: String!) {
+    page(
+        where: {
+            id: $id
+        }
+    ) {
+        ...PageFragment
+    }
+}

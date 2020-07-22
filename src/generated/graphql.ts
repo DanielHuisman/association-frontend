@@ -2520,6 +2520,18 @@ export type BankFragment = (
   & Pick<Bank, 'id' | 'bic' | 'country' | 'name' | 'isActive'>
 );
 
+export type CommitteeFragment = (
+  { __typename?: 'Committee' }
+  & Pick<Committee, 'id'>
+  & { name: (
+    { __typename?: 'ShortTranslatable' }
+    & TranslatableFragment_ShortTranslatable_
+  ), description: (
+    { __typename?: 'LongTranslatable' }
+    & TranslatableFragment_LongTranslatable_
+  ) }
+);
+
 export type DirectDebitFragment = (
   { __typename?: 'DirectDebit' }
   & Pick<DirectDebit, 'id' | 'createdAt' | 'updatedAt' | 'status' | 'messageId' | 'collectionDate' | 'instructionCount' | 'amount'>
@@ -2583,6 +2595,18 @@ export type MembershipFragment = (
   & Pick<Membership, 'id' | 'type' | 'startedAt' | 'endedAt'>
 );
 
+export type PageFragment = (
+  { __typename?: 'Page' }
+  & Pick<Page, 'id'>
+  & { title: (
+    { __typename?: 'ShortTranslatable' }
+    & TranslatableFragment_ShortTranslatable_
+  ), body: (
+    { __typename?: 'LongTranslatable' }
+    & TranslatableFragment_LongTranslatable_
+  ) }
+);
+
 export type ProviderFragment = (
   { __typename?: 'Provider' }
   & Pick<Provider, 'id' | 'type' | 'email'>
@@ -2598,6 +2622,18 @@ export type MembershipFeeTransactionFragment = (
   { __typename?: 'MembershipFeeTransaction' }
   & Pick<MembershipFeeTransaction, 'year'>
 );
+
+export type TranslatableFragment_ShortTranslatable_ = (
+  { __typename?: 'ShortTranslatable' }
+  & Pick<ShortTranslatable, 'en' | 'nl'>
+);
+
+export type TranslatableFragment_LongTranslatable_ = (
+  { __typename?: 'LongTranslatable' }
+  & Pick<LongTranslatable, 'en' | 'nl'>
+);
+
+export type TranslatableFragment = TranslatableFragment_ShortTranslatable_ | TranslatableFragment_LongTranslatable_;
 
 export type UserFragment = (
   { __typename?: 'User' }
@@ -2750,6 +2786,20 @@ export type GetBanksQuery = (
     & { values: Array<(
       { __typename?: 'Bank' }
       & BankFragment
+    )> }
+  ) }
+);
+
+export type GetCommitteesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCommitteesQuery = (
+  { __typename?: 'Query' }
+  & { committees: (
+    { __typename?: 'CommitteeList' }
+    & { values: Array<(
+      { __typename?: 'Committee' }
+      & CommitteeFragment
     )> }
   ) }
 );
@@ -3006,6 +3056,19 @@ export type GetMembersQuery = (
   ) }
 );
 
+export type GetPageQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetPageQuery = (
+  { __typename?: 'Query' }
+  & { page: (
+    { __typename?: 'Page' }
+    & PageFragment
+  ) }
+);
+
 export type GetPaperMandatesQueryVariables = Exact<{
   status?: Maybe<MandateStatus>;
 }>;
@@ -3112,6 +3175,23 @@ export const BankFragmentDoc = gql`
   isActive
 }
     `;
+export const TranslatableFragmentDoc = gql`
+    fragment TranslatableFragment on Translatable {
+  en
+  nl
+}
+    `;
+export const CommitteeFragmentDoc = gql`
+    fragment CommitteeFragment on Committee {
+  id
+  name {
+    ...TranslatableFragment
+  }
+  description {
+    ...TranslatableFragment
+  }
+}
+    ${TranslatableFragmentDoc}`;
 export const DirectDebitFragmentDoc = gql`
     fragment DirectDebitFragment on DirectDebit {
   id
@@ -3216,6 +3296,17 @@ export const MembershipFragmentDoc = gql`
   endedAt
 }
     `;
+export const PageFragmentDoc = gql`
+    fragment PageFragment on Page {
+  id
+  title {
+    ...TranslatableFragment
+  }
+  body {
+    ...TranslatableFragment
+  }
+}
+    ${TranslatableFragmentDoc}`;
 export const ProviderFragmentDoc = gql`
     fragment ProviderFragment on Provider {
   id
@@ -3605,6 +3696,40 @@ export function useGetBanksLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHoo
 export type GetBanksQueryHookResult = ReturnType<typeof useGetBanksQuery>;
 export type GetBanksLazyQueryHookResult = ReturnType<typeof useGetBanksLazyQuery>;
 export type GetBanksQueryResult = ApolloReactCommon.QueryResult<GetBanksQuery, GetBanksQueryVariables>;
+export const GetCommitteesDocument = gql`
+    query GetCommittees {
+  committees(orderBy: {name: {en: ASC}}) {
+    values {
+      ...CommitteeFragment
+    }
+  }
+}
+    ${CommitteeFragmentDoc}`;
+
+/**
+ * __useGetCommitteesQuery__
+ *
+ * To run a query within a React component, call `useGetCommitteesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCommitteesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCommitteesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCommitteesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetCommitteesQuery, GetCommitteesQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetCommitteesQuery, GetCommitteesQueryVariables>(GetCommitteesDocument, baseOptions);
+      }
+export function useGetCommitteesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetCommitteesQuery, GetCommitteesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetCommitteesQuery, GetCommitteesQueryVariables>(GetCommitteesDocument, baseOptions);
+        }
+export type GetCommitteesQueryHookResult = ReturnType<typeof useGetCommitteesQuery>;
+export type GetCommitteesLazyQueryHookResult = ReturnType<typeof useGetCommitteesLazyQuery>;
+export type GetCommitteesQueryResult = ApolloReactCommon.QueryResult<GetCommitteesQuery, GetCommitteesQueryVariables>;
 export const GetDirectDebitDocument = gql`
     query GetDirectDebit($id: String!) {
   directDebit(where: {id: $id}) {
@@ -3974,6 +4099,39 @@ export function useGetMembersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryH
 export type GetMembersQueryHookResult = ReturnType<typeof useGetMembersQuery>;
 export type GetMembersLazyQueryHookResult = ReturnType<typeof useGetMembersLazyQuery>;
 export type GetMembersQueryResult = ApolloReactCommon.QueryResult<GetMembersQuery, GetMembersQueryVariables>;
+export const GetPageDocument = gql`
+    query GetPage($id: String!) {
+  page(where: {id: $id}) {
+    ...PageFragment
+  }
+}
+    ${PageFragmentDoc}`;
+
+/**
+ * __useGetPageQuery__
+ *
+ * To run a query within a React component, call `useGetPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPageQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetPageQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetPageQuery, GetPageQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetPageQuery, GetPageQueryVariables>(GetPageDocument, baseOptions);
+      }
+export function useGetPageLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetPageQuery, GetPageQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetPageQuery, GetPageQueryVariables>(GetPageDocument, baseOptions);
+        }
+export type GetPageQueryHookResult = ReturnType<typeof useGetPageQuery>;
+export type GetPageLazyQueryHookResult = ReturnType<typeof useGetPageLazyQuery>;
+export type GetPageQueryResult = ApolloReactCommon.QueryResult<GetPageQuery, GetPageQueryVariables>;
 export const GetPaperMandatesDocument = gql`
     query GetPaperMandates($status: MandateStatus) {
   paperMandates(where: {status: {equals: $status}}) {

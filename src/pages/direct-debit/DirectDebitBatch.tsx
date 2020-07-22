@@ -32,7 +32,7 @@ const DirectDebitBatch = ({match}: RouteComponentProps<IRouteParams>) => {
         <Container>
             {loading && <Loader active />}
 
-            {data && !data.directDebitBatch && <>{t('general:notFound', 'Not found')}</>}
+            {data && !data.directDebitBatch && <>{t('general:notFound.text', 'Not found')}</>}
             {data && data.directDebitBatch && (
                 <>
                     <Helmet title={t('directDebits:directDebitBatch.header', 'Direct debit batch')} />

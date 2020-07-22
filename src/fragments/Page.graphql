@@ -1,0 +1,11 @@
+# import './Translatable.graphql'
+
+fragment PageFragment on Page {
+    id
+    title {
+        ...TranslatableFragment
+    }
+    body {
+        ...TranslatableFragment
+    }
+}

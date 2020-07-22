@@ -8,6 +8,15 @@ declare module '*/Bank.graphql' {
 }
     
 
+declare module '*/Committee.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const CommitteeFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/DirectDebit.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -81,6 +90,15 @@ declare module '*/Membership.graphql' {
 }
     
 
+declare module '*/Page.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const PageFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/Provider.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -95,6 +113,15 @@ declare module '*/Transaction.graphql' {
   const defaultDocument: DocumentNode;
   export const TransactionFragment: DocumentNode;
 export const MembershipFeeTransactionFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/Translatable.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const TranslatableFragment: DocumentNode;
 
   export default defaultDocument;
 }
@@ -208,6 +235,15 @@ declare module '*/GetBanks.graphql' {
 }
     
 
+declare module '*/GetCommittees.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const GetCommittees: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/GetDirectDebit.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -275,6 +311,15 @@ declare module '*/GetMembers.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const GetMembers: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/GetPage.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const GetPage: DocumentNode;
 
   export default defaultDocument;
 }

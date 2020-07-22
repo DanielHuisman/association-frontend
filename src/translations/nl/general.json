@@ -1,5 +1,39 @@
 {
+  "administration": {
+    "header": "Administratie"
+  },
+  "association": {
+    "board": {
+      "header": "Bestuur"
+    },
+    "collaborations": {
+      "header": "Samenwerkingen"
+    },
+    "committees": {
+      "header": "Commissies"
+    },
+    "documents": {
+      "articlesofAssociation": "Statuten",
+      "header": "Documenten",
+      "houseRegulations": "Huishoudelijk reglement",
+      "membershipFeeRegulations": "Contributiereglement"
+    },
+    "header": "Vereniging"
+  },
   "cancel": "Annuleren",
+  "contact": {
+    "address": {
+      "email": "E-mailadres",
+      "postal": "Postadres",
+      "visitors": "Bezoekadres"
+    },
+    "bic": "BIC",
+    "header": "Contact",
+    "iban": "IBAN",
+    "kvk": "Kamer van Koophandel",
+    "other": "Overige gegevens",
+    "social": "Social media"
+  },
   "date": {
     "never": "Nooit"
   },
@@ -8,6 +42,19 @@
     "no": "Nee",
     "yes": "Ja"
   },
-  "notFound": "Niet gevonden",
+  "home": {
+    "activities": "Activiteiten",
+    "drinks": "Borrels",
+    "header": "Home",
+    "join": "Word lid"
+  },
+  "join": {
+    "header": "Word lid"
+  },
+  "notFound": {
+    "button": "Ga naar hoofdpagina",
+    "header": "Pagina niet gevonden",
+    "text": "Niet gevonden"
+  },
   "unknown": "Onbekend"
 }
