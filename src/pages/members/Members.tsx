@@ -30,7 +30,7 @@ const Members = () => {
                     <p>{
                         t('members:members.withMandate', 'Members with mandate:')}
                         {' '}
-                        {data.members.filter(hasAcceptedMandates).length} / {data.members.length}
+                        {data.members.values.filter(hasAcceptedMandates).length} / {data.members.values.length}
                     </p>
                     <Table selectable stackable>
                         <Table.Header>
@@ -44,7 +44,7 @@ const Members = () => {
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
-                            {data.members.map((member) => (
+                            {data.members.values.map((member) => (
                                 <TableSelectableRow key={member.id} to={`/members/${member.id}`}>
                                     <Table.Cell>{member.firstName}</Table.Cell>
                                     <Table.Cell>{member.initials}</Table.Cell>

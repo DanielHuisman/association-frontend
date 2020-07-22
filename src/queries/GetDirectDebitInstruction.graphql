@@ -6,7 +6,11 @@
 # import '../fragments/Member.graphql'
 
 query GetDirectDebitInstruction($id: String!) {
-    directDebitInstruction(id: $id) {
+    directDebitInstruction(
+        where: {
+            id: $id
+        }
+    ) {
         ...DirectDebitInstructionFragment
 
         batch {
@@ -18,7 +22,9 @@ query GetDirectDebitInstruction($id: String!) {
         }
 
         transactions {
-            ...TransactionFragment
+            values {
+                ...TransactionFragment
+            }
         }
 
         mandate {

@@ -6,7 +6,11 @@
 # import '../fragments/Membership.graphql'
 
 query GetTransaction($id: String!) {
-    transaction(id: $id) {
+    transaction(
+        where: {
+            id: $id
+        }
+    ) {
         ...TransactionFragment
 
         member {

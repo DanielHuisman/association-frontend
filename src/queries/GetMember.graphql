@@ -4,19 +4,29 @@
 # import '../fragments/Transaction.graphql'
 
 query GetMember($id: String!) {
-    member(id: $id) {
+    member(
+        where: {
+            id: $id
+        }
+    ) {
         ...MemberFragment
 
         memberships {
-            ...MembershipFragment
+            values {
+                ...MembershipFragment
+            }
         }
 
         mandates {
-            ...MandateFragment
+            values {
+                ...MandateFragment
+            }
         }
 
         transactions {
-            ...TransactionFragment
+            values {
+                ...TransactionFragment
+            }
         }
     }
 }

@@ -2,6 +2,8 @@
 
 query GetDirectDebits {
     directDebits {
-        ...DirectDebitFragment
+        values {
+            ...DirectDebitFragment
+        }
     }
 }

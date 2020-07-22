@@ -1,4 +1,4 @@
-mutation CreateDigitalMandate($data: DigitalMandateCreateInput!) {
+mutation CreateDigitalMandate($data: CreateDigitalMandateInput!) {
     createDigitalMandate(data: $data) {
         redirectUrl
     }

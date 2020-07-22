@@ -23,7 +23,7 @@ const DirectDebits = () => {
 
             {loading && <Loader active />}
 
-            {data && <DirectDebitTable directDebits={data.directDebits} />}
+            {data && <DirectDebitTable directDebits={data.directDebits.values} />}
         </Container>
     );
 };

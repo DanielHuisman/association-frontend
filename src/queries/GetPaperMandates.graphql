@@ -2,11 +2,19 @@
 # import '../fragments/Member.graphql'
 
 query GetPaperMandates($status: MandateStatus) {
-    paperMandates(status: $status) {
-        ...MandateFragment
+    paperMandates(
+        where: {
+            status: {
+                equals: $status
+            }
+        }
+    ) {
+        values {
+            ...MandateFragment
 
-        member {
-            ...MemberFragment
+            member {
+                ...MemberFragment
+            }
         }
     }
 }

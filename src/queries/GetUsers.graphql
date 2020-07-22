@@ -2,6 +2,8 @@
 
 query GetUsers {
     users {
-        ...UserFragment
+        values {
+            ...UserFragment
+        }
     }
 }

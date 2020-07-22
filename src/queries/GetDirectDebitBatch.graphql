@@ -5,17 +5,23 @@
 # import '../fragments/Member.graphql'
 
 query GetDirectDebitBatch($id: String!) {
-    directDebitBatch(id: $id) {
+    directDebitBatch(
+        where: {
+            id: $id
+        }
+    ) {
         ...DirectDebitBatchFragment
 
             instructions {
-                ...DirectDebitInstructionFragment
+                values {
+                    ...DirectDebitInstructionFragment
 
-                mandate {
-                    ...MandateFragment
+                    mandate {
+                        ...MandateFragment
 
-                    member {
-                        ...MemberFragment
+                        member {
+                            ...MemberFragment
+                        }
                     }
                 }
             }

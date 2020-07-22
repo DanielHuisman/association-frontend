@@ -86,21 +86,21 @@ const DirectDebit = ({match}: RouteComponentProps<IRouteParams>) => {
                     </Table>
 
                     <Header size="large">{t('directDebits:directDebit.batches', 'Direct debit batches')}</Header>
-                    {data.directDebit.batches.length === 0 && <p>{t('directDebits:directDebit.noBatches', 'There are no batches.')}</p>}
-                    {data.directDebit.batches.length > 0 && (
-                        <DirectDebitBatchTable directDebitId={data.directDebit.id} batches={data.directDebit.batches} />
+                    {data.directDebit.batches.values.length === 0 && <p>{t('directDebits:directDebit.noBatches', 'There are no batches.')}</p>}
+                    {data.directDebit.batches.values.length > 0 && (
+                        <DirectDebitBatchTable directDebitId={data.directDebit.id} batches={data.directDebit.batches.values} />
                     )}
 
                     <Header size="large">{t('directDebits:directDebit.intructions', 'Direct debit instructions')}</Header>
-                    {data.directDebit.batches.length === 0 && <p>{t('directDebits:directDebit.noInstructions', 'There are no instructions.')}</p>}
-                    {data.directDebit.batches.length > 0 && (
-                        <DirectDebitInstructionTable directDebitId={data.directDebit.id} batches={data.directDebit.batches} showBatch />
+                    {data.directDebit.batches.values.length === 0 && <p>{t('directDebits:directDebit.noInstructions', 'There are no instructions.')}</p>}
+                    {data.directDebit.batches.values.length > 0 && (
+                        <DirectDebitInstructionTable directDebitId={data.directDebit.id} batches={data.directDebit.batches.values} showBatch />
                     )}
 
                     <Header size="large">{t('directDebits:directDebit.warnings', 'Direct debit warnings')}</Header>
-                    {data.directDebit.warnings.length === 0 && <p>{t('directDebits:directDebit.noWarnings', 'There are no warnings.')}</p>}
-                    {data.directDebit.warnings.length > 0 && (
-                        <DirectDebitWarningTable warnings={data.directDebit.warnings} />
+                    {data.directDebit.warnings.values.length === 0 && <p>{t('directDebits:directDebit.noWarnings', 'There are no warnings.')}</p>}
+                    {data.directDebit.warnings.values.length > 0 && (
+                        <DirectDebitWarningTable warnings={data.directDebit.warnings.values} />
                     )}
                 </>
             )}

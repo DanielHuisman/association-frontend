@@ -129,11 +129,11 @@ const DirectDebitInstruction = ({match}: RouteComponentProps<IRouteParams>) => {
                     </Button>
 
                     <Header size="large">{t('directDebits:directDebitInstruction.transactions', 'Transactions')}</Header>
-                    {data.directDebitInstruction.transactions.length === 0 && (
+                    {data.directDebitInstruction.transactions.values.length === 0 && (
                         <p>{t('directDebits:directDebitInstruction.noTransactions', 'There are no transactions.')}</p>
                     )}
-                    {data.directDebitInstruction.transactions.length > 0 && (
-                        <TransactionTable transactions={data.directDebitInstruction.transactions} />
+                    {data.directDebitInstruction.transactions.values.length > 0 && (
+                        <TransactionTable transactions={data.directDebitInstruction.transactions.values} />
                     )}
                 </>
             )}

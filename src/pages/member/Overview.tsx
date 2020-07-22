@@ -116,7 +116,7 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
-                            {data.member.memberships
+                            {data.member.memberships.values
                                 .map((membership) => (
                                     <Table.Row key={membership.id}>
                                         <Table.Cell><MembershipType membership={membership} /></Table.Cell>
@@ -150,11 +150,11 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                         </>
                     )}
 
-                    {user && data.member.mandates.length === 0 && (
+                    {user && data.member.mandates.values.length === 0 && (
                         <p className={styles.text}>{t('mandates:mandates.none', 'Member has no mandates.')}</p>
                     )}
 
-                    {data.member.mandates.length > 0 && (
+                    {data.member.mandates.values.length > 0 && (
                         <Table selectable stackable>
                             <Table.Header>
                                 <Table.Row>
@@ -168,7 +168,7 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
-                                {data.member.mandates
+                                {data.member.mandates.values
                                     .filter((mandate) => user || ![MandateStatus.CANCELLED, MandateStatus.INVALID].includes(mandate.status))
                                     .map((mandate) => (
                                         <TableSelectableRow key={mandate.id} to={`/mandates/${mandate.id}`}>
@@ -195,11 +195,11 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                     )}
 
                     <Header size="large">{t('directDebits:directDebitInstruction.transactions', 'Transactions')}</Header>
-                    {data.member.transactions.length === 0 && (
+                    {data.member.transactions.values.length === 0 && (
                         <p>{t('directDebits:directDebitInstruction.noTransactions', 'There are no transactions.')}</p>
                     )}
-                    {data.member.transactions.length > 0 && (
-                        <TransactionTable transactions={data.member.transactions} />
+                    {data.member.transactions.values.length > 0 && (
+                        <TransactionTable transactions={data.member.transactions.values} />
                     )}
                 </>
             )}

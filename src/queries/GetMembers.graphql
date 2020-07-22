@@ -3,10 +3,20 @@
 
 query GetMembers {
     members {
-        ...MemberFragment
+        values {
+            ...MemberFragment
 
-        mandates(status: ACCEPTED) {
-            ...MandateFragment
+            mandates(
+                where: {
+                    status: {
+                        equals: ACCEPTED
+                    }
+                }
+            ) {
+                values {
+                    ...MandateFragment
+                }
+            }
         }
     }
 }

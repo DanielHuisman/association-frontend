@@ -25,11 +25,11 @@ const MandatesReviewList = () => {
 
             {data && (
                 <p>
-                    {data.paperMandates.length === 0 && t('mandates:mandates.review.none', 'No mandates to review.')}
-                    {data.paperMandates.length > 0 && t('mandates:mandates.review.text', 'These mandates need to be reviewed.')}
+                    {data.paperMandates.values.length === 0 && t('mandates:mandates.review.none', 'No mandates to review.')}
+                    {data.paperMandates.values.length > 0 && t('mandates:mandates.review.text', 'These mandates need to be reviewed.')}
                 </p>
             )}
-            {data && data.paperMandates.length > 0 && <MandateTable mandates={data.paperMandates} />}
+            {data && data.paperMandates.values.length > 0 && <MandateTable mandates={data.paperMandates.values} />}
         </>
     );
 };

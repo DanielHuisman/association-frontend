@@ -1,7 +1,12 @@
 # import '../fragments/Mandate.graphql'
 
-mutation UploadPaperMandate($data: PaperMandateFileCreateInput!, $file: Upload!) {
-    uploadPaperMandate(data: $data, file: $file) {
+mutation UploadPaperMandate($paperMandateId: String!, $file: Upload!) {
+    uploadPaperMandate(
+        paperMandate: {
+            id: $paperMandateId
+        },
+        file: $file
+    ) {
         ...MandateFragment
     }
 }

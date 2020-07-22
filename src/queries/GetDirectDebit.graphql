@@ -7,27 +7,37 @@
 # import '../fragments/File.graphql'
 
 query GetDirectDebit($id: String!) {
-    directDebit(id: $id) {
+    directDebit(
+        where: {
+            id: $id
+        }
+    ) {
         ...DirectDebitFragment
 
         batches {
-            ...DirectDebitBatchFragment
+            values {
+                ...DirectDebitBatchFragment
 
-            instructions {
-                ...DirectDebitInstructionFragment
+                instructions {
+                    values {
+                        ...DirectDebitInstructionFragment
 
-                mandate {
-                    ...MandateFragment
+                        mandate {
+                            ...MandateFragment
 
-                    member {
-                        ...MemberFragment
+                            member {
+                                ...MemberFragment
+                            }
+                        }
                     }
                 }
             }
         }
 
         warnings {
-            ...DirectDebitWarningFragment
+            values {
+                ...DirectDebitWarningFragment
+            }
         }
 
         file {

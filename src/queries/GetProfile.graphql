@@ -6,7 +6,9 @@ query GetProfile {
         ...UserFragment
 
         providers {
-            ...ProviderFragment
+            values {
+                ...ProviderFragment
+            }
         }
     }
 }

@@ -29,12 +29,7 @@ const PaperMandateForm = ({paperMandateId}: IProps) => {
             data={({file}) => {
                 return {
                     variables: {
-                        data: {
-                            name: file.name,
-                            paperMandate: {
-                                id: paperMandateId
-                            }
-                        },
+                        mandateId: paperMandateId,
                         file
                     }
                 };

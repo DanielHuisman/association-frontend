@@ -17,7 +17,7 @@ const MandatesList = () => {
         <>
             {loading && <Loader active />}
 
-            {data && <MandateTable mandates={data.mandates} />}
+            {data && <MandateTable mandates={data.mandates.values} />}
         </>
     );
 };

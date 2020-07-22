@@ -33,7 +33,7 @@ const Users = () => {
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                        {data.users.map((user) => (
+                        {data.users.values.map((user) => (
                             <TableSelectableRow key={user.id} to={`/users/${user.id}`}>
                                 <Table.Cell>{user.name}</Table.Cell>
                                 <Table.Cell>{user.email}</Table.Cell>

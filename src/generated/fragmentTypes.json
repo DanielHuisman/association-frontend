@@ -3,13 +3,13 @@
     "types": [
       {
         "kind": "INTERFACE",
-        "name": "Mandate",
+        "name": "Translatable",
         "possibleTypes": [
           {
-            "name": "PaperMandate"
+            "name": "ShortTranslatable"
           },
           {
-            "name": "DigitalMandate"
+            "name": "LongTranslatable"
           }
         ]
       },
@@ -19,6 +19,18 @@
         "possibleTypes": [
           {
             "name": "MembershipFeeTransaction"
+          }
+        ]
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "Mandate",
+        "possibleTypes": [
+          {
+            "name": "DigitalMandate"
+          },
+          {
+            "name": "PaperMandate"
           }
         ]
       }

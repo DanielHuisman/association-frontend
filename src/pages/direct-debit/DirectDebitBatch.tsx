@@ -84,8 +84,10 @@ const DirectDebitBatch = ({match}: RouteComponentProps<IRouteParams>) => {
                     </Button>
 
                     <Header size="large">{t('directDebits:directDebit.intructions', 'Direct debit instructions')}</Header>
-                    {data.directDebitBatch.instructions.length === 0 && <p>{t('directDebits:directDebit.noInstructions', 'There are no instructions.')}</p>}
-                    {data.directDebitBatch.instructions.length > 0 && (
+                    {data.directDebitBatch.instructions.values.length === 0 &&
+                        <p>{t('directDebits:directDebit.noInstructions', 'There are no instructions.')}</p>
+                    }
+                    {data.directDebitBatch.instructions.values.length > 0 && (
                         <DirectDebitInstructionTable directDebitId={data.directDebitBatch.directDebit.id} batches={[data.directDebitBatch]} />
                     )}
                 </>

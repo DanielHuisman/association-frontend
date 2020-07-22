@@ -1,7 +1,11 @@
 # import '../fragments/Mandate.graphql'
 
 mutation InvalidateMandate($id: String!) {
-    invalidateMandate(mandate: {id: $id}) {
+    invalidateMandate(
+        mandate: {
+            id: $id
+        }
+    ) {
         ...MandateFragment
     }
 }

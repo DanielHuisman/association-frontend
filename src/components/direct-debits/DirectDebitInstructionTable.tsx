@@ -4,16 +4,16 @@ import {Table} from 'semantic-ui-react';
 
 import TableSelectableRow from '../../components/table/TableSelectableRow';
 import {DirectDebitBatchFragment, DirectDebitInstructionFragment, MandateFragment, MemberFragment} from '../../generated/graphql';
-import {formatCurrency} from '../../util';
+import {formatCurrency, EntityList} from '../../util';
 
 interface IProps {
     directDebitId: string;
     batches: (DirectDebitBatchFragment & {
-        instructions: (DirectDebitInstructionFragment & {
+        instructions: EntityList<DirectDebitInstructionFragment & {
             mandate: MandateFragment & {
                 member: MemberFragment;
             }
-        })[];
+        }>;
     })[];
     showBatch?: boolean;
 }
@@ -39,7 +39,7 @@ const DirectDebitInstructionTable = ({directDebitId, batches, showBatch = false}
             <Table.Body>
                 {batches.map((batch) => (
                     <React.Fragment key={batch.id}>
-                        {batch.instructions.map((instruction) => (
+                        {batch.instructions.values.map((instruction) => (
                             <TableSelectableRow key={instruction.id} to={`/direct-debits/${directDebitId}/instructions/${instruction.id}`}>
                                 <Table.Cell>{instruction.instructionId}</Table.Cell>
                                 <Table.Cell>{instruction.mandate.member.initials} {instruction.mandate.member.lastName}</Table.Cell>

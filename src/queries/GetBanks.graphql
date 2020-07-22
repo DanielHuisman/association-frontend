@@ -2,6 +2,8 @@
 
 query GetBanks {
     banks {
-        ...BankFragment
+        values {
+            ...BankFragment
+        }
     }
 }
