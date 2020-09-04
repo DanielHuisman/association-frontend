@@ -10,6 +10,10 @@ import Contact from '../../pages/contact/Contact';
 import Join from '../../pages/join/Join';
 import Login from '../../pages/auth/login/Login';
 import Logout from '../../pages/auth/logout/Logout';
+import VerifyEmail from '../../pages/auth/verify-email/VerifyEmail';
+import ResetPassword from '../../pages/auth/reset-password/ResetPassword';
+import RequestVerifyEmail from '../../pages/auth/request-verify-email/RequestVerifyEmail';
+import RequestResetPassword from '../../pages/auth/request-reset-password/RequestResetPassword';
 import Members from '../../pages/members/Members';
 import Member from '../../pages/member/Member';
 import Mandates from '../../pages/mandates/Mandates';
@@ -40,6 +44,10 @@ const Main = ({jumbotron = false}: IProps) => {
 
                     <NoAuthRoute exact path="/login" component={Login} />
                     <AuthRoute exact path="/logout" component={Logout} />
+                    <NoAuthRoute exact path="/verify/:token" component={VerifyEmail} />
+                    <NoAuthRoute exact path="/reset/:token" component={ResetPassword} />
+                    <Route exact path="/request/verify" component={RequestVerifyEmail} />
+                    <NoAuthRoute exact path="/request/reset" component={RequestResetPassword} />
 
                     <AdminRoute exact path="/members" component={Members} />
                     <Route path="/members/:memberId" component={Member} />
