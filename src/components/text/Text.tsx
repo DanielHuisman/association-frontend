@@ -19,13 +19,9 @@ const Text = ({name}: IProps) => {
         }
     });
 
-    if (error) {
-        throw error;
-    }
-
     return (
         <>
-            {loading && (
+            {(loading || error) && (
                 <Placeholder>
                     <Placeholder.Paragraph>
                         <Placeholder.Line />

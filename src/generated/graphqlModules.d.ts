@@ -127,15 +127,6 @@ declare module '*/Translatable.graphql' {
 }
     
 
-declare module '*/User.graphql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const UserFragment: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
 declare module '*/AcceptPaperMandate.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -149,6 +140,24 @@ declare module '*/CancelPaperMandate.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const CancelPaperMandate: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/ChangeEmail.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ChangeEmail: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/ChangePassword.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ChangePassword: DocumentNode;
 
   export default defaultDocument;
 }
@@ -181,28 +190,10 @@ declare module '*/InvalidateMandate.graphql' {
 }
     
 
-declare module '*/OAuthAuthenticate.graphql' {
+declare module '*/Login.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const OAuthAuthenticate: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/OAuthAuthorize.graphql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const OAuthAuthorize: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/OAuthUnlink.graphql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const OAuthUnlink: DocumentNode;
+  export const Login: DocumentNode;
 
   export default defaultDocument;
 }
@@ -217,10 +208,46 @@ declare module '*/RejectPaperMandate.graphql' {
 }
     
 
+declare module '*/RequestResetPassword.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const RequestResetPassword: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/RequestVerifyEmail.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const RequestVerifyEmail: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/ResetPassword.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ResetPassword: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/UploadPaperMandate.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const UploadPaperMandate: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/VerifyEmail.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const VerifyEmail: DocumentNode;
 
   export default defaultDocument;
 }
@@ -347,24 +374,6 @@ declare module '*/GetTransaction.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const GetTransaction: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/GetUser.graphql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const GetUser: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/GetUsers.graphql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const GetUsers: DocumentNode;
 
   export default defaultDocument;
 }

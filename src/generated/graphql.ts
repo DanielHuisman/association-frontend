@@ -10,14 +10,14 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: any;
   /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   Date: any;
   /** A time string at UTC, such as 10:15:30Z, compliant with the `full-time` format outlined in section 5.6 of the RFC 3339profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   Time: any;
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: any;
-  /** The `Upload` scalar type represents a file upload. */
-  Upload: any;
 };
 
 export type CreateDigitalMandateInput = {
@@ -29,72 +29,6 @@ export type CreatePaperMandateInput = {
   bic: Scalars['String'];
   iban: Scalars['String'];
   member: MemberWhereUniqueInput;
-};
-
-
-
-
-export enum OrderByArg {
-  ASC = 'ASC',
-  DESC = 'DESC'
-}
-
-export type IntFilter = {
-  equals?: Maybe<Scalars['Int']>;
-  not?: Maybe<Scalars['Int']>;
-  in?: Maybe<Array<Scalars['Int']>>;
-  notIn?: Maybe<Array<Scalars['Int']>>;
-  lt?: Maybe<Scalars['Int']>;
-  lte?: Maybe<Scalars['Int']>;
-  gt?: Maybe<Scalars['Int']>;
-  gte?: Maybe<Scalars['Int']>;
-};
-
-export type FloatFilter = {
-  equals?: Maybe<Scalars['Float']>;
-  not?: Maybe<Scalars['Float']>;
-  in?: Maybe<Array<Scalars['Float']>>;
-  notIn?: Maybe<Array<Scalars['Float']>>;
-  lt?: Maybe<Scalars['Float']>;
-  lte?: Maybe<Scalars['Float']>;
-  gt?: Maybe<Scalars['Float']>;
-  gte?: Maybe<Scalars['Float']>;
-};
-
-export type StringFilter = {
-  equals?: Maybe<Scalars['String']>;
-  not?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  notIn?: Maybe<Array<Scalars['String']>>;
-  lt?: Maybe<Scalars['String']>;
-  lte?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  gte?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  startsWith?: Maybe<Scalars['String']>;
-  endsWith?: Maybe<Scalars['String']>;
-};
-
-export type DateTimeFilter = {
-  equals?: Maybe<Scalars['DateTime']>;
-  not?: Maybe<Scalars['DateTime']>;
-  in?: Maybe<Array<Scalars['DateTime']>>;
-  notIn?: Maybe<Array<Scalars['DateTime']>>;
-  lt?: Maybe<Scalars['DateTime']>;
-  lte?: Maybe<Scalars['DateTime']>;
-  gt?: Maybe<Scalars['DateTime']>;
-  gte?: Maybe<Scalars['DateTime']>;
-};
-
-export type ListInfo = {
-  __typename?: 'ListInfo';
-  count: Scalars['Int'];
-};
-
-export type AccessToken = {
-  __typename?: 'AccessToken';
-  accessToken: Scalars['String'];
-  expiresIn: Scalars['Int'];
 };
 
 export type Bank = {
@@ -200,6 +134,7 @@ export enum StudentType {
 export type Member = {
   __typename?: 'Member';
   id: Scalars['String'];
+  providers: ProviderList;
   firstName: Scalars['String'];
   initials: Scalars['String'];
   lastName: Scalars['String'];
@@ -212,11 +147,20 @@ export type Member = {
   language: Language;
   pronouns: Pronouns;
   studentType: StudentType;
+  isAdmin: Scalars['Boolean'];
   memberships: MembershipList;
   mandates: MandateList;
   transactions: TransactionList;
   warnings: DirectDebitWarningList;
   latestMembership: Membership;
+};
+
+
+export type MemberprovidersArgs = {
+  where?: Maybe<ProviderWhereInput>;
+  orderBy?: Maybe<ProviderOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
 };
 
 
@@ -450,43 +394,6 @@ export type PaperMandateinstructionsArgs = {
   take?: Maybe<Scalars['Int']>;
 };
 
-export enum Role {
-  USER = 'USER',
-  ADMIN = 'ADMIN'
-}
-
-export type User = {
-  __typename?: 'User';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  email: Scalars['String'];
-  role: Role;
-  providers: ProviderList;
-};
-
-
-export type UserprovidersArgs = {
-  where?: Maybe<ProviderWhereInput>;
-  orderBy?: Maybe<ProviderOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export enum ProviderType {
-  GOOGLE = 'GOOGLE'
-}
-
-export type Provider = {
-  __typename?: 'Provider';
-  id: Scalars['String'];
-  type: ProviderType;
-  identifier: Scalars['String'];
-  credentials: Scalars['String'];
-  email: Scalars['String'];
-  isVerified: Scalars['Boolean'];
-  user: User;
-};
-
 export type Setting = {
   __typename?: 'Setting';
   key: Scalars['String'];
@@ -500,6 +407,95 @@ export type CreateDigitalMandateResult = {
   mandate: DigitalMandate;
 };
 
+
+export type AccessToken = {
+  __typename?: 'AccessToken';
+  accessToken: Scalars['String'];
+  expiresIn: Scalars['Int'];
+};
+
+export type Provider = {
+  __typename?: 'Provider';
+  id: Scalars['String'];
+  type: Scalars['String'];
+  email: Scalars['String'];
+  isVerified: Scalars['Boolean'];
+  user: Member;
+};
+
+export enum TokenType {
+  VERIFY_EMAIL = 'VERIFY_EMAIL',
+  RESET_PASSWORD = 'RESET_PASSWORD'
+}
+
+export type Token = {
+  __typename?: 'Token';
+  id: Scalars['String'];
+  type: TokenType;
+  token: Scalars['String'];
+  expiresAt: Scalars['DateTime'];
+  provider: Provider;
+};
+
+
+
+
+export enum OrderByArg {
+  ASC = 'ASC',
+  DESC = 'DESC'
+}
+
+export type IntFilter = {
+  equals?: Maybe<Scalars['Int']>;
+  not?: Maybe<Scalars['Int']>;
+  in?: Maybe<Array<Scalars['Int']>>;
+  notIn?: Maybe<Array<Scalars['Int']>>;
+  lt?: Maybe<Scalars['Int']>;
+  lte?: Maybe<Scalars['Int']>;
+  gt?: Maybe<Scalars['Int']>;
+  gte?: Maybe<Scalars['Int']>;
+};
+
+export type FloatFilter = {
+  equals?: Maybe<Scalars['Float']>;
+  not?: Maybe<Scalars['Float']>;
+  in?: Maybe<Array<Scalars['Float']>>;
+  notIn?: Maybe<Array<Scalars['Float']>>;
+  lt?: Maybe<Scalars['Float']>;
+  lte?: Maybe<Scalars['Float']>;
+  gt?: Maybe<Scalars['Float']>;
+  gte?: Maybe<Scalars['Float']>;
+};
+
+export type StringFilter = {
+  equals?: Maybe<Scalars['String']>;
+  not?: Maybe<Scalars['String']>;
+  in?: Maybe<Array<Scalars['String']>>;
+  notIn?: Maybe<Array<Scalars['String']>>;
+  lt?: Maybe<Scalars['String']>;
+  lte?: Maybe<Scalars['String']>;
+  gt?: Maybe<Scalars['String']>;
+  gte?: Maybe<Scalars['String']>;
+  contains?: Maybe<Scalars['String']>;
+  startsWith?: Maybe<Scalars['String']>;
+  endsWith?: Maybe<Scalars['String']>;
+};
+
+export type DateTimeFilter = {
+  equals?: Maybe<Scalars['DateTime']>;
+  not?: Maybe<Scalars['DateTime']>;
+  in?: Maybe<Array<Scalars['DateTime']>>;
+  notIn?: Maybe<Array<Scalars['DateTime']>>;
+  lt?: Maybe<Scalars['DateTime']>;
+  lte?: Maybe<Scalars['DateTime']>;
+  gt?: Maybe<Scalars['DateTime']>;
+  gte?: Maybe<Scalars['DateTime']>;
+};
+
+export type ListInfo = {
+  __typename?: 'ListInfo';
+  count: Scalars['Int'];
+};
 
 export type BankWhereInput = {
   id?: Maybe<StringFilter>;
@@ -743,6 +739,7 @@ export type MembershipList = {
 
 export type MemberWhereInput = {
   id?: Maybe<StringFilter>;
+  providers?: Maybe<ProviderWhereInput>;
   firstName?: Maybe<StringFilter>;
   initials?: Maybe<StringFilter>;
   lastName?: Maybe<StringFilter>;
@@ -755,6 +752,7 @@ export type MemberWhereInput = {
   language?: Maybe<LanguageFilter>;
   pronouns?: Maybe<PronounsFilter>;
   studentType?: Maybe<StudentTypeFilter>;
+  isAdmin?: Maybe<Scalars['Boolean']>;
   memberships?: Maybe<MembershipWhereInput>;
   mandates?: Maybe<MandateWhereInput>;
   transactions?: Maybe<TransactionWhereInput>;
@@ -777,10 +775,12 @@ export type MemberOrderByInput = {
   language?: Maybe<OrderByArg>;
   pronouns?: Maybe<OrderByArg>;
   studentType?: Maybe<OrderByArg>;
+  isAdmin?: Maybe<OrderByArg>;
 };
 
 export type MemberCreateInput = {
   id?: Maybe<Scalars['String']>;
+  providers?: Maybe<Array<ProviderCreateRelationInput>>;
   firstName: Scalars['String'];
   initials: Scalars['String'];
   lastName: Scalars['String'];
@@ -793,6 +793,7 @@ export type MemberCreateInput = {
   language?: Maybe<Language>;
   pronouns?: Maybe<Pronouns>;
   studentType: StudentType;
+  isAdmin?: Maybe<Scalars['Boolean']>;
   memberships?: Maybe<Array<MembershipCreateRelationInput>>;
   mandates?: Maybe<Array<MandateCreateRelationInput>>;
   transactions?: Maybe<Array<TransactionCreateRelationInput>>;
@@ -801,6 +802,7 @@ export type MemberCreateInput = {
 
 export type MemberUpdateInput = {
   id?: Maybe<Scalars['String']>;
+  providers?: Maybe<Array<ProviderUpdateRelationInput>>;
   firstName?: Maybe<Scalars['String']>;
   initials?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
@@ -813,6 +815,7 @@ export type MemberUpdateInput = {
   language?: Maybe<Language>;
   pronouns?: Maybe<Pronouns>;
   studentType?: Maybe<StudentType>;
+  isAdmin?: Maybe<Scalars['Boolean']>;
   memberships?: Maybe<Array<MembershipUpdateRelationInput>>;
   mandates?: Maybe<Array<MandateUpdateRelationInput>>;
   transactions?: Maybe<Array<TransactionUpdateRelationInput>>;
@@ -1346,101 +1349,6 @@ export type PaperMandateList = {
   values: Array<PaperMandate>;
 };
 
-export type UserWhereInput = {
-  id?: Maybe<StringFilter>;
-  name?: Maybe<StringFilter>;
-  email?: Maybe<StringFilter>;
-  role?: Maybe<RoleFilter>;
-  providers?: Maybe<ProviderWhereInput>;
-  AND?: Maybe<Array<UserWhereInput>>;
-  OR?: Maybe<Array<UserWhereInput>>;
-};
-
-export type UserOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  name?: Maybe<OrderByArg>;
-  email?: Maybe<OrderByArg>;
-  role?: Maybe<OrderByArg>;
-};
-
-export type UserCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  email: Scalars['String'];
-  role?: Maybe<Role>;
-  providers?: Maybe<Array<ProviderCreateRelationInput>>;
-};
-
-export type UserUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  role?: Maybe<Role>;
-  providers?: Maybe<Array<ProviderUpdateRelationInput>>;
-};
-
-export type UserWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type UserList = {
-  __typename?: 'UserList';
-  info: ListInfo;
-  values: Array<User>;
-};
-
-export type ProviderWhereInput = {
-  id?: Maybe<StringFilter>;
-  type?: Maybe<ProviderTypeFilter>;
-  identifier?: Maybe<StringFilter>;
-  credentials?: Maybe<StringFilter>;
-  email?: Maybe<StringFilter>;
-  isVerified?: Maybe<Scalars['Boolean']>;
-  user?: Maybe<UserWhereInput>;
-  AND?: Maybe<Array<ProviderWhereInput>>;
-  OR?: Maybe<Array<ProviderWhereInput>>;
-};
-
-export type ProviderOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  type?: Maybe<OrderByArg>;
-  identifier?: Maybe<OrderByArg>;
-  credentials?: Maybe<OrderByArg>;
-  email?: Maybe<OrderByArg>;
-  isVerified?: Maybe<OrderByArg>;
-  user?: Maybe<UserOrderByInput>;
-};
-
-export type ProviderCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  type: ProviderType;
-  identifier: Scalars['String'];
-  credentials: Scalars['String'];
-  email: Scalars['String'];
-  isVerified?: Maybe<Scalars['Boolean']>;
-  user: UserCreateRelationInput;
-};
-
-export type ProviderUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  type?: Maybe<ProviderType>;
-  identifier?: Maybe<Scalars['String']>;
-  credentials?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  isVerified?: Maybe<Scalars['Boolean']>;
-  user?: Maybe<UserUpdateRelationInput>;
-};
-
-export type ProviderWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type ProviderList = {
-  __typename?: 'ProviderList';
-  info: ListInfo;
-  values: Array<Provider>;
-};
-
 export type SettingWhereInput = {
   key?: Maybe<StringFilter>;
   value?: Maybe<StringFilter>;
@@ -1475,6 +1383,104 @@ export type SettingList = {
   __typename?: 'SettingList';
   info: ListInfo;
   values: Array<Setting>;
+};
+
+export type ProviderWhereInput = {
+  id?: Maybe<StringFilter>;
+  type?: Maybe<StringFilter>;
+  email?: Maybe<StringFilter>;
+  isVerified?: Maybe<Scalars['Boolean']>;
+  user?: Maybe<MemberWhereInput>;
+  AND?: Maybe<Array<ProviderWhereInput>>;
+  OR?: Maybe<Array<ProviderWhereInput>>;
+};
+
+export type ProviderOrderByInput = {
+  id?: Maybe<OrderByArg>;
+  type?: Maybe<OrderByArg>;
+  email?: Maybe<OrderByArg>;
+  isVerified?: Maybe<OrderByArg>;
+  user?: Maybe<MemberOrderByInput>;
+};
+
+export type ProviderCreateInput = {
+  id?: Maybe<Scalars['String']>;
+  type: Scalars['String'];
+  email: Scalars['String'];
+  isVerified?: Maybe<Scalars['Boolean']>;
+  user: MemberCreateRelationInput;
+};
+
+export type ProviderUpdateInput = {
+  id?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  isVerified?: Maybe<Scalars['Boolean']>;
+  user?: Maybe<MemberUpdateRelationInput>;
+};
+
+export type ProviderWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type ProviderList = {
+  __typename?: 'ProviderList';
+  info: ListInfo;
+  values: Array<Provider>;
+};
+
+export type TokenWhereInput = {
+  id?: Maybe<StringFilter>;
+  type?: Maybe<TokenTypeFilter>;
+  token?: Maybe<StringFilter>;
+  expiresAt?: Maybe<DateTimeFilter>;
+  provider?: Maybe<ProviderWhereInput>;
+  AND?: Maybe<Array<TokenWhereInput>>;
+  OR?: Maybe<Array<TokenWhereInput>>;
+};
+
+export type TokenOrderByInput = {
+  id?: Maybe<OrderByArg>;
+  type?: Maybe<OrderByArg>;
+  token?: Maybe<OrderByArg>;
+  expiresAt?: Maybe<OrderByArg>;
+  provider?: Maybe<ProviderOrderByInput>;
+};
+
+export type TokenCreateInput = {
+  id?: Maybe<Scalars['String']>;
+  type: TokenType;
+  token: Scalars['String'];
+  expiresAt: Scalars['DateTime'];
+  provider: ProviderCreateRelationInput;
+};
+
+export type TokenUpdateInput = {
+  id?: Maybe<Scalars['String']>;
+  type?: Maybe<TokenType>;
+  token?: Maybe<Scalars['String']>;
+  expiresAt?: Maybe<Scalars['DateTime']>;
+  provider?: Maybe<ProviderUpdateRelationInput>;
+};
+
+export type TokenWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
+};
+
+export type TokenList = {
+  __typename?: 'TokenList';
+  info: ListInfo;
+  values: Array<Token>;
+};
+
+export type RegisterInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  passwordRepeat: Scalars['String'];
+  firstName: Scalars['String'];
+  initials: Scalars['String'];
+  lastName: Scalars['String'];
 };
 
 export type ShortTranslatableWhereInput = {
@@ -1593,6 +1599,11 @@ export type StudentTypeFilter = {
   notIn?: Maybe<Array<StudentType>>;
 };
 
+export type ProviderCreateRelationInput = {
+  create?: Maybe<ProviderCreateInput>;
+  connect?: Maybe<ProviderWhereUniqueInput>;
+};
+
 export type MandateCreateRelationInput = {
   create?: Maybe<MandateCreateInput>;
   connect?: Maybe<MandateWhereUniqueInput>;
@@ -1606,6 +1617,12 @@ export type TransactionCreateRelationInput = {
 export type DirectDebitWarningCreateRelationInput = {
   create?: Maybe<DirectDebitWarningCreateInput>;
   connect?: Maybe<DirectDebitWarningWhereUniqueInput>;
+};
+
+export type ProviderUpdateRelationInput = {
+  create?: Maybe<ProviderCreateInput>;
+  connect?: Maybe<ProviderWhereUniqueInput>;
+  disconnect?: Maybe<ProviderWhereUniqueInput>;
 };
 
 export type MandateUpdateRelationInput = {
@@ -1680,45 +1697,15 @@ export type MandateStatusFilter = {
   notIn?: Maybe<Array<MandateStatus>>;
 };
 
-export type RoleFilter = {
-  equals?: Maybe<Role>;
-  not?: Maybe<Role>;
-  in?: Maybe<Array<Role>>;
-  notIn?: Maybe<Array<Role>>;
-};
-
-export type ProviderCreateRelationInput = {
-  create?: Maybe<ProviderCreateInput>;
-  connect?: Maybe<ProviderWhereUniqueInput>;
-};
-
-export type ProviderUpdateRelationInput = {
-  create?: Maybe<ProviderCreateInput>;
-  connect?: Maybe<ProviderWhereUniqueInput>;
-  disconnect?: Maybe<ProviderWhereUniqueInput>;
-};
-
-export type ProviderTypeFilter = {
-  equals?: Maybe<ProviderType>;
-  not?: Maybe<ProviderType>;
-  in?: Maybe<Array<ProviderType>>;
-  notIn?: Maybe<Array<ProviderType>>;
-};
-
-export type UserCreateRelationInput = {
-  create?: Maybe<UserCreateInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-};
-
-export type UserUpdateRelationInput = {
-  create?: Maybe<UserCreateInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput>;
+export type TokenTypeFilter = {
+  equals?: Maybe<TokenType>;
+  not?: Maybe<TokenType>;
+  in?: Maybe<Array<TokenType>>;
+  notIn?: Maybe<Array<TokenType>>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  me?: Maybe<User>;
   bank: Bank;
   banks: BankList;
   committee: Committee;
@@ -1749,12 +1736,13 @@ export type Query = {
   pages: PageList;
   paperMandate: PaperMandate;
   paperMandates: PaperMandateList;
-  user: User;
-  users: UserList;
-  provider: Provider;
-  providers: ProviderList;
   setting: Setting;
   settings: SettingList;
+  provider: Provider;
+  providers: ProviderList;
+  token: Token;
+  tokens: TokenList;
+  me?: Maybe<Member>;
 };
 
 
@@ -1953,14 +1941,14 @@ export type QuerypaperMandatesArgs = {
 };
 
 
-export type QueryuserArgs = {
-  where: UserWhereUniqueInput;
+export type QuerysettingArgs = {
+  where: SettingWhereUniqueInput;
 };
 
 
-export type QueryusersArgs = {
-  where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<UserOrderByInput>;
+export type QuerysettingsArgs = {
+  where?: Maybe<SettingWhereInput>;
+  orderBy?: Maybe<SettingOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -1979,23 +1967,20 @@ export type QueryprovidersArgs = {
 };
 
 
-export type QuerysettingArgs = {
-  where: SettingWhereUniqueInput;
+export type QuerytokenArgs = {
+  where: TokenWhereUniqueInput;
 };
 
 
-export type QuerysettingsArgs = {
-  where?: Maybe<SettingWhereInput>;
-  orderBy?: Maybe<SettingOrderByInput>;
+export type QuerytokensArgs = {
+  where?: Maybe<TokenWhereInput>;
+  orderBy?: Maybe<TokenOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  oauthAuthorize: Scalars['String'];
-  oauthAuthenticate: AccessToken;
-  oauthUnlink: Provider;
   invalidateMandate: Mandate;
   createDigitalMandate: CreateDigitalMandateResult;
   createPaperMandate: PaperMandate;
@@ -2056,37 +2041,26 @@ export type Mutation = {
   updatePage: Page;
   deletePage: Page;
   deletePages: PageList;
-  createUser: User;
-  updateUser: User;
-  deleteUser: User;
-  deleteUsers: UserList;
-  createProvider: Provider;
-  updateProvider: Provider;
-  deleteProvider: Provider;
-  deleteProviders: ProviderList;
   createSetting: Setting;
   updateSetting: Setting;
   deleteSetting: Setting;
   deleteSettings: SettingList;
-};
-
-
-export type MutationoauthAuthorizeArgs = {
-  type: ProviderType;
-  redirectUri: Scalars['String'];
-};
-
-
-export type MutationoauthAuthenticateArgs = {
-  type: ProviderType;
-  redirectUri: Scalars['String'];
-  code: Scalars['String'];
-  userId?: Maybe<Scalars['String']>;
-};
-
-
-export type MutationoauthUnlinkArgs = {
-  type: ProviderType;
+  createProvider: Provider;
+  updateProvider: Provider;
+  deleteProvider: Provider;
+  deleteProviders: ProviderList;
+  createToken: Token;
+  updateToken: Token;
+  deleteToken: Token;
+  deleteTokens: TokenList;
+  register: Scalars['Boolean'];
+  login: AccessToken;
+  changeEmail: Scalars['Boolean'];
+  changePassword: Scalars['Boolean'];
+  requestVerifyEmail: Scalars['Boolean'];
+  requestResetPassword: Scalars['Boolean'];
+  verifyEmail: Scalars['Boolean'];
+  resetPassword: Scalars['Boolean'];
 };
 
 
@@ -2444,25 +2418,25 @@ export type MutationdeletePagesArgs = {
 };
 
 
-export type MutationcreateUserArgs = {
-  data: UserCreateInput;
+export type MutationcreateSettingArgs = {
+  data: SettingCreateInput;
 };
 
 
-export type MutationupdateUserArgs = {
-  where: UserWhereUniqueInput;
-  data: UserUpdateInput;
+export type MutationupdateSettingArgs = {
+  where: SettingWhereUniqueInput;
+  data: SettingUpdateInput;
 };
 
 
-export type MutationdeleteUserArgs = {
-  where: UserWhereUniqueInput;
+export type MutationdeleteSettingArgs = {
+  where: SettingWhereUniqueInput;
 };
 
 
-export type MutationdeleteUsersArgs = {
-  where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<UserOrderByInput>;
+export type MutationdeleteSettingsArgs = {
+  where?: Maybe<SettingWhereInput>;
+  orderBy?: Maybe<SettingOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -2492,27 +2466,71 @@ export type MutationdeleteProvidersArgs = {
 };
 
 
-export type MutationcreateSettingArgs = {
-  data: SettingCreateInput;
+export type MutationcreateTokenArgs = {
+  data: TokenCreateInput;
 };
 
 
-export type MutationupdateSettingArgs = {
-  where: SettingWhereUniqueInput;
-  data: SettingUpdateInput;
+export type MutationupdateTokenArgs = {
+  where: TokenWhereUniqueInput;
+  data: TokenUpdateInput;
 };
 
 
-export type MutationdeleteSettingArgs = {
-  where: SettingWhereUniqueInput;
+export type MutationdeleteTokenArgs = {
+  where: TokenWhereUniqueInput;
 };
 
 
-export type MutationdeleteSettingsArgs = {
-  where?: Maybe<SettingWhereInput>;
-  orderBy?: Maybe<SettingOrderByInput>;
+export type MutationdeleteTokensArgs = {
+  where?: Maybe<TokenWhereInput>;
+  orderBy?: Maybe<TokenOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
+};
+
+
+export type MutationregisterArgs = {
+  data: RegisterInput;
+};
+
+
+export type MutationloginArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
+export type MutationchangeEmailArgs = {
+  email: Scalars['String'];
+};
+
+
+export type MutationchangePasswordArgs = {
+  password: Scalars['String'];
+  passwordRepeat: Scalars['String'];
+};
+
+
+export type MutationrequestVerifyEmailArgs = {
+  email: Scalars['String'];
+};
+
+
+export type MutationrequestResetPasswordArgs = {
+  email: Scalars['String'];
+};
+
+
+export type MutationverifyEmailArgs = {
+  token: Scalars['String'];
+};
+
+
+export type MutationresetPasswordArgs = {
+  token: Scalars['String'];
+  password: Scalars['String'];
+  passwordRepeat: Scalars['String'];
 };
 
 export type BankFragment = (
@@ -2587,7 +2605,7 @@ export type PaperMandateFragment = (
 
 export type MemberFragment = (
   { __typename?: 'Member' }
-  & Pick<Member, 'id' | 'firstName' | 'initials' | 'lastName' | 'email' | 'address' | 'postalCode' | 'city' | 'phoneNumber' | 'birthdate' | 'language' | 'pronouns' | 'studentType'>
+  & Pick<Member, 'id' | 'firstName' | 'initials' | 'lastName' | 'email' | 'address' | 'postalCode' | 'city' | 'phoneNumber' | 'birthdate' | 'language' | 'pronouns' | 'studentType' | 'isAdmin'>
 );
 
 export type MembershipFragment = (
@@ -2635,11 +2653,6 @@ export type TranslatableFragment_LongTranslatable_ = (
 
 export type TranslatableFragment = TranslatableFragment_ShortTranslatable_ | TranslatableFragment_LongTranslatable_;
 
-export type UserFragment = (
-  { __typename?: 'User' }
-  & Pick<User, 'id' | 'name' | 'email' | 'role'>
-);
-
 export type AcceptPaperMandateMutationVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -2664,6 +2677,27 @@ export type CancelPaperMandateMutation = (
     { __typename?: 'PaperMandate' }
     & MandateFragment_PaperMandate_
   ) }
+);
+
+export type ChangeEmailMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type ChangeEmailMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'changeEmail'>
+);
+
+export type ChangePasswordMutationVariables = Exact<{
+  password: Scalars['String'];
+  passwordRepeat: Scalars['String'];
+}>;
+
+
+export type ChangePasswordMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'changePassword'>
 );
 
 export type CreateDigitalMandateMutationVariables = Exact<{
@@ -2708,43 +2742,17 @@ export type InvalidateMandateMutation = (
   ) }
 );
 
-export type OAuthAuthenticateMutationVariables = Exact<{
-  type: ProviderType;
-  redirectUri: Scalars['String'];
-  code: Scalars['String'];
-  userId?: Maybe<Scalars['String']>;
+export type LoginMutationVariables = Exact<{
+  email: Scalars['String'];
+  password: Scalars['String'];
 }>;
 
 
-export type OAuthAuthenticateMutation = (
+export type LoginMutation = (
   { __typename?: 'Mutation' }
-  & { oauthAuthenticate: (
+  & { login: (
     { __typename?: 'AccessToken' }
     & Pick<AccessToken, 'accessToken' | 'expiresIn'>
-  ) }
-);
-
-export type OAuthAuthorizeMutationVariables = Exact<{
-  type: ProviderType;
-  redirectUri: Scalars['String'];
-}>;
-
-
-export type OAuthAuthorizeMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'oauthAuthorize'>
-);
-
-export type OAuthUnlinkMutationVariables = Exact<{
-  type: ProviderType;
-}>;
-
-
-export type OAuthUnlinkMutation = (
-  { __typename?: 'Mutation' }
-  & { oauthUnlink: (
-    { __typename?: 'Provider' }
-    & Pick<Provider, 'id'>
   ) }
 );
 
@@ -2762,6 +2770,38 @@ export type RejectPaperMandateMutation = (
   ) }
 );
 
+export type RequestResetPasswordMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type RequestResetPasswordMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'requestResetPassword'>
+);
+
+export type RequestVerifyEmailMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type RequestVerifyEmailMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'requestVerifyEmail'>
+);
+
+export type ResetPasswordMutationVariables = Exact<{
+  token: Scalars['String'];
+  password: Scalars['String'];
+  passwordRepeat: Scalars['String'];
+}>;
+
+
+export type ResetPasswordMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'resetPassword'>
+);
+
 export type UploadPaperMandateMutationVariables = Exact<{
   paperMandateId: Scalars['String'];
   file: Scalars['Upload'];
@@ -2774,6 +2814,16 @@ export type UploadPaperMandateMutation = (
     { __typename?: 'PaperMandate' }
     & MandateFragment_PaperMandate_
   ) }
+);
+
+export type VerifyEmailMutationVariables = Exact<{
+  token: Scalars['String'];
+}>;
+
+
+export type VerifyEmailMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'verifyEmail'>
 );
 
 export type GetBanksQueryVariables = Exact<{ [key: string]: never; }>;
@@ -3095,7 +3145,7 @@ export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetProfileQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
-    { __typename?: 'User' }
+    { __typename?: 'Member' }
     & { providers: (
       { __typename?: 'ProviderList' }
       & { values: Array<(
@@ -3103,7 +3153,7 @@ export type GetProfileQuery = (
         & ProviderFragment
       )> }
     ) }
-    & UserFragment
+    & MemberFragment
   )> }
 );
 
@@ -3136,33 +3186,6 @@ export type GetTransactionQuery = (
       & DirectDebitInstructionFragment
     )> }
     & TransactionFragment
-  ) }
-);
-
-export type GetUserQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type GetUserQuery = (
-  { __typename?: 'Query' }
-  & { user: (
-    { __typename?: 'User' }
-    & UserFragment
-  ) }
-);
-
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUsersQuery = (
-  { __typename?: 'Query' }
-  & { users: (
-    { __typename?: 'UserList' }
-    & { values: Array<(
-      { __typename?: 'User' }
-      & UserFragment
-    )> }
   ) }
 );
 
@@ -3286,6 +3309,7 @@ export const MemberFragmentDoc = gql`
   language
   pronouns
   studentType
+  isAdmin
 }
     `;
 export const MembershipFragmentDoc = gql`
@@ -3329,14 +3353,6 @@ export const TransactionFragmentDoc = gql`
   ...MembershipFeeTransactionFragment
 }
     ${MembershipFeeTransactionFragmentDoc}`;
-export const UserFragmentDoc = gql`
-    fragment UserFragment on User {
-  id
-  name
-  email
-  role
-}
-    `;
 export const AcceptPaperMandateDocument = gql`
     mutation AcceptPaperMandate($id: String!) {
   acceptPaperMandate(mandate: {id: $id}) {
@@ -3401,6 +3417,67 @@ export function useCancelPaperMandateMutation(baseOptions?: ApolloReactHooks.Mut
 export type CancelPaperMandateMutationHookResult = ReturnType<typeof useCancelPaperMandateMutation>;
 export type CancelPaperMandateMutationResult = ApolloReactCommon.MutationResult<CancelPaperMandateMutation>;
 export type CancelPaperMandateMutationOptions = ApolloReactCommon.BaseMutationOptions<CancelPaperMandateMutation, CancelPaperMandateMutationVariables>;
+export const ChangeEmailDocument = gql`
+    mutation ChangeEmail($email: String!) {
+  changeEmail(email: $email)
+}
+    `;
+export type ChangeEmailMutationFn = ApolloReactCommon.MutationFunction<ChangeEmailMutation, ChangeEmailMutationVariables>;
+
+/**
+ * __useChangeEmailMutation__
+ *
+ * To run a mutation, you first call `useChangeEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useChangeEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [changeEmailMutation, { data, loading, error }] = useChangeEmailMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useChangeEmailMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ChangeEmailMutation, ChangeEmailMutationVariables>) {
+        return ApolloReactHooks.useMutation<ChangeEmailMutation, ChangeEmailMutationVariables>(ChangeEmailDocument, baseOptions);
+      }
+export type ChangeEmailMutationHookResult = ReturnType<typeof useChangeEmailMutation>;
+export type ChangeEmailMutationResult = ApolloReactCommon.MutationResult<ChangeEmailMutation>;
+export type ChangeEmailMutationOptions = ApolloReactCommon.BaseMutationOptions<ChangeEmailMutation, ChangeEmailMutationVariables>;
+export const ChangePasswordDocument = gql`
+    mutation ChangePassword($password: String!, $passwordRepeat: String!) {
+  changePassword(password: $password, passwordRepeat: $passwordRepeat)
+}
+    `;
+export type ChangePasswordMutationFn = ApolloReactCommon.MutationFunction<ChangePasswordMutation, ChangePasswordMutationVariables>;
+
+/**
+ * __useChangePasswordMutation__
+ *
+ * To run a mutation, you first call `useChangePasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useChangePasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [changePasswordMutation, { data, loading, error }] = useChangePasswordMutation({
+ *   variables: {
+ *      password: // value for 'password'
+ *      passwordRepeat: // value for 'passwordRepeat'
+ *   },
+ * });
+ */
+export function useChangePasswordMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ChangePasswordMutation, ChangePasswordMutationVariables>) {
+        return ApolloReactHooks.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument, baseOptions);
+      }
+export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswordMutation>;
+export type ChangePasswordMutationResult = ApolloReactCommon.MutationResult<ChangePasswordMutation>;
+export type ChangePasswordMutationOptions = ApolloReactCommon.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
 export const CreateDigitalMandateDocument = gql`
     mutation CreateDigitalMandate($data: CreateDigitalMandateInput!) {
   createDigitalMandate(data: $data) {
@@ -3497,105 +3574,40 @@ export function useInvalidateMandateMutation(baseOptions?: ApolloReactHooks.Muta
 export type InvalidateMandateMutationHookResult = ReturnType<typeof useInvalidateMandateMutation>;
 export type InvalidateMandateMutationResult = ApolloReactCommon.MutationResult<InvalidateMandateMutation>;
 export type InvalidateMandateMutationOptions = ApolloReactCommon.BaseMutationOptions<InvalidateMandateMutation, InvalidateMandateMutationVariables>;
-export const OAuthAuthenticateDocument = gql`
-    mutation OAuthAuthenticate($type: ProviderType!, $redirectUri: String!, $code: String!, $userId: String) {
-  oauthAuthenticate(type: $type, redirectUri: $redirectUri, code: $code, userId: $userId) {
+export const LoginDocument = gql`
+    mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
     accessToken
     expiresIn
   }
 }
     `;
-export type OAuthAuthenticateMutationFn = ApolloReactCommon.MutationFunction<OAuthAuthenticateMutation, OAuthAuthenticateMutationVariables>;
+export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, LoginMutationVariables>;
 
 /**
- * __useOAuthAuthenticateMutation__
+ * __useLoginMutation__
  *
- * To run a mutation, you first call `useOAuthAuthenticateMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useOAuthAuthenticateMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLoginMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [oAuthAuthenticateMutation, { data, loading, error }] = useOAuthAuthenticateMutation({
+ * const [loginMutation, { data, loading, error }] = useLoginMutation({
  *   variables: {
- *      type: // value for 'type'
- *      redirectUri: // value for 'redirectUri'
- *      code: // value for 'code'
- *      userId: // value for 'userId'
+ *      email: // value for 'email'
+ *      password: // value for 'password'
  *   },
  * });
  */
-export function useOAuthAuthenticateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<OAuthAuthenticateMutation, OAuthAuthenticateMutationVariables>) {
-        return ApolloReactHooks.useMutation<OAuthAuthenticateMutation, OAuthAuthenticateMutationVariables>(OAuthAuthenticateDocument, baseOptions);
+export function useLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+        return ApolloReactHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
       }
-export type OAuthAuthenticateMutationHookResult = ReturnType<typeof useOAuthAuthenticateMutation>;
-export type OAuthAuthenticateMutationResult = ApolloReactCommon.MutationResult<OAuthAuthenticateMutation>;
-export type OAuthAuthenticateMutationOptions = ApolloReactCommon.BaseMutationOptions<OAuthAuthenticateMutation, OAuthAuthenticateMutationVariables>;
-export const OAuthAuthorizeDocument = gql`
-    mutation OAuthAuthorize($type: ProviderType!, $redirectUri: String!) {
-  oauthAuthorize(type: $type, redirectUri: $redirectUri)
-}
-    `;
-export type OAuthAuthorizeMutationFn = ApolloReactCommon.MutationFunction<OAuthAuthorizeMutation, OAuthAuthorizeMutationVariables>;
-
-/**
- * __useOAuthAuthorizeMutation__
- *
- * To run a mutation, you first call `useOAuthAuthorizeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useOAuthAuthorizeMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [oAuthAuthorizeMutation, { data, loading, error }] = useOAuthAuthorizeMutation({
- *   variables: {
- *      type: // value for 'type'
- *      redirectUri: // value for 'redirectUri'
- *   },
- * });
- */
-export function useOAuthAuthorizeMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<OAuthAuthorizeMutation, OAuthAuthorizeMutationVariables>) {
-        return ApolloReactHooks.useMutation<OAuthAuthorizeMutation, OAuthAuthorizeMutationVariables>(OAuthAuthorizeDocument, baseOptions);
-      }
-export type OAuthAuthorizeMutationHookResult = ReturnType<typeof useOAuthAuthorizeMutation>;
-export type OAuthAuthorizeMutationResult = ApolloReactCommon.MutationResult<OAuthAuthorizeMutation>;
-export type OAuthAuthorizeMutationOptions = ApolloReactCommon.BaseMutationOptions<OAuthAuthorizeMutation, OAuthAuthorizeMutationVariables>;
-export const OAuthUnlinkDocument = gql`
-    mutation OAuthUnlink($type: ProviderType!) {
-  oauthUnlink(type: $type) {
-    id
-  }
-}
-    `;
-export type OAuthUnlinkMutationFn = ApolloReactCommon.MutationFunction<OAuthUnlinkMutation, OAuthUnlinkMutationVariables>;
-
-/**
- * __useOAuthUnlinkMutation__
- *
- * To run a mutation, you first call `useOAuthUnlinkMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useOAuthUnlinkMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [oAuthUnlinkMutation, { data, loading, error }] = useOAuthUnlinkMutation({
- *   variables: {
- *      type: // value for 'type'
- *   },
- * });
- */
-export function useOAuthUnlinkMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<OAuthUnlinkMutation, OAuthUnlinkMutationVariables>) {
-        return ApolloReactHooks.useMutation<OAuthUnlinkMutation, OAuthUnlinkMutationVariables>(OAuthUnlinkDocument, baseOptions);
-      }
-export type OAuthUnlinkMutationHookResult = ReturnType<typeof useOAuthUnlinkMutation>;
-export type OAuthUnlinkMutationResult = ApolloReactCommon.MutationResult<OAuthUnlinkMutation>;
-export type OAuthUnlinkMutationOptions = ApolloReactCommon.BaseMutationOptions<OAuthUnlinkMutation, OAuthUnlinkMutationVariables>;
+export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
+export type LoginMutationResult = ApolloReactCommon.MutationResult<LoginMutation>;
+export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
 export const RejectPaperMandateDocument = gql`
     mutation RejectPaperMandate($id: String!, $reason: String!) {
   rejectPaperMandate(mandate: {id: $id}, reason: $reason) {
@@ -3629,6 +3641,98 @@ export function useRejectPaperMandateMutation(baseOptions?: ApolloReactHooks.Mut
 export type RejectPaperMandateMutationHookResult = ReturnType<typeof useRejectPaperMandateMutation>;
 export type RejectPaperMandateMutationResult = ApolloReactCommon.MutationResult<RejectPaperMandateMutation>;
 export type RejectPaperMandateMutationOptions = ApolloReactCommon.BaseMutationOptions<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>;
+export const RequestResetPasswordDocument = gql`
+    mutation RequestResetPassword($email: String!) {
+  requestResetPassword(email: $email)
+}
+    `;
+export type RequestResetPasswordMutationFn = ApolloReactCommon.MutationFunction<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>;
+
+/**
+ * __useRequestResetPasswordMutation__
+ *
+ * To run a mutation, you first call `useRequestResetPasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRequestResetPasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [requestResetPasswordMutation, { data, loading, error }] = useRequestResetPasswordMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useRequestResetPasswordMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>) {
+        return ApolloReactHooks.useMutation<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>(RequestResetPasswordDocument, baseOptions);
+      }
+export type RequestResetPasswordMutationHookResult = ReturnType<typeof useRequestResetPasswordMutation>;
+export type RequestResetPasswordMutationResult = ApolloReactCommon.MutationResult<RequestResetPasswordMutation>;
+export type RequestResetPasswordMutationOptions = ApolloReactCommon.BaseMutationOptions<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>;
+export const RequestVerifyEmailDocument = gql`
+    mutation RequestVerifyEmail($email: String!) {
+  requestVerifyEmail(email: $email)
+}
+    `;
+export type RequestVerifyEmailMutationFn = ApolloReactCommon.MutationFunction<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>;
+
+/**
+ * __useRequestVerifyEmailMutation__
+ *
+ * To run a mutation, you first call `useRequestVerifyEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRequestVerifyEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [requestVerifyEmailMutation, { data, loading, error }] = useRequestVerifyEmailMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useRequestVerifyEmailMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>) {
+        return ApolloReactHooks.useMutation<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>(RequestVerifyEmailDocument, baseOptions);
+      }
+export type RequestVerifyEmailMutationHookResult = ReturnType<typeof useRequestVerifyEmailMutation>;
+export type RequestVerifyEmailMutationResult = ApolloReactCommon.MutationResult<RequestVerifyEmailMutation>;
+export type RequestVerifyEmailMutationOptions = ApolloReactCommon.BaseMutationOptions<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>;
+export const ResetPasswordDocument = gql`
+    mutation ResetPassword($token: String!, $password: String!, $passwordRepeat: String!) {
+  resetPassword(token: $token, password: $password, passwordRepeat: $passwordRepeat)
+}
+    `;
+export type ResetPasswordMutationFn = ApolloReactCommon.MutationFunction<ResetPasswordMutation, ResetPasswordMutationVariables>;
+
+/**
+ * __useResetPasswordMutation__
+ *
+ * To run a mutation, you first call `useResetPasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResetPasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resetPasswordMutation, { data, loading, error }] = useResetPasswordMutation({
+ *   variables: {
+ *      token: // value for 'token'
+ *      password: // value for 'password'
+ *      passwordRepeat: // value for 'passwordRepeat'
+ *   },
+ * });
+ */
+export function useResetPasswordMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ResetPasswordMutation, ResetPasswordMutationVariables>) {
+        return ApolloReactHooks.useMutation<ResetPasswordMutation, ResetPasswordMutationVariables>(ResetPasswordDocument, baseOptions);
+      }
+export type ResetPasswordMutationHookResult = ReturnType<typeof useResetPasswordMutation>;
+export type ResetPasswordMutationResult = ApolloReactCommon.MutationResult<ResetPasswordMutation>;
+export type ResetPasswordMutationOptions = ApolloReactCommon.BaseMutationOptions<ResetPasswordMutation, ResetPasswordMutationVariables>;
 export const UploadPaperMandateDocument = gql`
     mutation UploadPaperMandate($paperMandateId: String!, $file: Upload!) {
   uploadPaperMandate(paperMandate: {id: $paperMandateId}, file: $file) {
@@ -3662,6 +3766,36 @@ export function useUploadPaperMandateMutation(baseOptions?: ApolloReactHooks.Mut
 export type UploadPaperMandateMutationHookResult = ReturnType<typeof useUploadPaperMandateMutation>;
 export type UploadPaperMandateMutationResult = ApolloReactCommon.MutationResult<UploadPaperMandateMutation>;
 export type UploadPaperMandateMutationOptions = ApolloReactCommon.BaseMutationOptions<UploadPaperMandateMutation, UploadPaperMandateMutationVariables>;
+export const VerifyEmailDocument = gql`
+    mutation VerifyEmail($token: String!) {
+  verifyEmail(token: $token)
+}
+    `;
+export type VerifyEmailMutationFn = ApolloReactCommon.MutationFunction<VerifyEmailMutation, VerifyEmailMutationVariables>;
+
+/**
+ * __useVerifyEmailMutation__
+ *
+ * To run a mutation, you first call `useVerifyEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useVerifyEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [verifyEmailMutation, { data, loading, error }] = useVerifyEmailMutation({
+ *   variables: {
+ *      token: // value for 'token'
+ *   },
+ * });
+ */
+export function useVerifyEmailMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<VerifyEmailMutation, VerifyEmailMutationVariables>) {
+        return ApolloReactHooks.useMutation<VerifyEmailMutation, VerifyEmailMutationVariables>(VerifyEmailDocument, baseOptions);
+      }
+export type VerifyEmailMutationHookResult = ReturnType<typeof useVerifyEmailMutation>;
+export type VerifyEmailMutationResult = ApolloReactCommon.MutationResult<VerifyEmailMutation>;
+export type VerifyEmailMutationOptions = ApolloReactCommon.BaseMutationOptions<VerifyEmailMutation, VerifyEmailMutationVariables>;
 export const GetBanksDocument = gql`
     query GetBanks {
   banks {
@@ -4174,7 +4308,7 @@ export type GetPaperMandatesQueryResult = ApolloReactCommon.QueryResult<GetPaper
 export const GetProfileDocument = gql`
     query GetProfile {
   me {
-    ...UserFragment
+    ...MemberFragment
     providers {
       values {
         ...ProviderFragment
@@ -4182,7 +4316,7 @@ export const GetProfileDocument = gql`
     }
   }
 }
-    ${UserFragmentDoc}
+    ${MemberFragmentDoc}
 ${ProviderFragmentDoc}`;
 
 /**
@@ -4262,70 +4396,3 @@ export function useGetTransactionLazyQuery(baseOptions?: ApolloReactHooks.LazyQu
 export type GetTransactionQueryHookResult = ReturnType<typeof useGetTransactionQuery>;
 export type GetTransactionLazyQueryHookResult = ReturnType<typeof useGetTransactionLazyQuery>;
 export type GetTransactionQueryResult = ApolloReactCommon.QueryResult<GetTransactionQuery, GetTransactionQueryVariables>;
-export const GetUserDocument = gql`
-    query GetUser($id: String!) {
-  user(where: {id: $id}) {
-    ...UserFragment
-  }
-}
-    ${UserFragmentDoc}`;
-
-/**
- * __useGetUserQuery__
- *
- * To run a query within a React component, call `useGetUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetUserQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useGetUserQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
-      }
-export function useGetUserLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
-        }
-export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
-export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
-export type GetUserQueryResult = ApolloReactCommon.QueryResult<GetUserQuery, GetUserQueryVariables>;
-export const GetUsersDocument = gql`
-    query GetUsers {
-  users {
-    values {
-      ...UserFragment
-    }
-  }
-}
-    ${UserFragmentDoc}`;
-
-/**
- * __useGetUsersQuery__
- *
- * To run a query within a React component, call `useGetUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetUsersQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetUsersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetUsersQuery, GetUsersQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, baseOptions);
-      }
-export function useGetUsersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetUsersQuery, GetUsersQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, baseOptions);
-        }
-export type GetUsersQueryHookResult = ReturnType<typeof useGetUsersQuery>;
-export type GetUsersLazyQueryHookResult = ReturnType<typeof useGetUsersLazyQuery>;
-export type GetUsersQueryResult = ApolloReactCommon.QueryResult<GetUsersQuery, GetUsersQueryVariables>;

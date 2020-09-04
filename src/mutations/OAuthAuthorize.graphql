@@ -1,3 +1,0 @@
-mutation OAuthAuthorize($type: ProviderType!, $redirectUri: String!) {
-    oauthAuthorize(type: $type, redirectUri: $redirectUri)
-}

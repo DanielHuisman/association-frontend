@@ -1,9 +1,9 @@
-# import '../fragments/User.graphql'
+# import '../fragments/Member.graphql'
 # import '../fragments/Provider.graphql'
 
 query GetProfile {
     me {
-        ...UserFragment
+        ...MemberFragment
 
         providers {
             values {

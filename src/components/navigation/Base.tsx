@@ -3,14 +3,14 @@ import {useTranslation} from 'react-i18next';
 import {Link, NavLink} from 'react-router-dom';
 import {Menu, Dropdown, Button, Icon} from 'semantic-ui-react';
 
-import {UserFragment, Role} from '../../generated/graphql';
+import {MemberFragment} from '../../generated/graphql';
 
 import LanguageMenuItem from './LanguageMenuItem';
 import styles from './Navigation.css';
 import LogoMenuItem from './LogoMenuItem';
 
 interface IProps {
-    user?: UserFragment;
+    user?: MemberFragment;
     sidebar?: boolean;
     onClick?: () => void;
 }
@@ -49,12 +49,9 @@ const Base = ({user, sidebar = false, onClick}: IProps) => {
                     {t('general:contact.header', 'Contact')}
                 </Menu.Item>
 
-                {user && user.role === Role.ADMIN && (
+                {user && user.isAdmin && (
                     <Dropdown text={t('general:administration.header', 'Administration')} item>
                         <Dropdown.Menu>
-                            <Dropdown.Item as={NavLink} exact to="/users" onClick={onClick}>
-                                {t('users:users.header', 'Users')}
-                            </Dropdown.Item>
                             <Dropdown.Item as={NavLink} exact to="/members" onClick={onClick}>
                                 {t('members:members.header', 'Members')}
                             </Dropdown.Item>
@@ -86,7 +83,7 @@ const Base = ({user, sidebar = false, onClick}: IProps) => {
                 <Menu.Menu position="right">
                     <Menu.Item as={NavLink} exact to="/account" onClick={onClick}>
                         <Icon name="user" />
-                        {user.name}
+                        {user.firstName} {user.lastName}
                     </Menu.Item>
                     <Menu.Item as={NavLink} exact to="/logout" onClick={onClick}>
                         {t('auth:logout.header', 'Sign out')}

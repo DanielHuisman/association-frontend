@@ -1,14 +1,14 @@
 import React from 'react';
 import {Container, Responsive, Menu, Icon} from 'semantic-ui-react';
 
-import {UserFragment} from '../../generated/graphql';
+import {MemberFragment} from '../../generated/graphql';
 
 import Base from './Base';
 import LanguageMenuItem from './LanguageMenuItem';
 import LogoMenuItem from './LogoMenuItem';
 
 interface IProps {
-    user?: UserFragment;
+    user?: MemberFragment;
     onSidebar?: () => void;
 }
 

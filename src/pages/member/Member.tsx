@@ -5,7 +5,7 @@ import {useQuery} from '@apollo/react-hooks';
 import {Container, Loader} from 'semantic-ui-react';
 
 import {UserContext} from '../../components/authentication/UserContext';
-import {GetMemberQuery, GetMandateQueryVariables, Role} from '../../generated/graphql';
+import {GetMemberQuery, GetMandateQueryVariables} from '../../generated/graphql';
 import GetMember from '../../queries/GetMember.graphql';
 import {hasPendingPaperMandates} from '../../util';
 import Sign from '../sign/Sign';
@@ -33,7 +33,7 @@ const Member = ({history, match, location}: RouteComponentProps<IRouteParams>) =
     useEffect(() => {
         if (data && data.member) {
             // Check if the member should be redirected to sign a mandate
-            if (!user || user.role !== Role.ADMIN) {
+            if (!user || user.isAdmin) {
                 if (hasPendingPaperMandates(data.member) && !location.pathname.includes('/mandates/sign/paper')) {
                     history.push(`${match.url}/mandates/sign/paper`);
                 }

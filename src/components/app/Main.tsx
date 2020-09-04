@@ -10,9 +10,6 @@ import Contact from '../../pages/contact/Contact';
 import Join from '../../pages/join/Join';
 import Login from '../../pages/auth/login/Login';
 import Logout from '../../pages/auth/logout/Logout';
-import OAuth from '../../pages/auth/oauth/OAuth';
-import Users from '../../pages/users/Users';
-import User from '../../pages/user/User';
 import Members from '../../pages/members/Members';
 import Member from '../../pages/member/Member';
 import Mandates from '../../pages/mandates/Mandates';
@@ -42,11 +39,7 @@ const Main = ({jumbotron = false}: IProps) => {
                     <Route exact path="/join" component={Join} />
 
                     <NoAuthRoute exact path="/login" component={Login} />
-                    <Route exact path="/oauth/:providerType" component={OAuth} />
                     <AuthRoute exact path="/logout" component={Logout} />
-
-                    <AdminRoute exact path="/users" component={Users} />
-                    <AdminRoute path="/users/:userId" component={User} />
 
                     <AdminRoute exact path="/members" component={Members} />
                     <Route path="/members/:memberId" component={Member} />

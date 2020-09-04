@@ -1,13 +1,13 @@
 import React from 'react';
 import {Sidebar as SESidebar, Menu} from 'semantic-ui-react';
 
-import {UserFragment} from '../../generated/graphql';
+import {MemberFragment} from '../../generated/graphql';
 
 import Base from './Base';
 import styles from './Navigation.css';
 
 interface IProps {
-    user?: UserFragment;
+    user?: MemberFragment;
     visible: boolean;
     children: any;
     onHide?: () => void;

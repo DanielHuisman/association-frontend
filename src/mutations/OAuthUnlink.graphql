@@ -1,5 +1,0 @@
-mutation OAuthUnlink($type: ProviderType!) {
-    oauthUnlink(type: $type) {
-        id
-    }
-}

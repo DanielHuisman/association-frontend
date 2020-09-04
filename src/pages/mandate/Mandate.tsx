@@ -13,7 +13,7 @@ import RejectButton from '../../components/mandate/RejectButton';
 import InvalidateButton from '../../components/mandate/InvalidateButton';
 import YesNo from '../../components/util/YesNo';
 import GetMandate from '../../queries/GetMandate.graphql';
-import {GetMandateQuery, GetMandateQueryVariables, MandateStatus, Role} from '../../generated/graphql';
+import {GetMandateQuery, GetMandateQueryVariables, MandateStatus} from '../../generated/graphql';
 
 interface IRouteParams {
     mandateId: string;
@@ -108,7 +108,7 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                         </Table.Body>
                     </Table>
 
-                    {user && user.role === Role.ADMIN && (
+                    {user && user.isAdmin && (
                         <>
                             {data.mandate.__typename === 'PaperMandate' && data.mandate.status === MandateStatus.UNACCEPTED && data.mandate.uploadedFile && (
                                 <>
@@ -150,7 +150,7 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
                         </Table.Body>
                     </Table>
 
-                    {user && user.role === Role.ADMIN && (
+                    {user && user.isAdmin && (
                         <Button as={Link} to={`/members/${data.mandate.member.id}`} color="blue">
                             {t('mandates:mandate.viewMember', 'View member')}
                         </Button>

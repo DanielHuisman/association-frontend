@@ -1,8 +1,7 @@
 {
   "user": {
     "email": "E-mailadres",
-    "name": "Naam",
-    "role": "Rol"
+    "name": "Naam"
   },
   "users": {
     "header": "Gebruikers"

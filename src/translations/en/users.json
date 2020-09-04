@@ -1,8 +1,7 @@
 {
   "user": {
     "email": "Email address",
-    "name": "Name",
-    "role": "Role"
+    "name": "Name"
   },
   "users": {
     "header": "Users"

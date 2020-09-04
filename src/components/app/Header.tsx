@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {UserFragment} from '../../generated/graphql';
+import {MemberFragment} from '../../generated/graphql';
 import Topbar from '../navigation/Topbar';
 
 interface IProps {
-    user?: UserFragment;
+    user?: MemberFragment;
     onSidebar?: () => void;
 }
 
