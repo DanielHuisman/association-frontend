@@ -1,3 +1,4 @@
+import account from './account.json';
 import auth from './auth.json';
 import directDebits from './directDebits.json';
 import events from './events.json';
@@ -9,6 +10,7 @@ import transactions from './transactions.json';
 import users from './users.json';
 
 export default {
+    account,
     auth,
     directDebits,
     events,

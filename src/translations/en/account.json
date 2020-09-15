@@ -1,0 +1,34 @@
+{
+  "profile": {
+    "header": "Profile",
+    "image": {
+      "failure": "Failed to change your profile image.",
+      "header": "Image",
+      "success": "Successfully changed your profile image.",
+      "update": "Update profile image"
+    },
+    "information": {
+      "header": "Information",
+      "update": "Update profile information"
+    }
+  },
+  "security": {
+    "email": {
+      "change": "Change email address",
+      "currentEmail": "Current email address",
+      "failure": "Failed to change your email address.",
+      "header": "Email address",
+      "newEmail": "New email address",
+      "success": "Successfully changed your email address."
+    },
+    "header": "Security",
+    "password": {
+      "change": "Change password",
+      "failure": "Failed to change your password.",
+      "header": "Password",
+      "password": "Password",
+      "passwordRepeat": "Repeat password",
+      "success": "Successfully changed your password."
+    }
+  }
+}

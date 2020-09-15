@@ -14,6 +14,7 @@ import VerifyEmail from '../../pages/auth/verify-email/VerifyEmail';
 import ResetPassword from '../../pages/auth/reset-password/ResetPassword';
 import RequestVerifyEmail from '../../pages/auth/request-verify-email/RequestVerifyEmail';
 import RequestResetPassword from '../../pages/auth/request-reset-password/RequestResetPassword';
+import Account from '../../pages/account/Account';
 import Members from '../../pages/members/Members';
 import Member from '../../pages/member/Member';
 import Mandates from '../../pages/mandates/Mandates';
@@ -48,6 +49,8 @@ const Main = ({jumbotron = false}: IProps) => {
                     <NoAuthRoute exact path="/reset/:token" component={ResetPassword} />
                     <Route exact path="/request/verify" component={RequestVerifyEmail} />
                     <NoAuthRoute exact path="/request/reset" component={RequestResetPassword} />
+
+                    <AuthRoute path="/account" component={Account} />
 
                     <AdminRoute exact path="/members" component={Members} />
                     <Route path="/members/:memberId" component={Member} />

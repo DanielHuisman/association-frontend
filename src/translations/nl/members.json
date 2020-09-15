@@ -3,7 +3,7 @@
     "address": "Adres",
     "birthdate": "Geboortedatum",
     "checkInfo": "Dit is je lidmaatschapsinformatie, controleer a.u.b. of alles correct is. Als iets incorrect is of je iets wil wijzigen, kun je contact opnemen met het bestuur.",
-    "city": "City",
+    "city": "Woonplaats",
     "details": "Gegevens lid",
     "email": "E-mailadres",
     "firstName": "Voornaam",
@@ -19,9 +19,9 @@
     "phoneNumber": "Telefoonnummer",
     "postalCode": "Postcode",
     "pronounTypes": {
-      "HE_HIM": "Hij/hem",
-      "SHE_HER": "Zij/haar",
-      "THEY_THEM": "Hen/hun"
+      "HE_HIM": "Hij/hem/zijn",
+      "SHE_HER": "Zij/haar/haar",
+      "THEY_THEM": "Die/hen/hun"
     },
     "pronouns": "Gewenste voornaamwoorden",
     "studentType": "Soort student",

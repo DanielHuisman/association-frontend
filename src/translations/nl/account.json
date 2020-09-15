@@ -1,0 +1,34 @@
+{
+  "profile": {
+    "header": "Profiel",
+    "image": {
+      "failure": "Profielfoto veranderen is mislukt.",
+      "header": "Foto",
+      "success": "Profielfoto is succesvol veranderd.",
+      "update": "Verander profielfoto"
+    },
+    "information": {
+      "header": "Gegevens",
+      "update": "Verander profielgegevens"
+    }
+  },
+  "security": {
+    "email": {
+      "change": "Verander e-mailadres",
+      "currentEmail": "Huidige e-mailadres",
+      "failure": "E-mailadres veranderen is mislukt.",
+      "header": "E-mailadres",
+      "newEmail": "Nieuwe e-mailadres",
+      "success": "E-mailadres is succesvol veranderd."
+    },
+    "header": "Beveiliging",
+    "password": {
+      "change": "Verander wachtwoord",
+      "failure": "Wachtwoord veranderen is mislukt.",
+      "header": "Wachtwoord",
+      "password": "Wachtwoord",
+      "passwordRepeat": "Herhaal wachtwoord",
+      "success": "Wachtwoord is succesvol veranderd."
+    }
+  }
+}

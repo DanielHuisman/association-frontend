@@ -2,7 +2,7 @@ import {ApolloError} from 'apollo-client';
 import {TFunction} from 'i18next';
 import {useTranslation} from 'react-i18next';
 
-import {TranslatableFragment} from '../generated/graphql';
+import {Language, TranslatableFragment} from '../generated/graphql';
 export const useTranslate = () => {
     const {i18n} = useTranslation();
 
@@ -24,3 +24,20 @@ export const CURRENCY_FORMAT = new Intl.NumberFormat('nl-NL', {
     currency: 'EUR'
 });
 export const formatCurrency = (amount: number) => CURRENCY_FORMAT.format(amount / 100);
+
+export const languageNames = {
+    en: 'English',
+    nl: 'Nederlands'
+};
+
+export const languageFlags = {
+    en: 'gb',
+    nl: 'nl'
+};
+
+export const languageOptions = Object.values(Language).map((language) => ({
+    key: language,
+    value: language,
+    text: languageNames[language.toLowerCase()],
+    flag: languageFlags[language.toLowerCase()]
+}));
