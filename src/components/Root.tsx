@@ -1,5 +1,6 @@
 import React from 'react';
 import {Router} from 'react-router-dom';
+import ScrollMemory from 'react-router-scroll-memory';
 import {ApolloProvider} from '@apollo/react-hooks';
 import {createBrowserHistory} from 'history';
 
@@ -14,6 +15,7 @@ const Root = () => {
     return (
         <ApolloProvider client={client}>
             <Router history={history}>
+                <ScrollMemory />
                 <App />
             </Router>
         </ApolloProvider>
