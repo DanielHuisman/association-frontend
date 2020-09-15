@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {Field, FormikConfig} from 'formik';
 
 import {Form, SubmitButton, FieldFile} from '../../../components/form';
-import UserImage from '../../../components/user/UserImage';
+import MemberImage from '../../../components/member/MemberImage';
 
 export interface IValues {
     file: File;
@@ -24,7 +24,7 @@ const ImageForm = ({profile, onSubmit}: IProps) => {
             }}
             onSubmit={onSubmit}
         >
-            <UserImage user={profile} style={{marginBottom: '1rem'}} />
+            <MemberImage member={profile} style={{marginBottom: '1rem'}} />
             <Field component={FieldFile} name="file" />
 
             <SubmitButton color="blue">

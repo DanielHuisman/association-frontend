@@ -1,5 +1,5 @@
 import React from 'react';
-import {RouteComponentProps} from 'react-router-dom';
+import {Redirect, RouteComponentProps} from 'react-router-dom';
 import {Container, Grid} from 'semantic-ui-react';
 
 import AccountMenu from '../../components/account/AccountMenu';
@@ -16,6 +16,7 @@ const Account = ({match}: RouteComponentProps) => (
                     <AccountMenu />
                 </Grid.Column>
                 <Grid.Column width={12}>
+                    <Redirect exact path={`${match.path}/`} to={`${match.path}/profile`} />
                     <AuthRoute exact path={`${match.path}/profile`} component={Profile} />
                     <AuthRoute exact path={`${match.path}/security`} component={Security} />
                 </Grid.Column>

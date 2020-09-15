@@ -7,7 +7,7 @@ import {Page} from '../../../components/page/Page';
 import {GetProfileQuery} from '../../../generated/graphql';
 import GetProfile from '../../../queries/GetProfile.graphql';
 
-// import Image from './Image';
+import Image from './Image';
 import Information from './Information';
 
 const Profile = () => {
@@ -21,7 +21,7 @@ const Profile = () => {
                         <Helmet title={t('account:profile.header', 'Profile')} />
                         <Header size="huge">{t('account:profile.header', 'Profile')}</Header>
 
-                        {/* <Image /> */}
+                        <Image />
 
                         <Divider />
 

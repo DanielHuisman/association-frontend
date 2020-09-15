@@ -64,6 +64,14 @@ export type Committee = {
   description: LongTranslatable;
 };
 
+export type File = {
+  __typename?: 'File';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  mimeType: Scalars['String'];
+  url: Scalars['String'];
+};
+
 export type Transaction = {
   id: Scalars['String'];
   createdAt: Scalars['DateTime'];
@@ -148,6 +156,7 @@ export type Member = {
   pronouns: Pronouns;
   studentType: StudentType;
   isAdmin: Scalars['Boolean'];
+  image?: Maybe<File>;
   memberships: MembershipList;
   mandates: MandateList;
   transactions: TransactionList;
@@ -203,14 +212,6 @@ export type DirectDebitWarning = {
   description: Scalars['String'];
   directDebit: DirectDebit;
   member?: Maybe<Member>;
-};
-
-export type File = {
-  __typename?: 'File';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  mimeType: Scalars['String'];
-  url: Scalars['String'];
 };
 
 export enum DirectDebitStatus {
@@ -578,6 +579,42 @@ export type CommitteeList = {
   values: Array<Committee>;
 };
 
+export type FileWhereInput = {
+  id?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  mimeType?: Maybe<StringFilter>;
+  AND?: Maybe<Array<FileWhereInput>>;
+  OR?: Maybe<Array<FileWhereInput>>;
+};
+
+export type FileOrderByInput = {
+  id?: Maybe<OrderByArg>;
+  name?: Maybe<OrderByArg>;
+  mimeType?: Maybe<OrderByArg>;
+};
+
+export type FileCreateInput = {
+  id?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  mimeType: Scalars['String'];
+};
+
+export type FileUpdateInput = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  mimeType?: Maybe<Scalars['String']>;
+};
+
+export type FileWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type FileList = {
+  __typename?: 'FileList';
+  info: ListInfo;
+  values: Array<File>;
+};
+
 export type TransactionWhereInput = {
   id?: Maybe<StringFilter>;
   createdAt?: Maybe<DateTimeFilter>;
@@ -753,6 +790,7 @@ export type MemberWhereInput = {
   pronouns?: Maybe<PronounsFilter>;
   studentType?: Maybe<StudentTypeFilter>;
   isAdmin?: Maybe<Scalars['Boolean']>;
+  image?: Maybe<FileWhereInput>;
   memberships?: Maybe<MembershipWhereInput>;
   mandates?: Maybe<MandateWhereInput>;
   transactions?: Maybe<TransactionWhereInput>;
@@ -776,6 +814,7 @@ export type MemberOrderByInput = {
   pronouns?: Maybe<OrderByArg>;
   studentType?: Maybe<OrderByArg>;
   isAdmin?: Maybe<OrderByArg>;
+  image?: Maybe<FileOrderByInput>;
 };
 
 export type MemberCreateInput = {
@@ -794,6 +833,7 @@ export type MemberCreateInput = {
   pronouns?: Maybe<Pronouns>;
   studentType: StudentType;
   isAdmin?: Maybe<Scalars['Boolean']>;
+  image?: Maybe<FileCreateRelationInput>;
   memberships?: Maybe<Array<MembershipCreateRelationInput>>;
   mandates?: Maybe<Array<MandateCreateRelationInput>>;
   transactions?: Maybe<Array<TransactionCreateRelationInput>>;
@@ -816,6 +856,7 @@ export type MemberUpdateInput = {
   pronouns?: Maybe<Pronouns>;
   studentType?: Maybe<StudentType>;
   isAdmin?: Maybe<Scalars['Boolean']>;
+  image?: Maybe<FileUpdateRelationInput>;
   memberships?: Maybe<Array<MembershipUpdateRelationInput>>;
   mandates?: Maybe<Array<MandateUpdateRelationInput>>;
   transactions?: Maybe<Array<TransactionUpdateRelationInput>>;
@@ -878,42 +919,6 @@ export type DirectDebitWarningList = {
   __typename?: 'DirectDebitWarningList';
   info: ListInfo;
   values: Array<DirectDebitWarning>;
-};
-
-export type FileWhereInput = {
-  id?: Maybe<StringFilter>;
-  name?: Maybe<StringFilter>;
-  mimeType?: Maybe<StringFilter>;
-  AND?: Maybe<Array<FileWhereInput>>;
-  OR?: Maybe<Array<FileWhereInput>>;
-};
-
-export type FileOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  name?: Maybe<OrderByArg>;
-  mimeType?: Maybe<OrderByArg>;
-};
-
-export type FileCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  mimeType: Scalars['String'];
-};
-
-export type FileUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  mimeType?: Maybe<Scalars['String']>;
-};
-
-export type FileWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type FileList = {
-  __typename?: 'FileList';
-  info: ListInfo;
-  values: Array<File>;
 };
 
 export type DirectDebitWhereInput = {
@@ -1604,6 +1609,11 @@ export type ProviderCreateRelationInput = {
   connect?: Maybe<ProviderWhereUniqueInput>;
 };
 
+export type FileCreateRelationInput = {
+  create?: Maybe<FileCreateInput>;
+  connect?: Maybe<FileWhereUniqueInput>;
+};
+
 export type MandateCreateRelationInput = {
   create?: Maybe<MandateCreateInput>;
   connect?: Maybe<MandateWhereUniqueInput>;
@@ -1623,6 +1633,12 @@ export type ProviderUpdateRelationInput = {
   create?: Maybe<ProviderCreateInput>;
   connect?: Maybe<ProviderWhereUniqueInput>;
   disconnect?: Maybe<ProviderWhereUniqueInput>;
+};
+
+export type FileUpdateRelationInput = {
+  create?: Maybe<FileCreateInput>;
+  connect?: Maybe<FileWhereUniqueInput>;
+  disconnect?: Maybe<FileWhereUniqueInput>;
 };
 
 export type MandateUpdateRelationInput = {
@@ -1666,21 +1682,10 @@ export type DirectDebitBatchCreateRelationInput = {
   connect?: Maybe<DirectDebitBatchWhereUniqueInput>;
 };
 
-export type FileCreateRelationInput = {
-  create?: Maybe<FileCreateInput>;
-  connect?: Maybe<FileWhereUniqueInput>;
-};
-
 export type DirectDebitBatchUpdateRelationInput = {
   create?: Maybe<DirectDebitBatchCreateInput>;
   connect?: Maybe<DirectDebitBatchWhereUniqueInput>;
   disconnect?: Maybe<DirectDebitBatchWhereUniqueInput>;
-};
-
-export type FileUpdateRelationInput = {
-  create?: Maybe<FileCreateInput>;
-  connect?: Maybe<FileWhereUniqueInput>;
-  disconnect?: Maybe<FileWhereUniqueInput>;
 };
 
 export type SequenceTypeFilter = {
@@ -1710,6 +1715,8 @@ export type Query = {
   banks: BankList;
   committee: Committee;
   committees: CommitteeList;
+  file: File;
+  files: FileList;
   transaction: Transaction;
   transactions: TransactionList;
   membershipFeeTransaction: MembershipFeeTransaction;
@@ -1720,8 +1727,6 @@ export type Query = {
   members: MemberList;
   directDebitWarning: DirectDebitWarning;
   directDebitWarnings: DirectDebitWarningList;
-  file: File;
-  files: FileList;
   directDebit: DirectDebit;
   directDebits: DirectDebitList;
   directDebitBatch: DirectDebitBatch;
@@ -1767,6 +1772,19 @@ export type QuerycommitteeArgs = {
 export type QuerycommitteesArgs = {
   where?: Maybe<CommitteeWhereInput>;
   orderBy?: Maybe<CommitteeOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryfileArgs = {
+  where: FileWhereUniqueInput;
+};
+
+
+export type QueryfilesArgs = {
+  where?: Maybe<FileWhereInput>;
+  orderBy?: Maybe<FileOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -1832,19 +1850,6 @@ export type QuerydirectDebitWarningArgs = {
 export type QuerydirectDebitWarningsArgs = {
   where?: Maybe<DirectDebitWarningWhereInput>;
   orderBy?: Maybe<DirectDebitWarningOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryfileArgs = {
-  where: FileWhereUniqueInput;
-};
-
-
-export type QueryfilesArgs = {
-  where?: Maybe<FileWhereInput>;
-  orderBy?: Maybe<FileOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -1988,6 +1993,7 @@ export type Mutation = {
   acceptPaperMandate: PaperMandate;
   rejectPaperMandate: PaperMandate;
   generateMembershipFeeTransactions: Scalars['Int'];
+  uploadMemberImage: Member;
   uploadPaperMandate: PaperMandate;
   createBank: Bank;
   updateBank: Bank;
@@ -1997,6 +2003,10 @@ export type Mutation = {
   updateCommittee: Committee;
   deleteCommittee: Committee;
   deleteCommittees: CommitteeList;
+  createFile: File;
+  updateFile: File;
+  deleteFile: File;
+  deleteFiles: FileList;
   createTransaction: Transaction;
   updateTransaction: Transaction;
   deleteTransaction: Transaction;
@@ -2017,10 +2027,6 @@ export type Mutation = {
   updateDirectDebitWarning: DirectDebitWarning;
   deleteDirectDebitWarning: DirectDebitWarning;
   deleteDirectDebitWarnings: DirectDebitWarningList;
-  createFile: File;
-  updateFile: File;
-  deleteFile: File;
-  deleteFiles: FileList;
   createDirectDebit: DirectDebit;
   updateDirectDebit: DirectDebit;
   deleteDirectDebit: DirectDebit;
@@ -2100,9 +2106,15 @@ export type MutationgenerateMembershipFeeTransactionsArgs = {
 };
 
 
+export type MutationuploadMemberImageArgs = {
+  member: MemberWhereUniqueInput;
+  file: Scalars['Upload'];
+};
+
+
 export type MutationuploadPaperMandateArgs = {
   paperMandate: PaperMandateWhereUniqueInput;
-  file?: Maybe<Scalars['Upload']>;
+  file: Scalars['Upload'];
 };
 
 
@@ -2149,6 +2161,30 @@ export type MutationdeleteCommitteeArgs = {
 export type MutationdeleteCommitteesArgs = {
   where?: Maybe<CommitteeWhereInput>;
   orderBy?: Maybe<CommitteeOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type MutationcreateFileArgs = {
+  data: FileCreateInput;
+};
+
+
+export type MutationupdateFileArgs = {
+  where: FileWhereUniqueInput;
+  data: FileUpdateInput;
+};
+
+
+export type MutationdeleteFileArgs = {
+  where: FileWhereUniqueInput;
+};
+
+
+export type MutationdeleteFilesArgs = {
+  where?: Maybe<FileWhereInput>;
+  orderBy?: Maybe<FileOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -2269,30 +2305,6 @@ export type MutationdeleteDirectDebitWarningArgs = {
 export type MutationdeleteDirectDebitWarningsArgs = {
   where?: Maybe<DirectDebitWarningWhereInput>;
   orderBy?: Maybe<DirectDebitWarningOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateFileArgs = {
-  data: FileCreateInput;
-};
-
-
-export type MutationupdateFileArgs = {
-  where: FileWhereUniqueInput;
-  data: FileUpdateInput;
-};
-
-
-export type MutationdeleteFileArgs = {
-  where: FileWhereUniqueInput;
-};
-
-
-export type MutationdeleteFilesArgs = {
-  where?: Maybe<FileWhereInput>;
-  orderBy?: Maybe<FileOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -2606,6 +2618,10 @@ export type PaperMandateFragment = (
 export type MemberFragment = (
   { __typename?: 'Member' }
   & Pick<Member, 'id' | 'firstName' | 'initials' | 'lastName' | 'email' | 'address' | 'postalCode' | 'city' | 'phoneNumber' | 'birthdate' | 'language' | 'pronouns' | 'studentType' | 'isAdmin'>
+  & { image?: Maybe<(
+    { __typename?: 'File' }
+    & FileFragment
+  )> }
 );
 
 export type MembershipFragment = (
@@ -2800,6 +2816,20 @@ export type ResetPasswordMutationVariables = Exact<{
 export type ResetPasswordMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'resetPassword'>
+);
+
+export type UploadMemberImageMutationVariables = Exact<{
+  member: MemberWhereUniqueInput;
+  file: Scalars['Upload'];
+}>;
+
+
+export type UploadMemberImageMutation = (
+  { __typename?: 'Mutation' }
+  & { uploadMemberImage: (
+    { __typename?: 'Member' }
+    & MemberFragment
+  ) }
 );
 
 export type UploadPaperMandateMutationVariables = Exact<{
@@ -3310,8 +3340,11 @@ export const MemberFragmentDoc = gql`
   pronouns
   studentType
   isAdmin
+  image {
+    ...FileFragment
+  }
 }
-    `;
+    ${FileFragmentDoc}`;
 export const MembershipFragmentDoc = gql`
     fragment MembershipFragment on Membership {
   id
@@ -3733,6 +3766,39 @@ export function useResetPasswordMutation(baseOptions?: ApolloReactHooks.Mutation
 export type ResetPasswordMutationHookResult = ReturnType<typeof useResetPasswordMutation>;
 export type ResetPasswordMutationResult = ApolloReactCommon.MutationResult<ResetPasswordMutation>;
 export type ResetPasswordMutationOptions = ApolloReactCommon.BaseMutationOptions<ResetPasswordMutation, ResetPasswordMutationVariables>;
+export const UploadMemberImageDocument = gql`
+    mutation UploadMemberImage($member: MemberWhereUniqueInput!, $file: Upload!) {
+  uploadMemberImage(member: $member, file: $file) {
+    ...MemberFragment
+  }
+}
+    ${MemberFragmentDoc}`;
+export type UploadMemberImageMutationFn = ApolloReactCommon.MutationFunction<UploadMemberImageMutation, UploadMemberImageMutationVariables>;
+
+/**
+ * __useUploadMemberImageMutation__
+ *
+ * To run a mutation, you first call `useUploadMemberImageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUploadMemberImageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [uploadMemberImageMutation, { data, loading, error }] = useUploadMemberImageMutation({
+ *   variables: {
+ *      member: // value for 'member'
+ *      file: // value for 'file'
+ *   },
+ * });
+ */
+export function useUploadMemberImageMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UploadMemberImageMutation, UploadMemberImageMutationVariables>) {
+        return ApolloReactHooks.useMutation<UploadMemberImageMutation, UploadMemberImageMutationVariables>(UploadMemberImageDocument, baseOptions);
+      }
+export type UploadMemberImageMutationHookResult = ReturnType<typeof useUploadMemberImageMutation>;
+export type UploadMemberImageMutationResult = ApolloReactCommon.MutationResult<UploadMemberImageMutation>;
+export type UploadMemberImageMutationOptions = ApolloReactCommon.BaseMutationOptions<UploadMemberImageMutation, UploadMemberImageMutationVariables>;
 export const UploadPaperMandateDocument = gql`
     mutation UploadPaperMandate($paperMandateId: String!, $file: Upload!) {
   uploadPaperMandate(paperMandate: {id: $paperMandateId}, file: $file) {

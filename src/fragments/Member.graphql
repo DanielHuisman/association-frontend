@@ -1,3 +1,5 @@
+# import './File.graphql'
+
 fragment MemberFragment on Member {
     id
     firstName
@@ -13,4 +15,8 @@ fragment MemberFragment on Member {
     pronouns
     studentType
     isAdmin
+
+    image {
+        ...FileFragment
+    }
 }

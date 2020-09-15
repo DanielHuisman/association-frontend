@@ -1,9 +1,10 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Link, NavLink} from 'react-router-dom';
-import {Menu, Dropdown, Button, Icon} from 'semantic-ui-react';
+import {Menu, Dropdown, Button} from 'semantic-ui-react';
 
 import {MemberFragment} from '../../generated/graphql';
+import MemberImage from '../member/MemberImage';
 
 import LanguageMenuItem from './LanguageMenuItem';
 import styles from './Navigation.css';
@@ -81,8 +82,8 @@ const Base = ({user, sidebar = false, onClick}: IProps) => {
             )}
             {user && (
                 <Menu.Menu position="right">
-                    <Menu.Item as={NavLink} exact to="/account" onClick={onClick}>
-                        <Icon name="user" />
+                    <Menu.Item as={NavLink} exact to="/account/profile" onClick={onClick} fitted="vertically">
+                        <MemberImage member={user} size={32} style={sidebar ? {marginBottom: '0.5rem'} : {marginRight: '0.75rem'}} />
                         {user.firstName} {user.lastName}
                     </Menu.Item>
                     <Menu.Item as={NavLink} exact to="/logout" onClick={onClick}>
