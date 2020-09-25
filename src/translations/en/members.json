@@ -1,6 +1,7 @@
 {
   "member": {
     "address": "Address",
+    "birthDate": "Date of birth",
     "birthdate": "Date of birth",
     "checkInfo": "This is your membership information, please check if everything is correct. If something is incorrect or you would like to change something, please contact the board.",
     "city": "City",

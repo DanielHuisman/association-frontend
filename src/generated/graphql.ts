@@ -2818,6 +2818,20 @@ export type ResetPasswordMutation = (
   & Pick<Mutation, 'resetPassword'>
 );
 
+export type UpdateMemberMutationVariables = Exact<{
+  where: MemberWhereUniqueInput;
+  data: MemberUpdateInput;
+}>;
+
+
+export type UpdateMemberMutation = (
+  { __typename?: 'Mutation' }
+  & { updateMember: (
+    { __typename?: 'Member' }
+    & MemberFragment
+  ) }
+);
+
 export type UploadMemberImageMutationVariables = Exact<{
   member: MemberWhereUniqueInput;
   file: Scalars['Upload'];
@@ -3766,6 +3780,39 @@ export function useResetPasswordMutation(baseOptions?: ApolloReactHooks.Mutation
 export type ResetPasswordMutationHookResult = ReturnType<typeof useResetPasswordMutation>;
 export type ResetPasswordMutationResult = ApolloReactCommon.MutationResult<ResetPasswordMutation>;
 export type ResetPasswordMutationOptions = ApolloReactCommon.BaseMutationOptions<ResetPasswordMutation, ResetPasswordMutationVariables>;
+export const UpdateMemberDocument = gql`
+    mutation UpdateMember($where: MemberWhereUniqueInput!, $data: MemberUpdateInput!) {
+  updateMember(where: $where, data: $data) {
+    ...MemberFragment
+  }
+}
+    ${MemberFragmentDoc}`;
+export type UpdateMemberMutationFn = ApolloReactCommon.MutationFunction<UpdateMemberMutation, UpdateMemberMutationVariables>;
+
+/**
+ * __useUpdateMemberMutation__
+ *
+ * To run a mutation, you first call `useUpdateMemberMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateMemberMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateMemberMutation, { data, loading, error }] = useUpdateMemberMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useUpdateMemberMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateMemberMutation, UpdateMemberMutationVariables>) {
+        return ApolloReactHooks.useMutation<UpdateMemberMutation, UpdateMemberMutationVariables>(UpdateMemberDocument, baseOptions);
+      }
+export type UpdateMemberMutationHookResult = ReturnType<typeof useUpdateMemberMutation>;
+export type UpdateMemberMutationResult = ApolloReactCommon.MutationResult<UpdateMemberMutation>;
+export type UpdateMemberMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateMemberMutation, UpdateMemberMutationVariables>;
 export const UploadMemberImageDocument = gql`
     mutation UploadMemberImage($member: MemberWhereUniqueInput!, $file: Upload!) {
   uploadMemberImage(member: $member, file: $file) {

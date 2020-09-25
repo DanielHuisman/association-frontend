@@ -8,7 +8,11 @@
       "update": "Verander profielfoto"
     },
     "information": {
+      "failure": "Failed to change your profile.",
+      "firstNameRemark": "Gewenste voornaam, niet noodzakelijk wettelijke voornaam.",
       "header": "Gegevens",
+      "initialsRemark": "Wettelijke initialen.",
+      "success": "Successfully changed your profile.",
       "update": "Verander profielgegevens"
     }
   },

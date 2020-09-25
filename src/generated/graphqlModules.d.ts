@@ -235,6 +235,15 @@ declare module '*/ResetPassword.graphql' {
 }
     
 
+declare module '*/UpdateMember.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const UpdateMember: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/UploadMemberImage.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

@@ -4,15 +4,21 @@ import {Field, FormikConfig} from 'formik';
 import * as Yup from 'yup';
 
 import {Form, FieldInput, SubmitButton, FieldDropdown} from '../../../components/form';
-import {Language, MemberFragment, ProviderFragment} from '../../../generated/graphql';
-import {languageOptions} from '../../../util';
+import {Language, MemberFragment, Pronouns, ProviderFragment, StudentType} from '../../../generated/graphql';
+import {languageOptions, isPhoneNumber} from '../../../util';
 
 export interface IValues {
     firstName: string;
     lastName: string;
     initials: string;
-    email: string;
+    address: string;
+    postalCode: string;
+    city: string;
+    phoneNumber: string;
+    birthdate: string;
     language: Language;
+    pronouns: Pronouns;
+    studentType: StudentType;
 }
 
 interface IProps {
@@ -32,12 +38,6 @@ const schema = Yup.object().shape({
     initials: Yup.string()
         .required('This field is required.')
         .matches(/^[a-zA-z. ]+$/, 'Invalid initials, only use letters, dots or spaces.'),
-    email: Yup.string()
-        .required('This field is required.')
-        .email('Invalid email address.'),
-    language: Yup.string()
-        .required('This field is required.')
-        .oneOf(Object.values(Language)),
     address: Yup.string()
         .required('This field is required.'),
     postalCode: Yup.string()
@@ -45,7 +45,20 @@ const schema = Yup.object().shape({
     city: Yup.string()
         .required('This field is required.'),
     phoneNumber: Yup.string()
-        .required('This field is required.'),
+        .required('This field is required.')
+        .test('isPhoneNumber', 'Invalid phone number', isPhoneNumber),
+    birthdate: Yup.string()
+        .required('This field is required.')
+        .matches(/^\d{4}-\d{1,2}-\d{1,2}$/, 'Invalid date.'),
+    language: Yup.string()
+        .required('This field is required.')
+        .oneOf(Object.values(Language)),
+    pronouns: Yup.string()
+        .required('This field is required.')
+        .oneOf(Object.values(Pronouns)),
+    studentType: Yup.string()
+        .required('This field is required.')
+        .oneOf(Object.values(StudentType)),
 });
 
 const InformationForm = ({profile, onSubmit}: IProps) => {
@@ -58,23 +71,51 @@ const InformationForm = ({profile, onSubmit}: IProps) => {
             onSubmit={onSubmit}
         >
             <Field component={FieldInput} name="firstName" type="text" label={t('members:member.firstName', 'First name')} />
+            <p>
+                <i>{t('account:profile.information.firstNameRemark', 'Preferred first name, not necessarily legal first name.')}</i>
+            </p>
+
             <Field component={FieldInput} name="initials" type="text" label={t('members:member.initials', 'Initials')} />
+            <p>
+                <i>{t('account:profile.information.initialsRemark', 'Legal initials.')}</i>
+            </p>
+
             <Field component={FieldInput} name="lastName" type="text" label={t('members:member.lastName', 'Last name')} />
-            <Field component={FieldInput} name="email" type="text" label={t('members:member.email', 'Email address')} />
+
+            <Field component={FieldInput} name="address" type="text" label={t('members:member.address', 'Address')} />
+            <Field component={FieldInput} name="postalCode" type="text" label={t('members:member.postalCode', 'Postal code')} />
+            <Field component={FieldInput} name="city" type="text" label={t('members:member.city', 'City')} />
+            {/* TODO: country */}
+
+            <Field component={FieldInput} name="phoneNumber" type="text" label={t('members:member.phoneNumber', 'Phone number')} />
+            <Field component={FieldInput} name="birthdate" type="date" label={t('members:member.birthDate', 'Date of birth')} />
+
             <Field
                 component={FieldDropdown}
                 name="language"
                 label={t('members:member.language', 'Language')}
                 options={languageOptions}
             />
-
-            <Field component={FieldInput} name="address" type="text" label={t('members:member.address', 'Address')} />
-            <Field component={FieldInput} name="postalCode" type="text" label={t('members:member.postalCode', 'Postal code')} />
-            <Field component={FieldInput} name="city" type="text" label={t('members:member.city', 'City')} />
-            {/* TODO: country */}
-            <Field component={FieldInput} name="phoneNumber" type="text" label={t('members:member.phoneNumber', 'Phone number')} />
-
-            {/* TODO: birthdate, pronouns, student type */}
+            <Field
+                component={FieldDropdown}
+                name="pronouns"
+                label={t('members:member.pronouns', 'Pronouns')}
+                options={Object.values(Pronouns).map((pronoun) => ({
+                    key: pronoun,
+                    value: pronoun,
+                    text: t(`members:member.pronounTypes.${pronoun}`)
+                }))}
+            />
+            <Field
+                component={FieldDropdown}
+                name="studentType"
+                label={t('members:member.studentType', 'Student type')}
+                options={Object.values(StudentType).map((type) => ({
+                    key: type,
+                    value: type,
+                    text: t(`members:member.studentTypes.${type}`)
+                }))}
+            />
 
             <SubmitButton color="blue">
                 {t('account:profile.information.update', 'Update profile information')}

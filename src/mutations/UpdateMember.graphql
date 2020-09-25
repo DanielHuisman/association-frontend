@@ -1,0 +1,7 @@
+# import '../fragments/Member.graphql'
+
+mutation UpdateMember($where: MemberWhereUniqueInput!, $data: MemberUpdateInput!) {
+    updateMember(where: $where, data: $data) {
+        ...MemberFragment
+    }
+}

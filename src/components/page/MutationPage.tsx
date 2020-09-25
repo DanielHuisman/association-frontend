@@ -1,7 +1,6 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {MutationFunction, MutationResult} from '@apollo/react-common';
-import {useMutation, MutationHookOptions} from '@apollo/react-hooks';
+import {useMutation, MutationFunction, MutationResult, MutationHookOptions} from '@apollo/react-hooks';
 import {Message, Loader} from 'semantic-ui-react';
 
 import {translateError} from '../../util';

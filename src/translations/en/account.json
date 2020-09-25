@@ -8,7 +8,11 @@
       "update": "Update profile image"
     },
     "information": {
+      "failure": "Failed to change your profile.",
+      "firstNameRemark": "Preferred first name, not necessarily legal first name.",
       "header": "Information",
+      "initialsRemark": "Legal initials.",
+      "success": "Successfully changed your profile.",
       "update": "Update profile information"
     }
   },

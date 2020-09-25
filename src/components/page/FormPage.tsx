@@ -1,6 +1,5 @@
 import React from 'react';
-import {QueryResult, MutationFunction, MutationResult} from '@apollo/react-common';
-import {MutationHookOptions} from '@apollo/react-hooks';
+import {QueryResult, MutationFunction, MutationResult, MutationHookOptions} from '@apollo/react-hooks';
 import {FormikConfig} from 'formik';
 
 import {Page, IPageProps} from './Page';

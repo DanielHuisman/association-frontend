@@ -1,6 +1,7 @@
 {
   "member": {
     "address": "Adres",
+    "birthDate": "Date of birth",
     "birthdate": "Geboortedatum",
     "checkInfo": "Dit is je lidmaatschapsinformatie, controleer a.u.b. of alles correct is. Als iets incorrect is of je iets wil wijzigen, kun je contact opnemen met het bestuur.",
     "city": "Woonplaats",
@@ -21,7 +22,7 @@
     "pronounTypes": {
       "HE_HIM": "Hij/hem/zijn",
       "SHE_HER": "Zij/haar/haar",
-      "THEY_THEM": "Die/hen/hun"
+      "THEY_THEM": "Hen/hen/hun"
     },
     "pronouns": "Gewenste voornaamwoorden",
     "studentType": "Soort student",

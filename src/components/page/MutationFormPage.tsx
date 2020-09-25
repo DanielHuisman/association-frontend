@@ -1,6 +1,5 @@
 import React from 'react';
-import {MutationFunction, MutationResult} from '@apollo/react-common';
-import {MutationHookOptions} from '@apollo/react-hooks';
+import {MutationFunction, MutationResult, MutationHookOptions} from '@apollo/react-hooks';
 import {FormikConfig} from 'formik';
 
 import {MutationPage, IMutationPageProps} from './MutationPage';

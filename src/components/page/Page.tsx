@@ -1,6 +1,5 @@
 import React from 'react';
-import {QueryResult, MutationFunction, MutationResult} from '@apollo/react-common';
-import {useQuery, QueryHookOptions} from '@apollo/react-hooks';
+import {useQuery, QueryResult, QueryHookOptions, MutationFunction, MutationResult} from '@apollo/react-hooks';
 import {Loader} from 'semantic-ui-react';
 
 import {MutationPage, IMutationPageProps} from './MutationPage';

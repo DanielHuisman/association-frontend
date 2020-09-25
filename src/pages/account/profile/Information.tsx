@@ -1,10 +1,12 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Header} from 'semantic-ui-react';
+import omit from 'lodash.omit';
 
-import {Page} from '../../../components/page/Page';
-import {GetProfileQuery} from '../../../generated/graphql';
+import {FormPage} from '../../../components/page/FormPage';
+import {GetProfileQuery, UpdateMemberMutation} from '../../../generated/graphql';
 import GetProfile from '../../../queries/GetProfile.graphql';
+import UpdateMember from '../../../mutations/UpdateMember.graphql';
 
 import InformationForm, {IValues} from './InformationForm';
 
@@ -15,17 +17,28 @@ const Information = () => {
         <>
             <Header size="large">{t('account:profile.information.header', 'Information')}</Header>
 
-            <Page<GetProfileQuery> query={GetProfile}>
-                {({data}) => {
-                    const handleSubmit = (values: IValues) => {
-                        console.log(values);
-                    };
+            <FormPage<GetProfileQuery, UpdateMemberMutation, IValues>
+                query={GetProfile}
+                mutation={UpdateMember}
 
-                    return (
-                        <InformationForm profile={data.me} onSubmit={handleSubmit} />
-                    );
-                }}
-            </Page>
+                data={(values, {data}) => ({
+                    variables: {
+                        where: {
+                            id: data.me.id
+                        },
+                        data: omit(values, ['__typename', 'id', 'email', 'isAdmin', 'image', 'providers'])
+                    }
+                })}
+
+                success={t('account:profile.information.success', 'Successfully changed your profile.')}
+                failure={t('account:profile.information.failure', 'Failed to change your profile.')}
+            >
+                {(handleSubmit, {loading, data}) => (
+                    <>
+                        {!loading && <InformationForm profile={data.me} onSubmit={handleSubmit} />}
+                    </>
+                )}
+            </FormPage>
         </>
     );
 };
