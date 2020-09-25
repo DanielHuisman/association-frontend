@@ -749,8 +749,8 @@ export type MembershipOrderByInput = {
 export type MembershipCreateInput = {
   id?: Maybe<Scalars['String']>;
   type?: Maybe<MembershipType>;
-  startedAt: Scalars['DateTime'];
-  endedAt?: Maybe<Scalars['DateTime']>;
+  startedAt: Scalars['Date'];
+  endedAt?: Maybe<Scalars['Date']>;
   member: MemberCreateRelationInput;
   transactions?: Maybe<Array<MembershipFeeTransactionCreateRelationInput>>;
 };
@@ -758,8 +758,8 @@ export type MembershipCreateInput = {
 export type MembershipUpdateInput = {
   id?: Maybe<Scalars['String']>;
   type?: Maybe<MembershipType>;
-  startedAt?: Maybe<Scalars['DateTime']>;
-  endedAt?: Maybe<Scalars['DateTime']>;
+  startedAt?: Maybe<Scalars['Date']>;
+  endedAt?: Maybe<Scalars['Date']>;
   member?: Maybe<MemberUpdateRelationInput>;
   transactions?: Maybe<Array<MembershipFeeTransactionUpdateRelationInput>>;
 };
@@ -828,7 +828,7 @@ export type MemberCreateInput = {
   postalCode: Scalars['String'];
   city: Scalars['String'];
   phoneNumber: Scalars['String'];
-  birthdate: Scalars['DateTime'];
+  birthdate: Scalars['Date'];
   language?: Maybe<Language>;
   pronouns?: Maybe<Pronouns>;
   studentType: StudentType;
@@ -851,7 +851,7 @@ export type MemberUpdateInput = {
   postalCode?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
   phoneNumber?: Maybe<Scalars['String']>;
-  birthdate?: Maybe<Scalars['DateTime']>;
+  birthdate?: Maybe<Scalars['Date']>;
   language?: Maybe<Language>;
   pronouns?: Maybe<Pronouns>;
   studentType?: Maybe<StudentType>;
@@ -3126,6 +3126,28 @@ export type GetMemberQuery = (
   ) }
 );
 
+export type GetMemberMandatesQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetMemberMandatesQuery = (
+  { __typename?: 'Query' }
+  & { member: (
+    { __typename?: 'Member' }
+    & { mandates: (
+      { __typename?: 'MandateList' }
+      & { values: Array<(
+        { __typename?: 'DigitalMandate' }
+        & MandateFragment_DigitalMandate_
+      ) | (
+        { __typename?: 'PaperMandate' }
+        & MandateFragment_PaperMandate_
+      )> }
+    ) }
+  ) }
+);
+
 export type GetMembersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4306,6 +4328,43 @@ export function useGetMemberLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHo
 export type GetMemberQueryHookResult = ReturnType<typeof useGetMemberQuery>;
 export type GetMemberLazyQueryHookResult = ReturnType<typeof useGetMemberLazyQuery>;
 export type GetMemberQueryResult = ApolloReactCommon.QueryResult<GetMemberQuery, GetMemberQueryVariables>;
+export const GetMemberMandatesDocument = gql`
+    query GetMemberMandates($id: String!) {
+  member(where: {id: $id}) {
+    mandates {
+      values {
+        ...MandateFragment
+      }
+    }
+  }
+}
+    ${MandateFragmentDoc}`;
+
+/**
+ * __useGetMemberMandatesQuery__
+ *
+ * To run a query within a React component, call `useGetMemberMandatesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMemberMandatesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMemberMandatesQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetMemberMandatesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(GetMemberMandatesDocument, baseOptions);
+      }
+export function useGetMemberMandatesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(GetMemberMandatesDocument, baseOptions);
+        }
+export type GetMemberMandatesQueryHookResult = ReturnType<typeof useGetMemberMandatesQuery>;
+export type GetMemberMandatesLazyQueryHookResult = ReturnType<typeof useGetMemberMandatesLazyQuery>;
+export type GetMemberMandatesQueryResult = ApolloReactCommon.QueryResult<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>;
 export const GetMembersDocument = gql`
     query GetMembers {
   members {

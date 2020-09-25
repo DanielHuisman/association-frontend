@@ -17,6 +17,10 @@ const AccountMenu = () => {
                 <Icon className="left" name="shield" />
                 {t('account:security.header', 'Security')}
             </Menu.Item>
+            <Menu.Item as={NavLink} to="/account/mandates">
+                <Icon className="left" name="file alternate" />
+                {t('account:mandates.header', 'Mandates')}
+            </Menu.Item>
         </Menu>
     );
 };

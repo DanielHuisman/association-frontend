@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, RouteComponentProps} from 'react-router-dom';
+import {Switch, Redirect, RouteComponentProps} from 'react-router-dom';
 import {Container, Grid} from 'semantic-ui-react';
 
 import AccountMenu from '../../components/account/AccountMenu';
@@ -7,6 +7,7 @@ import {AuthRoute} from '../../components/authentication';
 
 import Profile from './profile/Profile';
 import Security from './security/Security';
+import Mandates from './mandates/Mandates';
 
 const Account = ({match}: RouteComponentProps) => (
     <Container>
@@ -16,9 +17,12 @@ const Account = ({match}: RouteComponentProps) => (
                     <AccountMenu />
                 </Grid.Column>
                 <Grid.Column width={12}>
-                    <Redirect exact path={`${match.path}/`} to={`${match.path}/profile`} />
-                    <AuthRoute exact path={`${match.path}/profile`} component={Profile} />
-                    <AuthRoute exact path={`${match.path}/security`} component={Security} />
+                    <Switch>
+                        <AuthRoute exact path={`${match.path}/profile`} component={Profile} />
+                        <AuthRoute exact path={`${match.path}/security`} component={Security} />
+                        <AuthRoute exact path={`${match.path}/mandates`} component={Mandates} />
+                        <Redirect exact path={`${match.path}/`} to={`${match.path}/profile`} />
+                    </Switch>
                 </Grid.Column>
             </Grid.Row>
         </Grid>

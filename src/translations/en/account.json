@@ -1,4 +1,7 @@
 {
+  "mandates": {
+    "header": "Mandates"
+  },
   "profile": {
     "header": "Profile",
     "image": {

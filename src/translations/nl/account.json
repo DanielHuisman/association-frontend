@@ -1,4 +1,7 @@
 {
+  "mandates": {
+    "header": "Incassomachtigingen"
+  },
   "profile": {
     "header": "Profiel",
     "image": {

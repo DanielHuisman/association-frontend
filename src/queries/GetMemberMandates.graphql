@@ -1,0 +1,15 @@
+# import '../fragments/Mandate.graphql'
+
+query GetMemberMandates($id: String!) {
+    member(
+        where: {
+            id: $id
+        }
+    ) {
+        mandates {
+            values {
+                ...MandateFragment
+            }
+        }
+    }
+}

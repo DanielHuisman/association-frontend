@@ -53,11 +53,11 @@ const Main = ({jumbotron = false}: IProps) => {
                     <AuthRoute path="/account" component={Account} />
 
                     <AdminRoute exact path="/members" component={Members} />
-                    <Route path="/members/:memberId" component={Member} />
+                    <AdminRoute path="/members/:memberId" component={Member} />
 
                     <AdminRoute exact path="/mandates" component={Mandates} />
                     <AdminRoute exact path="/mandates/review" component={Mandates} />
-                    <Route path="/mandates/:mandateId" component={Mandate} />
+                    <AdminRoute path="/mandates/:mandateId" component={Mandate} />
 
                     <AdminRoute exact path="/direct-debits" component={DirectDebits} />
                     <AdminRoute exact path="/direct-debits/:directDebitId" component={DirectDebit} />
