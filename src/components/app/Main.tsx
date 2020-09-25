@@ -7,7 +7,7 @@ import Home from '../../pages/home/Home';
 import Association from '../../pages/association/Association';
 import Calendar from '../../pages/calendar/Calendar';
 import Contact from '../../pages/contact/Contact';
-import Join from '../../pages/join/Join';
+import Register from '../../pages/auth/register/Register';
 import Login from '../../pages/auth/login/Login';
 import Logout from '../../pages/auth/logout/Logout';
 import VerifyEmail from '../../pages/auth/verify-email/VerifyEmail';
@@ -41,8 +41,9 @@ const Main = ({jumbotron = false}: IProps) => {
                     <Route path="/association" component={Association} />
                     <Route exact path="/calendar" component={Calendar} />
                     <Route exact path="/contact" component={Contact} />
-                    <Route exact path="/join" component={Join} />
 
+                    <NoAuthRoute exact path="/register" component={Register} />
+                    <NoAuthRoute exact path="/join" component={Register} />
                     <NoAuthRoute exact path="/login" component={Login} />
                     <AuthRoute exact path="/logout" component={Logout} />
                     <NoAuthRoute exact path="/verify/:token" component={VerifyEmail} />

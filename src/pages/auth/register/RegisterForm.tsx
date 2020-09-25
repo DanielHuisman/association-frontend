@@ -4,7 +4,7 @@ import {Field, FormikConfig} from 'formik';
 import * as Yup from 'yup';
 
 import {Form, FieldInput, SubmitButton, FieldDropdown} from '../../../components/form';
-import {Language, MemberFragment, Pronouns, ProviderFragment, StudentType} from '../../../generated/graphql';
+import {Language, Pronouns, StudentType} from '../../../generated/graphql';
 import {languageOptions, isPhoneNumber} from '../../../util';
 
 export interface IValues {
@@ -19,14 +19,12 @@ export interface IValues {
     language: Language;
     pronouns: Pronouns;
     studentType: StudentType;
+    email: string;
+    password: string;
+    passwordRepeat: string;
 }
 
 interface IProps {
-    profile: MemberFragment & {
-        providers: {
-            values: ProviderFragment[];
-        }
-    };
     onSubmit: FormikConfig<IValues>['onSubmit'];
 }
 
@@ -59,42 +57,69 @@ const schema = Yup.object().shape({
     studentType: Yup.string()
         .required('This field is required.')
         .oneOf(Object.values(StudentType)),
+    email: Yup.string()
+        .required('This field is required.')
+        .email('Invalid email address.'),
+    password: Yup.string()
+        .required('This field is required.')
+        .min(8, 'Minimum length is 8 characters.'),
+    passwordRepeat: Yup.string()
+        .required('This field is required.')
+        .min(8, 'Minimum length is 8 characters.')
+        .oneOf([Yup.ref('password'), null], 'Passwords do not match.')
 });
 
-const InformationForm = ({profile, onSubmit}: IProps) => {
+const InformationForm = ({onSubmit}: IProps) => {
     const {t} = useTranslation();
 
     return (
         <Form<IValues>
-            initialValues={profile}
+            initialValues={{
+                firstName: '',
+                initials: '',
+                lastName: '',
+                address: '',
+                postalCode: '',
+                city: '',
+                phoneNumber: '',
+                birthdate: '',
+                language: null,
+                pronouns: null,
+                studentType: null,
+                email: '',
+                password: '',
+                passwordRepeat: ''
+            }}
             validationSchema={schema}
             onSubmit={onSubmit}
         >
-            <Field component={FieldInput} name="firstName" type="text" label={t('members:member.firstName', 'First name')} />
+            <Field component={FieldInput} name="firstName" type="text" label={t('members:member.firstName', 'First name')} autoComplete="given-name" />
             <p>
                 <i>{t('account:profile.information.firstNameRemark', 'Preferred first name, not necessarily legal first name.')}</i>
             </p>
 
-            <Field component={FieldInput} name="initials" type="text" label={t('members:member.initials', 'Initials')} />
+            <Field component={FieldInput} name="initials" type="text" label={t('members:member.initials', 'Initials')} autoComplete="off" />
             <p>
                 <i>{t('account:profile.information.initialsRemark', 'Legal initials.')}</i>
             </p>
 
-            <Field component={FieldInput} name="lastName" type="text" label={t('members:member.lastName', 'Last name')} />
+            <Field component={FieldInput} name="lastName" type="text" label={t('members:member.lastName', 'Last name')} autoComplete="family-name" />
 
-            <Field component={FieldInput} name="address" type="text" label={t('members:member.address', 'Address')} />
-            <Field component={FieldInput} name="postalCode" type="text" label={t('members:member.postalCode', 'Postal code')} />
-            <Field component={FieldInput} name="city" type="text" label={t('members:member.city', 'City')} />
+            <Field component={FieldInput} name="address" type="text" label={t('members:member.address', 'Address')} autoComplete="address-line1" />
+            <Field component={FieldInput} name="postalCode" type="text" label={t('members:member.postalCode', 'Postal code')} autoComplete="postal-code" />
+            <Field component={FieldInput} name="city" type="text" label={t('members:member.city', 'City')} autoComplete="address-level2" />
             {/* TODO: country */}
 
-            <Field component={FieldInput} name="phoneNumber" type="text" label={t('members:member.phoneNumber', 'Phone number')} />
-            <Field component={FieldInput} name="birthdate" type="date" label={t('members:member.birthdate', 'Date of birth')} />
+            <Field component={FieldInput} name="email" type="text" label={t('members:member.email', 'Email address')} autoComplete="email" />
+            <Field component={FieldInput} name="phoneNumber" type="text" label={t('members:member.phoneNumber', 'Phone number')} autoComplete="tel" />
+            <Field component={FieldInput} name="birthdate" type="date" label={t('members:member.birthdate', 'Date of birth')} autoComplete="bday" />
 
             <Field
                 component={FieldDropdown}
                 name="language"
                 label={t('members:member.language', 'Language')}
                 options={languageOptions}
+                autoComplete="language"
             />
             <Field
                 component={FieldDropdown}
@@ -117,8 +142,25 @@ const InformationForm = ({profile, onSubmit}: IProps) => {
                 }))}
             />
 
+            <Field
+                component={FieldInput}
+                name="password"
+                type="password"
+                label={t('members:member.password', 'Password')}
+                autoComplete="new-password"
+            />
+            <Field
+                component={FieldInput}
+                name="passwordRepeat"
+                type="password"
+                label={t('members:member.passwordRepeat', 'Repeat password')}
+                autoComplete="new-password"
+            />
+
+            {/* TODO: terms and conditions checkbox */}
+
             <SubmitButton color="blue">
-                {t('account:profile.information.update', 'Update profile information')}
+                {t('auth:register.submit', 'Complete registration')}
             </SubmitButton>
         </Form>
     );

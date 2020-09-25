@@ -1,7 +1,6 @@
 {
   "member": {
     "address": "Adres",
-    "birthDate": "Date of birth",
     "birthdate": "Geboortedatum",
     "checkInfo": "Dit is je lidmaatschapsinformatie, controleer a.u.b. of alles correct is. Als iets incorrect is of je iets wil wijzigen, kun je contact opnemen met het bestuur.",
     "city": "Woonplaats",
@@ -17,6 +16,8 @@
     },
     "lastName": "Achternaam",
     "name": "Naam",
+    "password": "Wachtwoord",
+    "passwordRepeat": "Herhaal wachtwoord",
     "phoneNumber": "Telefoonnummer",
     "postalCode": "Postcode",
     "pronounTypes": {

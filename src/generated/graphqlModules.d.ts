@@ -199,6 +199,15 @@ declare module '*/Login.graphql' {
 }
     
 
+declare module '*/Register.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const Register: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/RejectPaperMandate.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
