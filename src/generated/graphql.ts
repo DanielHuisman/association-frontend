@@ -4331,7 +4331,7 @@ export type GetMemberQueryResult = ApolloReactCommon.QueryResult<GetMemberQuery,
 export const GetMemberMandatesDocument = gql`
     query GetMemberMandates($id: String!) {
   member(where: {id: $id}) {
-    mandates {
+    mandates(orderBy: {createdAt: DESC}) {
       values {
         ...MandateFragment
       }

@@ -6,7 +6,11 @@ query GetMemberMandates($id: String!) {
             id: $id
         }
     ) {
-        mandates {
+        mandates(
+            orderBy: {
+                createdAt: DESC
+            }
+        ) {
             values {
                 ...MandateFragment
             }
