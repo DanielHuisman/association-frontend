@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Link, RouteComponentProps} from 'react-router-dom';
-import {Header, Table, Button, Icon, Loader, Message} from 'semantic-ui-react';
+import {Header, Table, Button, Icon, Message} from 'semantic-ui-react';
 import moment from 'moment';
 
 import MandateType from '../../../components/mandate/MandateType';
@@ -18,8 +18,8 @@ const MandatesDetails = ({match}: RouteComponentProps<IRouteParams>) => {
     const {t} = useTranslation();
 
     return (
-        <Page<GetMandateQuery> query={GetMandate} queryVariables={{id: match.params.mandateId}} defaultBehaviour={false}>
-            {({loading, data, error}) => {
+        <Page<GetMandateQuery> query={GetMandate} queryVariables={{id: match.params.mandateId}}>
+            {({data}) => {
                 return (
                     <>
                         <Button as={Link} to="/account/mandates" labelPosition="left" basic icon>
@@ -27,9 +27,7 @@ const MandatesDetails = ({match}: RouteComponentProps<IRouteParams>) => {
                             {t('general:backToList', 'Back to list')}
                         </Button>
 
-                        {loading && <Loader active />}
-
-                        {((data && !data.mandate) || error) && <Message error>{t('general:notFound.text', 'Not found')}</Message>}
+                        {data && !data.mandate && <Message error>{t('general:notFound.text', 'Not found')}</Message>}
                         {data && data.mandate && (
                             <>
                                 <Header size="large">{t('mandates:mandate.details.mandate', 'Mandate details')}</Header>

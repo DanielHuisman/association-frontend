@@ -1,6 +1,6 @@
 import React from 'react';
 import {useQuery, QueryResult, QueryHookOptions, MutationFunction, MutationResult} from '@apollo/react-hooks';
-import {Loader} from 'semantic-ui-react';
+import {Loader, Message} from 'semantic-ui-react';
 
 import {MutationPage, IMutationPageProps} from './MutationPage';
 
@@ -44,7 +44,12 @@ export const Page = <QueryType, MutationType = any>({
         }
 
         if (queryResult.error) {
-            throw queryResult.error;
+            return (
+                <Message error>
+                    {queryResult.error.networkError ?
+                        queryResult.error.networkError.message : queryResult.error.graphQLErrors.map((error) => error.message).join(', ')}
+                </Message>
+            );
         }
     }
 
