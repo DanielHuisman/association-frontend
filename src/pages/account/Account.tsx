@@ -18,9 +18,9 @@ const Account = ({match}: RouteComponentProps) => (
                 </Grid.Column>
                 <Grid.Column width={12}>
                     <Switch>
-                        <AuthRoute exact path={`${match.path}/profile`} component={Profile} />
-                        <AuthRoute exact path={`${match.path}/security`} component={Security} />
-                        <AuthRoute exact path={`${match.path}/mandates`} component={Mandates} />
+                        <AuthRoute path={`${match.path}/profile`} component={Profile} />
+                        <AuthRoute path={`${match.path}/security`} component={Security} />
+                        <AuthRoute path={`${match.path}/mandates`} component={Mandates} />
                         <Redirect exact path={`${match.path}/`} to={`${match.path}/profile`} />
                     </Switch>
                 </Grid.Column>

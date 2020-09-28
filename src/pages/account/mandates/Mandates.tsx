@@ -1,34 +1,25 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
+import {Switch, Route, RouteComponentProps} from 'react-router-dom';
 import {Header} from 'semantic-ui-react';
 
-import {UserContext} from '../../../components/authentication/UserContext';
-import {Page} from '../../../components/page/Page';
-import {GetMemberMandatesQuery} from '../../../generated/graphql';
-import GetMemberMandates from '../../../queries/GetMemberMandates.graphql';
+import List from './List';
+import Details from './Details';
 
-const Mandates = () => {
+const Mandates = ({match}: RouteComponentProps) => {
     const {t} = useTranslation();
-    const member = useContext(UserContext);
 
     return (
-        <Page<GetMemberMandatesQuery> query={GetMemberMandates} queryVariables={{id: member.id}}>
-            {({data}) => {
-                return (
-                    <>
-                        <Helmet title={t('account:mandates.header', 'Mandates')} />
-                        <Header size="huge">{t('account:mandates.header', 'Mandates')}</Header>
+        <>
+            <Helmet title={t('account:mandates.header', 'Mandates')} />
+            <Header size="huge">{t('account:mandates.header', 'Mandates')}</Header>
 
-                        {data.member.mandates.values.map((mandate) => (
-                            <div key={mandate.id}>
-                                {mandate.mandateId}
-                            </div>
-                        ))}
-                    </>
-                );
-            }}
-        </Page>
+            <Switch>
+                <Route exact path={`${match.path}/`} component={List} />
+                <Route exact path={`${match.path}/:mandateId`} component={Details} />
+            </Switch>
+        </>
     );
 };
 
