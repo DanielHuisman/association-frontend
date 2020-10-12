@@ -4218,7 +4218,7 @@ export type GetDirectDebitInstructionLazyQueryHookResult = ReturnType<typeof use
 export type GetDirectDebitInstructionQueryResult = ApolloReactCommon.QueryResult<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>;
 export const GetDirectDebitsDocument = gql`
     query GetDirectDebits {
-  directDebits {
+  directDebits(orderBy: {createdAt: DESC}) {
     values {
       ...DirectDebitFragment
     }
@@ -4289,7 +4289,7 @@ export type GetMandateLazyQueryHookResult = ReturnType<typeof useGetMandateLazyQ
 export type GetMandateQueryResult = ApolloReactCommon.QueryResult<GetMandateQuery, GetMandateQueryVariables>;
 export const GetMandatesDocument = gql`
     query GetMandates {
-  mandates {
+  mandates(orderBy: {createdAt: DESC}) {
     values {
       ...MandateFragment
       member {
@@ -4415,7 +4415,7 @@ export type GetMemberMandatesLazyQueryHookResult = ReturnType<typeof useGetMembe
 export type GetMemberMandatesQueryResult = ApolloReactCommon.QueryResult<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>;
 export const GetMembersDocument = gql`
     query GetMembers {
-  members {
+  members(orderBy: {firstName: ASC, lastName: ASC}) {
     values {
       ...MemberFragment
       mandates(where: {status: {equals: ACCEPTED}}) {

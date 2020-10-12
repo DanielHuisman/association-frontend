@@ -1,7 +1,11 @@
 # import '../fragments/DirectDebit.graphql'
 
 query GetDirectDebits {
-    directDebits {
+    directDebits(
+        orderBy: {
+            createdAt: DESC
+        }
+    ) {
         values {
             ...DirectDebitFragment
         }

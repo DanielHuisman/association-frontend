@@ -2,7 +2,12 @@
 # import '../fragments/Mandate.graphql'
 
 query GetMembers {
-    members {
+    members(
+        orderBy: {
+            firstName: ASC,
+            lastName: ASC
+        }
+    ) {
         values {
             ...MemberFragment
 
