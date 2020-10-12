@@ -3203,6 +3203,20 @@ export type GetPageQuery = (
   ) }
 );
 
+export type GetPagesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPagesQuery = (
+  { __typename?: 'Query' }
+  & { pages: (
+    { __typename?: 'PageList' }
+    & { values: Array<(
+      { __typename?: 'Page' }
+      & PageFragment
+    )> }
+  ) }
+);
+
 export type GetPaperMandatesQueryVariables = Exact<{
   status?: Maybe<MandateStatus>;
 }>;
@@ -4486,6 +4500,40 @@ export function useGetPageLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHook
 export type GetPageQueryHookResult = ReturnType<typeof useGetPageQuery>;
 export type GetPageLazyQueryHookResult = ReturnType<typeof useGetPageLazyQuery>;
 export type GetPageQueryResult = ApolloReactCommon.QueryResult<GetPageQuery, GetPageQueryVariables>;
+export const GetPagesDocument = gql`
+    query GetPages {
+  pages(orderBy: {id: ASC}) {
+    values {
+      ...PageFragment
+    }
+  }
+}
+    ${PageFragmentDoc}`;
+
+/**
+ * __useGetPagesQuery__
+ *
+ * To run a query within a React component, call `useGetPagesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPagesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPagesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetPagesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetPagesQuery, GetPagesQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetPagesQuery, GetPagesQueryVariables>(GetPagesDocument, baseOptions);
+      }
+export function useGetPagesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetPagesQuery, GetPagesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetPagesQuery, GetPagesQueryVariables>(GetPagesDocument, baseOptions);
+        }
+export type GetPagesQueryHookResult = ReturnType<typeof useGetPagesQuery>;
+export type GetPagesLazyQueryHookResult = ReturnType<typeof useGetPagesLazyQuery>;
+export type GetPagesQueryResult = ApolloReactCommon.QueryResult<GetPagesQuery, GetPagesQueryVariables>;
 export const GetPaperMandatesDocument = gql`
     query GetPaperMandates($status: MandateStatus) {
   paperMandates(where: {status: {equals: $status}}) {

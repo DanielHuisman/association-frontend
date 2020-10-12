@@ -388,6 +388,15 @@ declare module '*/GetPage.graphql' {
 }
     
 
+declare module '*/GetPages.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const GetPages: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/GetPaperMandates.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

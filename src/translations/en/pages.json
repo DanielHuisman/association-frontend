@@ -1,0 +1,10 @@
+{
+  "page": {
+    "id": "Identifier",
+    "titleEn": "Title - English",
+    "titleNl": "Title - Dutch"
+  },
+  "pages": {
+    "header": "Pages"
+  }
+}

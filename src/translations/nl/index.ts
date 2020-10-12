@@ -6,6 +6,7 @@ import events from './events.json';
 import general from './general.json';
 import mandates from './mandates.json';
 import members from './members.json';
+import pages from './pages.json';
 import transactions from './transactions.json';
 import users from './users.json';
 
@@ -18,6 +19,7 @@ export default {
     general,
     mandates,
     members,
+    pages,
     transactions,
     users
 };

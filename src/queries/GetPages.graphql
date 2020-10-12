@@ -1,0 +1,13 @@
+# import '../fragments/Page.graphql'
+
+query GetPages {
+    pages(
+        orderBy: {
+            id: ASC
+        }
+    ) {
+        values {
+            ...PageFragment
+        }
+    }
+}

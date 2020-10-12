@@ -24,6 +24,7 @@ import DirectDebit from '../../pages/direct-debit/DirectDebit';
 import DirectDebitBatch from '../../pages/direct-debit/DirectDebitBatch';
 import DirectDebitInstruction from '../../pages/direct-debit/DirectDebitInstruction';
 import Transaction from '../../pages/transaction/Transaction';
+import Pages from '../../pages/pages/Pages';
 import ErrorPage from '../../pages/util/error/Error';
 import NotFound from '../../pages/util/not-found/NotFound';
 
@@ -66,6 +67,9 @@ const Main = ({jumbotron = false}: IProps) => {
                     <AdminRoute exact path="/direct-debits/:directDebitId/instructions/:directDebitInstructionId" component={DirectDebitInstruction} />
 
                     <AdminRoute exact path="/transactions/:transactionId" component={Transaction} />
+
+                    <AdminRoute exact path="/pages" component={Pages} />
+                    {/* <AdminRoute path="/pages/:pageId" component={Page} /> */}
 
                     <Route component={NotFound} />
                 </Switch>

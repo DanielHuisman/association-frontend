@@ -62,6 +62,9 @@ const Base = ({user, sidebar = false, onClick}: IProps) => {
                             <Dropdown.Item as={NavLink} exact to="/direct-debits" onClick={onClick}>
                                 {t('directDebits:directDebits.header', 'Direct debits')}
                             </Dropdown.Item>
+                            <Dropdown.Item as={NavLink} exact to="/pages" onClick={onClick}>
+                                {t('pages:pages.header', 'Pages')}
+                            </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 )}
