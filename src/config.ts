@@ -1,9 +1,15 @@
 const apiUrls = [
-    'https://mandate.exaltio.nl/api/graphql'
+    'https://exaltio.nl/api/graphql',
+    'https://www.exaltio.nl/api/graphql',
+    'https://exaltio.utwente.nl/api/graphql',
+    'https://www.exaltio.utwente.nl/api/graphql'
 ];
 
 const apiSubscriptionUrls = [
-    'wss://mandate.exaltio.nl/api/graphql'
+    'wss://exaltio.nl/api/graphql',
+    'wss://www.exaltio.nl/api/graphql',
+    'wss://exaltio.utwente.nl/api/graphql',
+    'wss://www.exaltio.utwente.nl/api/graphql'
 ];
 
 const hostname = window.location.hostname;
