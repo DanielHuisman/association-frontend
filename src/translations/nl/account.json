@@ -37,5 +37,8 @@
       "passwordRepeat": "Herhaal wachtwoord",
       "success": "Wachtwoord is succesvol veranderd."
     }
+  },
+  "transactions": {
+    "header": "Transacties"
   }
 }

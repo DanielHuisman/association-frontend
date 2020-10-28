@@ -370,6 +370,24 @@ declare module '*/GetMemberMandates.graphql' {
 }
     
 
+declare module '*/GetMemberTransaction.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const GetMemberTransaction: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/GetMemberTransactions.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const GetMemberTransactions: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/GetMembers.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

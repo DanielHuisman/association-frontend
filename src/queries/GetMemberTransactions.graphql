@@ -1,0 +1,19 @@
+# import '../fragments/Transaction.graphql'
+
+query GetMemberTransactions($id: String!) {
+    member(
+        where: {
+            id: $id
+        }
+    ) {
+        transactions(
+            orderBy: {
+                createdAt: DESC
+            }
+        ) {
+            values {
+                ...TransactionFragment
+            }
+        }
+    }
+}

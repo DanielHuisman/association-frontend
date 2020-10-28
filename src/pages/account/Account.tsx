@@ -8,6 +8,7 @@ import {AuthRoute} from '../../components/authentication';
 import Profile from './profile/Profile';
 import Security from './security/Security';
 import Mandates from './mandates/Mandates';
+import Transactions from './transactions/Transactions';
 
 const Account = ({match}: RouteComponentProps) => (
     <Container>
@@ -21,6 +22,7 @@ const Account = ({match}: RouteComponentProps) => (
                         <AuthRoute path={`${match.path}/profile`} component={Profile} />
                         <AuthRoute path={`${match.path}/security`} component={Security} />
                         <AuthRoute path={`${match.path}/mandates`} component={Mandates} />
+                        <AuthRoute path={`${match.path}/transactions`} component={Transactions} />
                         <Redirect exact path={`${match.path}/`} to={`${match.path}/profile`} />
                     </Switch>
                 </Grid.Column>

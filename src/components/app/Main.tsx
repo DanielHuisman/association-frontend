@@ -47,7 +47,7 @@ const Main = ({jumbotron = false}: IProps) => {
                     <NoAuthRoute exact path="/join" component={Register} />
                     <NoAuthRoute exact path="/login" component={Login} />
                     <AuthRoute exact path="/logout" component={Logout} />
-                    <NoAuthRoute exact path="/verify/:token" component={VerifyEmail} />
+                    <Route exact path="/verify/:token" component={VerifyEmail} />
                     <NoAuthRoute exact path="/reset/:token" component={ResetPassword} />
                     <Route exact path="/request/verify" component={RequestVerifyEmail} />
                     <NoAuthRoute exact path="/request/reset" component={RequestResetPassword} />

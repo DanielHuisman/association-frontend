@@ -1,0 +1,11 @@
+# import '../fragments/Transaction.graphql'
+
+query GetMemberTransaction($id: String!) {
+    transaction(
+        where: {
+            id: $id
+        }
+    ) {
+        ...TransactionFragment
+    }
+}

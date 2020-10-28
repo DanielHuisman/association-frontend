@@ -37,5 +37,8 @@
       "passwordRepeat": "Repeat password",
       "success": "Successfully changed your password."
     }
+  },
+  "transactions": {
+    "header": "Transactions"
   }
 }

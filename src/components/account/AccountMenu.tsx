@@ -21,6 +21,10 @@ const AccountMenu = () => {
                 <Icon className="left" name="file alternate" />
                 {t('account:mandates.header', 'Mandates')}
             </Menu.Item>
+            <Menu.Item as={NavLink} to="/account/transactions">
+                <Icon className="left" name="euro" />
+                {t('account:transactions.header', 'Transactions')}
+            </Menu.Item>
         </Menu>
     );
 };

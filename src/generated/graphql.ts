@@ -2001,6 +2001,8 @@ export type Mutation = {
   acceptPaperMandate: PaperMandate;
   rejectPaperMandate: PaperMandate;
   generateMembershipFeeTransactions: Scalars['Int'];
+  generateDirectDebit: DirectDebit;
+  generateDirectDebitFile: DirectDebit;
   uploadMemberImage: Member;
   uploadPaperMandate: PaperMandate;
   createBank: Bank;
@@ -2111,6 +2113,16 @@ export type MutationrejectPaperMandateArgs = {
 
 export type MutationgenerateMembershipFeeTransactionsArgs = {
   year: Scalars['Int'];
+};
+
+
+export type MutationgenerateDirectDebitArgs = {
+  collectionDate: Scalars['Date'];
+};
+
+
+export type MutationgenerateDirectDebitFileArgs = {
+  directDebit: DirectDebitWhereUniqueInput;
 };
 
 
@@ -3161,6 +3173,38 @@ export type GetMemberMandatesQuery = (
       ) | (
         { __typename?: 'PaperMandate' }
         & MandateFragment_PaperMandate_
+      )> }
+    ) }
+  ) }
+);
+
+export type GetMemberTransactionQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetMemberTransactionQuery = (
+  { __typename?: 'Query' }
+  & { transaction: (
+    { __typename?: 'MembershipFeeTransaction' }
+    & TransactionFragment
+  ) }
+);
+
+export type GetMemberTransactionsQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetMemberTransactionsQuery = (
+  { __typename?: 'Query' }
+  & { member: (
+    { __typename?: 'Member' }
+    & { transactions: (
+      { __typename?: 'TransactionList' }
+      & { values: Array<(
+        { __typename?: 'MembershipFeeTransaction' }
+        & TransactionFragment
       )> }
     ) }
   ) }
@@ -4427,6 +4471,76 @@ export function useGetMemberMandatesLazyQuery(baseOptions?: ApolloReactHooks.Laz
 export type GetMemberMandatesQueryHookResult = ReturnType<typeof useGetMemberMandatesQuery>;
 export type GetMemberMandatesLazyQueryHookResult = ReturnType<typeof useGetMemberMandatesLazyQuery>;
 export type GetMemberMandatesQueryResult = ApolloReactCommon.QueryResult<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>;
+export const GetMemberTransactionDocument = gql`
+    query GetMemberTransaction($id: String!) {
+  transaction(where: {id: $id}) {
+    ...TransactionFragment
+  }
+}
+    ${TransactionFragmentDoc}`;
+
+/**
+ * __useGetMemberTransactionQuery__
+ *
+ * To run a query within a React component, call `useGetMemberTransactionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMemberTransactionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMemberTransactionQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetMemberTransactionQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>(GetMemberTransactionDocument, baseOptions);
+      }
+export function useGetMemberTransactionLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>(GetMemberTransactionDocument, baseOptions);
+        }
+export type GetMemberTransactionQueryHookResult = ReturnType<typeof useGetMemberTransactionQuery>;
+export type GetMemberTransactionLazyQueryHookResult = ReturnType<typeof useGetMemberTransactionLazyQuery>;
+export type GetMemberTransactionQueryResult = ApolloReactCommon.QueryResult<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>;
+export const GetMemberTransactionsDocument = gql`
+    query GetMemberTransactions($id: String!) {
+  member(where: {id: $id}) {
+    transactions(orderBy: {createdAt: DESC}) {
+      values {
+        ...TransactionFragment
+      }
+    }
+  }
+}
+    ${TransactionFragmentDoc}`;
+
+/**
+ * __useGetMemberTransactionsQuery__
+ *
+ * To run a query within a React component, call `useGetMemberTransactionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMemberTransactionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMemberTransactionsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetMemberTransactionsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>(GetMemberTransactionsDocument, baseOptions);
+      }
+export function useGetMemberTransactionsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>(GetMemberTransactionsDocument, baseOptions);
+        }
+export type GetMemberTransactionsQueryHookResult = ReturnType<typeof useGetMemberTransactionsQuery>;
+export type GetMemberTransactionsLazyQueryHookResult = ReturnType<typeof useGetMemberTransactionsLazyQuery>;
+export type GetMemberTransactionsQueryResult = ApolloReactCommon.QueryResult<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>;
 export const GetMembersDocument = gql`
     query GetMembers {
   members(orderBy: {firstName: ASC, lastName: ASC}) {

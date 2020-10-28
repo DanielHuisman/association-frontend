@@ -12,13 +12,16 @@ import TransactionType from './TransactionType';
 
 interface IProps {
     transactions: TransactionFragment[];
+    urlPrefix?: string;
+    hideUpdatedAt?: boolean;
 }
 
 interface IContentProps {
     transaction: TransactionFragment;
+    hideUpdatedAt: boolean;
 }
 
-const TransactionTable = ({transactions}: IProps) => {
+const TransactionTable = ({transactions, urlPrefix = '/transactions', hideUpdatedAt = false}: IProps) => {
     const {t} = useTranslation();
     const user = useContext(UserContext);
 
@@ -31,17 +34,17 @@ const TransactionTable = ({transactions}: IProps) => {
                     <Table.HeaderCell>{t('transactions:transaction.amount', 'Amount')}</Table.HeaderCell>
                     <Table.HeaderCell>{t('transactions:transaction.status', 'Status')}</Table.HeaderCell>
                     <Table.HeaderCell>{t('transactions:transaction.createdAt', 'Created at')}</Table.HeaderCell>
-                    <Table.HeaderCell>{t('transactions:transaction.updatedAt', 'Updated at')}</Table.HeaderCell>
+                    {!hideUpdatedAt && <Table.HeaderCell>{t('transactions:transaction.updatedAt', 'Updated at')}</Table.HeaderCell>}
                 </Table.Row>
             </Table.Header>
             <Table.Body>
                 {transactions.map((transaction) => user ? (
-                    <TableSelectableRow key={transaction.id} to={`/transactions/${transaction.id}`}>
-                        <TransactionTableRowContent transaction={transaction} />
+                    <TableSelectableRow key={transaction.id} to={`${urlPrefix}/${transaction.id}`}>
+                        <TransactionTableRowContent transaction={transaction} hideUpdatedAt={hideUpdatedAt} />
                     </TableSelectableRow>
                 ) : (
                     <Table.Row key={transaction.id}>
-                        <TransactionTableRowContent transaction={transaction} />
+                        <TransactionTableRowContent transaction={transaction} hideUpdatedAt={hideUpdatedAt} />
                     </Table.Row>
                 ))}
             </Table.Body>
@@ -49,14 +52,14 @@ const TransactionTable = ({transactions}: IProps) => {
     );
 };
 
-const TransactionTableRowContent = ({transaction}: IContentProps) => (
+const TransactionTableRowContent = ({transaction, hideUpdatedAt}: IContentProps) => (
     <>
         <Table.Cell><TransactionType transaction={transaction} /></Table.Cell>
         <Table.Cell>{transaction.description}</Table.Cell>
         <Table.Cell>{formatCurrency(transaction.amount)}</Table.Cell>
         <Table.Cell>-</Table.Cell>
         <Table.Cell>{moment(transaction.createdAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
-        <Table.Cell>{moment(transaction.updatedAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>
+        {!hideUpdatedAt && <Table.Cell>{moment(transaction.updatedAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>}
     </>
 );
 
