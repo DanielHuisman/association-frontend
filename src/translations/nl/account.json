@@ -1,5 +1,6 @@
 {
   "mandates": {
+    "changeBankAccount": "Change bank account",
     "header": "Incassomachtigingen"
   },
   "profile": {

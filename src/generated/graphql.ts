@@ -162,6 +162,8 @@ export type Member = {
   transactions: TransactionList;
   warnings: DirectDebitWarningList;
   latestMembership: Membership;
+  hasMandate: Scalars['Boolean'];
+  hasPendingPaperMandates: Scalars['Boolean'];
 };
 
 
@@ -3219,7 +3221,10 @@ export type GetMembersQuery = (
     { __typename?: 'MemberList' }
     & { values: Array<(
       { __typename?: 'Member' }
-      & { mandates: (
+      & { latestMembership: (
+        { __typename?: 'Membership' }
+        & MembershipFragment
+      ), mandates: (
         { __typename?: 'MandateList' }
         & { values: Array<(
           { __typename?: 'DigitalMandate' }
@@ -3288,6 +3293,7 @@ export type GetProfileQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'Member' }
+    & Pick<Member, 'hasMandate' | 'hasPendingPaperMandates'>
     & { providers: (
       { __typename?: 'ProviderList' }
       & { values: Array<(
@@ -4546,6 +4552,9 @@ export const GetMembersDocument = gql`
   members(orderBy: {firstName: ASC, lastName: ASC}) {
     values {
       ...MemberFragment
+      latestMembership {
+        ...MembershipFragment
+      }
       mandates(where: {status: {equals: ACCEPTED}}) {
         values {
           ...MandateFragment
@@ -4555,6 +4564,7 @@ export const GetMembersDocument = gql`
   }
 }
     ${MemberFragmentDoc}
+${MembershipFragmentDoc}
 ${MandateFragmentDoc}`;
 
 /**
@@ -4691,6 +4701,8 @@ export const GetProfileDocument = gql`
     query GetProfile {
   me {
     ...MemberFragment
+    hasMandate
+    hasPendingPaperMandates
     providers {
       values {
         ...ProviderFragment

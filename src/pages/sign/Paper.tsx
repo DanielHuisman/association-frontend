@@ -1,28 +1,34 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Trans, useTranslation} from 'react-i18next';
 import {RouteComponentProps} from 'react-router-dom';
 import {useQuery} from '@apollo/react-hooks';
 import {Loader, Header, List, Button, Icon} from 'semantic-ui-react';
 
+import {UserContext} from '../../components/authentication/UserContext';
 import PaperMandateUploadForm from '../../components/mandate/PaperMandateUploadForm';
-import {GetMemberQuery, GetMemberQueryVariables, MandateStatus, MandateFragment_PaperMandate_} from '../../generated/graphql';
-import GetMember from '../../queries/GetMember.graphql';
-import {hasPendingPaperMandates, getPendingPaperMandates} from '../../util';
+import {GetMemberMandatesQuery, GetMemberMandatesQueryVariables, MandateStatus, MandateFragment_PaperMandate_} from '../../generated/graphql';
+import GetMemberMandates from '../../queries/GetMemberMandates.graphql';
+import {getPendingPaperMandates} from '../../util';
 
 import styles from './Sign.css';
 
-interface IRouteParams {
-    memberId: string;
-}
-
-const Paper = ({history, match}: RouteComponentProps<IRouteParams>) => {
+const Paper = ({history}: RouteComponentProps) => {
+    const user = useContext(UserContext);
     const {t} = useTranslation();
 
-    const {loading, data, error} = useQuery<GetMemberQuery, GetMemberQueryVariables>(GetMember, {
+    const {loading, data, error} = useQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(GetMemberMandates, {
         variables: {
-            id: match.params.memberId
+            id: user.id
         }
     });
+
+    const paperMandate = data ? getPendingPaperMandates(data.member.mandates.values)[0] as MandateFragment_PaperMandate_ : null;
+
+    useEffect(() => {
+        if (data && !paperMandate) {
+            history.push('/sign');
+        }
+    }, [paperMandate]);
 
     if (loading) {
         return <Loader active />;
@@ -31,14 +37,6 @@ const Paper = ({history, match}: RouteComponentProps<IRouteParams>) => {
     if (error) {
         throw error;
     }
-
-    useEffect(() => {
-        if (data && !hasPendingPaperMandates(data.member)) {
-            history.push(`/members/${match.params.memberId}`);
-        }
-    });
-
-    const paperMandate = getPendingPaperMandates(data.member)[0] as MandateFragment_PaperMandate_;
 
     return (
         <>

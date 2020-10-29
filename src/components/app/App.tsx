@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import i18n from 'i18next';
+import React, {useEffect, useState} from 'react';
 import {ErrorBoundary} from 'react-error-boundary';
 import {Helmet} from 'react-helmet';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
@@ -13,23 +14,35 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 
-const App = ({location}: RouteComponentProps) => {
+const App = ({history, location}: RouteComponentProps) => {
     const [isSidebarVisible, setSidebarVisible] = useState(false);
     const {loading, data, error} = useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfile);
 
     const user = loading || error ? null : data.me;
 
-    // useEffect(() => {
-    //     if (user) {
-    //         // Change user ID for Matomo tracking
-    //         matomo.push(['setUserId', user.id]);
+    useEffect(() => {
+        if (user) {
+            // Change user ID for Matomo tracking
+            // matomo.push(['setUserId', user.id]);
 
-    //         // Change language to user preference
-    //         // if (i18n.language !== user.language.toLowerCase()) {
-    //         //     i18n.changeLanguage(user.language.toLowerCase());
-    //         // }
-    //     }
-    // }, [user]);
+            // Check if the user has to sign a mandate
+            if (!user.hasMandate && !location.pathname.startsWith('/sign')) {
+                console.log('nee');
+                history.push(`/sign`);
+            }
+
+            // Check if the user has pending paper mandates
+            if (user.hasPendingPaperMandates && !location.pathname.startsWith('/sign/paper')) {
+                console.log('nee 2');
+                history.push(`/sign/paper`);
+            }
+
+            // Change user language if needed
+            if (i18n.language !== user.language.toLowerCase()) {
+                i18n.changeLanguage(user.language.toLowerCase());
+            }
+        }
+    }, [user]);
 
     return (
         <ErrorBoundary fallback={<div />}>

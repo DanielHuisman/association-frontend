@@ -94,7 +94,8 @@ const PaperMandateForm = ({memberId, history}: IProps) => {
         >
             {(handleSubmit, mutationResult) => {
                 if (mutationResult.data && mutationResult.data.createPaperMandate) {
-                    history.push(`/members/${memberId}/mandates/sign/paper`);
+                    // TODO: using history.push gives query store errors
+                    window.location.href = '/sign/paper';
                 }
 
                 return (

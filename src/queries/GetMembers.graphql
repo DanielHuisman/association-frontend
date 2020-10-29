@@ -1,4 +1,5 @@
 # import '../fragments/Member.graphql'
+# import '../fragments/Membership.graphql'
 # import '../fragments/Mandate.graphql'
 
 query GetMembers {
@@ -10,6 +11,10 @@ query GetMembers {
     ) {
         values {
             ...MemberFragment
+
+            latestMembership {
+                ...MembershipFragment
+            }
 
             mandates(
                 where: {

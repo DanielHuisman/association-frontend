@@ -87,6 +87,7 @@
         "header": "Failed to create mandate"
       },
       "instructions": "You need to download the mandate form, print it out and sign it with your signature. Afterwards, you can make a photo of the form or scan it using a scanner. If you are unable to print, photograph or scan the mandate form, please contact the board.",
+      "none": "You have no pending mandates.",
       "pending": "Thank you for signing and uploading the mandate form. The board will review it within in few days. You will receive an email when the mandate has been reviewed.",
       "requirements": {
         "header": "Requirements",

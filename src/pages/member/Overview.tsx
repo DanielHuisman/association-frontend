@@ -135,7 +135,7 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
 
                     <Header size="large">{t('mandates:mandates.header', 'Mandates')}</Header>
 
-                    {!user && !hasAcceptedMandates(data.member) && (
+                    {!user && !hasAcceptedMandates(data.member.mandates.values) && (
                         <>
                             <p className={styles.text}>
                                 <Trans i18nKey="mandates:sign.required">

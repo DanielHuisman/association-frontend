@@ -87,6 +87,7 @@
         "header": "Incassomachtiging aanmaken is mislukt"
       },
       "instructions": "Download het formulier, print het uit en teken het met je handtekening. Maak daarna een foto of scan het formulier in. Als het niet lukt om het formulier te printen, fotograferen of scannen, neem dan contact op met het bestuur.",
+      "none": "You have no pending mandates.",
       "pending": "Bedankt voor het uploaden van de incassomachtiging. Het bestuur zal de incassomachtiging binnen een paar dagen beoordelen. Je ontvangt een e-mail zodra de incassomachtiging is beoordeeld.",
       "requirements": {
         "header": "Vereisten",

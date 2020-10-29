@@ -5,6 +5,9 @@ query GetProfile {
     me {
         ...MemberFragment
 
+        hasMandate
+        hasPendingPaperMandates
+
         providers {
             values {
                 ...ProviderFragment

@@ -18,6 +18,8 @@ const Members = () => {
         throw error;
     }
 
+    const actualMembers = data && data.members.values.filter((member) => !member.latestMembership.endedAt);
+
     return (
         <Container>
             <Helmet title={t('members:members.header', 'Members')} />
@@ -30,7 +32,7 @@ const Members = () => {
                     <p>{
                         t('members:members.withMandate', 'Members with mandate:')}
                         {' '}
-                        {data.members.values.filter(hasAcceptedMandates).length} / {data.members.values.length}
+                        {actualMembers.filter((member) => hasAcceptedMandates(member.mandates.values)).length} / {actualMembers.length}
                     </p>
                     <Table selectable stackable>
                         <Table.Header>
@@ -40,6 +42,7 @@ const Members = () => {
                                 <Table.HeaderCell>{t('members:member.lastName', 'Last name')}</Table.HeaderCell>
                                 <Table.HeaderCell>{t('members:member.email', 'Email address')}</Table.HeaderCell>
                                 <Table.HeaderCell>{t('members:member.language', 'Language')}</Table.HeaderCell>
+                                <Table.HeaderCell>{t('members:member.isMember', 'Is member')}</Table.HeaderCell>
                                 <Table.HeaderCell>{t('members:member.hasMandate', 'Has mandate')}</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
@@ -52,7 +55,10 @@ const Members = () => {
                                     <Table.Cell>{member.email}</Table.Cell>
                                     <Table.Cell>{t(`members:member.languages.${member.language}`)}</Table.Cell>
                                     <Table.Cell>
-                                        <YesNo value={hasAcceptedMandates(member)} />
+                                        <YesNo value={!member.latestMembership.endedAt} />
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        <YesNo value={hasAcceptedMandates(member.mandates.values)} />
                                     </Table.Cell>
                                 </TableSelectableRow>
                             ))}

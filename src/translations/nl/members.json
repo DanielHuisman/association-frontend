@@ -9,6 +9,7 @@
     "firstName": "Voornaam",
     "hasMandate": "Heeft incassomachtiging",
     "initials": "Initialen",
+    "isMember": "Is member",
     "language": "Taal",
     "languages": {
       "EN": "Engels",

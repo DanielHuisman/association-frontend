@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Trans} from 'react-i18next';
 import {RouteComponentProps} from 'react-router-dom';
 import {Segment, Grid} from 'semantic-ui-react';
 
-// import DigitalMandateForm from '../../components//mandate/DigitalMandateForm';
-import PaperMandateForm from '../../components//mandate/PaperMandateForm';
+import {UserContext} from '../../components/authentication/UserContext';
+// import DigitalMandateForm from '../../components/mandate/DigitalMandateForm';
+import PaperMandateForm from '../../components/mandate/PaperMandateForm';
 
 import styles from './Sign.css';
 
@@ -14,6 +15,7 @@ interface IRouteParams {
 
 const Intro = ({match, history}: RouteComponentProps<IRouteParams>) => {
     // const {t} = useTranslation();
+    const member = useContext(UserContext);
 
     return (
         <>
@@ -73,7 +75,7 @@ const Intro = ({match, history}: RouteComponentProps<IRouteParams>) => {
                                 </Trans>
                             </p>
 
-                            <PaperMandateForm memberId={match.params.memberId} history={history} />
+                            <PaperMandateForm memberId={member.id} history={history} />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

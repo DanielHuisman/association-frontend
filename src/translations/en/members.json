@@ -9,6 +9,7 @@
     "firstName": "First name",
     "hasMandate": "Has mandate",
     "initials": "Initials",
+    "isMember": "Is member",
     "language": "Language",
     "languages": {
       "EN": "English",
