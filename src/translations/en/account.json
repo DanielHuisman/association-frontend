@@ -18,6 +18,11 @@
       "initialsRemark": "Legal initials.",
       "success": "Successfully changed your profile.",
       "update": "Update profile information"
+    },
+    "noMandate": {
+      "button": "Sign mandate",
+      "content": "You have not yet signed a mandate, which is required to automatically deduct the yearly membership fee\nfrom your bank account. Please sign one here:",
+      "header": "No mandate signed"
     }
   },
   "security": {

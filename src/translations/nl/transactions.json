@@ -20,5 +20,5 @@
     "viewDirectDebitInstruction": "Bekijk incasso-instructie",
     "viewMember": "Bekijk lid"
   },
-  "transaction:noInstruction": "This transaction is not linked to a direct debit instruction."
+  "transaction:noInstruction": "Deze transactie is niet gelinkt aan een incasso-instructie."
 }

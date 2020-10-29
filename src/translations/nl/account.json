@@ -18,6 +18,11 @@
       "initialsRemark": "Wettelijke initialen.",
       "success": "Successfully changed your profile.",
       "update": "Verander profielgegevens"
+    },
+    "noMandate": {
+      "button": "Teken incassomachtiging",
+      "content": "Je hebt nog geen incassomachtiging getekend. Dit is nodig om automatisch de jaarlijkse contributie af te kunnen schrijven van je bankrekening.\nHier kun je een incassomachtiging tekenen:",
+      "header": "Geen incassomachtiging getekend"
     }
   },
   "security": {

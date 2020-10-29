@@ -26,14 +26,12 @@ const App = ({history, location}: RouteComponentProps) => {
             // matomo.push(['setUserId', user.id]);
 
             // Check if the user has to sign a mandate
-            if (!user.hasMandate && !location.pathname.startsWith('/sign')) {
-                console.log('nee');
-                history.push(`/sign`);
-            }
+            // if (!user.hasMandate && !(location.pathname.startsWith('/sign') || location.pathname.startsWith('/account/profile'))) {
+            //     history.push(`/sign`);
+            // }
 
             // Check if the user has pending paper mandates
             if (user.hasPendingPaperMandates && !location.pathname.startsWith('/sign/paper')) {
-                console.log('nee 2');
                 history.push(`/sign/paper`);
             }
 
