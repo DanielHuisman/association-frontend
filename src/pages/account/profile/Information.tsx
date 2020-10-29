@@ -26,7 +26,7 @@ const Information = () => {
                         where: {
                             id: data.me.id
                         },
-                        data: omit(values, ['__typename', 'id', 'email', 'isAdmin', 'image', 'providers'])
+                        data: omit(values, ['__typename', 'id', 'email', 'isAdmin', 'image', 'providers', 'hasMandate', 'hasPendingPaperMandates'])
                     }
                 })}
 
