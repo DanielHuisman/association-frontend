@@ -25,10 +25,10 @@ interface IValues {
 const schema = Yup.object().shape({
     iban: Yup.string()
         .required('This field is required.')
-        .test('is-valid-iban', 'Invalid IBAN.', (s?: string) => s && isValidIBAN(s)),
+        .test('is-valid-iban', 'Invalid IBAN.', (s?: string) => s && isValidIBAN(s.replace(/ /g, ''))),
     bic: Yup.string()
         .required('This field is required.')
-        .test('is-valid-bic', 'Invalid BIC.', (s?: string) => s && isValidBIC(s))
+        .test('is-valid-bic', 'Invalid BIC.', (s?: string) => s && isValidBIC(s.replace(/ /g, '')))
 });
 
 const BIC_LOOKUP = {
