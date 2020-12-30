@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {Link} from 'react-router-dom';
 import {Container, Grid, Header, Image, Button} from 'semantic-ui-react';
 
-import logo from '../../../public/images/logo.svg';
+import logo from '../../../public/images/logo_white.svg';
 import photo1 from '../../../public/images/photo1.jpg';
 import photo2 from '../../../public/images/photo2.jpg';
 import photo3 from '../../../public/images/photo3.jpg';
