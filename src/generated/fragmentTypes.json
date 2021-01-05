@@ -1,39 +1,15 @@
 {
-  "__schema": {
-    "types": [
-      {
-        "kind": "INTERFACE",
-        "name": "Translatable",
-        "possibleTypes": [
-          {
-            "name": "ShortTranslatable"
-          },
-          {
-            "name": "LongTranslatable"
-          }
-        ]
-      },
-      {
-        "kind": "INTERFACE",
-        "name": "Mandate",
-        "possibleTypes": [
-          {
-            "name": "DigitalMandate"
-          },
-          {
-            "name": "PaperMandate"
-          }
-        ]
-      },
-      {
-        "kind": "INTERFACE",
-        "name": "Transaction",
-        "possibleTypes": [
-          {
-            "name": "MembershipFeeTransaction"
-          }
-        ]
-      }
+  "possibleTypes": {
+    "Translatable": [
+      "ShortTranslatable",
+      "LongTranslatable"
+    ],
+    "Mandate": [
+      "DigitalMandate",
+      "PaperMandate"
+    ],
+    "Transaction": [
+      "MembershipFeeTransaction"
     ]
   }
 }

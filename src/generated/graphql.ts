@@ -1,8 +1,9 @@
-import gql from 'graphql-tag';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHooks from '@apollo/react-hooks';
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -33,11 +34,11 @@ export type CreatePaperMandateInput = {
 
 export type Bank = {
   __typename?: 'Bank';
-  id?: Maybe<Scalars['String']>;
-  bic?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
+  id: Scalars['String'];
+  bic: Scalars['String'];
+  country: Scalars['String'];
+  name: Scalars['String'];
+  isActive: Scalars['Boolean'];
 };
 
 export type Translatable = {
@@ -59,11 +60,11 @@ export type LongTranslatable = Translatable & {
 
 export type BoardPeriod = {
   __typename?: 'BoardPeriod';
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatable>;
-  startedAt?: Maybe<Scalars['Date']>;
+  id: Scalars['String'];
+  name: ShortTranslatable;
+  startedAt: Scalars['Date'];
   endedAt?: Maybe<Scalars['Date']>;
-  members?: Maybe<MemberList>;
+  members: MemberList;
 };
 
 
@@ -85,18 +86,18 @@ export enum MandateStatus {
 }
 
 export type Mandate = {
-  id?: Maybe<Scalars['String']>;
-  mandateId?: Maybe<Scalars['String']>;
-  status?: Maybe<MandateStatus>;
-  createdAt?: Maybe<Scalars['DateTime']>;
+  id: Scalars['String'];
+  mandateId: Scalars['String'];
+  status: MandateStatus;
+  createdAt: Scalars['DateTime'];
   acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic?: Maybe<Scalars['String']>;
+  bic: Scalars['String'];
   iban?: Maybe<Scalars['String']>;
-  reason?: Maybe<Scalars['String']>;
-  isFirstTransaction?: Maybe<Scalars['Boolean']>;
+  reason: Scalars['String'];
+  isFirstTransaction: Scalars['Boolean'];
   errorMessage?: Maybe<Scalars['String']>;
-  member?: Maybe<Member>;
-  instructions?: Maybe<DirectDebitInstructionList>;
+  member: Member;
+  instructions: DirectDebitInstructionList;
 };
 
 
@@ -108,26 +109,26 @@ export type MandateinstructionsArgs = {
 };
 
 export type Transaction = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  description?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['Int']>;
-  member?: Maybe<Member>;
+  id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  description: Scalars['String'];
+  amount: Scalars['Int'];
+  member: Member;
   instruction?: Maybe<DirectDebitInstruction>;
 };
 
 export type DirectDebitInstruction = {
   __typename?: 'DirectDebitInstruction';
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  instructionId?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  batch?: Maybe<DirectDebitBatch>;
-  transactions?: Maybe<TransactionList>;
-  mandate?: Maybe<Mandate>;
-  amount?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  instructionId: Scalars['String'];
+  description: Scalars['String'];
+  batch: DirectDebitBatch;
+  transactions: TransactionList;
+  mandate: Mandate;
+  amount: Scalars['Int'];
 };
 
 
@@ -147,15 +148,15 @@ export enum SequenceType {
 
 export type DirectDebitBatch = {
   __typename?: 'DirectDebitBatch';
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  batchId?: Maybe<Scalars['String']>;
-  sequenceType?: Maybe<SequenceType>;
-  directDebit?: Maybe<DirectDebit>;
-  instructions?: Maybe<DirectDebitInstructionList>;
-  instructionCount?: Maybe<Scalars['Int']>;
-  amount?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  batchId: Scalars['String'];
+  sequenceType: SequenceType;
+  directDebit: DirectDebit;
+  instructions: DirectDebitInstructionList;
+  instructionCount: Scalars['Int'];
+  amount: Scalars['Int'];
 };
 
 
@@ -168,10 +169,10 @@ export type DirectDebitBatchinstructionsArgs = {
 
 export type File = {
   __typename?: 'File';
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  mimeType?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name: Scalars['String'];
+  mimeType: Scalars['String'];
+  url: Scalars['String'];
 };
 
 export enum DirectDebitStatus {
@@ -184,17 +185,17 @@ export enum DirectDebitStatus {
 
 export type DirectDebit = {
   __typename?: 'DirectDebit';
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  status?: Maybe<DirectDebitStatus>;
-  messageId?: Maybe<Scalars['String']>;
-  collectionDate?: Maybe<Scalars['String']>;
-  batches?: Maybe<DirectDebitBatchList>;
-  warnings?: Maybe<DirectDebitWarningList>;
+  id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  status: DirectDebitStatus;
+  messageId: Scalars['String'];
+  collectionDate: Scalars['String'];
+  batches: DirectDebitBatchList;
+  warnings: DirectDebitWarningList;
   file?: Maybe<File>;
-  instructionCount?: Maybe<Scalars['Int']>;
-  amount?: Maybe<Scalars['Int']>;
+  instructionCount: Scalars['Int'];
+  amount: Scalars['Int'];
 };
 
 
@@ -215,25 +216,25 @@ export type DirectDebitwarningsArgs = {
 
 export type DirectDebitWarning = {
   __typename?: 'DirectDebitWarning';
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  description?: Maybe<Scalars['String']>;
-  directDebit?: Maybe<DirectDebit>;
+  id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  description: Scalars['String'];
+  directDebit: DirectDebit;
   member?: Maybe<Member>;
 };
 
 export type MembershipFeeTransaction = Transaction & {
   __typename?: 'MembershipFeeTransaction';
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  description?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['Int']>;
-  member?: Maybe<Member>;
+  id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  description: Scalars['String'];
+  amount: Scalars['Int'];
+  member: Member;
   instruction?: Maybe<DirectDebitInstruction>;
-  year?: Maybe<Scalars['Int']>;
-  membership?: Maybe<Membership>;
+  year: Scalars['Int'];
+  membership: Membership;
 };
 
 export enum MembershipType {
@@ -244,12 +245,12 @@ export enum MembershipType {
 
 export type Membership = {
   __typename?: 'Membership';
-  id?: Maybe<Scalars['String']>;
-  type?: Maybe<MembershipType>;
-  startedAt?: Maybe<Scalars['Date']>;
+  id: Scalars['String'];
+  type: MembershipType;
+  startedAt: Scalars['Date'];
   endedAt?: Maybe<Scalars['Date']>;
-  member?: Maybe<Member>;
-  transactions?: Maybe<MembershipFeeTransactionList>;
+  member: Member;
+  transactions: MembershipFeeTransactionList;
 };
 
 
@@ -282,31 +283,31 @@ export enum StudentType {
 
 export type Member = {
   __typename?: 'Member';
-  id?: Maybe<Scalars['String']>;
-  providers?: Maybe<ProviderList>;
-  firstName?: Maybe<Scalars['String']>;
-  initials?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  address?: Maybe<Scalars['String']>;
-  postalCode?: Maybe<Scalars['String']>;
-  city?: Maybe<Scalars['String']>;
-  phoneNumber?: Maybe<Scalars['String']>;
-  birthdate?: Maybe<Scalars['Date']>;
-  language?: Maybe<Language>;
-  pronouns?: Maybe<Pronouns>;
-  studentType?: Maybe<StudentType>;
-  isAdmin?: Maybe<Scalars['Boolean']>;
+  id: Scalars['String'];
+  providers: ProviderList;
+  firstName: Scalars['String'];
+  initials: Scalars['String'];
+  lastName: Scalars['String'];
+  email: Scalars['String'];
+  address: Scalars['String'];
+  postalCode: Scalars['String'];
+  city: Scalars['String'];
+  phoneNumber: Scalars['String'];
+  birthdate: Scalars['Date'];
+  language: Language;
+  pronouns: Pronouns;
+  studentType: StudentType;
+  isAdmin: Scalars['Boolean'];
   image?: Maybe<File>;
-  memberships?: Maybe<MembershipList>;
-  boardPeriods?: Maybe<BoardPeriodList>;
-  committeePeriods?: Maybe<CommitteePeriodList>;
-  mandates?: Maybe<MandateList>;
-  transactions?: Maybe<TransactionList>;
-  warnings?: Maybe<DirectDebitWarningList>;
-  latestMembership?: Maybe<Membership>;
-  hasMandate?: Maybe<Scalars['Boolean']>;
-  hasPendingPaperMandates?: Maybe<Scalars['Boolean']>;
+  memberships: MembershipList;
+  boardPeriods: BoardPeriodList;
+  committeePeriods: CommitteePeriodList;
+  mandates: MandateList;
+  transactions: TransactionList;
+  warnings: DirectDebitWarningList;
+  latestMembership: Membership;
+  hasMandate: Scalars['Boolean'];
+  hasPendingPaperMandates: Scalars['Boolean'];
 };
 
 
@@ -367,12 +368,12 @@ export type MemberwarningsArgs = {
 
 export type CommitteePeriod = {
   __typename?: 'CommitteePeriod';
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatable>;
-  startedAt?: Maybe<Scalars['Date']>;
+  id: Scalars['String'];
+  name: ShortTranslatable;
+  startedAt: Scalars['Date'];
   endedAt?: Maybe<Scalars['Date']>;
-  committee?: Maybe<Committee>;
-  members?: Maybe<MemberList>;
+  committee: Committee;
+  members: MemberList;
 };
 
 
@@ -385,10 +386,10 @@ export type CommitteePeriodmembersArgs = {
 
 export type Committee = {
   __typename?: 'Committee';
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatable>;
-  description?: Maybe<LongTranslatable>;
-  periods?: Maybe<CommitteePeriodList>;
+  id: Scalars['String'];
+  name: ShortTranslatable;
+  description: LongTranslatable;
+  periods: CommitteePeriodList;
 };
 
 
@@ -401,20 +402,20 @@ export type CommitteeperiodsArgs = {
 
 export type DigitalMandate = Mandate & {
   __typename?: 'DigitalMandate';
-  id?: Maybe<Scalars['String']>;
-  mandateId?: Maybe<Scalars['String']>;
-  status?: Maybe<MandateStatus>;
-  createdAt?: Maybe<Scalars['DateTime']>;
+  id: Scalars['String'];
+  mandateId: Scalars['String'];
+  status: MandateStatus;
+  createdAt: Scalars['DateTime'];
   acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic?: Maybe<Scalars['String']>;
+  bic: Scalars['String'];
   iban?: Maybe<Scalars['String']>;
-  reason?: Maybe<Scalars['String']>;
-  isFirstTransaction?: Maybe<Scalars['Boolean']>;
+  reason: Scalars['String'];
+  isFirstTransaction: Scalars['Boolean'];
   errorMessage?: Maybe<Scalars['String']>;
-  member?: Maybe<Member>;
-  instructions?: Maybe<DirectDebitInstructionList>;
-  messageId?: Maybe<Scalars['String']>;
-  entranceCode?: Maybe<Scalars['String']>;
+  member: Member;
+  instructions: DirectDebitInstructionList;
+  messageId: Scalars['String'];
+  entranceCode: Scalars['String'];
   transactionId?: Maybe<Scalars['String']>;
 };
 
@@ -428,25 +429,25 @@ export type DigitalMandateinstructionsArgs = {
 
 export type Page = {
   __typename?: 'Page';
-  id?: Maybe<Scalars['String']>;
-  title?: Maybe<ShortTranslatable>;
-  body?: Maybe<LongTranslatable>;
+  id: Scalars['String'];
+  title: ShortTranslatable;
+  body: LongTranslatable;
 };
 
 export type PaperMandate = Mandate & {
   __typename?: 'PaperMandate';
-  id?: Maybe<Scalars['String']>;
-  mandateId?: Maybe<Scalars['String']>;
-  status?: Maybe<MandateStatus>;
-  createdAt?: Maybe<Scalars['DateTime']>;
+  id: Scalars['String'];
+  mandateId: Scalars['String'];
+  status: MandateStatus;
+  createdAt: Scalars['DateTime'];
   acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic?: Maybe<Scalars['String']>;
+  bic: Scalars['String'];
   iban?: Maybe<Scalars['String']>;
-  reason?: Maybe<Scalars['String']>;
-  isFirstTransaction?: Maybe<Scalars['Boolean']>;
+  reason: Scalars['String'];
+  isFirstTransaction: Scalars['Boolean'];
   errorMessage?: Maybe<Scalars['String']>;
-  member?: Maybe<Member>;
-  instructions?: Maybe<DirectDebitInstructionList>;
+  member: Member;
+  instructions: DirectDebitInstructionList;
   generatedFile?: Maybe<File>;
   uploadedFile?: Maybe<File>;
 };
@@ -461,31 +462,31 @@ export type PaperMandateinstructionsArgs = {
 
 export type Setting = {
   __typename?: 'Setting';
-  key?: Maybe<Scalars['String']>;
-  value?: Maybe<Scalars['String']>;
-  isPublic?: Maybe<Scalars['Boolean']>;
+  key: Scalars['String'];
+  value: Scalars['String'];
+  isPublic: Scalars['Boolean'];
 };
 
 export type CreateDigitalMandateResult = {
   __typename?: 'CreateDigitalMandateResult';
-  redirectUrl?: Maybe<Scalars['String']>;
-  mandate?: Maybe<DigitalMandate>;
+  redirectUrl: Scalars['String'];
+  mandate: DigitalMandate;
 };
 
 
 export type AccessToken = {
   __typename?: 'AccessToken';
-  accessToken?: Maybe<Scalars['String']>;
-  expiresIn?: Maybe<Scalars['Int']>;
+  accessToken: Scalars['String'];
+  expiresIn: Scalars['Int'];
 };
 
 export type Provider = {
   __typename?: 'Provider';
-  id?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  isVerified?: Maybe<Scalars['Boolean']>;
-  user?: Maybe<Member>;
+  id: Scalars['String'];
+  type: Scalars['String'];
+  email: Scalars['String'];
+  isVerified: Scalars['Boolean'];
+  user: Member;
 };
 
 export enum TokenType {
@@ -495,11 +496,11 @@ export enum TokenType {
 
 export type Token = {
   __typename?: 'Token';
-  id?: Maybe<Scalars['String']>;
-  type?: Maybe<TokenType>;
-  token?: Maybe<Scalars['String']>;
-  expiresAt?: Maybe<Scalars['DateTime']>;
-  provider?: Maybe<Provider>;
+  id: Scalars['String'];
+  type: TokenType;
+  token: Scalars['String'];
+  expiresAt: Scalars['DateTime'];
+  provider: Provider;
 };
 
 
@@ -513,8 +514,8 @@ export enum OrderByArg {
 export type IntFilter = {
   equals?: Maybe<Scalars['Int']>;
   not?: Maybe<Scalars['Int']>;
-  in?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  notIn?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  in?: Maybe<Array<Scalars['Int']>>;
+  notIn?: Maybe<Array<Scalars['Int']>>;
   lt?: Maybe<Scalars['Int']>;
   lte?: Maybe<Scalars['Int']>;
   gt?: Maybe<Scalars['Int']>;
@@ -524,8 +525,8 @@ export type IntFilter = {
 export type FloatFilter = {
   equals?: Maybe<Scalars['Float']>;
   not?: Maybe<Scalars['Float']>;
-  in?: Maybe<Array<Maybe<Scalars['Float']>>>;
-  notIn?: Maybe<Array<Maybe<Scalars['Float']>>>;
+  in?: Maybe<Array<Scalars['Float']>>;
+  notIn?: Maybe<Array<Scalars['Float']>>;
   lt?: Maybe<Scalars['Float']>;
   lte?: Maybe<Scalars['Float']>;
   gt?: Maybe<Scalars['Float']>;
@@ -535,8 +536,8 @@ export type FloatFilter = {
 export type StringFilter = {
   equals?: Maybe<Scalars['String']>;
   not?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  notIn?: Maybe<Array<Maybe<Scalars['String']>>>;
+  in?: Maybe<Array<Scalars['String']>>;
+  notIn?: Maybe<Array<Scalars['String']>>;
   lt?: Maybe<Scalars['String']>;
   lte?: Maybe<Scalars['String']>;
   gt?: Maybe<Scalars['String']>;
@@ -549,8 +550,8 @@ export type StringFilter = {
 export type DateTimeFilter = {
   equals?: Maybe<Scalars['DateTime']>;
   not?: Maybe<Scalars['DateTime']>;
-  in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
-  notIn?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  in?: Maybe<Array<Scalars['DateTime']>>;
+  notIn?: Maybe<Array<Scalars['DateTime']>>;
   lt?: Maybe<Scalars['DateTime']>;
   lte?: Maybe<Scalars['DateTime']>;
   gt?: Maybe<Scalars['DateTime']>;
@@ -568,8 +569,8 @@ export type BankWhereInput = {
   country?: Maybe<StringFilter>;
   name?: Maybe<StringFilter>;
   isActive?: Maybe<Scalars['Boolean']>;
-  AND?: Maybe<Array<Maybe<BankWhereInput>>>;
-  OR?: Maybe<Array<Maybe<BankWhereInput>>>;
+  AND?: Maybe<Array<BankWhereInput>>;
+  OR?: Maybe<Array<BankWhereInput>>;
 };
 
 export type BankOrderByInput = {
@@ -582,10 +583,10 @@ export type BankOrderByInput = {
 
 export type BankCreateInput = {
   id?: Maybe<Scalars['String']>;
-  bic: Scalars['String'];
-  country: Scalars['String'];
-  name: Scalars['String'];
-  isActive: Scalars['Boolean'];
+  bic?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  isActive?: Maybe<Scalars['Boolean']>;
 };
 
 export type BankUpdateInput = {
@@ -603,7 +604,7 @@ export type BankWhereUniqueInput = {
 
 export type BankList = {
   __typename?: 'BankList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<Bank>;
 };
 
@@ -613,8 +614,8 @@ export type BoardPeriodWhereInput = {
   startedAt?: Maybe<DateTimeFilter>;
   endedAt?: Maybe<DateTimeFilter>;
   members?: Maybe<MemberWhereInput>;
-  AND?: Maybe<Array<Maybe<BoardPeriodWhereInput>>>;
-  OR?: Maybe<Array<Maybe<BoardPeriodWhereInput>>>;
+  AND?: Maybe<Array<BoardPeriodWhereInput>>;
+  OR?: Maybe<Array<BoardPeriodWhereInput>>;
 };
 
 export type BoardPeriodOrderByInput = {
@@ -626,10 +627,10 @@ export type BoardPeriodOrderByInput = {
 
 export type BoardPeriodCreateInput = {
   id?: Maybe<Scalars['String']>;
-  name: ShortTranslatableCreateInput;
-  startedAt: Scalars['Date'];
+  name?: Maybe<ShortTranslatableCreateInput>;
+  startedAt?: Maybe<Scalars['Date']>;
   endedAt?: Maybe<Scalars['Date']>;
-  members?: Maybe<Array<Maybe<MemberCreateRelationInput>>>;
+  members?: Maybe<Array<MemberCreateRelationInput>>;
 };
 
 export type BoardPeriodUpdateInput = {
@@ -637,7 +638,7 @@ export type BoardPeriodUpdateInput = {
   name?: Maybe<ShortTranslatableUpdateInput>;
   startedAt?: Maybe<Scalars['Date']>;
   endedAt?: Maybe<Scalars['Date']>;
-  members?: Maybe<Array<Maybe<MemberUpdateRelationInput>>>;
+  members?: Maybe<Array<MemberUpdateRelationInput>>;
 };
 
 export type BoardPeriodWhereUniqueInput = {
@@ -646,7 +647,7 @@ export type BoardPeriodWhereUniqueInput = {
 
 export type BoardPeriodList = {
   __typename?: 'BoardPeriodList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<BoardPeriod>;
 };
 
@@ -663,8 +664,8 @@ export type MandateWhereInput = {
   errorMessage?: Maybe<StringFilter>;
   member?: Maybe<MemberWhereInput>;
   instructions?: Maybe<DirectDebitInstructionWhereInput>;
-  AND?: Maybe<Array<Maybe<MandateWhereInput>>>;
-  OR?: Maybe<Array<Maybe<MandateWhereInput>>>;
+  AND?: Maybe<Array<MandateWhereInput>>;
+  OR?: Maybe<Array<MandateWhereInput>>;
 };
 
 export type MandateOrderByInput = {
@@ -683,17 +684,17 @@ export type MandateOrderByInput = {
 
 export type MandateCreateInput = {
   id?: Maybe<Scalars['String']>;
-  mandateId: Scalars['String'];
+  mandateId?: Maybe<Scalars['String']>;
   status?: Maybe<MandateStatus>;
   createdAt?: Maybe<Scalars['DateTime']>;
   acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic: Scalars['String'];
+  bic?: Maybe<Scalars['String']>;
   iban?: Maybe<Scalars['String']>;
-  reason: Scalars['String'];
+  reason?: Maybe<Scalars['String']>;
   isFirstTransaction?: Maybe<Scalars['Boolean']>;
   errorMessage?: Maybe<Scalars['String']>;
-  member: MemberCreateRelationInput;
-  instructions?: Maybe<Array<Maybe<DirectDebitInstructionCreateRelationInput>>>;
+  member?: Maybe<MemberCreateRelationInput>;
+  instructions?: Maybe<Array<DirectDebitInstructionCreateRelationInput>>;
 };
 
 export type MandateUpdateInput = {
@@ -708,7 +709,7 @@ export type MandateUpdateInput = {
   isFirstTransaction?: Maybe<Scalars['Boolean']>;
   errorMessage?: Maybe<Scalars['String']>;
   member?: Maybe<MemberUpdateRelationInput>;
-  instructions?: Maybe<Array<Maybe<DirectDebitInstructionUpdateRelationInput>>>;
+  instructions?: Maybe<Array<DirectDebitInstructionUpdateRelationInput>>;
 };
 
 export type MandateWhereUniqueInput = {
@@ -717,7 +718,7 @@ export type MandateWhereUniqueInput = {
 
 export type MandateList = {
   __typename?: 'MandateList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<Mandate>;
 };
 
@@ -729,8 +730,8 @@ export type TransactionWhereInput = {
   amount?: Maybe<IntFilter>;
   member?: Maybe<MemberWhereInput>;
   instruction?: Maybe<DirectDebitInstructionWhereInput>;
-  AND?: Maybe<Array<Maybe<TransactionWhereInput>>>;
-  OR?: Maybe<Array<Maybe<TransactionWhereInput>>>;
+  AND?: Maybe<Array<TransactionWhereInput>>;
+  OR?: Maybe<Array<TransactionWhereInput>>;
 };
 
 export type TransactionOrderByInput = {
@@ -747,9 +748,9 @@ export type TransactionCreateInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  description: Scalars['String'];
-  amount: Scalars['Float'];
-  member: MemberCreateRelationInput;
+  description?: Maybe<Scalars['String']>;
+  amount?: Maybe<Scalars['Float']>;
+  member?: Maybe<MemberCreateRelationInput>;
   instruction?: Maybe<DirectDebitInstructionCreateRelationInput>;
 };
 
@@ -769,7 +770,7 @@ export type TransactionWhereUniqueInput = {
 
 export type TransactionList = {
   __typename?: 'TransactionList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<Transaction>;
 };
 
@@ -782,8 +783,8 @@ export type DirectDebitInstructionWhereInput = {
   batch?: Maybe<DirectDebitBatchWhereInput>;
   transactions?: Maybe<TransactionWhereInput>;
   mandate?: Maybe<MandateWhereInput>;
-  AND?: Maybe<Array<Maybe<DirectDebitInstructionWhereInput>>>;
-  OR?: Maybe<Array<Maybe<DirectDebitInstructionWhereInput>>>;
+  AND?: Maybe<Array<DirectDebitInstructionWhereInput>>;
+  OR?: Maybe<Array<DirectDebitInstructionWhereInput>>;
 };
 
 export type DirectDebitInstructionOrderByInput = {
@@ -800,11 +801,11 @@ export type DirectDebitInstructionCreateInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  instructionId: Scalars['String'];
-  description: Scalars['String'];
-  batch: DirectDebitBatchCreateRelationInput;
-  transactions?: Maybe<Array<Maybe<TransactionCreateRelationInput>>>;
-  mandate: MandateCreateRelationInput;
+  instructionId?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  batch?: Maybe<DirectDebitBatchCreateRelationInput>;
+  transactions?: Maybe<Array<TransactionCreateRelationInput>>;
+  mandate?: Maybe<MandateCreateRelationInput>;
 };
 
 export type DirectDebitInstructionUpdateInput = {
@@ -814,7 +815,7 @@ export type DirectDebitInstructionUpdateInput = {
   instructionId?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   batch?: Maybe<DirectDebitBatchUpdateRelationInput>;
-  transactions?: Maybe<Array<Maybe<TransactionUpdateRelationInput>>>;
+  transactions?: Maybe<Array<TransactionUpdateRelationInput>>;
   mandate?: Maybe<MandateUpdateRelationInput>;
 };
 
@@ -824,7 +825,7 @@ export type DirectDebitInstructionWhereUniqueInput = {
 
 export type DirectDebitInstructionList = {
   __typename?: 'DirectDebitInstructionList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<DirectDebitInstruction>;
 };
 
@@ -836,8 +837,8 @@ export type DirectDebitBatchWhereInput = {
   sequenceType?: Maybe<SequenceTypeFilter>;
   directDebit?: Maybe<DirectDebitWhereInput>;
   instructions?: Maybe<DirectDebitInstructionWhereInput>;
-  AND?: Maybe<Array<Maybe<DirectDebitBatchWhereInput>>>;
-  OR?: Maybe<Array<Maybe<DirectDebitBatchWhereInput>>>;
+  AND?: Maybe<Array<DirectDebitBatchWhereInput>>;
+  OR?: Maybe<Array<DirectDebitBatchWhereInput>>;
 };
 
 export type DirectDebitBatchOrderByInput = {
@@ -853,10 +854,10 @@ export type DirectDebitBatchCreateInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  batchId: Scalars['String'];
-  sequenceType: SequenceType;
-  directDebit: DirectDebitCreateRelationInput;
-  instructions?: Maybe<Array<Maybe<DirectDebitInstructionCreateRelationInput>>>;
+  batchId?: Maybe<Scalars['String']>;
+  sequenceType?: Maybe<SequenceType>;
+  directDebit?: Maybe<DirectDebitCreateRelationInput>;
+  instructions?: Maybe<Array<DirectDebitInstructionCreateRelationInput>>;
 };
 
 export type DirectDebitBatchUpdateInput = {
@@ -866,7 +867,7 @@ export type DirectDebitBatchUpdateInput = {
   batchId?: Maybe<Scalars['String']>;
   sequenceType?: Maybe<SequenceType>;
   directDebit?: Maybe<DirectDebitUpdateRelationInput>;
-  instructions?: Maybe<Array<Maybe<DirectDebitInstructionUpdateRelationInput>>>;
+  instructions?: Maybe<Array<DirectDebitInstructionUpdateRelationInput>>;
 };
 
 export type DirectDebitBatchWhereUniqueInput = {
@@ -875,7 +876,7 @@ export type DirectDebitBatchWhereUniqueInput = {
 
 export type DirectDebitBatchList = {
   __typename?: 'DirectDebitBatchList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<DirectDebitBatch>;
 };
 
@@ -883,8 +884,8 @@ export type FileWhereInput = {
   id?: Maybe<StringFilter>;
   name?: Maybe<StringFilter>;
   mimeType?: Maybe<StringFilter>;
-  AND?: Maybe<Array<Maybe<FileWhereInput>>>;
-  OR?: Maybe<Array<Maybe<FileWhereInput>>>;
+  AND?: Maybe<Array<FileWhereInput>>;
+  OR?: Maybe<Array<FileWhereInput>>;
 };
 
 export type FileOrderByInput = {
@@ -895,8 +896,8 @@ export type FileOrderByInput = {
 
 export type FileCreateInput = {
   id?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  mimeType: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  mimeType?: Maybe<Scalars['String']>;
 };
 
 export type FileUpdateInput = {
@@ -911,7 +912,7 @@ export type FileWhereUniqueInput = {
 
 export type FileList = {
   __typename?: 'FileList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<File>;
 };
 
@@ -925,8 +926,8 @@ export type DirectDebitWhereInput = {
   batches?: Maybe<DirectDebitBatchWhereInput>;
   warnings?: Maybe<DirectDebitWarningWhereInput>;
   file?: Maybe<FileWhereInput>;
-  AND?: Maybe<Array<Maybe<DirectDebitWhereInput>>>;
-  OR?: Maybe<Array<Maybe<DirectDebitWhereInput>>>;
+  AND?: Maybe<Array<DirectDebitWhereInput>>;
+  OR?: Maybe<Array<DirectDebitWhereInput>>;
 };
 
 export type DirectDebitOrderByInput = {
@@ -944,10 +945,10 @@ export type DirectDebitCreateInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   status?: Maybe<DirectDebitStatus>;
-  messageId: Scalars['String'];
-  collectionDate: Scalars['String'];
-  batches?: Maybe<Array<Maybe<DirectDebitBatchCreateRelationInput>>>;
-  warnings?: Maybe<Array<Maybe<DirectDebitWarningCreateRelationInput>>>;
+  messageId?: Maybe<Scalars['String']>;
+  collectionDate?: Maybe<Scalars['String']>;
+  batches?: Maybe<Array<DirectDebitBatchCreateRelationInput>>;
+  warnings?: Maybe<Array<DirectDebitWarningCreateRelationInput>>;
   file?: Maybe<FileCreateRelationInput>;
 };
 
@@ -958,8 +959,8 @@ export type DirectDebitUpdateInput = {
   status?: Maybe<DirectDebitStatus>;
   messageId?: Maybe<Scalars['String']>;
   collectionDate?: Maybe<Scalars['String']>;
-  batches?: Maybe<Array<Maybe<DirectDebitBatchUpdateRelationInput>>>;
-  warnings?: Maybe<Array<Maybe<DirectDebitWarningUpdateRelationInput>>>;
+  batches?: Maybe<Array<DirectDebitBatchUpdateRelationInput>>;
+  warnings?: Maybe<Array<DirectDebitWarningUpdateRelationInput>>;
   file?: Maybe<FileUpdateRelationInput>;
 };
 
@@ -969,7 +970,7 @@ export type DirectDebitWhereUniqueInput = {
 
 export type DirectDebitList = {
   __typename?: 'DirectDebitList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<DirectDebit>;
 };
 
@@ -980,8 +981,8 @@ export type DirectDebitWarningWhereInput = {
   description?: Maybe<StringFilter>;
   directDebit?: Maybe<DirectDebitWhereInput>;
   member?: Maybe<MemberWhereInput>;
-  AND?: Maybe<Array<Maybe<DirectDebitWarningWhereInput>>>;
-  OR?: Maybe<Array<Maybe<DirectDebitWarningWhereInput>>>;
+  AND?: Maybe<Array<DirectDebitWarningWhereInput>>;
+  OR?: Maybe<Array<DirectDebitWarningWhereInput>>;
 };
 
 export type DirectDebitWarningOrderByInput = {
@@ -997,8 +998,8 @@ export type DirectDebitWarningCreateInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  description: Scalars['String'];
-  directDebit: DirectDebitCreateRelationInput;
+  description?: Maybe<Scalars['String']>;
+  directDebit?: Maybe<DirectDebitCreateRelationInput>;
   member?: Maybe<MemberCreateRelationInput>;
 };
 
@@ -1017,7 +1018,7 @@ export type DirectDebitWarningWhereUniqueInput = {
 
 export type DirectDebitWarningList = {
   __typename?: 'DirectDebitWarningList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<DirectDebitWarning>;
 };
 
@@ -1031,8 +1032,8 @@ export type MembershipFeeTransactionWhereInput = {
   instruction?: Maybe<DirectDebitInstructionWhereInput>;
   year?: Maybe<IntFilter>;
   membership?: Maybe<MembershipWhereInput>;
-  AND?: Maybe<Array<Maybe<MembershipFeeTransactionWhereInput>>>;
-  OR?: Maybe<Array<Maybe<MembershipFeeTransactionWhereInput>>>;
+  AND?: Maybe<Array<MembershipFeeTransactionWhereInput>>;
+  OR?: Maybe<Array<MembershipFeeTransactionWhereInput>>;
 };
 
 export type MembershipFeeTransactionOrderByInput = {
@@ -1051,12 +1052,12 @@ export type MembershipFeeTransactionCreateInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  description: Scalars['String'];
-  amount: Scalars['Float'];
-  member: MemberCreateRelationInput;
+  description?: Maybe<Scalars['String']>;
+  amount?: Maybe<Scalars['Float']>;
+  member?: Maybe<MemberCreateRelationInput>;
   instruction?: Maybe<DirectDebitInstructionCreateRelationInput>;
-  year: Scalars['Float'];
-  membership: MembershipCreateRelationInput;
+  year?: Maybe<Scalars['Float']>;
+  membership?: Maybe<MembershipCreateRelationInput>;
 };
 
 export type MembershipFeeTransactionUpdateInput = {
@@ -1077,7 +1078,7 @@ export type MembershipFeeTransactionWhereUniqueInput = {
 
 export type MembershipFeeTransactionList = {
   __typename?: 'MembershipFeeTransactionList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<MembershipFeeTransaction>;
 };
 
@@ -1088,8 +1089,8 @@ export type MembershipWhereInput = {
   endedAt?: Maybe<DateTimeFilter>;
   member?: Maybe<MemberWhereInput>;
   transactions?: Maybe<MembershipFeeTransactionWhereInput>;
-  AND?: Maybe<Array<Maybe<MembershipWhereInput>>>;
-  OR?: Maybe<Array<Maybe<MembershipWhereInput>>>;
+  AND?: Maybe<Array<MembershipWhereInput>>;
+  OR?: Maybe<Array<MembershipWhereInput>>;
 };
 
 export type MembershipOrderByInput = {
@@ -1103,10 +1104,10 @@ export type MembershipOrderByInput = {
 export type MembershipCreateInput = {
   id?: Maybe<Scalars['String']>;
   type?: Maybe<MembershipType>;
-  startedAt: Scalars['Date'];
+  startedAt?: Maybe<Scalars['Date']>;
   endedAt?: Maybe<Scalars['Date']>;
-  member: MemberCreateRelationInput;
-  transactions?: Maybe<Array<Maybe<MembershipFeeTransactionCreateRelationInput>>>;
+  member?: Maybe<MemberCreateRelationInput>;
+  transactions?: Maybe<Array<MembershipFeeTransactionCreateRelationInput>>;
 };
 
 export type MembershipUpdateInput = {
@@ -1115,7 +1116,7 @@ export type MembershipUpdateInput = {
   startedAt?: Maybe<Scalars['Date']>;
   endedAt?: Maybe<Scalars['Date']>;
   member?: Maybe<MemberUpdateRelationInput>;
-  transactions?: Maybe<Array<Maybe<MembershipFeeTransactionUpdateRelationInput>>>;
+  transactions?: Maybe<Array<MembershipFeeTransactionUpdateRelationInput>>;
 };
 
 export type MembershipWhereUniqueInput = {
@@ -1124,7 +1125,7 @@ export type MembershipWhereUniqueInput = {
 
 export type MembershipList = {
   __typename?: 'MembershipList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<Membership>;
 };
 
@@ -1151,8 +1152,8 @@ export type MemberWhereInput = {
   mandates?: Maybe<MandateWhereInput>;
   transactions?: Maybe<TransactionWhereInput>;
   warnings?: Maybe<DirectDebitWarningWhereInput>;
-  AND?: Maybe<Array<Maybe<MemberWhereInput>>>;
-  OR?: Maybe<Array<Maybe<MemberWhereInput>>>;
+  AND?: Maybe<Array<MemberWhereInput>>;
+  OR?: Maybe<Array<MemberWhereInput>>;
 };
 
 export type MemberOrderByInput = {
@@ -1175,32 +1176,32 @@ export type MemberOrderByInput = {
 
 export type MemberCreateInput = {
   id?: Maybe<Scalars['String']>;
-  providers?: Maybe<Array<Maybe<ProviderCreateRelationInput>>>;
-  firstName: Scalars['String'];
-  initials: Scalars['String'];
-  lastName: Scalars['String'];
-  email: Scalars['String'];
-  address: Scalars['String'];
-  postalCode: Scalars['String'];
-  city: Scalars['String'];
-  phoneNumber: Scalars['String'];
-  birthdate: Scalars['Date'];
+  providers?: Maybe<Array<ProviderCreateRelationInput>>;
+  firstName?: Maybe<Scalars['String']>;
+  initials?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  address?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  phoneNumber?: Maybe<Scalars['String']>;
+  birthdate?: Maybe<Scalars['Date']>;
   language?: Maybe<Language>;
   pronouns?: Maybe<Pronouns>;
-  studentType: StudentType;
+  studentType?: Maybe<StudentType>;
   isAdmin?: Maybe<Scalars['Boolean']>;
   image?: Maybe<FileCreateRelationInput>;
-  memberships?: Maybe<Array<Maybe<MembershipCreateRelationInput>>>;
-  boardPeriods?: Maybe<Array<Maybe<BoardPeriodCreateRelationInput>>>;
-  committeePeriods?: Maybe<Array<Maybe<CommitteePeriodCreateRelationInput>>>;
-  mandates?: Maybe<Array<Maybe<MandateCreateRelationInput>>>;
-  transactions?: Maybe<Array<Maybe<TransactionCreateRelationInput>>>;
-  warnings?: Maybe<Array<Maybe<DirectDebitWarningCreateRelationInput>>>;
+  memberships?: Maybe<Array<MembershipCreateRelationInput>>;
+  boardPeriods?: Maybe<Array<BoardPeriodCreateRelationInput>>;
+  committeePeriods?: Maybe<Array<CommitteePeriodCreateRelationInput>>;
+  mandates?: Maybe<Array<MandateCreateRelationInput>>;
+  transactions?: Maybe<Array<TransactionCreateRelationInput>>;
+  warnings?: Maybe<Array<DirectDebitWarningCreateRelationInput>>;
 };
 
 export type MemberUpdateInput = {
   id?: Maybe<Scalars['String']>;
-  providers?: Maybe<Array<Maybe<ProviderUpdateRelationInput>>>;
+  providers?: Maybe<Array<ProviderUpdateRelationInput>>;
   firstName?: Maybe<Scalars['String']>;
   initials?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
@@ -1215,12 +1216,12 @@ export type MemberUpdateInput = {
   studentType?: Maybe<StudentType>;
   isAdmin?: Maybe<Scalars['Boolean']>;
   image?: Maybe<FileUpdateRelationInput>;
-  memberships?: Maybe<Array<Maybe<MembershipUpdateRelationInput>>>;
-  boardPeriods?: Maybe<Array<Maybe<BoardPeriodUpdateRelationInput>>>;
-  committeePeriods?: Maybe<Array<Maybe<CommitteePeriodUpdateRelationInput>>>;
-  mandates?: Maybe<Array<Maybe<MandateUpdateRelationInput>>>;
-  transactions?: Maybe<Array<Maybe<TransactionUpdateRelationInput>>>;
-  warnings?: Maybe<Array<Maybe<DirectDebitWarningUpdateRelationInput>>>;
+  memberships?: Maybe<Array<MembershipUpdateRelationInput>>;
+  boardPeriods?: Maybe<Array<BoardPeriodUpdateRelationInput>>;
+  committeePeriods?: Maybe<Array<CommitteePeriodUpdateRelationInput>>;
+  mandates?: Maybe<Array<MandateUpdateRelationInput>>;
+  transactions?: Maybe<Array<TransactionUpdateRelationInput>>;
+  warnings?: Maybe<Array<DirectDebitWarningUpdateRelationInput>>;
 };
 
 export type MemberWhereUniqueInput = {
@@ -1229,7 +1230,7 @@ export type MemberWhereUniqueInput = {
 
 export type MemberList = {
   __typename?: 'MemberList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<Member>;
 };
 
@@ -1240,8 +1241,8 @@ export type CommitteePeriodWhereInput = {
   endedAt?: Maybe<DateTimeFilter>;
   committee?: Maybe<CommitteeWhereInput>;
   members?: Maybe<MemberWhereInput>;
-  AND?: Maybe<Array<Maybe<CommitteePeriodWhereInput>>>;
-  OR?: Maybe<Array<Maybe<CommitteePeriodWhereInput>>>;
+  AND?: Maybe<Array<CommitteePeriodWhereInput>>;
+  OR?: Maybe<Array<CommitteePeriodWhereInput>>;
 };
 
 export type CommitteePeriodOrderByInput = {
@@ -1254,11 +1255,11 @@ export type CommitteePeriodOrderByInput = {
 
 export type CommitteePeriodCreateInput = {
   id?: Maybe<Scalars['String']>;
-  name: ShortTranslatableCreateInput;
-  startedAt: Scalars['Date'];
+  name?: Maybe<ShortTranslatableCreateInput>;
+  startedAt?: Maybe<Scalars['Date']>;
   endedAt?: Maybe<Scalars['Date']>;
-  committee: CommitteeCreateRelationInput;
-  members?: Maybe<Array<Maybe<MemberCreateRelationInput>>>;
+  committee?: Maybe<CommitteeCreateRelationInput>;
+  members?: Maybe<Array<MemberCreateRelationInput>>;
 };
 
 export type CommitteePeriodUpdateInput = {
@@ -1267,7 +1268,7 @@ export type CommitteePeriodUpdateInput = {
   startedAt?: Maybe<Scalars['Date']>;
   endedAt?: Maybe<Scalars['Date']>;
   committee?: Maybe<CommitteeUpdateRelationInput>;
-  members?: Maybe<Array<Maybe<MemberUpdateRelationInput>>>;
+  members?: Maybe<Array<MemberUpdateRelationInput>>;
 };
 
 export type CommitteePeriodWhereUniqueInput = {
@@ -1276,7 +1277,7 @@ export type CommitteePeriodWhereUniqueInput = {
 
 export type CommitteePeriodList = {
   __typename?: 'CommitteePeriodList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<CommitteePeriod>;
 };
 
@@ -1285,8 +1286,8 @@ export type CommitteeWhereInput = {
   name?: Maybe<ShortTranslatableWhereInput>;
   description?: Maybe<LongTranslatableWhereInput>;
   periods?: Maybe<CommitteePeriodWhereInput>;
-  AND?: Maybe<Array<Maybe<CommitteeWhereInput>>>;
-  OR?: Maybe<Array<Maybe<CommitteeWhereInput>>>;
+  AND?: Maybe<Array<CommitteeWhereInput>>;
+  OR?: Maybe<Array<CommitteeWhereInput>>;
 };
 
 export type CommitteeOrderByInput = {
@@ -1297,16 +1298,16 @@ export type CommitteeOrderByInput = {
 
 export type CommitteeCreateInput = {
   id?: Maybe<Scalars['String']>;
-  name: ShortTranslatableCreateInput;
-  description: LongTranslatableCreateInput;
-  periods?: Maybe<Array<Maybe<CommitteePeriodCreateRelationInput>>>;
+  name?: Maybe<ShortTranslatableCreateInput>;
+  description?: Maybe<LongTranslatableCreateInput>;
+  periods?: Maybe<Array<CommitteePeriodCreateRelationInput>>;
 };
 
 export type CommitteeUpdateInput = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<ShortTranslatableUpdateInput>;
   description?: Maybe<LongTranslatableUpdateInput>;
-  periods?: Maybe<Array<Maybe<CommitteePeriodUpdateRelationInput>>>;
+  periods?: Maybe<Array<CommitteePeriodUpdateRelationInput>>;
 };
 
 export type CommitteeWhereUniqueInput = {
@@ -1315,7 +1316,7 @@ export type CommitteeWhereUniqueInput = {
 
 export type CommitteeList = {
   __typename?: 'CommitteeList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<Committee>;
 };
 
@@ -1335,8 +1336,8 @@ export type DigitalMandateWhereInput = {
   messageId?: Maybe<StringFilter>;
   entranceCode?: Maybe<StringFilter>;
   transactionId?: Maybe<StringFilter>;
-  AND?: Maybe<Array<Maybe<DigitalMandateWhereInput>>>;
-  OR?: Maybe<Array<Maybe<DigitalMandateWhereInput>>>;
+  AND?: Maybe<Array<DigitalMandateWhereInput>>;
+  OR?: Maybe<Array<DigitalMandateWhereInput>>;
 };
 
 export type DigitalMandateOrderByInput = {
@@ -1358,19 +1359,19 @@ export type DigitalMandateOrderByInput = {
 
 export type DigitalMandateCreateInput = {
   id?: Maybe<Scalars['String']>;
-  mandateId: Scalars['String'];
+  mandateId?: Maybe<Scalars['String']>;
   status?: Maybe<MandateStatus>;
   createdAt?: Maybe<Scalars['DateTime']>;
   acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic: Scalars['String'];
+  bic?: Maybe<Scalars['String']>;
   iban?: Maybe<Scalars['String']>;
-  reason: Scalars['String'];
+  reason?: Maybe<Scalars['String']>;
   isFirstTransaction?: Maybe<Scalars['Boolean']>;
   errorMessage?: Maybe<Scalars['String']>;
-  member: MemberCreateRelationInput;
-  instructions?: Maybe<Array<Maybe<DirectDebitInstructionCreateRelationInput>>>;
-  messageId: Scalars['String'];
-  entranceCode: Scalars['String'];
+  member?: Maybe<MemberCreateRelationInput>;
+  instructions?: Maybe<Array<DirectDebitInstructionCreateRelationInput>>;
+  messageId?: Maybe<Scalars['String']>;
+  entranceCode?: Maybe<Scalars['String']>;
   transactionId?: Maybe<Scalars['String']>;
 };
 
@@ -1386,7 +1387,7 @@ export type DigitalMandateUpdateInput = {
   isFirstTransaction?: Maybe<Scalars['Boolean']>;
   errorMessage?: Maybe<Scalars['String']>;
   member?: Maybe<MemberUpdateRelationInput>;
-  instructions?: Maybe<Array<Maybe<DirectDebitInstructionUpdateRelationInput>>>;
+  instructions?: Maybe<Array<DirectDebitInstructionUpdateRelationInput>>;
   messageId?: Maybe<Scalars['String']>;
   entranceCode?: Maybe<Scalars['String']>;
   transactionId?: Maybe<Scalars['String']>;
@@ -1398,7 +1399,7 @@ export type DigitalMandateWhereUniqueInput = {
 
 export type DigitalMandateList = {
   __typename?: 'DigitalMandateList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<DigitalMandate>;
 };
 
@@ -1406,8 +1407,8 @@ export type PageWhereInput = {
   id?: Maybe<StringFilter>;
   title?: Maybe<ShortTranslatableWhereInput>;
   body?: Maybe<LongTranslatableWhereInput>;
-  AND?: Maybe<Array<Maybe<PageWhereInput>>>;
-  OR?: Maybe<Array<Maybe<PageWhereInput>>>;
+  AND?: Maybe<Array<PageWhereInput>>;
+  OR?: Maybe<Array<PageWhereInput>>;
 };
 
 export type PageOrderByInput = {
@@ -1418,8 +1419,8 @@ export type PageOrderByInput = {
 
 export type PageCreateInput = {
   id?: Maybe<Scalars['String']>;
-  title: ShortTranslatableCreateInput;
-  body: LongTranslatableCreateInput;
+  title?: Maybe<ShortTranslatableCreateInput>;
+  body?: Maybe<LongTranslatableCreateInput>;
 };
 
 export type PageUpdateInput = {
@@ -1434,7 +1435,7 @@ export type PageWhereUniqueInput = {
 
 export type PageList = {
   __typename?: 'PageList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<Page>;
 };
 
@@ -1453,8 +1454,8 @@ export type PaperMandateWhereInput = {
   instructions?: Maybe<DirectDebitInstructionWhereInput>;
   generatedFile?: Maybe<FileWhereInput>;
   uploadedFile?: Maybe<FileWhereInput>;
-  AND?: Maybe<Array<Maybe<PaperMandateWhereInput>>>;
-  OR?: Maybe<Array<Maybe<PaperMandateWhereInput>>>;
+  AND?: Maybe<Array<PaperMandateWhereInput>>;
+  OR?: Maybe<Array<PaperMandateWhereInput>>;
 };
 
 export type PaperMandateOrderByInput = {
@@ -1475,17 +1476,17 @@ export type PaperMandateOrderByInput = {
 
 export type PaperMandateCreateInput = {
   id?: Maybe<Scalars['String']>;
-  mandateId: Scalars['String'];
+  mandateId?: Maybe<Scalars['String']>;
   status?: Maybe<MandateStatus>;
   createdAt?: Maybe<Scalars['DateTime']>;
   acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic: Scalars['String'];
+  bic?: Maybe<Scalars['String']>;
   iban?: Maybe<Scalars['String']>;
-  reason: Scalars['String'];
+  reason?: Maybe<Scalars['String']>;
   isFirstTransaction?: Maybe<Scalars['Boolean']>;
   errorMessage?: Maybe<Scalars['String']>;
-  member: MemberCreateRelationInput;
-  instructions?: Maybe<Array<Maybe<DirectDebitInstructionCreateRelationInput>>>;
+  member?: Maybe<MemberCreateRelationInput>;
+  instructions?: Maybe<Array<DirectDebitInstructionCreateRelationInput>>;
   generatedFile?: Maybe<FileCreateRelationInput>;
   uploadedFile?: Maybe<FileCreateRelationInput>;
 };
@@ -1502,7 +1503,7 @@ export type PaperMandateUpdateInput = {
   isFirstTransaction?: Maybe<Scalars['Boolean']>;
   errorMessage?: Maybe<Scalars['String']>;
   member?: Maybe<MemberUpdateRelationInput>;
-  instructions?: Maybe<Array<Maybe<DirectDebitInstructionUpdateRelationInput>>>;
+  instructions?: Maybe<Array<DirectDebitInstructionUpdateRelationInput>>;
   generatedFile?: Maybe<FileUpdateRelationInput>;
   uploadedFile?: Maybe<FileUpdateRelationInput>;
 };
@@ -1513,7 +1514,7 @@ export type PaperMandateWhereUniqueInput = {
 
 export type PaperMandateList = {
   __typename?: 'PaperMandateList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<PaperMandate>;
 };
 
@@ -1521,8 +1522,8 @@ export type SettingWhereInput = {
   key?: Maybe<StringFilter>;
   value?: Maybe<StringFilter>;
   isPublic?: Maybe<Scalars['Boolean']>;
-  AND?: Maybe<Array<Maybe<SettingWhereInput>>>;
-  OR?: Maybe<Array<Maybe<SettingWhereInput>>>;
+  AND?: Maybe<Array<SettingWhereInput>>;
+  OR?: Maybe<Array<SettingWhereInput>>;
 };
 
 export type SettingOrderByInput = {
@@ -1532,9 +1533,9 @@ export type SettingOrderByInput = {
 };
 
 export type SettingCreateInput = {
-  key: Scalars['String'];
-  value: Scalars['String'];
-  isPublic: Scalars['Boolean'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+  isPublic?: Maybe<Scalars['Boolean']>;
 };
 
 export type SettingUpdateInput = {
@@ -1549,7 +1550,7 @@ export type SettingWhereUniqueInput = {
 
 export type SettingList = {
   __typename?: 'SettingList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<Setting>;
 };
 
@@ -1559,8 +1560,8 @@ export type ProviderWhereInput = {
   email?: Maybe<StringFilter>;
   isVerified?: Maybe<Scalars['Boolean']>;
   user?: Maybe<MemberWhereInput>;
-  AND?: Maybe<Array<Maybe<ProviderWhereInput>>>;
-  OR?: Maybe<Array<Maybe<ProviderWhereInput>>>;
+  AND?: Maybe<Array<ProviderWhereInput>>;
+  OR?: Maybe<Array<ProviderWhereInput>>;
 };
 
 export type ProviderOrderByInput = {
@@ -1573,10 +1574,10 @@ export type ProviderOrderByInput = {
 
 export type ProviderCreateInput = {
   id?: Maybe<Scalars['String']>;
-  type: Scalars['String'];
-  email: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
   isVerified?: Maybe<Scalars['Boolean']>;
-  user: MemberCreateRelationInput;
+  user?: Maybe<MemberCreateRelationInput>;
 };
 
 export type ProviderUpdateInput = {
@@ -1593,7 +1594,7 @@ export type ProviderWhereUniqueInput = {
 
 export type ProviderList = {
   __typename?: 'ProviderList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<Provider>;
 };
 
@@ -1603,8 +1604,8 @@ export type TokenWhereInput = {
   token?: Maybe<StringFilter>;
   expiresAt?: Maybe<DateTimeFilter>;
   provider?: Maybe<ProviderWhereInput>;
-  AND?: Maybe<Array<Maybe<TokenWhereInput>>>;
-  OR?: Maybe<Array<Maybe<TokenWhereInput>>>;
+  AND?: Maybe<Array<TokenWhereInput>>;
+  OR?: Maybe<Array<TokenWhereInput>>;
 };
 
 export type TokenOrderByInput = {
@@ -1617,10 +1618,10 @@ export type TokenOrderByInput = {
 
 export type TokenCreateInput = {
   id?: Maybe<Scalars['String']>;
-  type: TokenType;
-  token: Scalars['String'];
-  expiresAt: Scalars['DateTime'];
-  provider: ProviderCreateRelationInput;
+  type?: Maybe<TokenType>;
+  token?: Maybe<Scalars['String']>;
+  expiresAt?: Maybe<Scalars['DateTime']>;
+  provider?: Maybe<ProviderCreateRelationInput>;
 };
 
 export type TokenUpdateInput = {
@@ -1638,7 +1639,7 @@ export type TokenWhereUniqueInput = {
 
 export type TokenList = {
   __typename?: 'TokenList';
-  info?: Maybe<ListInfo>;
+  info: ListInfo;
   values: Array<Token>;
 };
 
@@ -1662,8 +1663,8 @@ export type RegisterInput = {
 export type ShortTranslatableWhereInput = {
   en?: Maybe<StringFilter>;
   nl?: Maybe<StringFilter>;
-  AND?: Maybe<Array<Maybe<ShortTranslatableWhereInput>>>;
-  OR?: Maybe<Array<Maybe<ShortTranslatableWhereInput>>>;
+  AND?: Maybe<Array<ShortTranslatableWhereInput>>;
+  OR?: Maybe<Array<ShortTranslatableWhereInput>>;
 };
 
 export type ShortTranslatableOrderByInput = {
@@ -1695,8 +1696,8 @@ export type MemberUpdateRelationInput = {
 export type MandateStatusFilter = {
   equals?: Maybe<MandateStatus>;
   not?: Maybe<MandateStatus>;
-  in?: Maybe<Array<Maybe<MandateStatus>>>;
-  notIn?: Maybe<Array<Maybe<MandateStatus>>>;
+  in?: Maybe<Array<MandateStatus>>;
+  notIn?: Maybe<Array<MandateStatus>>;
 };
 
 export type DirectDebitInstructionCreateRelationInput = {
@@ -1746,8 +1747,8 @@ export type MandateUpdateRelationInput = {
 export type SequenceTypeFilter = {
   equals?: Maybe<SequenceType>;
   not?: Maybe<SequenceType>;
-  in?: Maybe<Array<Maybe<SequenceType>>>;
-  notIn?: Maybe<Array<Maybe<SequenceType>>>;
+  in?: Maybe<Array<SequenceType>>;
+  notIn?: Maybe<Array<SequenceType>>;
 };
 
 export type DirectDebitCreateRelationInput = {
@@ -1764,8 +1765,8 @@ export type DirectDebitUpdateRelationInput = {
 export type DirectDebitStatusFilter = {
   equals?: Maybe<DirectDebitStatus>;
   not?: Maybe<DirectDebitStatus>;
-  in?: Maybe<Array<Maybe<DirectDebitStatus>>>;
-  notIn?: Maybe<Array<Maybe<DirectDebitStatus>>>;
+  in?: Maybe<Array<DirectDebitStatus>>;
+  notIn?: Maybe<Array<DirectDebitStatus>>;
 };
 
 export type DirectDebitWarningCreateRelationInput = {
@@ -1804,8 +1805,8 @@ export type MembershipUpdateRelationInput = {
 export type MembershipTypeFilter = {
   equals?: Maybe<MembershipType>;
   not?: Maybe<MembershipType>;
-  in?: Maybe<Array<Maybe<MembershipType>>>;
-  notIn?: Maybe<Array<Maybe<MembershipType>>>;
+  in?: Maybe<Array<MembershipType>>;
+  notIn?: Maybe<Array<MembershipType>>;
 };
 
 export type MembershipFeeTransactionCreateRelationInput = {
@@ -1822,22 +1823,22 @@ export type MembershipFeeTransactionUpdateRelationInput = {
 export type LanguageFilter = {
   equals?: Maybe<Language>;
   not?: Maybe<Language>;
-  in?: Maybe<Array<Maybe<Language>>>;
-  notIn?: Maybe<Array<Maybe<Language>>>;
+  in?: Maybe<Array<Language>>;
+  notIn?: Maybe<Array<Language>>;
 };
 
 export type PronounsFilter = {
   equals?: Maybe<Pronouns>;
   not?: Maybe<Pronouns>;
-  in?: Maybe<Array<Maybe<Pronouns>>>;
-  notIn?: Maybe<Array<Maybe<Pronouns>>>;
+  in?: Maybe<Array<Pronouns>>;
+  notIn?: Maybe<Array<Pronouns>>;
 };
 
 export type StudentTypeFilter = {
   equals?: Maybe<StudentType>;
   not?: Maybe<StudentType>;
-  in?: Maybe<Array<Maybe<StudentType>>>;
-  notIn?: Maybe<Array<Maybe<StudentType>>>;
+  in?: Maybe<Array<StudentType>>;
+  notIn?: Maybe<Array<StudentType>>;
 };
 
 export type ProviderCreateRelationInput = {
@@ -1887,8 +1888,8 @@ export type CommitteeUpdateRelationInput = {
 export type LongTranslatableWhereInput = {
   en?: Maybe<StringFilter>;
   nl?: Maybe<StringFilter>;
-  AND?: Maybe<Array<Maybe<LongTranslatableWhereInput>>>;
-  OR?: Maybe<Array<Maybe<LongTranslatableWhereInput>>>;
+  AND?: Maybe<Array<LongTranslatableWhereInput>>;
+  OR?: Maybe<Array<LongTranslatableWhereInput>>;
 };
 
 export type LongTranslatableOrderByInput = {
@@ -1909,8 +1910,8 @@ export type LongTranslatableUpdateInput = {
 export type TokenTypeFilter = {
   equals?: Maybe<TokenType>;
   not?: Maybe<TokenType>;
-  in?: Maybe<Array<Maybe<TokenType>>>;
-  notIn?: Maybe<Array<Maybe<TokenType>>>;
+  in?: Maybe<Array<TokenType>>;
+  notIn?: Maybe<Array<TokenType>>;
 };
 
 export type Query = {
@@ -2362,7 +2363,7 @@ export type MutationsendContactFormArgs = {
   email: Scalars['String'];
   subject: Scalars['String'];
   message: Scalars['String'];
-  recaptcha?: Maybe<Scalars['String']>;
+  recaptcha: Scalars['String'];
 };
 
 
@@ -2821,7 +2822,7 @@ export type MutationdeleteTokensArgs = {
 
 
 export type MutationregisterArgs = {
-  data: RegisterInput;
+  data?: Maybe<RegisterInput>;
 };
 
 
@@ -2871,13 +2872,13 @@ export type BankFragment = (
 export type CommitteeFragment = (
   { __typename?: 'Committee' }
   & Pick<Committee, 'id'>
-  & { name?: Maybe<(
+  & { name: (
     { __typename?: 'ShortTranslatable' }
     & TranslatableFragment_ShortTranslatable_
-  )>, description?: Maybe<(
+  ), description: (
     { __typename?: 'LongTranslatable' }
     & TranslatableFragment_LongTranslatable_
-  )> }
+  ) }
 );
 
 export type DirectDebitFragment = (
@@ -2950,13 +2951,13 @@ export type MembershipFragment = (
 export type PageFragment = (
   { __typename?: 'Page' }
   & Pick<Page, 'id'>
-  & { title?: Maybe<(
+  & { title: (
     { __typename?: 'ShortTranslatable' }
     & TranslatableFragment_ShortTranslatable_
-  )>, body?: Maybe<(
+  ), body: (
     { __typename?: 'LongTranslatable' }
     & TranslatableFragment_LongTranslatable_
-  )> }
+  ) }
 );
 
 export type ProviderFragment = (
@@ -3235,41 +3236,41 @@ export type GetDirectDebitQuery = (
   { __typename?: 'Query' }
   & { directDebit: (
     { __typename?: 'DirectDebit' }
-    & { batches?: Maybe<(
+    & { batches: (
       { __typename?: 'DirectDebitBatchList' }
       & { values: Array<(
         { __typename?: 'DirectDebitBatch' }
-        & { instructions?: Maybe<(
+        & { instructions: (
           { __typename?: 'DirectDebitInstructionList' }
           & { values: Array<(
             { __typename?: 'DirectDebitInstruction' }
-            & { mandate?: Maybe<(
+            & { mandate: (
               { __typename?: 'DigitalMandate' }
-              & { member?: Maybe<(
+              & { member: (
                 { __typename?: 'Member' }
                 & MemberFragment
-              )> }
+              ) }
               & MandateFragment_DigitalMandate_
             ) | (
               { __typename?: 'PaperMandate' }
-              & { member?: Maybe<(
+              & { member: (
                 { __typename?: 'Member' }
                 & MemberFragment
-              )> }
+              ) }
               & MandateFragment_PaperMandate_
-            )> }
+            ) }
             & DirectDebitInstructionFragment
           )> }
-        )> }
+        ) }
         & DirectDebitBatchFragment
       )> }
-    )>, warnings?: Maybe<(
+    ), warnings: (
       { __typename?: 'DirectDebitWarningList' }
       & { values: Array<(
         { __typename?: 'DirectDebitWarning' }
         & DirectDebitWarningFragment
       )> }
-    )>, file?: Maybe<(
+    ), file?: Maybe<(
       { __typename?: 'File' }
       & FileFragment
     )> }
@@ -3286,31 +3287,31 @@ export type GetDirectDebitBatchQuery = (
   { __typename?: 'Query' }
   & { directDebitBatch: (
     { __typename?: 'DirectDebitBatch' }
-    & { instructions?: Maybe<(
+    & { instructions: (
       { __typename?: 'DirectDebitInstructionList' }
       & { values: Array<(
         { __typename?: 'DirectDebitInstruction' }
-        & { mandate?: Maybe<(
+        & { mandate: (
           { __typename?: 'DigitalMandate' }
-          & { member?: Maybe<(
+          & { member: (
             { __typename?: 'Member' }
             & MemberFragment
-          )> }
+          ) }
           & MandateFragment_DigitalMandate_
         ) | (
           { __typename?: 'PaperMandate' }
-          & { member?: Maybe<(
+          & { member: (
             { __typename?: 'Member' }
             & MemberFragment
-          )> }
+          ) }
           & MandateFragment_PaperMandate_
-        )> }
+        ) }
         & DirectDebitInstructionFragment
       )> }
-    )>, directDebit?: Maybe<(
+    ), directDebit: (
       { __typename?: 'DirectDebit' }
       & DirectDebitFragment
-    )> }
+    ) }
     & DirectDebitBatchFragment
   ) }
 );
@@ -3324,34 +3325,34 @@ export type GetDirectDebitInstructionQuery = (
   { __typename?: 'Query' }
   & { directDebitInstruction: (
     { __typename?: 'DirectDebitInstruction' }
-    & { batch?: Maybe<(
+    & { batch: (
       { __typename?: 'DirectDebitBatch' }
-      & { directDebit?: Maybe<(
+      & { directDebit: (
         { __typename?: 'DirectDebit' }
         & DirectDebitFragment
-      )> }
+      ) }
       & DirectDebitBatchFragment
-    )>, transactions?: Maybe<(
+    ), transactions: (
       { __typename?: 'TransactionList' }
       & { values: Array<(
         { __typename?: 'MembershipFeeTransaction' }
         & TransactionFragment
       )> }
-    )>, mandate?: Maybe<(
+    ), mandate: (
       { __typename?: 'DigitalMandate' }
-      & { member?: Maybe<(
+      & { member: (
         { __typename?: 'Member' }
         & MemberFragment
-      )> }
+      ) }
       & MandateFragment_DigitalMandate_
     ) | (
       { __typename?: 'PaperMandate' }
-      & { member?: Maybe<(
+      & { member: (
         { __typename?: 'Member' }
         & MemberFragment
-      )> }
+      ) }
       & MandateFragment_PaperMandate_
-    )> }
+    ) }
     & DirectDebitInstructionFragment
   ) }
 );
@@ -3379,17 +3380,17 @@ export type GetMandateQuery = (
   { __typename?: 'Query' }
   & { mandate: (
     { __typename?: 'DigitalMandate' }
-    & { member?: Maybe<(
+    & { member: (
       { __typename?: 'Member' }
       & MemberFragment
-    )> }
+    ) }
     & MandateFragment_DigitalMandate_
   ) | (
     { __typename?: 'PaperMandate' }
-    & { member?: Maybe<(
+    & { member: (
       { __typename?: 'Member' }
       & MemberFragment
-    )> }
+    ) }
     & MandateFragment_PaperMandate_
   ) }
 );
@@ -3403,17 +3404,17 @@ export type GetMandatesQuery = (
     { __typename?: 'MandateList' }
     & { values: Array<(
       { __typename?: 'DigitalMandate' }
-      & { member?: Maybe<(
+      & { member: (
         { __typename?: 'Member' }
         & MemberFragment
-      )> }
+      ) }
       & MandateFragment_DigitalMandate_
     ) | (
       { __typename?: 'PaperMandate' }
-      & { member?: Maybe<(
+      & { member: (
         { __typename?: 'Member' }
         & MemberFragment
-      )> }
+      ) }
       & MandateFragment_PaperMandate_
     )> }
   ) }
@@ -3428,13 +3429,13 @@ export type GetMemberQuery = (
   { __typename?: 'Query' }
   & { member: (
     { __typename?: 'Member' }
-    & { memberships?: Maybe<(
+    & { memberships: (
       { __typename?: 'MembershipList' }
       & { values: Array<(
         { __typename?: 'Membership' }
         & MembershipFragment
       )> }
-    )>, mandates?: Maybe<(
+    ), mandates: (
       { __typename?: 'MandateList' }
       & { values: Array<(
         { __typename?: 'DigitalMandate' }
@@ -3443,13 +3444,13 @@ export type GetMemberQuery = (
         { __typename?: 'PaperMandate' }
         & MandateFragment_PaperMandate_
       )> }
-    )>, transactions?: Maybe<(
+    ), transactions: (
       { __typename?: 'TransactionList' }
       & { values: Array<(
         { __typename?: 'MembershipFeeTransaction' }
         & TransactionFragment
       )> }
-    )> }
+    ) }
     & MemberFragment
   ) }
 );
@@ -3463,7 +3464,7 @@ export type GetMemberMandatesQuery = (
   { __typename?: 'Query' }
   & { member: (
     { __typename?: 'Member' }
-    & { mandates?: Maybe<(
+    & { mandates: (
       { __typename?: 'MandateList' }
       & { values: Array<(
         { __typename?: 'DigitalMandate' }
@@ -3472,7 +3473,7 @@ export type GetMemberMandatesQuery = (
         { __typename?: 'PaperMandate' }
         & MandateFragment_PaperMandate_
       )> }
-    )> }
+    ) }
   ) }
 );
 
@@ -3498,13 +3499,13 @@ export type GetMemberTransactionsQuery = (
   { __typename?: 'Query' }
   & { member: (
     { __typename?: 'Member' }
-    & { transactions?: Maybe<(
+    & { transactions: (
       { __typename?: 'TransactionList' }
       & { values: Array<(
         { __typename?: 'MembershipFeeTransaction' }
         & TransactionFragment
       )> }
-    )> }
+    ) }
   ) }
 );
 
@@ -3517,10 +3518,10 @@ export type GetMembersQuery = (
     { __typename?: 'MemberList' }
     & { values: Array<(
       { __typename?: 'Member' }
-      & { latestMembership?: Maybe<(
+      & { latestMembership: (
         { __typename?: 'Membership' }
         & MembershipFragment
-      )>, mandates?: Maybe<(
+      ), mandates: (
         { __typename?: 'MandateList' }
         & { values: Array<(
           { __typename?: 'DigitalMandate' }
@@ -3529,7 +3530,7 @@ export type GetMembersQuery = (
           { __typename?: 'PaperMandate' }
           & MandateFragment_PaperMandate_
         )> }
-      )> }
+      ) }
       & MemberFragment
     )> }
   ) }
@@ -3573,10 +3574,10 @@ export type GetPaperMandatesQuery = (
     { __typename?: 'PaperMandateList' }
     & { values: Array<(
       { __typename?: 'PaperMandate' }
-      & { member?: Maybe<(
+      & { member: (
         { __typename?: 'Member' }
         & MemberFragment
-      )> }
+      ) }
       & MandateFragment_PaperMandate_
     )> }
   ) }
@@ -3590,13 +3591,13 @@ export type GetProfileQuery = (
   & { me?: Maybe<(
     { __typename?: 'Member' }
     & Pick<Member, 'hasMandate' | 'hasPendingPaperMandates'>
-    & { providers?: Maybe<(
+    & { providers: (
       { __typename?: 'ProviderList' }
       & { values: Array<(
         { __typename?: 'Provider' }
         & ProviderFragment
       )> }
-    )> }
+    ) }
     & MemberFragment
   )> }
 );
@@ -3610,23 +3611,23 @@ export type GetTransactionQuery = (
   { __typename?: 'Query' }
   & { transaction: (
     { __typename?: 'MembershipFeeTransaction' }
-    & { member?: Maybe<(
+    & { member: (
       { __typename?: 'Member' }
-      & { latestMembership?: Maybe<(
+      & { latestMembership: (
         { __typename?: 'Membership' }
         & MembershipFragment
-      )> }
+      ) }
       & MemberFragment
-    )>, instruction?: Maybe<(
+    ), instruction?: Maybe<(
       { __typename?: 'DirectDebitInstruction' }
-      & { batch?: Maybe<(
+      & { batch: (
         { __typename?: 'DirectDebitBatch' }
-        & { directDebit?: Maybe<(
+        & { directDebit: (
           { __typename?: 'DirectDebit' }
           & DirectDebitFragment
-        )> }
+        ) }
         & DirectDebitBatchFragment
-      )> }
+      ) }
       & DirectDebitInstructionFragment
     )> }
     & TransactionFragment
@@ -3807,7 +3808,7 @@ export const AcceptPaperMandateDocument = gql`
   }
 }
     ${MandateFragmentDoc}`;
-export type AcceptPaperMandateMutationFn = ApolloReactCommon.MutationFunction<AcceptPaperMandateMutation, AcceptPaperMandateMutationVariables>;
+export type AcceptPaperMandateMutationFn = Apollo.MutationFunction<AcceptPaperMandateMutation, AcceptPaperMandateMutationVariables>;
 
 /**
  * __useAcceptPaperMandateMutation__
@@ -3826,12 +3827,12 @@ export type AcceptPaperMandateMutationFn = ApolloReactCommon.MutationFunction<Ac
  *   },
  * });
  */
-export function useAcceptPaperMandateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AcceptPaperMandateMutation, AcceptPaperMandateMutationVariables>) {
-        return ApolloReactHooks.useMutation<AcceptPaperMandateMutation, AcceptPaperMandateMutationVariables>(AcceptPaperMandateDocument, baseOptions);
+export function useAcceptPaperMandateMutation(baseOptions?: Apollo.MutationHookOptions<AcceptPaperMandateMutation, AcceptPaperMandateMutationVariables>) {
+        return Apollo.useMutation<AcceptPaperMandateMutation, AcceptPaperMandateMutationVariables>(AcceptPaperMandateDocument, baseOptions);
       }
 export type AcceptPaperMandateMutationHookResult = ReturnType<typeof useAcceptPaperMandateMutation>;
-export type AcceptPaperMandateMutationResult = ApolloReactCommon.MutationResult<AcceptPaperMandateMutation>;
-export type AcceptPaperMandateMutationOptions = ApolloReactCommon.BaseMutationOptions<AcceptPaperMandateMutation, AcceptPaperMandateMutationVariables>;
+export type AcceptPaperMandateMutationResult = Apollo.MutationResult<AcceptPaperMandateMutation>;
+export type AcceptPaperMandateMutationOptions = Apollo.BaseMutationOptions<AcceptPaperMandateMutation, AcceptPaperMandateMutationVariables>;
 export const CancelPaperMandateDocument = gql`
     mutation CancelPaperMandate($id: String!) {
   cancelPaperMandate(mandate: {id: $id}) {
@@ -3839,7 +3840,7 @@ export const CancelPaperMandateDocument = gql`
   }
 }
     ${MandateFragmentDoc}`;
-export type CancelPaperMandateMutationFn = ApolloReactCommon.MutationFunction<CancelPaperMandateMutation, CancelPaperMandateMutationVariables>;
+export type CancelPaperMandateMutationFn = Apollo.MutationFunction<CancelPaperMandateMutation, CancelPaperMandateMutationVariables>;
 
 /**
  * __useCancelPaperMandateMutation__
@@ -3858,18 +3859,18 @@ export type CancelPaperMandateMutationFn = ApolloReactCommon.MutationFunction<Ca
  *   },
  * });
  */
-export function useCancelPaperMandateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CancelPaperMandateMutation, CancelPaperMandateMutationVariables>) {
-        return ApolloReactHooks.useMutation<CancelPaperMandateMutation, CancelPaperMandateMutationVariables>(CancelPaperMandateDocument, baseOptions);
+export function useCancelPaperMandateMutation(baseOptions?: Apollo.MutationHookOptions<CancelPaperMandateMutation, CancelPaperMandateMutationVariables>) {
+        return Apollo.useMutation<CancelPaperMandateMutation, CancelPaperMandateMutationVariables>(CancelPaperMandateDocument, baseOptions);
       }
 export type CancelPaperMandateMutationHookResult = ReturnType<typeof useCancelPaperMandateMutation>;
-export type CancelPaperMandateMutationResult = ApolloReactCommon.MutationResult<CancelPaperMandateMutation>;
-export type CancelPaperMandateMutationOptions = ApolloReactCommon.BaseMutationOptions<CancelPaperMandateMutation, CancelPaperMandateMutationVariables>;
+export type CancelPaperMandateMutationResult = Apollo.MutationResult<CancelPaperMandateMutation>;
+export type CancelPaperMandateMutationOptions = Apollo.BaseMutationOptions<CancelPaperMandateMutation, CancelPaperMandateMutationVariables>;
 export const ChangeEmailDocument = gql`
     mutation ChangeEmail($email: String!) {
   changeEmail(email: $email)
 }
     `;
-export type ChangeEmailMutationFn = ApolloReactCommon.MutationFunction<ChangeEmailMutation, ChangeEmailMutationVariables>;
+export type ChangeEmailMutationFn = Apollo.MutationFunction<ChangeEmailMutation, ChangeEmailMutationVariables>;
 
 /**
  * __useChangeEmailMutation__
@@ -3888,18 +3889,18 @@ export type ChangeEmailMutationFn = ApolloReactCommon.MutationFunction<ChangeEma
  *   },
  * });
  */
-export function useChangeEmailMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ChangeEmailMutation, ChangeEmailMutationVariables>) {
-        return ApolloReactHooks.useMutation<ChangeEmailMutation, ChangeEmailMutationVariables>(ChangeEmailDocument, baseOptions);
+export function useChangeEmailMutation(baseOptions?: Apollo.MutationHookOptions<ChangeEmailMutation, ChangeEmailMutationVariables>) {
+        return Apollo.useMutation<ChangeEmailMutation, ChangeEmailMutationVariables>(ChangeEmailDocument, baseOptions);
       }
 export type ChangeEmailMutationHookResult = ReturnType<typeof useChangeEmailMutation>;
-export type ChangeEmailMutationResult = ApolloReactCommon.MutationResult<ChangeEmailMutation>;
-export type ChangeEmailMutationOptions = ApolloReactCommon.BaseMutationOptions<ChangeEmailMutation, ChangeEmailMutationVariables>;
+export type ChangeEmailMutationResult = Apollo.MutationResult<ChangeEmailMutation>;
+export type ChangeEmailMutationOptions = Apollo.BaseMutationOptions<ChangeEmailMutation, ChangeEmailMutationVariables>;
 export const ChangePasswordDocument = gql`
     mutation ChangePassword($password: String!, $passwordRepeat: String!) {
   changePassword(password: $password, passwordRepeat: $passwordRepeat)
 }
     `;
-export type ChangePasswordMutationFn = ApolloReactCommon.MutationFunction<ChangePasswordMutation, ChangePasswordMutationVariables>;
+export type ChangePasswordMutationFn = Apollo.MutationFunction<ChangePasswordMutation, ChangePasswordMutationVariables>;
 
 /**
  * __useChangePasswordMutation__
@@ -3919,12 +3920,12 @@ export type ChangePasswordMutationFn = ApolloReactCommon.MutationFunction<Change
  *   },
  * });
  */
-export function useChangePasswordMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ChangePasswordMutation, ChangePasswordMutationVariables>) {
-        return ApolloReactHooks.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument, baseOptions);
+export function useChangePasswordMutation(baseOptions?: Apollo.MutationHookOptions<ChangePasswordMutation, ChangePasswordMutationVariables>) {
+        return Apollo.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument, baseOptions);
       }
 export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswordMutation>;
-export type ChangePasswordMutationResult = ApolloReactCommon.MutationResult<ChangePasswordMutation>;
-export type ChangePasswordMutationOptions = ApolloReactCommon.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
+export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
+export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
 export const CreateDigitalMandateDocument = gql`
     mutation CreateDigitalMandate($data: CreateDigitalMandateInput!) {
   createDigitalMandate(data: $data) {
@@ -3932,7 +3933,7 @@ export const CreateDigitalMandateDocument = gql`
   }
 }
     `;
-export type CreateDigitalMandateMutationFn = ApolloReactCommon.MutationFunction<CreateDigitalMandateMutation, CreateDigitalMandateMutationVariables>;
+export type CreateDigitalMandateMutationFn = Apollo.MutationFunction<CreateDigitalMandateMutation, CreateDigitalMandateMutationVariables>;
 
 /**
  * __useCreateDigitalMandateMutation__
@@ -3951,12 +3952,12 @@ export type CreateDigitalMandateMutationFn = ApolloReactCommon.MutationFunction<
  *   },
  * });
  */
-export function useCreateDigitalMandateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateDigitalMandateMutation, CreateDigitalMandateMutationVariables>) {
-        return ApolloReactHooks.useMutation<CreateDigitalMandateMutation, CreateDigitalMandateMutationVariables>(CreateDigitalMandateDocument, baseOptions);
+export function useCreateDigitalMandateMutation(baseOptions?: Apollo.MutationHookOptions<CreateDigitalMandateMutation, CreateDigitalMandateMutationVariables>) {
+        return Apollo.useMutation<CreateDigitalMandateMutation, CreateDigitalMandateMutationVariables>(CreateDigitalMandateDocument, baseOptions);
       }
 export type CreateDigitalMandateMutationHookResult = ReturnType<typeof useCreateDigitalMandateMutation>;
-export type CreateDigitalMandateMutationResult = ApolloReactCommon.MutationResult<CreateDigitalMandateMutation>;
-export type CreateDigitalMandateMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateDigitalMandateMutation, CreateDigitalMandateMutationVariables>;
+export type CreateDigitalMandateMutationResult = Apollo.MutationResult<CreateDigitalMandateMutation>;
+export type CreateDigitalMandateMutationOptions = Apollo.BaseMutationOptions<CreateDigitalMandateMutation, CreateDigitalMandateMutationVariables>;
 export const CreatePaperMandateDocument = gql`
     mutation CreatePaperMandate($data: CreatePaperMandateInput!) {
   createPaperMandate(data: $data) {
@@ -3964,7 +3965,7 @@ export const CreatePaperMandateDocument = gql`
   }
 }
     ${MandateFragmentDoc}`;
-export type CreatePaperMandateMutationFn = ApolloReactCommon.MutationFunction<CreatePaperMandateMutation, CreatePaperMandateMutationVariables>;
+export type CreatePaperMandateMutationFn = Apollo.MutationFunction<CreatePaperMandateMutation, CreatePaperMandateMutationVariables>;
 
 /**
  * __useCreatePaperMandateMutation__
@@ -3983,12 +3984,12 @@ export type CreatePaperMandateMutationFn = ApolloReactCommon.MutationFunction<Cr
  *   },
  * });
  */
-export function useCreatePaperMandateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreatePaperMandateMutation, CreatePaperMandateMutationVariables>) {
-        return ApolloReactHooks.useMutation<CreatePaperMandateMutation, CreatePaperMandateMutationVariables>(CreatePaperMandateDocument, baseOptions);
+export function useCreatePaperMandateMutation(baseOptions?: Apollo.MutationHookOptions<CreatePaperMandateMutation, CreatePaperMandateMutationVariables>) {
+        return Apollo.useMutation<CreatePaperMandateMutation, CreatePaperMandateMutationVariables>(CreatePaperMandateDocument, baseOptions);
       }
 export type CreatePaperMandateMutationHookResult = ReturnType<typeof useCreatePaperMandateMutation>;
-export type CreatePaperMandateMutationResult = ApolloReactCommon.MutationResult<CreatePaperMandateMutation>;
-export type CreatePaperMandateMutationOptions = ApolloReactCommon.BaseMutationOptions<CreatePaperMandateMutation, CreatePaperMandateMutationVariables>;
+export type CreatePaperMandateMutationResult = Apollo.MutationResult<CreatePaperMandateMutation>;
+export type CreatePaperMandateMutationOptions = Apollo.BaseMutationOptions<CreatePaperMandateMutation, CreatePaperMandateMutationVariables>;
 export const InvalidateMandateDocument = gql`
     mutation InvalidateMandate($id: String!) {
   invalidateMandate(mandate: {id: $id}) {
@@ -3996,7 +3997,7 @@ export const InvalidateMandateDocument = gql`
   }
 }
     ${MandateFragmentDoc}`;
-export type InvalidateMandateMutationFn = ApolloReactCommon.MutationFunction<InvalidateMandateMutation, InvalidateMandateMutationVariables>;
+export type InvalidateMandateMutationFn = Apollo.MutationFunction<InvalidateMandateMutation, InvalidateMandateMutationVariables>;
 
 /**
  * __useInvalidateMandateMutation__
@@ -4015,12 +4016,12 @@ export type InvalidateMandateMutationFn = ApolloReactCommon.MutationFunction<Inv
  *   },
  * });
  */
-export function useInvalidateMandateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<InvalidateMandateMutation, InvalidateMandateMutationVariables>) {
-        return ApolloReactHooks.useMutation<InvalidateMandateMutation, InvalidateMandateMutationVariables>(InvalidateMandateDocument, baseOptions);
+export function useInvalidateMandateMutation(baseOptions?: Apollo.MutationHookOptions<InvalidateMandateMutation, InvalidateMandateMutationVariables>) {
+        return Apollo.useMutation<InvalidateMandateMutation, InvalidateMandateMutationVariables>(InvalidateMandateDocument, baseOptions);
       }
 export type InvalidateMandateMutationHookResult = ReturnType<typeof useInvalidateMandateMutation>;
-export type InvalidateMandateMutationResult = ApolloReactCommon.MutationResult<InvalidateMandateMutation>;
-export type InvalidateMandateMutationOptions = ApolloReactCommon.BaseMutationOptions<InvalidateMandateMutation, InvalidateMandateMutationVariables>;
+export type InvalidateMandateMutationResult = Apollo.MutationResult<InvalidateMandateMutation>;
+export type InvalidateMandateMutationOptions = Apollo.BaseMutationOptions<InvalidateMandateMutation, InvalidateMandateMutationVariables>;
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
@@ -4029,7 +4030,7 @@ export const LoginDocument = gql`
   }
 }
     `;
-export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, LoginMutationVariables>;
+export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
 
 /**
  * __useLoginMutation__
@@ -4049,18 +4050,18 @@ export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, 
  *   },
  * });
  */
-export function useLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-        return ApolloReactHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
+export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
       }
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
-export type LoginMutationResult = ApolloReactCommon.MutationResult<LoginMutation>;
-export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
 export const RegisterDocument = gql`
     mutation Register($data: RegisterInput!) {
   register(data: $data)
 }
     `;
-export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMutation, RegisterMutationVariables>;
+export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
 
 /**
  * __useRegisterMutation__
@@ -4079,12 +4080,12 @@ export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMuta
  *   },
  * });
  */
-export function useRegisterMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
-        return ApolloReactHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
+export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
+        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
       }
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
-export type RegisterMutationResult = ApolloReactCommon.MutationResult<RegisterMutation>;
-export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
+export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
 export const RejectPaperMandateDocument = gql`
     mutation RejectPaperMandate($id: String!, $reason: String!) {
   rejectPaperMandate(mandate: {id: $id}, reason: $reason) {
@@ -4092,7 +4093,7 @@ export const RejectPaperMandateDocument = gql`
   }
 }
     ${MandateFragmentDoc}`;
-export type RejectPaperMandateMutationFn = ApolloReactCommon.MutationFunction<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>;
+export type RejectPaperMandateMutationFn = Apollo.MutationFunction<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>;
 
 /**
  * __useRejectPaperMandateMutation__
@@ -4112,18 +4113,18 @@ export type RejectPaperMandateMutationFn = ApolloReactCommon.MutationFunction<Re
  *   },
  * });
  */
-export function useRejectPaperMandateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>) {
-        return ApolloReactHooks.useMutation<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>(RejectPaperMandateDocument, baseOptions);
+export function useRejectPaperMandateMutation(baseOptions?: Apollo.MutationHookOptions<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>) {
+        return Apollo.useMutation<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>(RejectPaperMandateDocument, baseOptions);
       }
 export type RejectPaperMandateMutationHookResult = ReturnType<typeof useRejectPaperMandateMutation>;
-export type RejectPaperMandateMutationResult = ApolloReactCommon.MutationResult<RejectPaperMandateMutation>;
-export type RejectPaperMandateMutationOptions = ApolloReactCommon.BaseMutationOptions<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>;
+export type RejectPaperMandateMutationResult = Apollo.MutationResult<RejectPaperMandateMutation>;
+export type RejectPaperMandateMutationOptions = Apollo.BaseMutationOptions<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>;
 export const RequestResetPasswordDocument = gql`
     mutation RequestResetPassword($email: String!) {
   requestResetPassword(email: $email)
 }
     `;
-export type RequestResetPasswordMutationFn = ApolloReactCommon.MutationFunction<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>;
+export type RequestResetPasswordMutationFn = Apollo.MutationFunction<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>;
 
 /**
  * __useRequestResetPasswordMutation__
@@ -4142,18 +4143,18 @@ export type RequestResetPasswordMutationFn = ApolloReactCommon.MutationFunction<
  *   },
  * });
  */
-export function useRequestResetPasswordMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>) {
-        return ApolloReactHooks.useMutation<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>(RequestResetPasswordDocument, baseOptions);
+export function useRequestResetPasswordMutation(baseOptions?: Apollo.MutationHookOptions<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>) {
+        return Apollo.useMutation<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>(RequestResetPasswordDocument, baseOptions);
       }
 export type RequestResetPasswordMutationHookResult = ReturnType<typeof useRequestResetPasswordMutation>;
-export type RequestResetPasswordMutationResult = ApolloReactCommon.MutationResult<RequestResetPasswordMutation>;
-export type RequestResetPasswordMutationOptions = ApolloReactCommon.BaseMutationOptions<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>;
+export type RequestResetPasswordMutationResult = Apollo.MutationResult<RequestResetPasswordMutation>;
+export type RequestResetPasswordMutationOptions = Apollo.BaseMutationOptions<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>;
 export const RequestVerifyEmailDocument = gql`
     mutation RequestVerifyEmail($email: String!) {
   requestVerifyEmail(email: $email)
 }
     `;
-export type RequestVerifyEmailMutationFn = ApolloReactCommon.MutationFunction<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>;
+export type RequestVerifyEmailMutationFn = Apollo.MutationFunction<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>;
 
 /**
  * __useRequestVerifyEmailMutation__
@@ -4172,18 +4173,22 @@ export type RequestVerifyEmailMutationFn = ApolloReactCommon.MutationFunction<Re
  *   },
  * });
  */
-export function useRequestVerifyEmailMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>) {
-        return ApolloReactHooks.useMutation<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>(RequestVerifyEmailDocument, baseOptions);
+export function useRequestVerifyEmailMutation(baseOptions?: Apollo.MutationHookOptions<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>) {
+        return Apollo.useMutation<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>(RequestVerifyEmailDocument, baseOptions);
       }
 export type RequestVerifyEmailMutationHookResult = ReturnType<typeof useRequestVerifyEmailMutation>;
-export type RequestVerifyEmailMutationResult = ApolloReactCommon.MutationResult<RequestVerifyEmailMutation>;
-export type RequestVerifyEmailMutationOptions = ApolloReactCommon.BaseMutationOptions<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>;
+export type RequestVerifyEmailMutationResult = Apollo.MutationResult<RequestVerifyEmailMutation>;
+export type RequestVerifyEmailMutationOptions = Apollo.BaseMutationOptions<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>;
 export const ResetPasswordDocument = gql`
     mutation ResetPassword($token: String!, $password: String!, $passwordRepeat: String!) {
-  resetPassword(token: $token, password: $password, passwordRepeat: $passwordRepeat)
+  resetPassword(
+    token: $token
+    password: $password
+    passwordRepeat: $passwordRepeat
+  )
 }
     `;
-export type ResetPasswordMutationFn = ApolloReactCommon.MutationFunction<ResetPasswordMutation, ResetPasswordMutationVariables>;
+export type ResetPasswordMutationFn = Apollo.MutationFunction<ResetPasswordMutation, ResetPasswordMutationVariables>;
 
 /**
  * __useResetPasswordMutation__
@@ -4204,12 +4209,12 @@ export type ResetPasswordMutationFn = ApolloReactCommon.MutationFunction<ResetPa
  *   },
  * });
  */
-export function useResetPasswordMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ResetPasswordMutation, ResetPasswordMutationVariables>) {
-        return ApolloReactHooks.useMutation<ResetPasswordMutation, ResetPasswordMutationVariables>(ResetPasswordDocument, baseOptions);
+export function useResetPasswordMutation(baseOptions?: Apollo.MutationHookOptions<ResetPasswordMutation, ResetPasswordMutationVariables>) {
+        return Apollo.useMutation<ResetPasswordMutation, ResetPasswordMutationVariables>(ResetPasswordDocument, baseOptions);
       }
 export type ResetPasswordMutationHookResult = ReturnType<typeof useResetPasswordMutation>;
-export type ResetPasswordMutationResult = ApolloReactCommon.MutationResult<ResetPasswordMutation>;
-export type ResetPasswordMutationOptions = ApolloReactCommon.BaseMutationOptions<ResetPasswordMutation, ResetPasswordMutationVariables>;
+export type ResetPasswordMutationResult = Apollo.MutationResult<ResetPasswordMutation>;
+export type ResetPasswordMutationOptions = Apollo.BaseMutationOptions<ResetPasswordMutation, ResetPasswordMutationVariables>;
 export const UpdateMemberDocument = gql`
     mutation UpdateMember($where: MemberWhereUniqueInput!, $data: MemberUpdateInput!) {
   updateMember(where: $where, data: $data) {
@@ -4217,7 +4222,7 @@ export const UpdateMemberDocument = gql`
   }
 }
     ${MemberFragmentDoc}`;
-export type UpdateMemberMutationFn = ApolloReactCommon.MutationFunction<UpdateMemberMutation, UpdateMemberMutationVariables>;
+export type UpdateMemberMutationFn = Apollo.MutationFunction<UpdateMemberMutation, UpdateMemberMutationVariables>;
 
 /**
  * __useUpdateMemberMutation__
@@ -4237,12 +4242,12 @@ export type UpdateMemberMutationFn = ApolloReactCommon.MutationFunction<UpdateMe
  *   },
  * });
  */
-export function useUpdateMemberMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateMemberMutation, UpdateMemberMutationVariables>) {
-        return ApolloReactHooks.useMutation<UpdateMemberMutation, UpdateMemberMutationVariables>(UpdateMemberDocument, baseOptions);
+export function useUpdateMemberMutation(baseOptions?: Apollo.MutationHookOptions<UpdateMemberMutation, UpdateMemberMutationVariables>) {
+        return Apollo.useMutation<UpdateMemberMutation, UpdateMemberMutationVariables>(UpdateMemberDocument, baseOptions);
       }
 export type UpdateMemberMutationHookResult = ReturnType<typeof useUpdateMemberMutation>;
-export type UpdateMemberMutationResult = ApolloReactCommon.MutationResult<UpdateMemberMutation>;
-export type UpdateMemberMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateMemberMutation, UpdateMemberMutationVariables>;
+export type UpdateMemberMutationResult = Apollo.MutationResult<UpdateMemberMutation>;
+export type UpdateMemberMutationOptions = Apollo.BaseMutationOptions<UpdateMemberMutation, UpdateMemberMutationVariables>;
 export const UploadMemberImageDocument = gql`
     mutation UploadMemberImage($member: MemberWhereUniqueInput!, $file: Upload!) {
   uploadMemberImage(member: $member, file: $file) {
@@ -4250,7 +4255,7 @@ export const UploadMemberImageDocument = gql`
   }
 }
     ${MemberFragmentDoc}`;
-export type UploadMemberImageMutationFn = ApolloReactCommon.MutationFunction<UploadMemberImageMutation, UploadMemberImageMutationVariables>;
+export type UploadMemberImageMutationFn = Apollo.MutationFunction<UploadMemberImageMutation, UploadMemberImageMutationVariables>;
 
 /**
  * __useUploadMemberImageMutation__
@@ -4270,12 +4275,12 @@ export type UploadMemberImageMutationFn = ApolloReactCommon.MutationFunction<Upl
  *   },
  * });
  */
-export function useUploadMemberImageMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UploadMemberImageMutation, UploadMemberImageMutationVariables>) {
-        return ApolloReactHooks.useMutation<UploadMemberImageMutation, UploadMemberImageMutationVariables>(UploadMemberImageDocument, baseOptions);
+export function useUploadMemberImageMutation(baseOptions?: Apollo.MutationHookOptions<UploadMemberImageMutation, UploadMemberImageMutationVariables>) {
+        return Apollo.useMutation<UploadMemberImageMutation, UploadMemberImageMutationVariables>(UploadMemberImageDocument, baseOptions);
       }
 export type UploadMemberImageMutationHookResult = ReturnType<typeof useUploadMemberImageMutation>;
-export type UploadMemberImageMutationResult = ApolloReactCommon.MutationResult<UploadMemberImageMutation>;
-export type UploadMemberImageMutationOptions = ApolloReactCommon.BaseMutationOptions<UploadMemberImageMutation, UploadMemberImageMutationVariables>;
+export type UploadMemberImageMutationResult = Apollo.MutationResult<UploadMemberImageMutation>;
+export type UploadMemberImageMutationOptions = Apollo.BaseMutationOptions<UploadMemberImageMutation, UploadMemberImageMutationVariables>;
 export const UploadPaperMandateDocument = gql`
     mutation UploadPaperMandate($paperMandateId: String!, $file: Upload!) {
   uploadPaperMandate(paperMandate: {id: $paperMandateId}, file: $file) {
@@ -4283,7 +4288,7 @@ export const UploadPaperMandateDocument = gql`
   }
 }
     ${MandateFragmentDoc}`;
-export type UploadPaperMandateMutationFn = ApolloReactCommon.MutationFunction<UploadPaperMandateMutation, UploadPaperMandateMutationVariables>;
+export type UploadPaperMandateMutationFn = Apollo.MutationFunction<UploadPaperMandateMutation, UploadPaperMandateMutationVariables>;
 
 /**
  * __useUploadPaperMandateMutation__
@@ -4303,18 +4308,18 @@ export type UploadPaperMandateMutationFn = ApolloReactCommon.MutationFunction<Up
  *   },
  * });
  */
-export function useUploadPaperMandateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UploadPaperMandateMutation, UploadPaperMandateMutationVariables>) {
-        return ApolloReactHooks.useMutation<UploadPaperMandateMutation, UploadPaperMandateMutationVariables>(UploadPaperMandateDocument, baseOptions);
+export function useUploadPaperMandateMutation(baseOptions?: Apollo.MutationHookOptions<UploadPaperMandateMutation, UploadPaperMandateMutationVariables>) {
+        return Apollo.useMutation<UploadPaperMandateMutation, UploadPaperMandateMutationVariables>(UploadPaperMandateDocument, baseOptions);
       }
 export type UploadPaperMandateMutationHookResult = ReturnType<typeof useUploadPaperMandateMutation>;
-export type UploadPaperMandateMutationResult = ApolloReactCommon.MutationResult<UploadPaperMandateMutation>;
-export type UploadPaperMandateMutationOptions = ApolloReactCommon.BaseMutationOptions<UploadPaperMandateMutation, UploadPaperMandateMutationVariables>;
+export type UploadPaperMandateMutationResult = Apollo.MutationResult<UploadPaperMandateMutation>;
+export type UploadPaperMandateMutationOptions = Apollo.BaseMutationOptions<UploadPaperMandateMutation, UploadPaperMandateMutationVariables>;
 export const VerifyEmailDocument = gql`
     mutation VerifyEmail($token: String!) {
   verifyEmail(token: $token)
 }
     `;
-export type VerifyEmailMutationFn = ApolloReactCommon.MutationFunction<VerifyEmailMutation, VerifyEmailMutationVariables>;
+export type VerifyEmailMutationFn = Apollo.MutationFunction<VerifyEmailMutation, VerifyEmailMutationVariables>;
 
 /**
  * __useVerifyEmailMutation__
@@ -4333,12 +4338,12 @@ export type VerifyEmailMutationFn = ApolloReactCommon.MutationFunction<VerifyEma
  *   },
  * });
  */
-export function useVerifyEmailMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<VerifyEmailMutation, VerifyEmailMutationVariables>) {
-        return ApolloReactHooks.useMutation<VerifyEmailMutation, VerifyEmailMutationVariables>(VerifyEmailDocument, baseOptions);
+export function useVerifyEmailMutation(baseOptions?: Apollo.MutationHookOptions<VerifyEmailMutation, VerifyEmailMutationVariables>) {
+        return Apollo.useMutation<VerifyEmailMutation, VerifyEmailMutationVariables>(VerifyEmailDocument, baseOptions);
       }
 export type VerifyEmailMutationHookResult = ReturnType<typeof useVerifyEmailMutation>;
-export type VerifyEmailMutationResult = ApolloReactCommon.MutationResult<VerifyEmailMutation>;
-export type VerifyEmailMutationOptions = ApolloReactCommon.BaseMutationOptions<VerifyEmailMutation, VerifyEmailMutationVariables>;
+export type VerifyEmailMutationResult = Apollo.MutationResult<VerifyEmailMutation>;
+export type VerifyEmailMutationOptions = Apollo.BaseMutationOptions<VerifyEmailMutation, VerifyEmailMutationVariables>;
 export const GetBanksDocument = gql`
     query GetBanks {
   banks {
@@ -4364,15 +4369,15 @@ export const GetBanksDocument = gql`
  *   },
  * });
  */
-export function useGetBanksQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetBanksQuery, GetBanksQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetBanksQuery, GetBanksQueryVariables>(GetBanksDocument, baseOptions);
+export function useGetBanksQuery(baseOptions?: Apollo.QueryHookOptions<GetBanksQuery, GetBanksQueryVariables>) {
+        return Apollo.useQuery<GetBanksQuery, GetBanksQueryVariables>(GetBanksDocument, baseOptions);
       }
-export function useGetBanksLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetBanksQuery, GetBanksQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetBanksQuery, GetBanksQueryVariables>(GetBanksDocument, baseOptions);
+export function useGetBanksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBanksQuery, GetBanksQueryVariables>) {
+          return Apollo.useLazyQuery<GetBanksQuery, GetBanksQueryVariables>(GetBanksDocument, baseOptions);
         }
 export type GetBanksQueryHookResult = ReturnType<typeof useGetBanksQuery>;
 export type GetBanksLazyQueryHookResult = ReturnType<typeof useGetBanksLazyQuery>;
-export type GetBanksQueryResult = ApolloReactCommon.QueryResult<GetBanksQuery, GetBanksQueryVariables>;
+export type GetBanksQueryResult = Apollo.QueryResult<GetBanksQuery, GetBanksQueryVariables>;
 export const GetCommitteesDocument = gql`
     query GetCommittees {
   committees(orderBy: {name: {en: ASC}}) {
@@ -4398,15 +4403,15 @@ export const GetCommitteesDocument = gql`
  *   },
  * });
  */
-export function useGetCommitteesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetCommitteesQuery, GetCommitteesQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetCommitteesQuery, GetCommitteesQueryVariables>(GetCommitteesDocument, baseOptions);
+export function useGetCommitteesQuery(baseOptions?: Apollo.QueryHookOptions<GetCommitteesQuery, GetCommitteesQueryVariables>) {
+        return Apollo.useQuery<GetCommitteesQuery, GetCommitteesQueryVariables>(GetCommitteesDocument, baseOptions);
       }
-export function useGetCommitteesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetCommitteesQuery, GetCommitteesQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetCommitteesQuery, GetCommitteesQueryVariables>(GetCommitteesDocument, baseOptions);
+export function useGetCommitteesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCommitteesQuery, GetCommitteesQueryVariables>) {
+          return Apollo.useLazyQuery<GetCommitteesQuery, GetCommitteesQueryVariables>(GetCommitteesDocument, baseOptions);
         }
 export type GetCommitteesQueryHookResult = ReturnType<typeof useGetCommitteesQuery>;
 export type GetCommitteesLazyQueryHookResult = ReturnType<typeof useGetCommitteesLazyQuery>;
-export type GetCommitteesQueryResult = ApolloReactCommon.QueryResult<GetCommitteesQuery, GetCommitteesQueryVariables>;
+export type GetCommitteesQueryResult = Apollo.QueryResult<GetCommitteesQuery, GetCommitteesQueryVariables>;
 export const GetDirectDebitDocument = gql`
     query GetDirectDebit($id: String!) {
   directDebit(where: {id: $id}) {
@@ -4461,15 +4466,15 @@ ${FileFragmentDoc}`;
  *   },
  * });
  */
-export function useGetDirectDebitQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetDirectDebitQuery, GetDirectDebitQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetDirectDebitQuery, GetDirectDebitQueryVariables>(GetDirectDebitDocument, baseOptions);
+export function useGetDirectDebitQuery(baseOptions: Apollo.QueryHookOptions<GetDirectDebitQuery, GetDirectDebitQueryVariables>) {
+        return Apollo.useQuery<GetDirectDebitQuery, GetDirectDebitQueryVariables>(GetDirectDebitDocument, baseOptions);
       }
-export function useGetDirectDebitLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetDirectDebitQuery, GetDirectDebitQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetDirectDebitQuery, GetDirectDebitQueryVariables>(GetDirectDebitDocument, baseOptions);
+export function useGetDirectDebitLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDirectDebitQuery, GetDirectDebitQueryVariables>) {
+          return Apollo.useLazyQuery<GetDirectDebitQuery, GetDirectDebitQueryVariables>(GetDirectDebitDocument, baseOptions);
         }
 export type GetDirectDebitQueryHookResult = ReturnType<typeof useGetDirectDebitQuery>;
 export type GetDirectDebitLazyQueryHookResult = ReturnType<typeof useGetDirectDebitLazyQuery>;
-export type GetDirectDebitQueryResult = ApolloReactCommon.QueryResult<GetDirectDebitQuery, GetDirectDebitQueryVariables>;
+export type GetDirectDebitQueryResult = Apollo.QueryResult<GetDirectDebitQuery, GetDirectDebitQueryVariables>;
 export const GetDirectDebitBatchDocument = gql`
     query GetDirectDebitBatch($id: String!) {
   directDebitBatch(where: {id: $id}) {
@@ -4512,15 +4517,15 @@ ${DirectDebitFragmentDoc}`;
  *   },
  * });
  */
-export function useGetDirectDebitBatchQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>(GetDirectDebitBatchDocument, baseOptions);
+export function useGetDirectDebitBatchQuery(baseOptions: Apollo.QueryHookOptions<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>) {
+        return Apollo.useQuery<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>(GetDirectDebitBatchDocument, baseOptions);
       }
-export function useGetDirectDebitBatchLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>(GetDirectDebitBatchDocument, baseOptions);
+export function useGetDirectDebitBatchLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>) {
+          return Apollo.useLazyQuery<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>(GetDirectDebitBatchDocument, baseOptions);
         }
 export type GetDirectDebitBatchQueryHookResult = ReturnType<typeof useGetDirectDebitBatchQuery>;
 export type GetDirectDebitBatchLazyQueryHookResult = ReturnType<typeof useGetDirectDebitBatchLazyQuery>;
-export type GetDirectDebitBatchQueryResult = ApolloReactCommon.QueryResult<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>;
+export type GetDirectDebitBatchQueryResult = Apollo.QueryResult<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>;
 export const GetDirectDebitInstructionDocument = gql`
     query GetDirectDebitInstruction($id: String!) {
   directDebitInstruction(where: {id: $id}) {
@@ -4567,15 +4572,15 @@ ${MemberFragmentDoc}`;
  *   },
  * });
  */
-export function useGetDirectDebitInstructionQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>(GetDirectDebitInstructionDocument, baseOptions);
+export function useGetDirectDebitInstructionQuery(baseOptions: Apollo.QueryHookOptions<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>) {
+        return Apollo.useQuery<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>(GetDirectDebitInstructionDocument, baseOptions);
       }
-export function useGetDirectDebitInstructionLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>(GetDirectDebitInstructionDocument, baseOptions);
+export function useGetDirectDebitInstructionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>) {
+          return Apollo.useLazyQuery<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>(GetDirectDebitInstructionDocument, baseOptions);
         }
 export type GetDirectDebitInstructionQueryHookResult = ReturnType<typeof useGetDirectDebitInstructionQuery>;
 export type GetDirectDebitInstructionLazyQueryHookResult = ReturnType<typeof useGetDirectDebitInstructionLazyQuery>;
-export type GetDirectDebitInstructionQueryResult = ApolloReactCommon.QueryResult<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>;
+export type GetDirectDebitInstructionQueryResult = Apollo.QueryResult<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>;
 export const GetDirectDebitsDocument = gql`
     query GetDirectDebits {
   directDebits(orderBy: {createdAt: DESC}) {
@@ -4601,15 +4606,15 @@ export const GetDirectDebitsDocument = gql`
  *   },
  * });
  */
-export function useGetDirectDebitsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>(GetDirectDebitsDocument, baseOptions);
+export function useGetDirectDebitsQuery(baseOptions?: Apollo.QueryHookOptions<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>) {
+        return Apollo.useQuery<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>(GetDirectDebitsDocument, baseOptions);
       }
-export function useGetDirectDebitsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>(GetDirectDebitsDocument, baseOptions);
+export function useGetDirectDebitsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>) {
+          return Apollo.useLazyQuery<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>(GetDirectDebitsDocument, baseOptions);
         }
 export type GetDirectDebitsQueryHookResult = ReturnType<typeof useGetDirectDebitsQuery>;
 export type GetDirectDebitsLazyQueryHookResult = ReturnType<typeof useGetDirectDebitsLazyQuery>;
-export type GetDirectDebitsQueryResult = ApolloReactCommon.QueryResult<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>;
+export type GetDirectDebitsQueryResult = Apollo.QueryResult<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>;
 export const GetMandateDocument = gql`
     query GetMandate($id: String!) {
   mandate(where: {id: $id}) {
@@ -4638,15 +4643,15 @@ ${MemberFragmentDoc}`;
  *   },
  * });
  */
-export function useGetMandateQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMandateQuery, GetMandateQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetMandateQuery, GetMandateQueryVariables>(GetMandateDocument, baseOptions);
+export function useGetMandateQuery(baseOptions: Apollo.QueryHookOptions<GetMandateQuery, GetMandateQueryVariables>) {
+        return Apollo.useQuery<GetMandateQuery, GetMandateQueryVariables>(GetMandateDocument, baseOptions);
       }
-export function useGetMandateLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMandateQuery, GetMandateQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetMandateQuery, GetMandateQueryVariables>(GetMandateDocument, baseOptions);
+export function useGetMandateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMandateQuery, GetMandateQueryVariables>) {
+          return Apollo.useLazyQuery<GetMandateQuery, GetMandateQueryVariables>(GetMandateDocument, baseOptions);
         }
 export type GetMandateQueryHookResult = ReturnType<typeof useGetMandateQuery>;
 export type GetMandateLazyQueryHookResult = ReturnType<typeof useGetMandateLazyQuery>;
-export type GetMandateQueryResult = ApolloReactCommon.QueryResult<GetMandateQuery, GetMandateQueryVariables>;
+export type GetMandateQueryResult = Apollo.QueryResult<GetMandateQuery, GetMandateQueryVariables>;
 export const GetMandatesDocument = gql`
     query GetMandates {
   mandates(orderBy: {createdAt: DESC}) {
@@ -4676,15 +4681,15 @@ ${MemberFragmentDoc}`;
  *   },
  * });
  */
-export function useGetMandatesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMandatesQuery, GetMandatesQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetMandatesQuery, GetMandatesQueryVariables>(GetMandatesDocument, baseOptions);
+export function useGetMandatesQuery(baseOptions?: Apollo.QueryHookOptions<GetMandatesQuery, GetMandatesQueryVariables>) {
+        return Apollo.useQuery<GetMandatesQuery, GetMandatesQueryVariables>(GetMandatesDocument, baseOptions);
       }
-export function useGetMandatesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMandatesQuery, GetMandatesQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetMandatesQuery, GetMandatesQueryVariables>(GetMandatesDocument, baseOptions);
+export function useGetMandatesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMandatesQuery, GetMandatesQueryVariables>) {
+          return Apollo.useLazyQuery<GetMandatesQuery, GetMandatesQueryVariables>(GetMandatesDocument, baseOptions);
         }
 export type GetMandatesQueryHookResult = ReturnType<typeof useGetMandatesQuery>;
 export type GetMandatesLazyQueryHookResult = ReturnType<typeof useGetMandatesLazyQuery>;
-export type GetMandatesQueryResult = ApolloReactCommon.QueryResult<GetMandatesQuery, GetMandatesQueryVariables>;
+export type GetMandatesQueryResult = Apollo.QueryResult<GetMandatesQuery, GetMandatesQueryVariables>;
 export const GetMemberDocument = gql`
     query GetMember($id: String!) {
   member(where: {id: $id}) {
@@ -4727,15 +4732,15 @@ ${TransactionFragmentDoc}`;
  *   },
  * });
  */
-export function useGetMemberQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMemberQuery, GetMemberQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetMemberQuery, GetMemberQueryVariables>(GetMemberDocument, baseOptions);
+export function useGetMemberQuery(baseOptions: Apollo.QueryHookOptions<GetMemberQuery, GetMemberQueryVariables>) {
+        return Apollo.useQuery<GetMemberQuery, GetMemberQueryVariables>(GetMemberDocument, baseOptions);
       }
-export function useGetMemberLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMemberQuery, GetMemberQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetMemberQuery, GetMemberQueryVariables>(GetMemberDocument, baseOptions);
+export function useGetMemberLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMemberQuery, GetMemberQueryVariables>) {
+          return Apollo.useLazyQuery<GetMemberQuery, GetMemberQueryVariables>(GetMemberDocument, baseOptions);
         }
 export type GetMemberQueryHookResult = ReturnType<typeof useGetMemberQuery>;
 export type GetMemberLazyQueryHookResult = ReturnType<typeof useGetMemberLazyQuery>;
-export type GetMemberQueryResult = ApolloReactCommon.QueryResult<GetMemberQuery, GetMemberQueryVariables>;
+export type GetMemberQueryResult = Apollo.QueryResult<GetMemberQuery, GetMemberQueryVariables>;
 export const GetMemberMandatesDocument = gql`
     query GetMemberMandates($id: String!) {
   member(where: {id: $id}) {
@@ -4764,15 +4769,15 @@ export const GetMemberMandatesDocument = gql`
  *   },
  * });
  */
-export function useGetMemberMandatesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(GetMemberMandatesDocument, baseOptions);
+export function useGetMemberMandatesQuery(baseOptions: Apollo.QueryHookOptions<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>) {
+        return Apollo.useQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(GetMemberMandatesDocument, baseOptions);
       }
-export function useGetMemberMandatesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(GetMemberMandatesDocument, baseOptions);
+export function useGetMemberMandatesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>) {
+          return Apollo.useLazyQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(GetMemberMandatesDocument, baseOptions);
         }
 export type GetMemberMandatesQueryHookResult = ReturnType<typeof useGetMemberMandatesQuery>;
 export type GetMemberMandatesLazyQueryHookResult = ReturnType<typeof useGetMemberMandatesLazyQuery>;
-export type GetMemberMandatesQueryResult = ApolloReactCommon.QueryResult<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>;
+export type GetMemberMandatesQueryResult = Apollo.QueryResult<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>;
 export const GetMemberTransactionDocument = gql`
     query GetMemberTransaction($id: String!) {
   transaction(where: {id: $id}) {
@@ -4797,15 +4802,15 @@ export const GetMemberTransactionDocument = gql`
  *   },
  * });
  */
-export function useGetMemberTransactionQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>(GetMemberTransactionDocument, baseOptions);
+export function useGetMemberTransactionQuery(baseOptions: Apollo.QueryHookOptions<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>) {
+        return Apollo.useQuery<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>(GetMemberTransactionDocument, baseOptions);
       }
-export function useGetMemberTransactionLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>(GetMemberTransactionDocument, baseOptions);
+export function useGetMemberTransactionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>) {
+          return Apollo.useLazyQuery<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>(GetMemberTransactionDocument, baseOptions);
         }
 export type GetMemberTransactionQueryHookResult = ReturnType<typeof useGetMemberTransactionQuery>;
 export type GetMemberTransactionLazyQueryHookResult = ReturnType<typeof useGetMemberTransactionLazyQuery>;
-export type GetMemberTransactionQueryResult = ApolloReactCommon.QueryResult<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>;
+export type GetMemberTransactionQueryResult = Apollo.QueryResult<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>;
 export const GetMemberTransactionsDocument = gql`
     query GetMemberTransactions($id: String!) {
   member(where: {id: $id}) {
@@ -4834,15 +4839,15 @@ export const GetMemberTransactionsDocument = gql`
  *   },
  * });
  */
-export function useGetMemberTransactionsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>(GetMemberTransactionsDocument, baseOptions);
+export function useGetMemberTransactionsQuery(baseOptions: Apollo.QueryHookOptions<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>) {
+        return Apollo.useQuery<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>(GetMemberTransactionsDocument, baseOptions);
       }
-export function useGetMemberTransactionsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>(GetMemberTransactionsDocument, baseOptions);
+export function useGetMemberTransactionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>) {
+          return Apollo.useLazyQuery<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>(GetMemberTransactionsDocument, baseOptions);
         }
 export type GetMemberTransactionsQueryHookResult = ReturnType<typeof useGetMemberTransactionsQuery>;
 export type GetMemberTransactionsLazyQueryHookResult = ReturnType<typeof useGetMemberTransactionsLazyQuery>;
-export type GetMemberTransactionsQueryResult = ApolloReactCommon.QueryResult<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>;
+export type GetMemberTransactionsQueryResult = Apollo.QueryResult<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>;
 export const GetMembersDocument = gql`
     query GetMembers {
   members(orderBy: {firstName: ASC, lastName: ASC}) {
@@ -4878,15 +4883,15 @@ ${MandateFragmentDoc}`;
  *   },
  * });
  */
-export function useGetMembersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetMembersQuery, GetMembersQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetMembersQuery, GetMembersQueryVariables>(GetMembersDocument, baseOptions);
+export function useGetMembersQuery(baseOptions?: Apollo.QueryHookOptions<GetMembersQuery, GetMembersQueryVariables>) {
+        return Apollo.useQuery<GetMembersQuery, GetMembersQueryVariables>(GetMembersDocument, baseOptions);
       }
-export function useGetMembersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMembersQuery, GetMembersQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetMembersQuery, GetMembersQueryVariables>(GetMembersDocument, baseOptions);
+export function useGetMembersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMembersQuery, GetMembersQueryVariables>) {
+          return Apollo.useLazyQuery<GetMembersQuery, GetMembersQueryVariables>(GetMembersDocument, baseOptions);
         }
 export type GetMembersQueryHookResult = ReturnType<typeof useGetMembersQuery>;
 export type GetMembersLazyQueryHookResult = ReturnType<typeof useGetMembersLazyQuery>;
-export type GetMembersQueryResult = ApolloReactCommon.QueryResult<GetMembersQuery, GetMembersQueryVariables>;
+export type GetMembersQueryResult = Apollo.QueryResult<GetMembersQuery, GetMembersQueryVariables>;
 export const GetPageDocument = gql`
     query GetPage($id: String!) {
   page(where: {id: $id}) {
@@ -4911,15 +4916,15 @@ export const GetPageDocument = gql`
  *   },
  * });
  */
-export function useGetPageQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetPageQuery, GetPageQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetPageQuery, GetPageQueryVariables>(GetPageDocument, baseOptions);
+export function useGetPageQuery(baseOptions: Apollo.QueryHookOptions<GetPageQuery, GetPageQueryVariables>) {
+        return Apollo.useQuery<GetPageQuery, GetPageQueryVariables>(GetPageDocument, baseOptions);
       }
-export function useGetPageLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetPageQuery, GetPageQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetPageQuery, GetPageQueryVariables>(GetPageDocument, baseOptions);
+export function useGetPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPageQuery, GetPageQueryVariables>) {
+          return Apollo.useLazyQuery<GetPageQuery, GetPageQueryVariables>(GetPageDocument, baseOptions);
         }
 export type GetPageQueryHookResult = ReturnType<typeof useGetPageQuery>;
 export type GetPageLazyQueryHookResult = ReturnType<typeof useGetPageLazyQuery>;
-export type GetPageQueryResult = ApolloReactCommon.QueryResult<GetPageQuery, GetPageQueryVariables>;
+export type GetPageQueryResult = Apollo.QueryResult<GetPageQuery, GetPageQueryVariables>;
 export const GetPagesDocument = gql`
     query GetPages {
   pages(orderBy: {id: ASC}) {
@@ -4945,15 +4950,15 @@ export const GetPagesDocument = gql`
  *   },
  * });
  */
-export function useGetPagesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetPagesQuery, GetPagesQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetPagesQuery, GetPagesQueryVariables>(GetPagesDocument, baseOptions);
+export function useGetPagesQuery(baseOptions?: Apollo.QueryHookOptions<GetPagesQuery, GetPagesQueryVariables>) {
+        return Apollo.useQuery<GetPagesQuery, GetPagesQueryVariables>(GetPagesDocument, baseOptions);
       }
-export function useGetPagesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetPagesQuery, GetPagesQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetPagesQuery, GetPagesQueryVariables>(GetPagesDocument, baseOptions);
+export function useGetPagesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPagesQuery, GetPagesQueryVariables>) {
+          return Apollo.useLazyQuery<GetPagesQuery, GetPagesQueryVariables>(GetPagesDocument, baseOptions);
         }
 export type GetPagesQueryHookResult = ReturnType<typeof useGetPagesQuery>;
 export type GetPagesLazyQueryHookResult = ReturnType<typeof useGetPagesLazyQuery>;
-export type GetPagesQueryResult = ApolloReactCommon.QueryResult<GetPagesQuery, GetPagesQueryVariables>;
+export type GetPagesQueryResult = Apollo.QueryResult<GetPagesQuery, GetPagesQueryVariables>;
 export const GetPaperMandatesDocument = gql`
     query GetPaperMandates($status: MandateStatus) {
   paperMandates(where: {status: {equals: $status}}) {
@@ -4984,15 +4989,15 @@ ${MemberFragmentDoc}`;
  *   },
  * });
  */
-export function useGetPaperMandatesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>(GetPaperMandatesDocument, baseOptions);
+export function useGetPaperMandatesQuery(baseOptions?: Apollo.QueryHookOptions<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>) {
+        return Apollo.useQuery<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>(GetPaperMandatesDocument, baseOptions);
       }
-export function useGetPaperMandatesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>(GetPaperMandatesDocument, baseOptions);
+export function useGetPaperMandatesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>) {
+          return Apollo.useLazyQuery<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>(GetPaperMandatesDocument, baseOptions);
         }
 export type GetPaperMandatesQueryHookResult = ReturnType<typeof useGetPaperMandatesQuery>;
 export type GetPaperMandatesLazyQueryHookResult = ReturnType<typeof useGetPaperMandatesLazyQuery>;
-export type GetPaperMandatesQueryResult = ApolloReactCommon.QueryResult<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>;
+export type GetPaperMandatesQueryResult = Apollo.QueryResult<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>;
 export const GetProfileDocument = gql`
     query GetProfile {
   me {
@@ -5024,15 +5029,15 @@ ${ProviderFragmentDoc}`;
  *   },
  * });
  */
-export function useGetProfileQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
+export function useGetProfileQuery(baseOptions?: Apollo.QueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
+        return Apollo.useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
       }
-export function useGetProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
+export function useGetProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
+          return Apollo.useLazyQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
         }
 export type GetProfileQueryHookResult = ReturnType<typeof useGetProfileQuery>;
 export type GetProfileLazyQueryHookResult = ReturnType<typeof useGetProfileLazyQuery>;
-export type GetProfileQueryResult = ApolloReactCommon.QueryResult<GetProfileQuery, GetProfileQueryVariables>;
+export type GetProfileQueryResult = Apollo.QueryResult<GetProfileQuery, GetProfileQueryVariables>;
 export const GetTransactionDocument = gql`
     query GetTransaction($id: String!) {
   transaction(where: {id: $id}) {
@@ -5077,12 +5082,12 @@ ${DirectDebitFragmentDoc}`;
  *   },
  * });
  */
-export function useGetTransactionQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetTransactionQuery, GetTransactionQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetTransactionQuery, GetTransactionQueryVariables>(GetTransactionDocument, baseOptions);
+export function useGetTransactionQuery(baseOptions: Apollo.QueryHookOptions<GetTransactionQuery, GetTransactionQueryVariables>) {
+        return Apollo.useQuery<GetTransactionQuery, GetTransactionQueryVariables>(GetTransactionDocument, baseOptions);
       }
-export function useGetTransactionLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetTransactionQuery, GetTransactionQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetTransactionQuery, GetTransactionQueryVariables>(GetTransactionDocument, baseOptions);
+export function useGetTransactionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTransactionQuery, GetTransactionQueryVariables>) {
+          return Apollo.useLazyQuery<GetTransactionQuery, GetTransactionQueryVariables>(GetTransactionDocument, baseOptions);
         }
 export type GetTransactionQueryHookResult = ReturnType<typeof useGetTransactionQuery>;
 export type GetTransactionLazyQueryHookResult = ReturnType<typeof useGetTransactionLazyQuery>;
-export type GetTransactionQueryResult = ApolloReactCommon.QueryResult<GetTransactionQuery, GetTransactionQueryVariables>;
+export type GetTransactionQueryResult = Apollo.QueryResult<GetTransactionQuery, GetTransactionQueryVariables>;

@@ -1,10 +1,10 @@
-import {ApolloClient} from 'apollo-client';
-import {setContext} from 'apollo-link-context';
-import {InMemoryCache, IntrospectionFragmentMatcher} from 'apollo-cache-inmemory';
+import {ApolloClient} from '@apollo/client';
+import {InMemoryCache} from '@apollo/client/cache';
+import {setContext} from '@apollo/client/link/context';
 import {createUploadLink} from 'apollo-upload-client';
 
 import config from './config';
-import fragmentTypes from './generated/fragmentTypes.json';
+import {possibleTypes} from './generated/fragmentTypes.json';
 
 // Initialize HTTP / upload link
 const uploadLink = createUploadLink({
@@ -24,9 +24,7 @@ const authLink = setContext((_, { headers }) => {
 
 // Initialize cache
 const cache = new InMemoryCache({
-    fragmentMatcher: new IntrospectionFragmentMatcher({
-        introspectionQueryResultData: fragmentTypes
-    })
+    possibleTypes
 });
 
 // Initialize Apollo client

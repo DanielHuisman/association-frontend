@@ -1,4 +1,4 @@
-import {ApolloError} from 'apollo-client';
+import {ApolloError} from '@apollo/client';
 import {TFunction} from 'i18next';
 import {useTranslation} from 'react-i18next';
 

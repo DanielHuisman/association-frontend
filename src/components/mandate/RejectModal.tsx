@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Field, FormikConfig} from 'formik';
-import {ApolloError} from 'apollo-client';
+import {ApolloError} from '@apollo/client';
 import * as Yup from 'yup';
 import {Modal, ModalProps, Message, Icon} from 'semantic-ui-react';
 
