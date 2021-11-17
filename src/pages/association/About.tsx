@@ -34,6 +34,11 @@ const About = () => {
                         {t('general:association.documents.membershipFeeRegulations', 'Membership fee regulations')}
                     </a>
                 </List.Item>
+                <List.Item>
+                    <a href={DOCUMENTS.privacyPolicy[language]} target="privacyPolicy">
+                        {t('general:association.documents.privacyPolicy', 'Privacy policy')}
+                    </a>
+                </List.Item>
             </List>
         </Container>
     );

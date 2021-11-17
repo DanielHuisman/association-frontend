@@ -48,5 +48,9 @@ export const DOCUMENTS = {
     membershipFeeRegulations: {
         en: '/media/membership_fee_regulations.pdf',
         nl: '/media/contributiereglement.pdf'
+    },
+    privacyPolicy: {
+        en: '/media/privacy_policy.pdf',
+        nl: '/media/privacybeleid.pdf'
     }
 };
