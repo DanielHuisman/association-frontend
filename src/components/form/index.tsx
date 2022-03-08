@@ -1,3 +1,4 @@
+export {default as FieldDate} from './FieldDate';
 export {default as FieldDropdown} from './FieldDropdown';
 export {default as FieldFile} from './FieldFile';
 export {default as FieldInput, FieldInputProps} from './FieldInput';

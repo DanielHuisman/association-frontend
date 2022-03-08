@@ -7,6 +7,7 @@ import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
 import {UserContext} from '../../components/authentication/UserContext';
+import EndMembershipButton from '../../components/membership/EndMembershipButton';
 import MembershipType from '../../components/membership/MembershipType';
 import TableSelectableRow from '../../components/table/TableSelectableRow';
 import TransactionTable from '../../components/transactions/TransactionTable';
@@ -33,6 +34,8 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
     if (error) {
         throw error;
     }
+
+    const activeMembership = data.member.memberships.values.find((membership) => !membership.endedAt);
 
     return (
         <Container>
@@ -105,6 +108,12 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                             </Table.Row>
                         </Table.Body>
                     </Table>
+
+                    {user && user.isAdmin && (
+                        <>
+                            {activeMembership && <EndMembershipButton membershipId={activeMembership.id} />}
+                        </>
+                    )}
 
                     <Header size="large">{t('members:memberships.header', 'Memberships')}</Header>
                     <Table selectable stackable>

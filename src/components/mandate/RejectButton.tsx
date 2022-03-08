@@ -14,7 +14,7 @@ interface IProps {
     mandateId: string;
 }
 
-const AcceptButton = ({mandateId}: IProps) => {
+const RejectButton = ({mandateId}: IProps) => {
     const {t} = useTranslation();
 
     const [reject, {loading, error}] = useMutation<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>(RejectPaperMandate, {
@@ -51,4 +51,4 @@ const AcceptButton = ({mandateId}: IProps) => {
     );
 };
 
-export default AcceptButton;
+export default RejectButton;

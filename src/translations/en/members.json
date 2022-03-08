@@ -42,6 +42,13 @@
     "withMandate": "Members with mandate:"
   },
   "membership": {
+    "end": {
+      "button": "End membership",
+      "date": "Ended at date",
+      "error": {
+        "header": "Failed to end membership"
+      }
+    },
     "endedAt": "End of membership",
     "endedAtNone": "Still a member",
     "startedAt": "Start of membership",

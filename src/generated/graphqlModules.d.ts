@@ -181,6 +181,15 @@ declare module '*/CreatePaperMandate.graphql' {
 }
     
 
+declare module '*/EndMembership.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const EndMembership: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/InvalidateMandate.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

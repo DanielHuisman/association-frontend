@@ -1,0 +1,14 @@
+# import '../fragments/Membership.graphql'
+
+mutation EndMembership($id: String!, $date: Date!) {
+    updateMembership(
+        where: {
+            id: $id
+        },
+        data: {
+            endedAt: $date
+        }
+    ) {
+        ...MembershipFragment
+    }
+}

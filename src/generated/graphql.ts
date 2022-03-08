@@ -41,40 +41,6 @@ export type Bank = {
   isActive: Scalars['Boolean'];
 };
 
-export type Translatable = {
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
-};
-
-export type ShortTranslatable = Translatable & {
-  __typename?: 'ShortTranslatable';
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
-};
-
-export type LongTranslatable = Translatable & {
-  __typename?: 'LongTranslatable';
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
-};
-
-export type BoardPeriod = {
-  __typename?: 'BoardPeriod';
-  id: Scalars['String'];
-  name: ShortTranslatable;
-  startedAt: Scalars['Date'];
-  endedAt?: Maybe<Scalars['Date']>;
-  members: MemberList;
-};
-
-
-export type BoardPeriodmembersArgs = {
-  where?: Maybe<MemberWhereInput>;
-  orderBy?: Maybe<MemberOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
 export enum MandateStatus {
   CREATED = 'CREATED',
   UNACCEPTED = 'UNACCEPTED',
@@ -300,8 +266,8 @@ export type Member = {
   isAdmin: Scalars['Boolean'];
   image?: Maybe<File>;
   memberships: MembershipList;
-  boardPeriods: BoardPeriodList;
-  committeePeriods: CommitteePeriodList;
+  groups: GroupList;
+  participations: ParticipationList;
   mandates: MandateList;
   transactions: TransactionList;
   warnings: DirectDebitWarningList;
@@ -327,17 +293,17 @@ export type MembermembershipsArgs = {
 };
 
 
-export type MemberboardPeriodsArgs = {
-  where?: Maybe<BoardPeriodWhereInput>;
-  orderBy?: Maybe<BoardPeriodOrderByInput>;
+export type MembergroupsArgs = {
+  where?: Maybe<GroupWhereInput>;
+  orderBy?: Maybe<GroupOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
 
 
-export type MembercommitteePeriodsArgs = {
-  where?: Maybe<CommitteePeriodWhereInput>;
-  orderBy?: Maybe<CommitteePeriodOrderByInput>;
+export type MemberparticipationsArgs = {
+  where?: Maybe<ParticipationWhereInput>;
+  orderBy?: Maybe<ParticipationOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -366,20 +332,139 @@ export type MemberwarningsArgs = {
   take?: Maybe<Scalars['Int']>;
 };
 
-export type CommitteePeriod = {
+export type Participation = {
+  __typename?: 'Participation';
+  id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  member: Member;
+  event: Event;
+};
+
+export type Translatable = {
+  en?: Maybe<Scalars['String']>;
+  nl?: Maybe<Scalars['String']>;
+};
+
+export type ShortTranslatable = Translatable & {
+  __typename?: 'ShortTranslatable';
+  en?: Maybe<Scalars['String']>;
+  nl?: Maybe<Scalars['String']>;
+};
+
+export type LongTranslatable = Translatable & {
+  __typename?: 'LongTranslatable';
+  en?: Maybe<Scalars['String']>;
+  nl?: Maybe<Scalars['String']>;
+};
+
+export type Event = {
+  __typename?: 'Event';
+  id: Scalars['String'];
+  name: ShortTranslatable;
+  description: LongTranslatable;
+  startedAt: Scalars['DateTime'];
+  endedAt: Scalars['DateTime'];
+  isAllDay: Scalars['Boolean'];
+  isCanceled: Scalars['Boolean'];
+  openedAt: Scalars['DateTime'];
+  closedAt: Scalars['DateTime'];
+  isMembersOnly: Scalars['Boolean'];
+  isParticipationRequired: Scalars['Boolean'];
+  maxParticipations?: Maybe<Scalars['Int']>;
+  groups: GroupList;
+  participations: ParticipationList;
+};
+
+
+export type EventgroupsArgs = {
+  where?: Maybe<GroupWhereInput>;
+  orderBy?: Maybe<GroupOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type EventparticipationsArgs = {
+  where?: Maybe<ParticipationWhereInput>;
+  orderBy?: Maybe<ParticipationOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+export type Group = {
+  id: Scalars['String'];
+  name: ShortTranslatable;
+  startedAt: Scalars['Date'];
+  endedAt?: Maybe<Scalars['Date']>;
+  members: MemberList;
+  events: EventList;
+};
+
+
+export type GroupmembersArgs = {
+  where?: Maybe<MemberWhereInput>;
+  orderBy?: Maybe<MemberOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type GroupeventsArgs = {
+  where?: Maybe<EventWhereInput>;
+  orderBy?: Maybe<EventOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+export type BoardPeriod = Group & {
+  __typename?: 'BoardPeriod';
+  id: Scalars['String'];
+  name: ShortTranslatable;
+  startedAt: Scalars['Date'];
+  endedAt?: Maybe<Scalars['Date']>;
+  members: MemberList;
+  events: EventList;
+};
+
+
+export type BoardPeriodmembersArgs = {
+  where?: Maybe<MemberWhereInput>;
+  orderBy?: Maybe<MemberOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type BoardPeriodeventsArgs = {
+  where?: Maybe<EventWhereInput>;
+  orderBy?: Maybe<EventOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+export type CommitteePeriod = Group & {
   __typename?: 'CommitteePeriod';
   id: Scalars['String'];
   name: ShortTranslatable;
   startedAt: Scalars['Date'];
   endedAt?: Maybe<Scalars['Date']>;
-  committee: Committee;
   members: MemberList;
+  events: EventList;
+  committee: Committee;
 };
 
 
 export type CommitteePeriodmembersArgs = {
   where?: Maybe<MemberWhereInput>;
   orderBy?: Maybe<MemberOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type CommitteePeriodeventsArgs = {
+  where?: Maybe<EventWhereInput>;
+  orderBy?: Maybe<EventOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -606,49 +691,6 @@ export type BankList = {
   __typename?: 'BankList';
   info: ListInfo;
   values: Array<Bank>;
-};
-
-export type BoardPeriodWhereInput = {
-  id?: Maybe<StringFilter>;
-  name?: Maybe<ShortTranslatableWhereInput>;
-  startedAt?: Maybe<DateTimeFilter>;
-  endedAt?: Maybe<DateTimeFilter>;
-  members?: Maybe<MemberWhereInput>;
-  AND?: Maybe<Array<BoardPeriodWhereInput>>;
-  OR?: Maybe<Array<BoardPeriodWhereInput>>;
-};
-
-export type BoardPeriodOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  name?: Maybe<ShortTranslatableOrderByInput>;
-  startedAt?: Maybe<OrderByArg>;
-  endedAt?: Maybe<OrderByArg>;
-};
-
-export type BoardPeriodCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatableCreateInput>;
-  startedAt?: Maybe<Scalars['Date']>;
-  endedAt?: Maybe<Scalars['Date']>;
-  members?: Maybe<Array<MemberCreateRelationInput>>;
-};
-
-export type BoardPeriodUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatableUpdateInput>;
-  startedAt?: Maybe<Scalars['Date']>;
-  endedAt?: Maybe<Scalars['Date']>;
-  members?: Maybe<Array<MemberUpdateRelationInput>>;
-};
-
-export type BoardPeriodWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type BoardPeriodList = {
-  __typename?: 'BoardPeriodList';
-  info: ListInfo;
-  values: Array<BoardPeriod>;
 };
 
 export type MandateWhereInput = {
@@ -1147,8 +1189,8 @@ export type MemberWhereInput = {
   isAdmin?: Maybe<Scalars['Boolean']>;
   image?: Maybe<FileWhereInput>;
   memberships?: Maybe<MembershipWhereInput>;
-  boardPeriods?: Maybe<BoardPeriodWhereInput>;
-  committeePeriods?: Maybe<CommitteePeriodWhereInput>;
+  groups?: Maybe<GroupWhereInput>;
+  participations?: Maybe<ParticipationWhereInput>;
   mandates?: Maybe<MandateWhereInput>;
   transactions?: Maybe<TransactionWhereInput>;
   warnings?: Maybe<DirectDebitWarningWhereInput>;
@@ -1192,8 +1234,8 @@ export type MemberCreateInput = {
   isAdmin?: Maybe<Scalars['Boolean']>;
   image?: Maybe<FileCreateRelationInput>;
   memberships?: Maybe<Array<MembershipCreateRelationInput>>;
-  boardPeriods?: Maybe<Array<BoardPeriodCreateRelationInput>>;
-  committeePeriods?: Maybe<Array<CommitteePeriodCreateRelationInput>>;
+  groups?: Maybe<Array<GroupCreateRelationInput>>;
+  participations?: Maybe<Array<ParticipationCreateRelationInput>>;
   mandates?: Maybe<Array<MandateCreateRelationInput>>;
   transactions?: Maybe<Array<TransactionCreateRelationInput>>;
   warnings?: Maybe<Array<DirectDebitWarningCreateRelationInput>>;
@@ -1217,8 +1259,8 @@ export type MemberUpdateInput = {
   isAdmin?: Maybe<Scalars['Boolean']>;
   image?: Maybe<FileUpdateRelationInput>;
   memberships?: Maybe<Array<MembershipUpdateRelationInput>>;
-  boardPeriods?: Maybe<Array<BoardPeriodUpdateRelationInput>>;
-  committeePeriods?: Maybe<Array<CommitteePeriodUpdateRelationInput>>;
+  groups?: Maybe<Array<GroupUpdateRelationInput>>;
+  participations?: Maybe<Array<ParticipationUpdateRelationInput>>;
   mandates?: Maybe<Array<MandateUpdateRelationInput>>;
   transactions?: Maybe<Array<TransactionUpdateRelationInput>>;
   warnings?: Maybe<Array<DirectDebitWarningUpdateRelationInput>>;
@@ -1234,13 +1276,224 @@ export type MemberList = {
   values: Array<Member>;
 };
 
+export type ParticipationWhereInput = {
+  id?: Maybe<StringFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
+  member?: Maybe<MemberWhereInput>;
+  event?: Maybe<EventWhereInput>;
+  AND?: Maybe<Array<ParticipationWhereInput>>;
+  OR?: Maybe<Array<ParticipationWhereInput>>;
+};
+
+export type ParticipationOrderByInput = {
+  id?: Maybe<OrderByArg>;
+  createdAt?: Maybe<OrderByArg>;
+  member?: Maybe<MemberOrderByInput>;
+  event?: Maybe<EventOrderByInput>;
+};
+
+export type ParticipationCreateInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  member?: Maybe<MemberCreateRelationInput>;
+  event?: Maybe<EventCreateRelationInput>;
+};
+
+export type ParticipationUpdateInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  member?: Maybe<MemberUpdateRelationInput>;
+  event?: Maybe<EventUpdateRelationInput>;
+};
+
+export type ParticipationWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type ParticipationList = {
+  __typename?: 'ParticipationList';
+  info: ListInfo;
+  values: Array<Participation>;
+};
+
+export type EventWhereInput = {
+  id?: Maybe<StringFilter>;
+  name?: Maybe<ShortTranslatableWhereInput>;
+  description?: Maybe<LongTranslatableWhereInput>;
+  startedAt?: Maybe<DateTimeFilter>;
+  endedAt?: Maybe<DateTimeFilter>;
+  isAllDay?: Maybe<Scalars['Boolean']>;
+  isCanceled?: Maybe<Scalars['Boolean']>;
+  openedAt?: Maybe<DateTimeFilter>;
+  closedAt?: Maybe<DateTimeFilter>;
+  isMembersOnly?: Maybe<Scalars['Boolean']>;
+  isParticipationRequired?: Maybe<Scalars['Boolean']>;
+  maxParticipations?: Maybe<IntFilter>;
+  groups?: Maybe<GroupWhereInput>;
+  participations?: Maybe<ParticipationWhereInput>;
+  AND?: Maybe<Array<EventWhereInput>>;
+  OR?: Maybe<Array<EventWhereInput>>;
+};
+
+export type EventOrderByInput = {
+  id?: Maybe<OrderByArg>;
+  name?: Maybe<ShortTranslatableOrderByInput>;
+  description?: Maybe<LongTranslatableOrderByInput>;
+  startedAt?: Maybe<OrderByArg>;
+  endedAt?: Maybe<OrderByArg>;
+  isAllDay?: Maybe<OrderByArg>;
+  isCanceled?: Maybe<OrderByArg>;
+  openedAt?: Maybe<OrderByArg>;
+  closedAt?: Maybe<OrderByArg>;
+  isMembersOnly?: Maybe<OrderByArg>;
+  isParticipationRequired?: Maybe<OrderByArg>;
+  maxParticipations?: Maybe<OrderByArg>;
+};
+
+export type EventCreateInput = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<ShortTranslatableCreateInput>;
+  description?: Maybe<LongTranslatableCreateInput>;
+  startedAt?: Maybe<Scalars['DateTime']>;
+  endedAt?: Maybe<Scalars['DateTime']>;
+  isAllDay?: Maybe<Scalars['Boolean']>;
+  isCanceled?: Maybe<Scalars['Boolean']>;
+  openedAt?: Maybe<Scalars['DateTime']>;
+  closedAt?: Maybe<Scalars['DateTime']>;
+  isMembersOnly?: Maybe<Scalars['Boolean']>;
+  isParticipationRequired?: Maybe<Scalars['Boolean']>;
+  maxParticipations?: Maybe<Scalars['Float']>;
+  groups?: Maybe<Array<GroupCreateRelationInput>>;
+  participations?: Maybe<Array<ParticipationCreateRelationInput>>;
+};
+
+export type EventUpdateInput = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<ShortTranslatableUpdateInput>;
+  description?: Maybe<LongTranslatableUpdateInput>;
+  startedAt?: Maybe<Scalars['DateTime']>;
+  endedAt?: Maybe<Scalars['DateTime']>;
+  isAllDay?: Maybe<Scalars['Boolean']>;
+  isCanceled?: Maybe<Scalars['Boolean']>;
+  openedAt?: Maybe<Scalars['DateTime']>;
+  closedAt?: Maybe<Scalars['DateTime']>;
+  isMembersOnly?: Maybe<Scalars['Boolean']>;
+  isParticipationRequired?: Maybe<Scalars['Boolean']>;
+  maxParticipations?: Maybe<Scalars['Float']>;
+  groups?: Maybe<Array<GroupUpdateRelationInput>>;
+  participations?: Maybe<Array<ParticipationUpdateRelationInput>>;
+};
+
+export type EventWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type EventList = {
+  __typename?: 'EventList';
+  info: ListInfo;
+  values: Array<Event>;
+};
+
+export type GroupWhereInput = {
+  id?: Maybe<StringFilter>;
+  name?: Maybe<ShortTranslatableWhereInput>;
+  startedAt?: Maybe<DateTimeFilter>;
+  endedAt?: Maybe<DateTimeFilter>;
+  members?: Maybe<MemberWhereInput>;
+  events?: Maybe<EventWhereInput>;
+  AND?: Maybe<Array<GroupWhereInput>>;
+  OR?: Maybe<Array<GroupWhereInput>>;
+};
+
+export type GroupOrderByInput = {
+  id?: Maybe<OrderByArg>;
+  name?: Maybe<ShortTranslatableOrderByInput>;
+  startedAt?: Maybe<OrderByArg>;
+  endedAt?: Maybe<OrderByArg>;
+};
+
+export type GroupCreateInput = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<ShortTranslatableCreateInput>;
+  startedAt?: Maybe<Scalars['Date']>;
+  endedAt?: Maybe<Scalars['Date']>;
+  members?: Maybe<Array<MemberCreateRelationInput>>;
+  events?: Maybe<Array<EventCreateRelationInput>>;
+};
+
+export type GroupUpdateInput = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<ShortTranslatableUpdateInput>;
+  startedAt?: Maybe<Scalars['Date']>;
+  endedAt?: Maybe<Scalars['Date']>;
+  members?: Maybe<Array<MemberUpdateRelationInput>>;
+  events?: Maybe<Array<EventUpdateRelationInput>>;
+};
+
+export type GroupWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type GroupList = {
+  __typename?: 'GroupList';
+  info: ListInfo;
+  values: Array<Group>;
+};
+
+export type BoardPeriodWhereInput = {
+  id?: Maybe<StringFilter>;
+  name?: Maybe<ShortTranslatableWhereInput>;
+  startedAt?: Maybe<DateTimeFilter>;
+  endedAt?: Maybe<DateTimeFilter>;
+  members?: Maybe<MemberWhereInput>;
+  events?: Maybe<EventWhereInput>;
+  AND?: Maybe<Array<BoardPeriodWhereInput>>;
+  OR?: Maybe<Array<BoardPeriodWhereInput>>;
+};
+
+export type BoardPeriodOrderByInput = {
+  id?: Maybe<OrderByArg>;
+  name?: Maybe<ShortTranslatableOrderByInput>;
+  startedAt?: Maybe<OrderByArg>;
+  endedAt?: Maybe<OrderByArg>;
+};
+
+export type BoardPeriodCreateInput = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<ShortTranslatableCreateInput>;
+  startedAt?: Maybe<Scalars['Date']>;
+  endedAt?: Maybe<Scalars['Date']>;
+  members?: Maybe<Array<MemberCreateRelationInput>>;
+  events?: Maybe<Array<EventCreateRelationInput>>;
+};
+
+export type BoardPeriodUpdateInput = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<ShortTranslatableUpdateInput>;
+  startedAt?: Maybe<Scalars['Date']>;
+  endedAt?: Maybe<Scalars['Date']>;
+  members?: Maybe<Array<MemberUpdateRelationInput>>;
+  events?: Maybe<Array<EventUpdateRelationInput>>;
+};
+
+export type BoardPeriodWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type BoardPeriodList = {
+  __typename?: 'BoardPeriodList';
+  info: ListInfo;
+  values: Array<BoardPeriod>;
+};
+
 export type CommitteePeriodWhereInput = {
   id?: Maybe<StringFilter>;
   name?: Maybe<ShortTranslatableWhereInput>;
   startedAt?: Maybe<DateTimeFilter>;
   endedAt?: Maybe<DateTimeFilter>;
-  committee?: Maybe<CommitteeWhereInput>;
   members?: Maybe<MemberWhereInput>;
+  events?: Maybe<EventWhereInput>;
+  committee?: Maybe<CommitteeWhereInput>;
   AND?: Maybe<Array<CommitteePeriodWhereInput>>;
   OR?: Maybe<Array<CommitteePeriodWhereInput>>;
 };
@@ -1258,8 +1511,9 @@ export type CommitteePeriodCreateInput = {
   name?: Maybe<ShortTranslatableCreateInput>;
   startedAt?: Maybe<Scalars['Date']>;
   endedAt?: Maybe<Scalars['Date']>;
-  committee?: Maybe<CommitteeCreateRelationInput>;
   members?: Maybe<Array<MemberCreateRelationInput>>;
+  events?: Maybe<Array<EventCreateRelationInput>>;
+  committee?: Maybe<CommitteeCreateRelationInput>;
 };
 
 export type CommitteePeriodUpdateInput = {
@@ -1267,8 +1521,9 @@ export type CommitteePeriodUpdateInput = {
   name?: Maybe<ShortTranslatableUpdateInput>;
   startedAt?: Maybe<Scalars['Date']>;
   endedAt?: Maybe<Scalars['Date']>;
-  committee?: Maybe<CommitteeUpdateRelationInput>;
   members?: Maybe<Array<MemberUpdateRelationInput>>;
+  events?: Maybe<Array<EventUpdateRelationInput>>;
+  committee?: Maybe<CommitteeUpdateRelationInput>;
 };
 
 export type CommitteePeriodWhereUniqueInput = {
@@ -1660,39 +1915,6 @@ export type RegisterInput = {
   studentType: StudentType;
 };
 
-export type ShortTranslatableWhereInput = {
-  en?: Maybe<StringFilter>;
-  nl?: Maybe<StringFilter>;
-  AND?: Maybe<Array<ShortTranslatableWhereInput>>;
-  OR?: Maybe<Array<ShortTranslatableWhereInput>>;
-};
-
-export type ShortTranslatableOrderByInput = {
-  en?: Maybe<OrderByArg>;
-  nl?: Maybe<OrderByArg>;
-};
-
-export type ShortTranslatableCreateInput = {
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
-};
-
-export type MemberCreateRelationInput = {
-  create?: Maybe<MemberCreateInput>;
-  connect?: Maybe<MemberWhereUniqueInput>;
-};
-
-export type ShortTranslatableUpdateInput = {
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
-};
-
-export type MemberUpdateRelationInput = {
-  create?: Maybe<MemberCreateInput>;
-  connect?: Maybe<MemberWhereUniqueInput>;
-  disconnect?: Maybe<MemberWhereUniqueInput>;
-};
-
 export type MandateStatusFilter = {
   equals?: Maybe<MandateStatus>;
   not?: Maybe<MandateStatus>;
@@ -1700,9 +1922,20 @@ export type MandateStatusFilter = {
   notIn?: Maybe<Array<MandateStatus>>;
 };
 
+export type MemberCreateRelationInput = {
+  create?: Maybe<MemberCreateInput>;
+  connect?: Maybe<MemberWhereUniqueInput>;
+};
+
 export type DirectDebitInstructionCreateRelationInput = {
   create?: Maybe<DirectDebitInstructionCreateInput>;
   connect?: Maybe<DirectDebitInstructionWhereUniqueInput>;
+};
+
+export type MemberUpdateRelationInput = {
+  create?: Maybe<MemberCreateInput>;
+  connect?: Maybe<MemberWhereUniqueInput>;
+  disconnect?: Maybe<MemberWhereUniqueInput>;
 };
 
 export type DirectDebitInstructionUpdateRelationInput = {
@@ -1846,14 +2079,14 @@ export type ProviderCreateRelationInput = {
   connect?: Maybe<ProviderWhereUniqueInput>;
 };
 
-export type BoardPeriodCreateRelationInput = {
-  create?: Maybe<BoardPeriodCreateInput>;
-  connect?: Maybe<BoardPeriodWhereUniqueInput>;
+export type GroupCreateRelationInput = {
+  create?: Maybe<GroupCreateInput>;
+  connect?: Maybe<GroupWhereUniqueInput>;
 };
 
-export type CommitteePeriodCreateRelationInput = {
-  create?: Maybe<CommitteePeriodCreateInput>;
-  connect?: Maybe<CommitteePeriodWhereUniqueInput>;
+export type ParticipationCreateRelationInput = {
+  create?: Maybe<ParticipationCreateInput>;
+  connect?: Maybe<ParticipationWhereUniqueInput>;
 };
 
 export type ProviderUpdateRelationInput = {
@@ -1862,16 +2095,71 @@ export type ProviderUpdateRelationInput = {
   disconnect?: Maybe<ProviderWhereUniqueInput>;
 };
 
-export type BoardPeriodUpdateRelationInput = {
-  create?: Maybe<BoardPeriodCreateInput>;
-  connect?: Maybe<BoardPeriodWhereUniqueInput>;
-  disconnect?: Maybe<BoardPeriodWhereUniqueInput>;
+export type GroupUpdateRelationInput = {
+  create?: Maybe<GroupCreateInput>;
+  connect?: Maybe<GroupWhereUniqueInput>;
+  disconnect?: Maybe<GroupWhereUniqueInput>;
 };
 
-export type CommitteePeriodUpdateRelationInput = {
-  create?: Maybe<CommitteePeriodCreateInput>;
-  connect?: Maybe<CommitteePeriodWhereUniqueInput>;
-  disconnect?: Maybe<CommitteePeriodWhereUniqueInput>;
+export type ParticipationUpdateRelationInput = {
+  create?: Maybe<ParticipationCreateInput>;
+  connect?: Maybe<ParticipationWhereUniqueInput>;
+  disconnect?: Maybe<ParticipationWhereUniqueInput>;
+};
+
+export type EventCreateRelationInput = {
+  create?: Maybe<EventCreateInput>;
+  connect?: Maybe<EventWhereUniqueInput>;
+};
+
+export type EventUpdateRelationInput = {
+  create?: Maybe<EventCreateInput>;
+  connect?: Maybe<EventWhereUniqueInput>;
+  disconnect?: Maybe<EventWhereUniqueInput>;
+};
+
+export type ShortTranslatableWhereInput = {
+  en?: Maybe<StringFilter>;
+  nl?: Maybe<StringFilter>;
+  AND?: Maybe<Array<ShortTranslatableWhereInput>>;
+  OR?: Maybe<Array<ShortTranslatableWhereInput>>;
+};
+
+export type LongTranslatableWhereInput = {
+  en?: Maybe<StringFilter>;
+  nl?: Maybe<StringFilter>;
+  AND?: Maybe<Array<LongTranslatableWhereInput>>;
+  OR?: Maybe<Array<LongTranslatableWhereInput>>;
+};
+
+export type ShortTranslatableOrderByInput = {
+  en?: Maybe<OrderByArg>;
+  nl?: Maybe<OrderByArg>;
+};
+
+export type LongTranslatableOrderByInput = {
+  en?: Maybe<OrderByArg>;
+  nl?: Maybe<OrderByArg>;
+};
+
+export type ShortTranslatableCreateInput = {
+  en?: Maybe<Scalars['String']>;
+  nl?: Maybe<Scalars['String']>;
+};
+
+export type LongTranslatableCreateInput = {
+  en?: Maybe<Scalars['String']>;
+  nl?: Maybe<Scalars['String']>;
+};
+
+export type ShortTranslatableUpdateInput = {
+  en?: Maybe<Scalars['String']>;
+  nl?: Maybe<Scalars['String']>;
+};
+
+export type LongTranslatableUpdateInput = {
+  en?: Maybe<Scalars['String']>;
+  nl?: Maybe<Scalars['String']>;
 };
 
 export type CommitteeCreateRelationInput = {
@@ -1885,26 +2173,15 @@ export type CommitteeUpdateRelationInput = {
   disconnect?: Maybe<CommitteeWhereUniqueInput>;
 };
 
-export type LongTranslatableWhereInput = {
-  en?: Maybe<StringFilter>;
-  nl?: Maybe<StringFilter>;
-  AND?: Maybe<Array<LongTranslatableWhereInput>>;
-  OR?: Maybe<Array<LongTranslatableWhereInput>>;
+export type CommitteePeriodCreateRelationInput = {
+  create?: Maybe<CommitteePeriodCreateInput>;
+  connect?: Maybe<CommitteePeriodWhereUniqueInput>;
 };
 
-export type LongTranslatableOrderByInput = {
-  en?: Maybe<OrderByArg>;
-  nl?: Maybe<OrderByArg>;
-};
-
-export type LongTranslatableCreateInput = {
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
-};
-
-export type LongTranslatableUpdateInput = {
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
+export type CommitteePeriodUpdateRelationInput = {
+  create?: Maybe<CommitteePeriodCreateInput>;
+  connect?: Maybe<CommitteePeriodWhereUniqueInput>;
+  disconnect?: Maybe<CommitteePeriodWhereUniqueInput>;
 };
 
 export type TokenTypeFilter = {
@@ -1918,8 +2195,6 @@ export type Query = {
   __typename?: 'Query';
   bank: Bank;
   banks: BankList;
-  boardPeriod: BoardPeriod;
-  boardPeriods: BoardPeriodList;
   mandate: Mandate;
   mandates: MandateList;
   transaction: Transaction;
@@ -1940,6 +2215,14 @@ export type Query = {
   memberships: MembershipList;
   member: Member;
   members: MemberList;
+  participation: Participation;
+  participations: ParticipationList;
+  event: Event;
+  events: EventList;
+  group: Group;
+  groups: GroupList;
+  boardPeriod: BoardPeriod;
+  boardPeriods: BoardPeriodList;
   committeePeriod: CommitteePeriod;
   committeePeriods: CommitteePeriodList;
   committee: Committee;
@@ -1968,19 +2251,6 @@ export type QuerybankArgs = {
 export type QuerybanksArgs = {
   where?: Maybe<BankWhereInput>;
   orderBy?: Maybe<BankOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryboardPeriodArgs = {
-  where: BoardPeriodWhereUniqueInput;
-};
-
-
-export type QueryboardPeriodsArgs = {
-  where?: Maybe<BoardPeriodWhereInput>;
-  orderBy?: Maybe<BoardPeriodOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -2116,6 +2386,58 @@ export type QuerymembersArgs = {
 };
 
 
+export type QueryparticipationArgs = {
+  where: ParticipationWhereUniqueInput;
+};
+
+
+export type QueryparticipationsArgs = {
+  where?: Maybe<ParticipationWhereInput>;
+  orderBy?: Maybe<ParticipationOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryeventArgs = {
+  where: EventWhereUniqueInput;
+};
+
+
+export type QueryeventsArgs = {
+  where?: Maybe<EventWhereInput>;
+  orderBy?: Maybe<EventOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type QuerygroupArgs = {
+  where: GroupWhereUniqueInput;
+};
+
+
+export type QuerygroupsArgs = {
+  where?: Maybe<GroupWhereInput>;
+  orderBy?: Maybe<GroupOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryboardPeriodArgs = {
+  where: BoardPeriodWhereUniqueInput;
+};
+
+
+export type QueryboardPeriodsArgs = {
+  where?: Maybe<BoardPeriodWhereInput>;
+  orderBy?: Maybe<BoardPeriodOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
 export type QuerycommitteePeriodArgs = {
   where: CommitteePeriodWhereUniqueInput;
 };
@@ -2238,10 +2560,6 @@ export type Mutation = {
   updateBank: Bank;
   deleteBank: Bank;
   deleteBanks: BankList;
-  createBoardPeriod: BoardPeriod;
-  updateBoardPeriod: BoardPeriod;
-  deleteBoardPeriod: BoardPeriod;
-  deleteBoardPeriods: BoardPeriodList;
   createMandate: Mandate;
   updateMandate: Mandate;
   deleteMandate: Mandate;
@@ -2282,6 +2600,22 @@ export type Mutation = {
   updateMember: Member;
   deleteMember: Member;
   deleteMembers: MemberList;
+  createParticipation: Participation;
+  updateParticipation: Participation;
+  deleteParticipation: Participation;
+  deleteParticipations: ParticipationList;
+  createEvent: Event;
+  updateEvent: Event;
+  deleteEvent: Event;
+  deleteEvents: EventList;
+  createGroup: Group;
+  updateGroup: Group;
+  deleteGroup: Group;
+  deleteGroups: GroupList;
+  createBoardPeriod: BoardPeriod;
+  updateBoardPeriod: BoardPeriod;
+  deleteBoardPeriod: BoardPeriod;
+  deleteBoardPeriods: BoardPeriodList;
   createCommitteePeriod: CommitteePeriod;
   updateCommitteePeriod: CommitteePeriod;
   deleteCommitteePeriod: CommitteePeriod;
@@ -2408,30 +2742,6 @@ export type MutationdeleteBankArgs = {
 export type MutationdeleteBanksArgs = {
   where?: Maybe<BankWhereInput>;
   orderBy?: Maybe<BankOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateBoardPeriodArgs = {
-  data: BoardPeriodCreateInput;
-};
-
-
-export type MutationupdateBoardPeriodArgs = {
-  where: BoardPeriodWhereUniqueInput;
-  data: BoardPeriodUpdateInput;
-};
-
-
-export type MutationdeleteBoardPeriodArgs = {
-  where: BoardPeriodWhereUniqueInput;
-};
-
-
-export type MutationdeleteBoardPeriodsArgs = {
-  where?: Maybe<BoardPeriodWhereInput>;
-  orderBy?: Maybe<BoardPeriodOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -2672,6 +2982,102 @@ export type MutationdeleteMemberArgs = {
 export type MutationdeleteMembersArgs = {
   where?: Maybe<MemberWhereInput>;
   orderBy?: Maybe<MemberOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type MutationcreateParticipationArgs = {
+  data: ParticipationCreateInput;
+};
+
+
+export type MutationupdateParticipationArgs = {
+  where: ParticipationWhereUniqueInput;
+  data: ParticipationUpdateInput;
+};
+
+
+export type MutationdeleteParticipationArgs = {
+  where: ParticipationWhereUniqueInput;
+};
+
+
+export type MutationdeleteParticipationsArgs = {
+  where?: Maybe<ParticipationWhereInput>;
+  orderBy?: Maybe<ParticipationOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type MutationcreateEventArgs = {
+  data: EventCreateInput;
+};
+
+
+export type MutationupdateEventArgs = {
+  where: EventWhereUniqueInput;
+  data: EventUpdateInput;
+};
+
+
+export type MutationdeleteEventArgs = {
+  where: EventWhereUniqueInput;
+};
+
+
+export type MutationdeleteEventsArgs = {
+  where?: Maybe<EventWhereInput>;
+  orderBy?: Maybe<EventOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type MutationcreateGroupArgs = {
+  data: GroupCreateInput;
+};
+
+
+export type MutationupdateGroupArgs = {
+  where: GroupWhereUniqueInput;
+  data: GroupUpdateInput;
+};
+
+
+export type MutationdeleteGroupArgs = {
+  where: GroupWhereUniqueInput;
+};
+
+
+export type MutationdeleteGroupsArgs = {
+  where?: Maybe<GroupWhereInput>;
+  orderBy?: Maybe<GroupOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type MutationcreateBoardPeriodArgs = {
+  data: BoardPeriodCreateInput;
+};
+
+
+export type MutationupdateBoardPeriodArgs = {
+  where: BoardPeriodWhereUniqueInput;
+  data: BoardPeriodUpdateInput;
+};
+
+
+export type MutationdeleteBoardPeriodArgs = {
+  where: BoardPeriodWhereUniqueInput;
+};
+
+
+export type MutationdeleteBoardPeriodsArgs = {
+  where?: Maybe<BoardPeriodWhereInput>;
+  orderBy?: Maybe<BoardPeriodOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -3059,6 +3465,20 @@ export type CreatePaperMandateMutation = (
     { __typename?: 'PaperMandate' }
     & MandateFragment_PaperMandate_
   )> }
+);
+
+export type EndMembershipMutationVariables = Exact<{
+  id: Scalars['String'];
+  date: Scalars['Date'];
+}>;
+
+
+export type EndMembershipMutation = (
+  { __typename?: 'Mutation' }
+  & { updateMembership: (
+    { __typename?: 'Membership' }
+    & MembershipFragment
+  ) }
 );
 
 export type InvalidateMandateMutationVariables = Exact<{
@@ -3990,6 +4410,39 @@ export function useCreatePaperMandateMutation(baseOptions?: Apollo.MutationHookO
 export type CreatePaperMandateMutationHookResult = ReturnType<typeof useCreatePaperMandateMutation>;
 export type CreatePaperMandateMutationResult = Apollo.MutationResult<CreatePaperMandateMutation>;
 export type CreatePaperMandateMutationOptions = Apollo.BaseMutationOptions<CreatePaperMandateMutation, CreatePaperMandateMutationVariables>;
+export const EndMembershipDocument = gql`
+    mutation EndMembership($id: String!, $date: Date!) {
+  updateMembership(where: {id: $id}, data: {endedAt: $date}) {
+    ...MembershipFragment
+  }
+}
+    ${MembershipFragmentDoc}`;
+export type EndMembershipMutationFn = Apollo.MutationFunction<EndMembershipMutation, EndMembershipMutationVariables>;
+
+/**
+ * __useEndMembershipMutation__
+ *
+ * To run a mutation, you first call `useEndMembershipMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEndMembershipMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [endMembershipMutation, { data, loading, error }] = useEndMembershipMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      date: // value for 'date'
+ *   },
+ * });
+ */
+export function useEndMembershipMutation(baseOptions?: Apollo.MutationHookOptions<EndMembershipMutation, EndMembershipMutationVariables>) {
+        return Apollo.useMutation<EndMembershipMutation, EndMembershipMutationVariables>(EndMembershipDocument, baseOptions);
+      }
+export type EndMembershipMutationHookResult = ReturnType<typeof useEndMembershipMutation>;
+export type EndMembershipMutationResult = Apollo.MutationResult<EndMembershipMutation>;
+export type EndMembershipMutationOptions = Apollo.BaseMutationOptions<EndMembershipMutation, EndMembershipMutationVariables>;
 export const InvalidateMandateDocument = gql`
     mutation InvalidateMandate($id: String!) {
   invalidateMandate(mandate: {id: $id}) {

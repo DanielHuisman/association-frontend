@@ -5,11 +5,11 @@ import {ApolloError} from '@apollo/client';
 import * as Yup from 'yup';
 import {Modal, ModalProps, Message, Icon} from 'semantic-ui-react';
 
-import {Form, FieldTextArea, SubmitButton} from '../form';
+import {Form, FieldDate, SubmitButton} from '../form';
 import {translateError} from '../../util';
 
 export interface IValues {
-    reason: string;
+    date: Date;
 }
 
 interface IProps {
@@ -19,19 +19,19 @@ interface IProps {
 }
 
 const schema = Yup.object().shape({
-    reason: Yup.string().required('This field is required.')
+    date: Yup.date().required('This field is required.')
 });
 
-const RejectModal = ({trigger, error, onSubmit}: IProps) => {
+const EndMembershipModal = ({trigger, error, onSubmit}: IProps) => {
     const {t} = useTranslation();
 
     return (
-        <Modal trigger={trigger} closeIcon>
-            <Modal.Header>{t('mandates:mandate.review.reject', 'Reject')}</Modal.Header>
+        <Modal size="small" trigger={trigger} closeIcon>
+            <Modal.Header>{t('members:membership.end.button', 'End membership')}</Modal.Header>
             <Modal.Content>
                 <Form<IValues>
                     initialValues={{
-                        reason: ''
+                        date: new Date()
                     }}
                     validationSchema={schema}
                     onSubmit={onSubmit}
@@ -39,7 +39,7 @@ const RejectModal = ({trigger, error, onSubmit}: IProps) => {
                     {error && (
                         <Message error visible>
                             <Message.Header>
-                                {t('mandates:mandate.review.error.header', 'Failed to reject mandate')}
+                                {t('members:membership.end.error.header', 'Failed to end membership')}
                             </Message.Header>
                             <Message.Content>
                                 {translateError(t, error)}
@@ -47,11 +47,11 @@ const RejectModal = ({trigger, error, onSubmit}: IProps) => {
                         </Message>
                     )}
 
-                    <Field component={FieldTextArea} name="reason" rows="5" label={t('mandates:mandate.review.reason', 'Reason')} />
+                    <Field component={FieldDate} name="date" label={t('members:membership.end.date', 'Ended at date')} />
 
                     <SubmitButton color="red">
                         <Icon name="times" />
-                        {t('mandates:mandate.review.reject', 'Reject')}
+                        {t('members:membership.end.button', 'End membership')}
                     </SubmitButton>
                 </Form>
             </Modal.Content>
@@ -59,4 +59,4 @@ const RejectModal = ({trigger, error, onSubmit}: IProps) => {
     );
 };
 
-export default RejectModal;
+export default EndMembershipModal;

@@ -18,7 +18,7 @@ interface IValues {
     file: File;
 }
 
-const PaperMandateForm = ({paperMandateId}: IProps) => {
+const PaperMandateUploadForm = ({paperMandateId}: IProps) => {
     const {t} = useTranslation();
 
     return (
@@ -67,4 +67,4 @@ const PaperMandateForm = ({paperMandateId}: IProps) => {
     );
 };
 
-export default PaperMandateForm;
+export default PaperMandateUploadForm;

@@ -42,6 +42,13 @@
     "withMandate": "Leden met incassomachtiging:"
   },
   "membership": {
+    "end": {
+      "button": "End membership",
+      "date": "Ended at date",
+      "error": {
+        "header": "Failed to end membership"
+      }
+    },
     "endedAt": "Einde lidmaatschap",
     "endedAtNone": "Nog lid",
     "startedAt": "Begin lidmaatschap",
