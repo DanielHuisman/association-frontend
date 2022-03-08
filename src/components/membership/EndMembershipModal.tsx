@@ -47,7 +47,7 @@ const EndMembershipModal = ({trigger, error, onSubmit}: IProps) => {
                         </Message>
                     )}
 
-                    <Field component={FieldDate} name="date" label={t('members:membership.end.date', 'Ended at date')} />
+                    <Field component={FieldDate} name="date" label={t('members:membership.end.date', 'End of membership date')} />
 
                     <SubmitButton color="red">
                         <Icon name="times" />

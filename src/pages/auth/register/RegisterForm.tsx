@@ -2,8 +2,9 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Field, FormikConfig} from 'formik';
 import * as Yup from 'yup';
+import {Moment} from 'moment';
 
-import {Form, FieldInput, SubmitButton, FieldDropdown} from '../../../components/form';
+import {Form, FieldInput, SubmitButton, FieldDropdown, FieldDate} from '../../../components/form';
 import {Language, Pronouns, StudentType} from '../../../generated/graphql';
 import {languageOptions, isPhoneNumber} from '../../../util';
 
@@ -15,7 +16,7 @@ export interface IValues {
     postalCode: string;
     city: string;
     phoneNumber: string;
-    birthdate: string;
+    birthdate: Moment;
     language: Language;
     pronouns: Pronouns;
     studentType: StudentType;
@@ -45,9 +46,8 @@ const schema = Yup.object().shape({
     phoneNumber: Yup.string()
         .required('This field is required.')
         .test('isPhoneNumber', 'Invalid phone number', isPhoneNumber),
-    birthdate: Yup.string()
-        .required('This field is required.')
-        .matches(/^\d{4}-\d{1,2}-\d{1,2}$/, 'Invalid date.'),
+    birthdate: Yup.date()
+        .required('This field is required.'),
     language: Yup.string()
         .required('This field is required.')
         .oneOf(Object.values(Language)),
@@ -69,7 +69,7 @@ const schema = Yup.object().shape({
         .oneOf([Yup.ref('password'), null], 'Passwords do not match.')
 });
 
-const InformationForm = ({onSubmit}: IProps) => {
+const RegisterForm = ({onSubmit}: IProps) => {
     const {t} = useTranslation();
 
     return (
@@ -82,7 +82,7 @@ const InformationForm = ({onSubmit}: IProps) => {
                 postalCode: '',
                 city: '',
                 phoneNumber: '',
-                birthdate: '',
+                birthdate: null,
                 language: null,
                 pronouns: null,
                 studentType: null,
@@ -112,7 +112,7 @@ const InformationForm = ({onSubmit}: IProps) => {
 
             <Field component={FieldInput} name="email" type="text" label={t('members:member.email', 'Email address')} autoComplete="email" />
             <Field component={FieldInput} name="phoneNumber" type="text" label={t('members:member.phoneNumber', 'Phone number')} autoComplete="tel" />
-            <Field component={FieldInput} name="birthdate" type="date" label={t('members:member.birthdate', 'Date of birth')} autoComplete="bday" />
+            <Field component={FieldDate} name="birthdate" label={t('members:member.birthdate', 'Date of birth')} autoComplete="bday" />
 
             <Field
                 component={FieldDropdown}
@@ -166,4 +166,4 @@ const InformationForm = ({onSubmit}: IProps) => {
     );
 };
 
-export default InformationForm;
+export default RegisterForm;

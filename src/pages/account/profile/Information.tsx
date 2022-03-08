@@ -26,7 +26,12 @@ const Information = () => {
                         where: {
                             id: data.me.id
                         },
-                        data: omit(values, ['__typename', 'id', 'email', 'isAdmin', 'image', 'providers', 'hasMandate', 'hasPendingPaperMandates'])
+                        data: omit({
+                            ...values,
+                            birthdate: values.birthdate.format('YYYY-MM-DD')
+                        }, [
+                            '__typename', 'id', 'email', 'isAdmin', 'image', 'providers', 'hasMandate', 'hasPendingPaperMandates'
+                        ])
                     }
                 })}
 

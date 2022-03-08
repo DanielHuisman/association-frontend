@@ -2,8 +2,9 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Field, FormikConfig} from 'formik';
 import * as Yup from 'yup';
+import moment, {Moment} from 'moment';
 
-import {Form, FieldInput, SubmitButton, FieldDropdown} from '../../../components/form';
+import {Form, FieldInput, SubmitButton, FieldDropdown, FieldDate} from '../../../components/form';
 import {Language, MemberFragment, Pronouns, ProviderFragment, StudentType} from '../../../generated/graphql';
 import {languageOptions, isPhoneNumber} from '../../../util';
 
@@ -15,7 +16,7 @@ export interface IValues {
     postalCode: string;
     city: string;
     phoneNumber: string;
-    birthdate: string;
+    birthdate: Moment;
     language: Language;
     pronouns: Pronouns;
     studentType: StudentType;
@@ -47,9 +48,8 @@ const schema = Yup.object().shape({
     phoneNumber: Yup.string()
         .required('This field is required.')
         .test('isPhoneNumber', 'Invalid phone number', isPhoneNumber),
-    birthdate: Yup.string()
-        .required('This field is required.')
-        .matches(/^\d{4}-\d{1,2}-\d{1,2}$/, 'Invalid date.'),
+    birthdate: Yup.date()
+        .required('This field is required.'),
     language: Yup.string()
         .required('This field is required.')
         .oneOf(Object.values(Language)),
@@ -66,7 +66,10 @@ const InformationForm = ({profile, onSubmit}: IProps) => {
 
     return (
         <Form<IValues>
-            initialValues={profile}
+            initialValues={{
+                ...profile,
+                birthdate: moment(profile.birthdate, 'YYYY-MM-DD')
+            }}
             validationSchema={schema}
             onSubmit={onSubmit}
         >
@@ -88,7 +91,7 @@ const InformationForm = ({profile, onSubmit}: IProps) => {
             {/* TODO: country */}
 
             <Field component={FieldInput} name="phoneNumber" type="text" label={t('members:member.phoneNumber', 'Phone number')} />
-            <Field component={FieldInput} name="birthdate" type="date" label={t('members:member.birthdate', 'Date of birth')} />
+            <Field component={FieldDate} name="birthdate" label={t('members:member.birthdate', 'Date of birth')} />
 
             <Field
                 component={FieldDropdown}

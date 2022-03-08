@@ -43,10 +43,10 @@
   },
   "membership": {
     "end": {
-      "button": "End membership",
-      "date": "Ended at date",
+      "button": "Beëindig lidmaatschap",
+      "date": "Einddatum lidmaatschap",
       "error": {
-        "header": "Failed to end membership"
+        "header": "Lidmaatschap beëindigen mislukt"
       }
     },
     "endedAt": "Einde lidmaatschap",

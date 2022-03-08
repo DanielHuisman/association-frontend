@@ -44,7 +44,7 @@
   "membership": {
     "end": {
       "button": "End membership",
-      "date": "Ended at date",
+      "date": "End of membership date",
       "error": {
         "header": "Failed to end membership"
       }

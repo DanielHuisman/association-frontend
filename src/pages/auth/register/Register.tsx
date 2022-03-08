@@ -7,11 +7,11 @@ import omit from 'lodash.omit';
 import {MutationFormPage} from '../../../components/page/MutationFormPage';
 import Text from '../../../components/text/Text';
 import {RegisterMutation} from '../../../generated/graphql';
-import Register from '../../../mutations/Register.graphql';
+import RegisterQL from '../../../mutations/Register.graphql';
 
 import RegisterForm, {IValues} from './RegisterForm';
 
-const Information = () => {
+const Register = () => {
     const {t} = useTranslation();
 
     return (
@@ -22,11 +22,14 @@ const Information = () => {
             <Text name="join" />
 
             <MutationFormPage<RegisterMutation, IValues>
-                mutation={Register}
+                mutation={RegisterQL}
 
                 data={(values) => ({
                     variables: {
-                        data: omit(values, ['termsAndConditions'])
+                        data: omit({
+                            ...values,
+                            birthdate: values.birthdate.format('YYYY-MM-DD')
+                        }, ['termsAndConditions'])
                     }
                 })}
 
@@ -43,4 +46,4 @@ const Information = () => {
     );
 };
 
-export default Information;
+export default Register;

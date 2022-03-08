@@ -10,6 +10,10 @@ generates:
             dedupeOperationSuffix: true
             exportFragmentSpreadSubTypes: true
             namingConvention: keep
+            scalars:
+                Date: 'string'
+                Time: 'string'
+                DateTime: 'string'
             withComponent: false
             withHOC: false
             withHooks: true
