@@ -48,7 +48,8 @@ const schema = Yup.object().shape({
     phoneNumber: Yup.string()
         .required('This field is required.')
         .test('isPhoneNumber', 'Invalid phone number', isPhoneNumber),
-    birthdate: Yup.date()
+    birthdate: Yup.object()
+        .nullable()
         .required('This field is required.'),
     language: Yup.string()
         .required('This field is required.')

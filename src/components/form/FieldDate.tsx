@@ -5,7 +5,7 @@ import SemanticDatepicker from 'react-semantic-ui-datepickers';
 import {Moment} from 'moment';
 import moment from 'moment';
 
-interface IProps extends FieldProps<Moment> {
+interface IProps extends FieldProps<Moment | null> {
     type: string;
     label?: string;
     placeholder?: string;
@@ -19,8 +19,10 @@ const FieldDate = ({field, form: {touched, errors, isSubmitting, setFieldValue},
 
         <SemanticDatepicker
             {...field}
-            value={field.value.toDate()}
-            onChange={(_event, data) => setFieldValue(field.name, moment(data.value as Date))}
+            value={field.value ? field.value.toDate() : null}
+            onChange={(_event, data) => {
+                setFieldValue(field.name, data.value ? moment(data.value as Date) : null);
+            }}
             placeholder={placeholder || label}
             disabled={isSubmitting}
             showOutsideDays

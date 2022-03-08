@@ -16,7 +16,7 @@ export interface IValues {
     postalCode: string;
     city: string;
     phoneNumber: string;
-    birthdate: Moment;
+    birthdate: Moment | null;
     language: Language;
     pronouns: Pronouns;
     studentType: StudentType;
@@ -46,7 +46,8 @@ const schema = Yup.object().shape({
     phoneNumber: Yup.string()
         .required('This field is required.')
         .test('isPhoneNumber', 'Invalid phone number', isPhoneNumber),
-    birthdate: Yup.date()
+    birthdate: Yup.object()
+        .nullable()
         .required('This field is required.'),
     language: Yup.string()
         .required('This field is required.')
