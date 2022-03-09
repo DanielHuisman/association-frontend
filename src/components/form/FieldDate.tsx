@@ -25,6 +25,7 @@ const FieldDate = ({field, form: {touched, errors, isSubmitting, setFieldValue},
             }}
             placeholder={placeholder || label}
             disabled={isSubmitting}
+            allowOnlyNumbers={false}
             showOutsideDays
             showToday
             {...props}

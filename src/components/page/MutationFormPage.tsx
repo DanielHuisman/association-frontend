@@ -24,6 +24,8 @@ export const MutationFormPage = <MutationType, IValues> ({data, children, ...pro
                 const handleSubmit: FormikConfig<IValues>['onSubmit'] = async (values, actions) => {
                     try {
                         await mutateFn(data(values));
+
+                        actions.resetForm();
                     } catch (err) {
                         // Error is handled in rendering
                     }

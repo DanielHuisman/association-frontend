@@ -4,6 +4,7 @@ import {Header} from 'semantic-ui-react';
 import omit from 'lodash.omit';
 
 import {FormPage} from '../../../components/page/FormPage';
+import {Spoiler} from '../../../components/util/Spoiler';
 import {GetProfileQuery, UpdateMemberMutation} from '../../../generated/graphql';
 import GetProfile from '../../../queries/GetProfile.graphql';
 import UpdateMember from '../../../mutations/UpdateMember.graphql';
@@ -35,13 +36,14 @@ const Information = () => {
                     }
                 })}
 
-                success={t('account:profile.information.success', 'Successfully changed your profile.')}
+                success={t('account:profile.information.success', 'Successfully changed your profile.')
+                /* TODO: add extra line describing that the board has to approve the membership */}
                 failure={t('account:profile.information.failure', 'Failed to change your profile.')}
             >
                 {(handleSubmit, {loading, data}) => (
-                    <>
-                        {!loading && <InformationForm profile={data.me} onSubmit={handleSubmit} />}
-                    </>
+                    <Spoiler open={!loading}>
+                        <InformationForm profile={data.me} onSubmit={handleSubmit} />
+                    </Spoiler>
                 )}
             </FormPage>
         </>

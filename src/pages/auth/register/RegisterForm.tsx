@@ -4,7 +4,8 @@ import {Field, FormikConfig} from 'formik';
 import * as Yup from 'yup';
 import {Moment} from 'moment';
 
-import {Form, FieldInput, SubmitButton, FieldDropdown, FieldDate} from '../../../components/form';
+import {DocumentList} from '../../../components/association/DocumentList';
+import {Form, FieldInput, SubmitButton, FieldDropdown, FieldDate, FieldCheckbox} from '../../../components/form';
 import {Language, Pronouns, StudentType} from '../../../generated/graphql';
 import {languageOptions, isPhoneNumber} from '../../../util';
 
@@ -92,6 +93,7 @@ const RegisterForm = ({onSubmit}: IProps) => {
                 passwordRepeat: ''
             }}
             validationSchema={schema}
+            validateOnMount
             onSubmit={onSubmit}
         >
             <Field component={FieldInput} name="firstName" type="text" label={t('members:member.firstName', 'First name')} autoComplete="given-name" />
@@ -158,7 +160,17 @@ const RegisterForm = ({onSubmit}: IProps) => {
                 autoComplete="new-password"
             />
 
-            {/* TODO: terms and conditions checkbox */}
+            <Field
+                component={FieldCheckbox}
+                name="termsAndConditions"
+                extraLabel={t('auth:register.termsAndConditions.label', 'Association rules')}
+                label={t('auth:register.termsAndConditions.text', 'By becoming a member of J&SV Exaltio, I agree to the following association documents:')}
+            />
+            <DocumentList size="medium" bulleted style={{
+                marginTop: '0.25rem',
+                marginBottom: '1.5rem',
+                marginLeft: '3rem'
+            }} />
 
             <SubmitButton color="blue">
                 {t('auth:register.submit', 'Complete registration')}

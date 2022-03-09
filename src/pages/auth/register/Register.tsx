@@ -6,6 +6,7 @@ import omit from 'lodash.omit';
 
 import {MutationFormPage} from '../../../components/page/MutationFormPage';
 import Text from '../../../components/text/Text';
+import {Spoiler} from '../../../components/util/Spoiler';
 import {RegisterMutation} from '../../../generated/graphql';
 import RegisterQL from '../../../mutations/Register.graphql';
 
@@ -33,13 +34,13 @@ const Register = () => {
                     }
                 })}
 
-                success={t('auth:register.success', 'Successfully changed your profile.')}
-                failure={t('auth:register.failure', 'Failed to change your profile.')}
+                success={t('auth:register.success', 'Successfully registered an account.')}
+                failure={t('auth:register.failure', 'Failed to register an account.')}
             >
                 {(handleSubmit, {loading}) => (
-                    <>
-                        {!loading && <RegisterForm onSubmit={handleSubmit} />}
-                    </>
+                    <Spoiler open={!loading}>
+                        <RegisterForm onSubmit={handleSubmit} />
+                    </Spoiler>
                 )}
             </MutationFormPage>
         </Container>
