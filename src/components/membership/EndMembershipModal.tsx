@@ -4,12 +4,13 @@ import {Field, FormikConfig} from 'formik';
 import {ApolloError} from '@apollo/client';
 import * as Yup from 'yup';
 import {Modal, ModalProps, Message, Icon} from 'semantic-ui-react';
+import moment from 'moment';
 
-import {Form, FieldDate, SubmitButton} from '../form';
+import {Form, FieldInput, SubmitButton} from '../form';
 import {translateError} from '../../util';
 
 export interface IValues {
-    date: Date;
+    date: string;
 }
 
 interface IProps {
@@ -19,7 +20,7 @@ interface IProps {
 }
 
 const schema = Yup.object().shape({
-    date: Yup.date().required('This field is required.')
+    date: Yup.string().nullable().required('This field is required.')
 });
 
 const EndMembershipModal = ({trigger, error, onSubmit}: IProps) => {
@@ -31,7 +32,7 @@ const EndMembershipModal = ({trigger, error, onSubmit}: IProps) => {
             <Modal.Content>
                 <Form<IValues>
                     initialValues={{
-                        date: new Date()
+                        date: moment().format('YYYY-MM-DD')
                     }}
                     validationSchema={schema}
                     onSubmit={onSubmit}
@@ -47,7 +48,7 @@ const EndMembershipModal = ({trigger, error, onSubmit}: IProps) => {
                         </Message>
                     )}
 
-                    <Field component={FieldDate} name="date" label={t('members:membership.end.date', 'End of membership date')} />
+                    <Field component={FieldInput} name="date" type="date" label={t('members:membership.end.date', 'End of membership date')} />
 
                     <SubmitButton color="red">
                         <Icon name="times" />

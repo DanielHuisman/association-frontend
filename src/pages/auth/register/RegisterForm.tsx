@@ -2,10 +2,9 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Field, FormikConfig} from 'formik';
 import * as Yup from 'yup';
-import {Moment} from 'moment';
 
 import {DocumentList} from '../../../components/association/DocumentList';
-import {Form, FieldInput, SubmitButton, FieldDropdown, FieldDate, FieldCheckbox} from '../../../components/form';
+import {Form, FieldInput, SubmitButton, FieldDropdown, FieldCheckbox} from '../../../components/form';
 import {Language, Pronouns, StudentType} from '../../../generated/graphql';
 import {languageOptions, isPhoneNumber} from '../../../util';
 
@@ -17,7 +16,7 @@ export interface IValues {
     postalCode: string;
     city: string;
     phoneNumber: string;
-    birthdate: Moment | null;
+    birthdate: string | null;
     language: Language;
     pronouns: Pronouns;
     studentType: StudentType;
@@ -47,7 +46,7 @@ const schema = Yup.object().shape({
     phoneNumber: Yup.string()
         .required('This field is required.')
         .test('isPhoneNumber', 'Invalid phone number', isPhoneNumber),
-    birthdate: Yup.object()
+    birthdate: Yup.string()
         .nullable()
         .required('This field is required.'),
     language: Yup.string()
@@ -115,7 +114,7 @@ const RegisterForm = ({onSubmit}: IProps) => {
 
             <Field component={FieldInput} name="email" type="text" label={t('members:member.email', 'Email address')} autoComplete="email" />
             <Field component={FieldInput} name="phoneNumber" type="text" label={t('members:member.phoneNumber', 'Phone number')} autoComplete="tel" />
-            <Field component={FieldDate} name="birthdate" label={t('members:member.birthdate', 'Date of birth')} autoComplete="bday" />
+            <Field component={FieldInput} name="birthdate" type="date" label={t('members:member.birthdate', 'Date of birth')} autoComplete="bday" />
 
             <Field
                 component={FieldDropdown}

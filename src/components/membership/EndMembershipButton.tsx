@@ -2,7 +2,6 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {useMutation} from '@apollo/react-hooks';
 import {Button, Icon} from 'semantic-ui-react';
-import moment from 'moment';
 
 import {EndMembershipMutation, EndMembershipMutationVariables} from '../../generated/graphql';
 import EndMembership from '../../mutations/EndMembership.graphql';
@@ -35,7 +34,7 @@ const EndMembershipButton = ({membershipId}: IProps) => {
             onSubmit={(data: IValues) => reject({
                 variables: {
                     id: membershipId,
-                    date: moment(data.date).format('YYYY-MM-DD')
+                    ...data
                 }
             })}
         />

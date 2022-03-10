@@ -27,10 +27,7 @@ const Register = () => {
 
                 data={(values) => ({
                     variables: {
-                        data: omit({
-                            ...values,
-                            birthdate: values.birthdate.format('YYYY-MM-DD')
-                        }, ['termsAndConditions'])
+                        data: omit(values, ['termsAndConditions'])
                     }
                 })}
 
