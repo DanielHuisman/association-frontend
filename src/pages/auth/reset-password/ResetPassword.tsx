@@ -1,30 +1,29 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import {Header, Button} from 'semantic-ui-react';
 
-import SmallContainer from '../../../components/container/SmallContainer';
+import {SmallContainer} from '../../../components/container/SmallContainer';
 import {MutationFormPage} from '../../../components/page';
 import {ResetPasswordMutation} from '../../../generated/graphql';
-import ResetPasswordDocument from '../../../mutations/ResetPassword.graphql';
+import ResetPasswordQL from '../../../mutations/ResetPassword.graphql';
 
-import ResetPasswordForm, {IValues} from './ResetPasswordForm';
+import {ResetPasswordForm, IValues} from './ResetPasswordForm';
 
-interface IRouteParams {
+type Params = {
     token: string;
-}
+};
 
-const ResetPassword = ({match}: RouteComponentProps<IRouteParams>) => {
+export const ResetPassword: React.FC = () => {
+    const params = useParams<Params>();
     const {t} = useTranslation();
-
-    const token = match.params.token;
 
     return (
         <SmallContainer>
             <Header size="huge">{t('auth:resetPassword.header', 'Reset password')}</Header>
 
             <MutationFormPage<ResetPasswordMutation, IValues>
-                mutation={ResetPasswordDocument}
+                mutation={ResetPasswordQL}
 
                 data={(values) => ({
                     variables: values
@@ -35,7 +34,7 @@ const ResetPassword = ({match}: RouteComponentProps<IRouteParams>) => {
             >
                 {(handleSubmit, {loading, data}) => (
                     <>
-                        {!loading && !data && <ResetPasswordForm token={token} onSubmit={handleSubmit} />}
+                        {!loading && !data && <ResetPasswordForm token={params.token} onSubmit={handleSubmit} />}
 
                         {!loading && data && (
                             <Button as={Link} to="/login" color="pink">
@@ -48,5 +47,3 @@ const ResetPassword = ({match}: RouteComponentProps<IRouteParams>) => {
         </SmallContainer>
     );
 };
-
-export default ResetPassword;

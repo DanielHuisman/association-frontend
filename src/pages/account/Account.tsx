@@ -1,16 +1,15 @@
 import React from 'react';
-import {Switch, Redirect, RouteComponentProps} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import {Container, Grid} from 'semantic-ui-react';
 
-import AccountMenu from '../../components/account/AccountMenu';
-import {AuthRoute} from '../../components/authentication';
+import {AccountMenu} from '../../components/account/AccountMenu';
 
-import Profile from './profile/Profile';
-import Security from './security/Security';
-import Mandates from './mandates/Mandates';
-import Transactions from './transactions/Transactions';
+import {Profile} from './profile/Profile';
+import {Security} from './security/Security';
+import {Mandates} from './mandates/Mandates';
+import {Transactions} from './transactions/Transactions';
 
-const Account = ({match}: RouteComponentProps) => (
+export const Account = () => (
     <Container>
         <Grid stackable>
             <Grid.Row>
@@ -18,17 +17,15 @@ const Account = ({match}: RouteComponentProps) => (
                     <AccountMenu />
                 </Grid.Column>
                 <Grid.Column width={12}>
-                    <Switch>
-                        <AuthRoute path={`${match.path}/profile`} component={Profile} />
-                        <AuthRoute path={`${match.path}/security`} component={Security} />
-                        <AuthRoute path={`${match.path}/mandates`} component={Mandates} />
-                        <AuthRoute path={`${match.path}/transactions`} component={Transactions} />
-                        <Redirect exact path={`${match.path}/`} to={`${match.path}/profile`} />
-                    </Switch>
+                    <Routes>
+                        <Route index element={<Navigate to="profile" />} />
+                        <Route path="profile" element={<Profile />} />
+                        <Route path="security" element={<Security />} />
+                        <Route path="mandates/*" element={<Mandates />} />
+                        <Route path="transactions/*" element={<Transactions />} />
+                    </Routes>
                 </Grid.Column>
             </Grid.Row>
         </Grid>
     </Container>
 );
-
-export default Account;

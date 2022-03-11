@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {NavLink} from 'react-router-dom';
 import {Menu, Icon} from 'semantic-ui-react';
 
-const AccountMenu = () => {
+export const AccountMenu = () => {
     const {t} = useTranslation();
 
     return (
@@ -28,5 +28,3 @@ const AccountMenu = () => {
         </Menu>
     );
 };
-
-export default AccountMenu;

@@ -2,14 +2,14 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Table} from 'semantic-ui-react';
 
-import TableSelectableRow from '../../components/table/TableSelectableRow';
+import {TableSelectableRow} from '../../components/table/TableSelectableRow';
 import {DirectDebitWarningFragment} from '../../generated/graphql';
 
-interface IProps {
+export interface DirectDebitWarningTableProps {
     warnings: DirectDebitWarningFragment[];
 }
 
-const DirectDebitWarningTable = ({warnings}: IProps) => {
+export const DirectDebitWarningTable: React.FC<DirectDebitWarningTableProps> = ({warnings}) => {
     const {t} = useTranslation();
 
     return (
@@ -36,5 +36,3 @@ const DirectDebitWarningTable = ({warnings}: IProps) => {
         </Table>
     );
 };
-
-export default DirectDebitWarningTable;

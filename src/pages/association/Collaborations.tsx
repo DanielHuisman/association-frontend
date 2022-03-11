@@ -3,9 +3,9 @@ import {Helmet} from 'react-helmet';
 import {Container, Header} from 'semantic-ui-react';
 import {useTranslation} from 'react-i18next';
 
-import Text from '../../components/text/Text';
+import {Text} from '../../components/text/Text';
 
-const Collaborations = () => {
+export const Collaborations: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -17,5 +17,3 @@ const Collaborations = () => {
         </Container>
     );
 };
-
-export default Collaborations;

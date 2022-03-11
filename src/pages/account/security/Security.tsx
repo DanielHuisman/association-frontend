@@ -7,10 +7,10 @@ import {Page} from '../../../components/page/Page';
 import GetProfile from '../../../queries/GetProfile.graphql';
 import {GetProfileQuery} from '../../../generated/graphql';
 
-import Email from './Email';
-import Password from './Password';
+import {Email} from './Email';
+import {Password} from './Password';
 
-const Security = () => {
+export const Security: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -38,5 +38,3 @@ const Security = () => {
         </Page>
     );
 };
-
-export default Security;

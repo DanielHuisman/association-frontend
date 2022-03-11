@@ -1,14 +1,14 @@
 import React from 'react';
 import {Formik, FormikConfig, FormikValues} from 'formik';
-import {Form as SUForm, FormProps} from 'semantic-ui-react';
+import {Form as SUForm, FormProps as SUFormProps} from 'semantic-ui-react';
 
-interface IProps<Values> extends FormikConfig<Values> {
+export interface FormProps<Values> extends FormikConfig<Values> {
     initialValues: Values;
     children: any;
-    formProps?: FormProps;
+    formProps?: SUFormProps;
 }
 
-const Form = <Values extends any = FormikValues>({children, formProps, ...props}: IProps<Values>) => (
+export const Form = <Values extends any = FormikValues>({children, formProps, ...props}: FormProps<Values>): ReturnType<React.FC> => (
     <Formik<Values> {...props}>
         {({isSubmitting, handleSubmit, handleReset}) => (
             <SUForm loading={isSubmitting} onSubmit={handleSubmit} onReset={handleReset} {...formProps}>
@@ -17,5 +17,3 @@ const Form = <Values extends any = FormikValues>({children, formProps, ...props}
         )}
     </Formik>
 );
-
-export default Form;

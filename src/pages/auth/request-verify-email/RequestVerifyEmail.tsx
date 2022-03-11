@@ -2,14 +2,14 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Header} from 'semantic-ui-react';
 
-import SmallContainer from '../../../components/container/SmallContainer';
+import {SmallContainer} from '../../../components/container/SmallContainer';
 import {MutationFormPage} from '../../../components/page';
 import {RequestVerifyEmailMutation} from '../../../generated/graphql';
-import RequestVerifyEmailDocument from '../../../mutations/RequestVerifyEmail.graphql';
+import RequestVerifyEmailQL from '../../../mutations/RequestVerifyEmail.graphql';
 
-import RequestVerifyEmailForm, {IValues} from './RequestVerifyEmailForm';
+import {RequestVerifyEmailForm, IValues} from './RequestVerifyEmailForm';
 
-const RequestVerifyEmail = () => {
+export const RequestVerifyEmail: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -17,7 +17,7 @@ const RequestVerifyEmail = () => {
             <Header size="huge">{t('auth:requestVerifyEmail.header', 'Resend verification email')}</Header>
 
             <MutationFormPage<RequestVerifyEmailMutation, IValues>
-                mutation={RequestVerifyEmailDocument}
+                mutation={RequestVerifyEmailQL}
 
                 data={(values) => ({
                     variables: values
@@ -35,5 +35,3 @@ const RequestVerifyEmail = () => {
         </SmallContainer>
     );
 };
-
-export default RequestVerifyEmail;

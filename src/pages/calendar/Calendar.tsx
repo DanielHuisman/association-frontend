@@ -4,9 +4,9 @@ import {useTranslation} from 'react-i18next';
 import {Container, Header, Grid} from 'semantic-ui-react';
 
 import {CALENDARS} from '../../constants';
-import Text from '../../components/text/Text';
+import {Text} from '../../components/text/Text';
 
-const Calendar = () => {
+export const Calendar: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -41,5 +41,3 @@ const Calendar = () => {
         </Container>
     );
 };
-
-export default Calendar;

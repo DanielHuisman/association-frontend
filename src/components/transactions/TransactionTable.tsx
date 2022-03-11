@@ -4,24 +4,19 @@ import {Table} from 'semantic-ui-react';
 import moment from 'moment';
 
 import {UserContext} from '../../components/authentication/UserContext';
-import TableSelectableRow from '../../components/table/TableSelectableRow';
+import {TableSelectableRow} from '../../components/table/TableSelectableRow';
 import {TransactionFragment} from '../../generated/graphql';
 import {formatCurrency} from '../../util';
 
-import TransactionType from './TransactionType';
+import {TransactionType} from './TransactionType';
 
-interface IProps {
+export interface TransactionTableProps {
     transactions: TransactionFragment[];
     urlPrefix?: string;
     hideUpdatedAt?: boolean;
 }
 
-interface IContentProps {
-    transaction: TransactionFragment;
-    hideUpdatedAt: boolean;
-}
-
-const TransactionTable = ({transactions, urlPrefix = '/transactions', hideUpdatedAt = false}: IProps) => {
+export const TransactionTable: React.FC<TransactionTableProps> = ({transactions, urlPrefix = '/transactions', hideUpdatedAt = false}) => {
     const {t} = useTranslation();
     const user = useContext(UserContext);
 
@@ -52,7 +47,12 @@ const TransactionTable = ({transactions, urlPrefix = '/transactions', hideUpdate
     );
 };
 
-const TransactionTableRowContent = ({transaction, hideUpdatedAt}: IContentProps) => (
+interface TransactionTableRowContent {
+    transaction: TransactionFragment;
+    hideUpdatedAt: boolean;
+}
+
+const TransactionTableRowContent: React.FC<TransactionTableRowContent> = ({transaction, hideUpdatedAt}) => (
     <>
         <Table.Cell><TransactionType transaction={transaction} /></Table.Cell>
         <Table.Cell>{transaction.description}</Table.Cell>
@@ -62,5 +62,3 @@ const TransactionTableRowContent = ({transaction, hideUpdatedAt}: IContentProps)
         {!hideUpdatedAt && <Table.Cell>{moment(transaction.updatedAt).format('YYYY-MM-DD HH:mm')}</Table.Cell>}
     </>
 );
-
-export default TransactionTable;

@@ -10,7 +10,7 @@ export interface IValues {
     passwordRepeat: string;
 }
 
-interface IProps {
+export interface PasswordFormProps {
     onSubmit: FormikConfig<IValues>['onSubmit'];
 }
 
@@ -24,7 +24,7 @@ const schema = Yup.object().shape({
         .oneOf([Yup.ref('password'), null], 'Passwords do not match.')
 });
 
-const PasswordForm = ({onSubmit}: IProps) => {
+export const PasswordForm: React.FC<PasswordFormProps> = ({onSubmit}) => {
     const {t} = useTranslation();
 
     return (
@@ -57,5 +57,3 @@ const PasswordForm = ({onSubmit}: IProps) => {
         </Form>
     );
 };
-
-export default PasswordForm;

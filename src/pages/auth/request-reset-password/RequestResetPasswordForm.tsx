@@ -9,7 +9,7 @@ export interface IValues {
     email: string;
 }
 
-interface IProps {
+export interface RequestResetPasswordFormProps {
     onSubmit: FormikConfig<IValues>['onSubmit'];
 }
 
@@ -19,7 +19,7 @@ const schema = Yup.object().shape({
         .email('Invalid email address.')
 });
 
-const RequestResetPasswordForm = ({onSubmit}: IProps) => {
+export const RequestResetPasswordForm = ({onSubmit}) => {
     const {t} = useTranslation();
 
     return (
@@ -38,5 +38,3 @@ const RequestResetPasswordForm = ({onSubmit}: IProps) => {
         </Form>
     );
 };
-
-export default RequestResetPasswordForm;

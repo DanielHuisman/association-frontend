@@ -3,15 +3,15 @@ import {useTranslation} from 'react-i18next';
 import {Table} from 'semantic-ui-react';
 import moment from 'moment';
 
-import TableSelectableRow from '../../components/table/TableSelectableRow';
+import {TableSelectableRow} from '../../components/table/TableSelectableRow';
 import {DirectDebitFragment} from '../../generated/graphql';
 import {formatCurrency} from '../../util';
 
-interface IProps {
+export interface DirectDebitTableProps {
     directDebits: DirectDebitFragment[];
 }
 
-const DirectDebitTable = ({directDebits}: IProps) => {
+export const DirectDebitTable: React.FC<DirectDebitTableProps> = ({directDebits}) => {
     const {t} = useTranslation();
 
     return (
@@ -43,5 +43,3 @@ const DirectDebitTable = ({directDebits}: IProps) => {
         </Table>
     );
 };
-
-export default DirectDebitTable;

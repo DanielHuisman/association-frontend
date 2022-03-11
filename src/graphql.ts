@@ -30,5 +30,6 @@ const cache = new InMemoryCache({
 // Initialize Apollo client
 export const client = new ApolloClient({
     cache,
-    link: authLink.concat(uploadLink)
+    link: authLink.concat(uploadLink),
+    connectToDevTools: process.env.NODE_ENV !== 'production'
 });

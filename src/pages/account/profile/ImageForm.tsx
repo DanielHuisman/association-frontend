@@ -3,18 +3,18 @@ import {useTranslation} from 'react-i18next';
 import {Field, FormikConfig} from 'formik';
 
 import {Form, SubmitButton, FieldFile} from '../../../components/form';
-import MemberImage from '../../../components/member/MemberImage';
+import {MemberImage} from '../../../components/member/MemberImage';
 
 export interface IValues {
     file: File;
 }
 
-interface IProps {
+export interface ImageFormProps {
     profile: any;
     onSubmit: FormikConfig<IValues>['onSubmit'];
 }
 
-const ImageForm = ({profile, onSubmit}: IProps) => {
+export const ImageForm: React.FC<ImageFormProps> = ({profile, onSubmit}) => {
     const {t} = useTranslation();
 
     return (
@@ -33,5 +33,3 @@ const ImageForm = ({profile, onSubmit}: IProps) => {
         </Form>
     );
 };
-
-export default ImageForm;

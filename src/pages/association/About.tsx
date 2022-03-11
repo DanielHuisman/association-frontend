@@ -4,9 +4,9 @@ import {useTranslation} from 'react-i18next';
 import {Container, Header} from 'semantic-ui-react';
 
 import {DocumentList} from '../../components/association/DocumentList';
-import Text from '../../components/text/Text';
+import {Text} from '../../components/text/Text';
 
-const About = () => {
+export const About: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -21,5 +21,3 @@ const About = () => {
         </Container>
     );
 };
-
-export default About;

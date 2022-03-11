@@ -2,16 +2,16 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Table} from 'semantic-ui-react';
 
-import TableSelectableRow from '../../components/table/TableSelectableRow';
+import {TableSelectableRow} from '../../components/table/TableSelectableRow';
 import {DirectDebitBatchFragment} from '../../generated/graphql';
 import {formatCurrency} from '../../util';
 
-interface IProps {
+export interface DirectDebitBatchTableProps {
     directDebitId: string;
     batches: DirectDebitBatchFragment[];
 }
 
-const DirectDebitBatchTable = ({directDebitId, batches}: IProps) => {
+export const DirectDebitBatchTable: React.FC<DirectDebitBatchTableProps> = ({directDebitId, batches}) => {
     const {t} = useTranslation();
 
     return (
@@ -37,5 +37,3 @@ const DirectDebitBatchTable = ({directDebitId, batches}: IProps) => {
         </Table>
     );
 };
-
-export default DirectDebitBatchTable;

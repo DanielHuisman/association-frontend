@@ -2,11 +2,11 @@ import React from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import {Loader} from 'semantic-ui-react';
 
-import MandateTable from '../../components/mandates/MandateTable';
+import {MandateTable} from '../../components/mandates/MandateTable';
 import {GetMandatesQuery, GetMandatesQueryVariables} from '../../generated/graphql';
 import GetMandates from '../../queries/GetMandates.graphql';
 
-const MandatesList = () => {
+export const List: React.FC = () => {
     const {loading, data, error} = useQuery<GetMandatesQuery, GetMandatesQueryVariables>(GetMandates);
 
     if (error) {
@@ -21,5 +21,3 @@ const MandatesList = () => {
         </>
     );
 };
-
-export default MandatesList;

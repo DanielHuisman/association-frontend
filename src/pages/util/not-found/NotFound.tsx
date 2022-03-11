@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {Link} from 'react-router-dom';
 import {Container, Header, Button} from 'semantic-ui-react';
 
-const NotFound = () => {
+export const NotFound: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -18,5 +18,3 @@ const NotFound = () => {
         </Container>
     );
 };
-
-export default NotFound;

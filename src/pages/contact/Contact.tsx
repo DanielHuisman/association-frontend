@@ -4,9 +4,9 @@ import {useTranslation} from 'react-i18next';
 import {Container, Grid, Header, List, Button, Icon} from 'semantic-ui-react';
 
 import {FORMS} from '../../constants';
-import Text from '../../components/text/Text';
+import {Text} from '../../components/text/Text';
 
-const Contact = () => {
+export const Contact: React.FC = () => {
     const {t, i18n} = useTranslation();
 
     return (
@@ -84,5 +84,3 @@ const Contact = () => {
         </Container>
     );
 };
-
-export default Contact;

@@ -2,11 +2,11 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Table} from 'semantic-ui-react';
 
-import TableSelectableRow from '../../components/table/TableSelectableRow';
+import {TableSelectableRow} from '../../components/table/TableSelectableRow';
 import {DirectDebitBatchFragment, DirectDebitInstructionFragment, MandateFragment, MemberFragment} from '../../generated/graphql';
 import {formatCurrency, EntityList} from '../../util';
 
-interface IProps {
+export interface DirectDebitInstructionTableProps {
     directDebitId: string;
     batches: (DirectDebitBatchFragment & {
         instructions: EntityList<DirectDebitInstructionFragment & {
@@ -18,7 +18,7 @@ interface IProps {
     showBatch?: boolean;
 }
 
-const DirectDebitInstructionTable = ({directDebitId, batches, showBatch = false}: IProps) => {
+export const DirectDebitInstructionTable: React.FC<DirectDebitInstructionTableProps> = ({directDebitId, batches, showBatch = false}) => {
     const {t} = useTranslation();
 
     return (
@@ -58,5 +58,3 @@ const DirectDebitInstructionTable = ({directDebitId, batches, showBatch = false}
         </Table>
     );
 };
-
-export default DirectDebitInstructionTable;

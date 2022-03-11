@@ -9,13 +9,13 @@ import {
 } from '../../../generated/graphql';
 import ChangeEmail from '../../../mutations/ChangeEmail.graphql';
 
-import EmailForm, {IValues} from './EmailForm';
+import {EmailForm, IValues} from './EmailForm';
 
-interface IProps {
+export interface EmailProps {
     provider: ProviderFragment;
 }
 
-const Email = ({provider}: IProps) => {
+export const Email: React.FC<EmailProps> = ({provider}) => {
     const {t} = useTranslation();
 
     return (
@@ -43,5 +43,3 @@ const Email = ({provider}: IProps) => {
         </>
     );
 };
-
-export default Email;

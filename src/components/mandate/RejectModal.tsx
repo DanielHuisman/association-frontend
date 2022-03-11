@@ -12,7 +12,7 @@ export interface IValues {
     reason: string;
 }
 
-interface IProps {
+export interface RejectModalProps {
     trigger: ModalProps['trigger'];
     error?: ApolloError;
     onSubmit: FormikConfig<IValues>['onSubmit'];
@@ -22,7 +22,7 @@ const schema = Yup.object().shape({
     reason: Yup.string().required('This field is required.')
 });
 
-const RejectModal = ({trigger, error, onSubmit}: IProps) => {
+export const RejectModal = ({trigger, error, onSubmit}) => {
     const {t} = useTranslation();
 
     return (
@@ -58,5 +58,3 @@ const RejectModal = ({trigger, error, onSubmit}: IProps) => {
         </Modal>
     );
 };
-
-export default RejectModal;

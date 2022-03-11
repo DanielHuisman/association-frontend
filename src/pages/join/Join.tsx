@@ -4,9 +4,9 @@ import {useTranslation} from 'react-i18next';
 import {Container, Header} from 'semantic-ui-react';
 
 import {FORMS} from '../../constants';
-import Text from '../../components/text/Text';
+import {Text} from '../../components/text/Text';
 
-const Join = () => {
+export const Join: React.FC = () => {
     const {t, i18n} = useTranslation();
 
     return (
@@ -25,5 +25,3 @@ const Join = () => {
         </Container>
     );
 };
-
-export default Join;

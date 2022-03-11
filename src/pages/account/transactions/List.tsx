@@ -1,12 +1,12 @@
 import React, {useContext} from 'react';
 
 import {UserContext} from '../../../components/authentication/UserContext';
-import TransactionTable from '../../../components/transactions/TransactionTable';
+import {TransactionTable} from '../../../components/transactions/TransactionTable';
 import {Page} from '../../../components/page/Page';
 import {GetMemberTransactionsQuery} from '../../../generated/graphql';
 import GetMemberTransactions from '../../../queries/GetMemberTransactions.graphql';
 
-const MandatesDetails = () => {
+export const List: React.FC = () => {
     const member = useContext(UserContext);
 
     return (
@@ -19,5 +19,3 @@ const MandatesDetails = () => {
         </Page>
     );
 };
-
-export default MandatesDetails;

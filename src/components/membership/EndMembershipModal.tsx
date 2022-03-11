@@ -13,7 +13,7 @@ export interface IValues {
     date: string;
 }
 
-interface IProps {
+export interface EndMembershipModalProps {
     trigger: ModalProps['trigger'];
     error?: ApolloError;
     onSubmit: FormikConfig<IValues>['onSubmit'];
@@ -23,7 +23,7 @@ const schema = Yup.object().shape({
     date: Yup.string().nullable().required('This field is required.')
 });
 
-const EndMembershipModal = ({trigger, error, onSubmit}: IProps) => {
+export const EndMembershipModal: React.FC<EndMembershipModalProps> = ({trigger, error, onSubmit}) => {
     const {t} = useTranslation();
 
     return (
@@ -59,5 +59,3 @@ const EndMembershipModal = ({trigger, error, onSubmit}: IProps) => {
         </Modal>
     );
 };
-
-export default EndMembershipModal;

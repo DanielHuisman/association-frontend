@@ -3,16 +3,16 @@ import {Container, Responsive, Menu, Icon} from 'semantic-ui-react';
 
 import {MemberFragment} from '../../generated/graphql';
 
-import Base from './Base';
-import LanguageMenuItem from './LanguageMenuItem';
-import LogoMenuItem from './LogoMenuItem';
+import {Base} from './Base';
+import {LanguageMenuItem} from './LanguageMenuItem';
+import {LogoMenuItem} from './LogoMenuItem';
 
-interface IProps {
+export interface TopbarProps {
     user?: MemberFragment;
     onSidebar?: () => void;
 }
 
-const Topbar = ({user, onSidebar}: IProps) => (
+export const Topbar: React.FC<TopbarProps> = ({user, onSidebar}: TopbarProps) => (
     <>
         <Responsive maxWidth={991}>
             <Menu size="large" fixed="top">
@@ -41,5 +41,3 @@ const Topbar = ({user, onSidebar}: IProps) => (
         </Responsive>
     </>
 );
-
-export default Topbar;

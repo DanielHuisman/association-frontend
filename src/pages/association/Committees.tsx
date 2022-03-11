@@ -4,13 +4,13 @@ import {useTranslation} from 'react-i18next';
 import {useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader} from 'semantic-ui-react';
 
-import Text from '../../components/text/Text';
-import Markdown from '../../components/text/Markdown';
+import {Text} from '../../components/text/Text';
+import {Markdown} from '../../components/text/Markdown';
 import {GetCommitteesQuery, GetCommitteesQueryVariables} from '../../generated/graphql';
 import GetCommittees from '../../queries/GetCommittees.graphql';
 import {useTranslate} from '../../util';
 
-const Committees = () => {
+export const Committees: React.FC = () => {
     const {t} = useTranslation();
     const translate = useTranslate();
 
@@ -44,5 +44,3 @@ const Committees = () => {
         </Container>
     );
 };
-
-export default Committees;

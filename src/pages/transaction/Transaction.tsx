@@ -1,26 +1,28 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import {useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
-import MembershipType from '../../components/membership/MembershipType';
-import TransactionType from '../../components/transactions/TransactionType';
+import {MembershipType} from '../../components/membership/MembershipType';
+import {TransactionType} from '../../components/transactions/TransactionType';
 import {GetTransactionQuery, GetTransactionQueryVariables} from '../../generated/graphql';
 import GetTransaction from '../../queries/GetTransaction.graphql';
 import {formatCurrency} from '../../util';
 
-interface IRouteParams {
+type Params = {
     transactionId: string;
-}
+};
 
-const Transaction = ({match}: RouteComponentProps<IRouteParams>) => {
+export const Transaction = () => {
+    const params = useParams<Params>();
     const {t} = useTranslation();
+
     const {loading, data, error} = useQuery<GetTransactionQuery, GetTransactionQueryVariables>(GetTransaction, {
         variables: {
-            id: match.params.transactionId
+            id: params.transactionId
         }
     });
 

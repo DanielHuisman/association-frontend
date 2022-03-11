@@ -1,13 +1,13 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
-import {Switch, Route, RouteComponentProps} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {Header} from 'semantic-ui-react';
 
-import List from './List';
-import Details from './Details';
+import {List} from './List';
+import {Details} from './Details';
 
-const Transactions = ({match}: RouteComponentProps) => {
+export const Transactions: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -15,12 +15,10 @@ const Transactions = ({match}: RouteComponentProps) => {
             <Helmet title={t('account:transactions.header', 'Transactions')} />
             <Header size="huge">{t('account:transactions.header', 'Transactions')}</Header>
 
-            <Switch>
-                <Route exact path={`${match.path}/`} component={List} />
-                <Route exact path={`${match.path}/:transactionId`} component={Details} />
-            </Switch>
+            <Routes>
+                <Route index element={<List />} />
+                <Route path=":transactionId" element={<Details />} />
+            </Routes>
         </>
     );
 };
-
-export default Transactions;

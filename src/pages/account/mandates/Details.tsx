@@ -1,24 +1,25 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import {Header, Table, Button, Icon, Message} from 'semantic-ui-react';
 import moment from 'moment';
 
-import MandateType from '../../../components/mandate/MandateType';
+import {MandateType} from '../../../components/mandate/MandateType';
 import {Page} from '../../../components/page/Page';
-import YesNo from '../../../components/util/YesNo';
+import {YesNo} from '../../../components/util/YesNo';
 import {GetMandateQuery} from '../../../generated/graphql';
 import GetMandate from '../../../queries/GetMandate.graphql';
 
-interface IRouteParams {
+type Params = {
     mandateId: string;
-}
+};
 
-const MandatesDetails = ({match}: RouteComponentProps<IRouteParams>) => {
+export const Details: React.FC = () => {
+    const params = useParams<Params>();
     const {t} = useTranslation();
 
     return (
-        <Page<GetMandateQuery> query={GetMandate} queryVariables={{id: match.params.mandateId}}>
+        <Page<GetMandateQuery> query={GetMandate} queryVariables={{id: params.mandateId}}>
             {({data}) => {
                 return (
                     <>
@@ -167,5 +168,3 @@ const MandatesDetails = ({match}: RouteComponentProps<IRouteParams>) => {
         </Page>
     );
 };
-
-export default MandatesDetails;

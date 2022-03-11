@@ -1,32 +1,28 @@
-import {History} from 'history';
 import React, {useEffect} from 'react';
 import {Helmet} from 'react-helmet';
+import {useNavigate} from 'react-router-dom';
 import {Container, Loader} from 'semantic-ui-react';
 
 import {client} from '../../../graphql';
 
-const signOut = async (history: History) => {
-    try {
-        // Reset authentication token
-        localStorage.setItem('token', '');
+export const Logout: React.FC = () => {
+    const navigate = useNavigate();
 
-        // Reset Apollo store
-        await client.resetStore();
-    } catch (err) {
-        // Ignore error
-    }
-
-    // Redirect to index
-    history.push('/');
-};
-
-interface IProps {
-    history: History;
-}
-
-const SignOut = ({history}: IProps) => {
     useEffect(() => {
-        signOut(history);
+        (async () => {
+            try {
+                // Reset authentication token
+                localStorage.setItem('token', '');
+
+                // Reset Apollo store
+                await client.resetStore();
+            } catch (err) {
+                // Ignore error
+            }
+
+            // Redirect to index
+            navigate('/');
+        })();
     }, []);
 
     return (
@@ -37,5 +33,3 @@ const SignOut = ({history}: IProps) => {
         </Container>
     );
 };
-
-export default SignOut;

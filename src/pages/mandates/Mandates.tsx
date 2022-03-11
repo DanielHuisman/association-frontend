@@ -1,14 +1,17 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
-import {Switch, Route, NavLink} from 'react-router-dom';
+import {Link, useSearchParams} from 'react-router-dom';
 import {Container, Header, Menu} from 'semantic-ui-react';
 
-import List from './List';
-import ReviewList from './ReviewList';
+import {List} from './List';
+import {ReviewList} from './ReviewList';
 
-const Mandates = () => {
+export const Mandates: React.FC = () => {
+    const [searchParams] = useSearchParams();
     const {t} = useTranslation();
+
+    const isReview = searchParams.get('filter') === 'review';
 
     return (
         <Container>
@@ -16,20 +19,16 @@ const Mandates = () => {
             <Header size="huge">{t('mandates:mandates.header', 'Mandates')}</Header>
 
             <Menu>
-                <Menu.Item as={NavLink} exact to="/mandates">
+                <Menu.Item as={Link} to="/mandates" active={!isReview}>
                     {t('mandates:mandates.menu.all', 'All')}
                 </Menu.Item>
-                <Menu.Item as={NavLink} exact to="/mandates/review">
+                <Menu.Item as={Link} to="/mandates" active={isReview}>
                     {t('mandates:mandates.menu.review', 'Ready for review')}
                 </Menu.Item>
             </Menu>
 
-            <Switch>
-                <Route exact path="/mandates" component={List} />
-                <Route path="/mandates/review" component={ReviewList} />
-            </Switch>
+            {!isReview && <List />}
+            {isReview && <ReviewList />}
         </Container>
     );
 };
-
-export default Mandates;

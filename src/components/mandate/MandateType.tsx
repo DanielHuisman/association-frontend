@@ -3,11 +3,11 @@ import {useTranslation} from 'react-i18next';
 
 import {MandateFragment} from '../../generated/graphql';
 
-interface IProps {
+export interface MandateTypeProps {
     mandate: MandateFragment;
 }
 
-const MandateType = ({mandate}: IProps) => {
+export const MandateType: React.FC<MandateTypeProps> = ({mandate}) => {
     const {t} = useTranslation();
 
     return (
@@ -18,5 +18,3 @@ const MandateType = ({mandate}: IProps) => {
         </>
     );
 };
-
-export default MandateType;

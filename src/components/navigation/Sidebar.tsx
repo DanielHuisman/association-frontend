@@ -3,17 +3,17 @@ import {Sidebar as SESidebar, Menu} from 'semantic-ui-react';
 
 import {MemberFragment} from '../../generated/graphql';
 
-import Base from './Base';
+import {Base} from './Base';
 import styles from './Navigation.css';
 
-interface IProps {
+export interface SidebarProps {
     user?: MemberFragment;
     visible: boolean;
     children: any;
     onHide?: () => void;
 }
 
-const Sidebar = ({user, visible, children, onHide}: IProps) => (
+export const Sidebar: React.FC<SidebarProps> = ({user, visible, children, onHide}) => (
     <SESidebar.Pushable>
         <SESidebar
             className={styles.sidebar}
@@ -32,5 +32,3 @@ const Sidebar = ({user, visible, children, onHide}: IProps) => (
         </SESidebar.Pusher>
     </SESidebar.Pushable>
 );
-
-export default Sidebar;

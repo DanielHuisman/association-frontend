@@ -1,17 +1,15 @@
 import React from 'react';
 
 import {MemberFragment} from '../../generated/graphql';
-import Topbar from '../navigation/Topbar';
+import {Topbar} from '../navigation/Topbar';
 
-interface IProps {
+export interface HeaderProps {
     user?: MemberFragment;
     onSidebar?: () => void;
 }
 
-const Header = ({user, onSidebar}: IProps) => (
+export const Header: React.FC<HeaderProps> = ({user, onSidebar}) => (
     <header>
         <Topbar user={user} onSidebar={onSidebar} />
     </header>
 );
-
-export default Header;

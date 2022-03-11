@@ -1,5 +1,9 @@
 {
   "possibleTypes": {
+    "Group": [
+      "BoardPeriod",
+      "CommitteePeriod"
+    ],
     "Mandate": [
       "DigitalMandate",
       "PaperMandate"
@@ -8,12 +12,8 @@
       "MembershipFeeTransaction"
     ],
     "Translatable": [
-      "ShortTranslatable",
-      "LongTranslatable"
-    ],
-    "Group": [
-      "BoardPeriod",
-      "CommitteePeriod"
+      "LongTranslatable",
+      "ShortTranslatable"
     ]
   }
 }

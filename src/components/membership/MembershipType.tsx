@@ -1,24 +1,22 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-import {MembershipFragment, MembershipType} from '../../generated/graphql';
+import {MembershipFragment, MembershipType as MembershipTypeEnum} from '../../generated/graphql';
 
-interface IProps {
+export interface MembershipTypeProps {
     membership: MembershipFragment;
 }
 
-const MembershipTypeComponent = ({membership}: IProps) => {
+export const MembershipType: React.FC<MembershipTypeProps> = ({membership}) => {
     const {t} = useTranslation();
 
     return (
         <>
-            {membership.type === MembershipType.NORMAL ?
+            {membership.type === MembershipTypeEnum.NORMAL ?
                 t('members:membership.types.normal', 'Regular member') :
-                (membership.type === MembershipType.HONORARY ?
+                (membership.type === MembershipTypeEnum.HONORARY ?
                     t('members:membership.types.honorary', 'Honorary member') :
                     t('members:membership.types.extraordinary', 'Extraordinary member'))}
         </>
     );
 };
-
-export default MembershipTypeComponent;

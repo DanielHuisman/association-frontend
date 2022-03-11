@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {Link} from 'react-router-dom';
 import {Field, FormikConfig} from 'formik';
 import * as Yup from 'yup';
-import {List, Button, Icon} from 'semantic-ui-react';
+import {List} from 'semantic-ui-react';
 
 import {Form, FieldInput, SubmitButton} from '../../../components/form';
 
@@ -12,7 +12,7 @@ export interface IValues {
     password: string;
 }
 
-interface IProps {
+export interface LoginFormProps {
     onSubmit: FormikConfig<IValues>['onSubmit'];
 }
 
@@ -24,7 +24,7 @@ const schema = Yup.object().shape({
         .required('This field is required.')
 });
 
-const LoginForm = ({onSubmit}: IProps) => {
+export const LoginForm: React.FC<LoginFormProps> = ({onSubmit}) => {
     const {t} = useTranslation();
 
     return (
@@ -51,5 +51,3 @@ const LoginForm = ({onSubmit}: IProps) => {
         </Form>
     );
 };
-
-export default LoginForm;

@@ -9,11 +9,11 @@ import photo1 from '../../../public/images/photo1.jpg';
 import photo2 from '../../../public/images/photo2.jpg';
 import photo3 from '../../../public/images/photo3.jpg';
 import photo4 from '../../../public/images/photo4.jpg';
-import Text from '../../components/text/Text';
+import {Text} from '../../components/text/Text';
 
 import styles from './Home.css';
 
-const Home = () => {
+export const Home: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -122,5 +122,3 @@ const Home = () => {
         </>
     );
 };
-
-export default Home;

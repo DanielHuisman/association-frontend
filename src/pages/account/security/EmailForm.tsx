@@ -11,7 +11,7 @@ export interface IValues {
     email: string;
 }
 
-interface IProps {
+export interface EmailFormProps {
     provider: ProviderFragment;
     onSubmit: FormikConfig<IValues>['onSubmit'];
 }
@@ -22,7 +22,7 @@ const schema = Yup.object().shape({
         .email('Invalid email address')
 });
 
-const EmailForm = ({provider, onSubmit}: IProps) => {
+export const EmailForm: React.FC<EmailFormProps> = ({provider, onSubmit}) => {
     const {t} = useTranslation();
 
     return (
@@ -43,5 +43,3 @@ const EmailForm = ({provider, onSubmit}: IProps) => {
         </Form>
     );
 };
-
-export default EmailForm;

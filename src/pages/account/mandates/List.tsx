@@ -4,12 +4,12 @@ import {Link} from 'react-router-dom';
 import {Button} from 'semantic-ui-react';
 
 import {UserContext} from '../../../components/authentication/UserContext';
-import MandateTable from '../../../components/mandates/MandateTable';
+import {MandateTable} from '../../../components/mandates/MandateTable';
 import {Page} from '../../../components/page/Page';
 import {GetMemberMandatesQuery} from '../../../generated/graphql';
 import GetMemberMandates from '../../../queries/GetMemberMandates.graphql';
 
-const MandatesDetails = () => {
+export const List: React.FC = () => {
     const {t} = useTranslation();
     const member = useContext(UserContext);
 
@@ -29,5 +29,3 @@ const MandatesDetails = () => {
         </Page>
     );
 };
-
-export default MandatesDetails;

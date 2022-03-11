@@ -6,11 +6,11 @@ import {Button, Icon} from 'semantic-ui-react';
 import CancelPaperMandate from '../../mutations/CancelPaperMandate.graphql';
 import {CancelPaperMandateMutation} from '../../generated/graphql';
 
-interface IProps {
+export interface CancelButtonProps {
     mandateId: string;
 }
 
-const CancelButton = ({mandateId}: IProps) => {
+export const CancelButton: React.FC<CancelButtonProps> = ({mandateId}) => {
     const {t} = useTranslation();
 
     const [cancel, {loading}] = useMutation<CancelPaperMandateMutation>(CancelPaperMandate, {
@@ -26,5 +26,3 @@ const CancelButton = ({mandateId}: IProps) => {
         </Button>
     );
 };
-
-export default CancelButton;

@@ -1,30 +1,32 @@
 import React, {useContext} from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import {useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
 import {UserContext} from '../../components/authentication/UserContext';
-import MandateType from '../../components/mandate/MandateType';
-import AcceptButton from '../../components/mandate/AcceptButton';
-import RejectButton from '../../components/mandate/RejectButton';
-import InvalidateButton from '../../components/mandate/InvalidateButton';
-import YesNo from '../../components/util/YesNo';
+import {MandateType} from '../../components/mandate/MandateType';
+import {AcceptButton} from '../../components/mandate/AcceptButton';
+import {RejectButton} from '../../components/mandate/RejectButton';
+import {InvalidateButton} from '../../components/mandate/InvalidateButton';
+import {YesNo} from '../../components/util/YesNo';
 import GetMandate from '../../queries/GetMandate.graphql';
 import {GetMandateQuery, GetMandateQueryVariables, MandateStatus} from '../../generated/graphql';
 
-interface IRouteParams {
+type Params = {
     mandateId: string;
-}
+};
 
-const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
+export const Mandate: React.FC = () => {
+    const params = useParams<Params>();
     const {t} = useTranslation();
     const user = useContext(UserContext);
+
     const {loading, data, error} = useQuery<GetMandateQuery, GetMandateQueryVariables>(GetMandate, {
         variables: {
-            id: match.params.mandateId
+            id: params.mandateId
         }
     });
 
@@ -194,5 +196,3 @@ const Mandate = ({match}: RouteComponentProps<IRouteParams>) => {
         </Container>
     );
 };
-
-export default Mandate;

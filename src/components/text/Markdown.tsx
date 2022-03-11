@@ -2,10 +2,6 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkSubSuper from 'remark-sub-super';
 
-interface IProps {
-    source: string;
-}
-
 const plugins = [
     [remarkSubSuper]
 ];
@@ -15,7 +11,11 @@ const renderers = {
     sub: 'sub'
 };
 
-const Markdown = ({source}: IProps) => (
+export interface MarkdownProps {
+    source: string;
+}
+
+export const Markdown = ({source}) => (
     <ReactMarkdown
         source={source}
         plugins={plugins}
@@ -23,5 +23,3 @@ const Markdown = ({source}: IProps) => (
         renderers={renderers}
     />
 );
-
-export default Markdown;

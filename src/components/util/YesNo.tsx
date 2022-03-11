@@ -2,11 +2,11 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Icon} from 'semantic-ui-react';
 
-interface IProps {
+export interface YesNoProps {
     value: boolean;
 }
 
-const YesNo = ({value = false}: IProps) => {
+export const YesNo: React.FC<YesNoProps> = ({value = false}) => {
     const {t} = useTranslation();
 
     return value ? (
@@ -21,5 +21,3 @@ const YesNo = ({value = false}: IProps) => {
         </>
     );
 };
-
-export default YesNo;

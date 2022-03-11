@@ -9,9 +9,9 @@ interface IMemberProps {
     style?: any;
 }
 
-type IProps = (Omit<StrictImageProps, 'size'> & IMemberProps) | (Omit<StrictIconProps, 'size'> & IMemberProps);
+export type MemberProps = (Omit<StrictImageProps, 'size'> & IMemberProps) | (Omit<StrictIconProps, 'size'> & IMemberProps);
 
-const MemberImage = ({member, size = 256, style, ...props}: IProps) => member.image ? (
+export const MemberImage: React.FC<MemberProps> = ({member, size = 256, style, ...props}) => member.image ? (
     <Image
         src={member.image.url}
         alt={member.image.name}
@@ -36,5 +36,3 @@ const MemberImage = ({member, size = 256, style, ...props}: IProps) => member.im
         {...props}
     />
 );
-
-export default MemberImage;

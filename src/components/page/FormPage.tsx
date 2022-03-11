@@ -2,9 +2,9 @@ import React from 'react';
 import {QueryResult, MutationFunction, MutationResult, MutationHookOptions} from '@apollo/react-hooks';
 import {FormikConfig} from 'formik';
 
-import {Page, IPageProps} from './Page';
+import {Page, PageProps} from './Page';
 
-interface IProps<QueryType, MutationType, IValues> extends Omit<IPageProps<QueryType, MutationType>, 'children'> {
+export interface FormPageProps<QueryType, MutationType, IValues> extends Omit<PageProps<QueryType, MutationType>, 'children'> {
     data: (values: IValues, queryResult: QueryResult<QueryType>) => MutationHookOptions<MutationType>;
     children: (
         handleSubmit: FormikConfig<IValues>['onSubmit'],
@@ -14,11 +14,9 @@ interface IProps<QueryType, MutationType, IValues> extends Omit<IPageProps<Query
     ) => JSX.Element | null;
 }
 
-export {
-    IProps as IFormPageProps
-};
-
-export const FormPage = <QueryType, MutationType, IValues> ({data, children, ...props}: IProps<QueryType, MutationType, IValues>) => {
+export const FormPage = <QueryType, MutationType, IValues>({
+    data, children, ...props
+}: FormPageProps<QueryType, MutationType, IValues>): ReturnType<React.FC> => {
     return (
         <Page<QueryType, MutationType> {...props}>
             {(queryResult, mutateFn, mutationResult) => {

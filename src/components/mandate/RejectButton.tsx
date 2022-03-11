@@ -8,13 +8,13 @@ import GetMandates from '../../queries/GetMandates.graphql';
 import GetPaperMandates from '../../queries/GetPaperMandates.graphql';
 import RejectPaperMandate from '../../mutations/RejectPaperMandate.graphql';
 
-import RejectModal, {IValues} from './RejectModal';
+import {RejectModal, IValues} from './RejectModal';
 
-interface IProps {
+export interface RejectButtonProps {
     mandateId: string;
 }
 
-const RejectButton = ({mandateId}: IProps) => {
+export const RejectButton: React.FC<RejectButtonProps> = ({mandateId}) => {
     const {t} = useTranslation();
 
     const [reject, {loading, error}] = useMutation<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>(RejectPaperMandate, {
@@ -50,5 +50,3 @@ const RejectButton = ({mandateId}: IProps) => {
         />
     );
 };
-
-export default RejectButton;

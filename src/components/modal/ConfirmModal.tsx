@@ -2,11 +2,11 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Modal, ModalProps} from 'semantic-ui-react';
 
-interface IProps extends ModalProps {
+export interface ConfirmModaProps extends ModalProps {
     onConfirm: () => void;
 }
 
-const ConfirmModal = ({onConfirm, ...props}: IProps) => {
+export const ConfirmModal: React.FC<ConfirmModaProps> = ({onConfirm, ...props}) => {
     const {t} = useTranslation();
 
     return (
@@ -20,5 +20,3 @@ const ConfirmModal = ({onConfirm, ...props}: IProps) => {
         />
     );
 };
-
-export default ConfirmModal;

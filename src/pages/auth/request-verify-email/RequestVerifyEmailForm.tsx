@@ -9,7 +9,7 @@ export interface IValues {
     email: string;
 }
 
-interface IProps {
+export interface RequestVerifyEmailFormProps {
     onSubmit: FormikConfig<IValues>['onSubmit'];
 }
 
@@ -19,7 +19,7 @@ const schema = Yup.object().shape({
         .email('Invalid email address.')
 });
 
-const RequestVerifyEmailForm = ({onSubmit}: IProps) => {
+export const RequestVerifyEmailForm: React.FC<RequestVerifyEmailFormProps> = ({onSubmit}) => {
     const {t} = useTranslation();
 
     return (
@@ -38,5 +38,3 @@ const RequestVerifyEmailForm = ({onSubmit}: IProps) => {
         </Form>
     );
 };
-
-export default RequestVerifyEmailForm;

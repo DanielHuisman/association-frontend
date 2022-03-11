@@ -1,32 +1,32 @@
 import React, {useState, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import {Header, Loader, Message, Button} from 'semantic-ui-react';
 
-import SmallContainer from '../../../components/container/SmallContainer';
+import {SmallContainer} from '../../../components/container/SmallContainer';
 import {VerifyEmailMutation} from '../../../generated/graphql';
 import {client} from '../../../graphql';
-import VerifyEmailDocument from '../../../mutations/VerifyEmail.graphql';
+import VerifyEmailQL from '../../../mutations/VerifyEmail.graphql';
 import {translateError} from '../../../util';
 
-interface IRouteParams {
+type Params = {
     token: string;
-}
+};
 
-const VerifyEmail = ({match}: RouteComponentProps<IRouteParams>) => {
+export const VerifyEmail: React.FC = () => {
+    const params = useParams<Params>();
     const {t} = useTranslation();
+
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(null);
-
-    const token = match.params.token;
 
     useEffect(() => {
         (async () => {
             try {
                 await client.mutate<VerifyEmailMutation>({
-                    mutation: VerifyEmailDocument,
+                    mutation: VerifyEmailQL,
                     variables: {
-                        token
+                        token: params.token
                     }
                 });
 
@@ -68,5 +68,3 @@ const VerifyEmail = ({match}: RouteComponentProps<IRouteParams>) => {
         </SmallContainer>
     );
 };
-
-export default VerifyEmail;

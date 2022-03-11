@@ -1,15 +1,17 @@
 import React, {MouseEvent, ReactNode} from 'react';
-import {withRouter, RouteComponentProps} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {Table} from 'semantic-ui-react';
 
 import styles from './Table.css';
 
-interface IProps extends RouteComponentProps {
+export interface TableSelectableRowProps {
     to: string;
     children: ReactNode | ReactNode[];
 }
 
-const TableSelectableRow = ({history, to, children}: IProps) => {
+export const TableSelectableRow: React.FC<TableSelectableRowProps> = ({to, children}) => {
+    const navigate = useNavigate();
+
     const onMouseDown = (event: MouseEvent<HTMLTableRowElement>) => {
         // If the target was an icon, check the parent node (e.g. button)
         let target: any = event.target;
@@ -23,7 +25,7 @@ const TableSelectableRow = ({history, to, children}: IProps) => {
         }
 
         if (event.button === 0) {
-            history.push(to);
+            navigate(to);
         } else if (event.button === 1) {
             window.open(to, 'channel');
         }
@@ -35,5 +37,3 @@ const TableSelectableRow = ({history, to, children}: IProps) => {
         </Table.Row>
     );
 };
-
-export default withRouter(TableSelectableRow);

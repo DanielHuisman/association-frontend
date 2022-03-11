@@ -10,7 +10,7 @@ import {GetBanksQuery, CreateDigitalMandateMutation} from '../../generated/graph
 import GetBanks from '../../queries/GetBanks.graphql';
 import CreateDigitalMandate from '../../mutations/CreateDigitalMandate.graphql';
 
-interface IProps {
+export interface DigitalMandateFormProps {
     memberId: string;
 }
 
@@ -22,7 +22,7 @@ const schema = Yup.object().shape({
     bic: Yup.string().required('This field is required.')
 });
 
-const DigitalMandateForm = ({memberId}: IProps) => {
+export const DigitalMandateForm: React.FC<DigitalMandateFormProps> = ({memberId}) => {
     const {t} = useTranslation();
 
     return (
@@ -55,7 +55,7 @@ const DigitalMandateForm = ({memberId}: IProps) => {
                     return <Loader active={true} />;
                 }
 
-                const options = queryResult.data.banks.map((bank) => ({
+                const options = queryResult.data.banks.values.map((bank) => ({
                     key: bank.bic,
                     value: bank.bic,
                     text: bank.name
@@ -93,5 +93,3 @@ const DigitalMandateForm = ({memberId}: IProps) => {
         </FormPage>
     );
 };
-
-export default DigitalMandateForm;

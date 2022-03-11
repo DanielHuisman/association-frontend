@@ -11,7 +11,7 @@ export interface IValues {
     passwordRepeat: string;
 }
 
-interface IProps {
+export interface ResetPasswordFormProps {
     token: string;
     onSubmit: FormikConfig<IValues>['onSubmit'];
 }
@@ -28,7 +28,7 @@ const schema = Yup.object().shape({
         .oneOf([Yup.ref('password'), null], 'Passwords do not match.')
 });
 
-const ResetPasswordForm = ({token, onSubmit}: IProps) => {
+export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({token, onSubmit}) => {
     const {t} = useTranslation();
 
     return (
@@ -51,5 +51,3 @@ const ResetPasswordForm = ({token, onSubmit}: IProps) => {
         </Form>
     );
 };
-
-export default ResetPasswordForm;

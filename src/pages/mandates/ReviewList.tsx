@@ -3,11 +3,11 @@ import {useTranslation} from 'react-i18next';
 import {useQuery} from '@apollo/react-hooks';
 import {Loader} from 'semantic-ui-react';
 
-import MandateTable from '../../components/mandates/MandateTable';
+import {MandateTable} from '../../components/mandates/MandateTable';
 import {GetPaperMandatesQuery, GetPaperMandatesQueryVariables, MandateStatus} from '../../generated/graphql';
 import GetPaperMandates from '../../queries/GetPaperMandates.graphql';
 
-const MandatesReviewList = () => {
+export const ReviewList: React.FC = () => {
     const {t} = useTranslation();
     const {loading, data, error} = useQuery<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>(GetPaperMandates, {
         variables: {
@@ -33,5 +33,3 @@ const MandatesReviewList = () => {
         </>
     );
 };
-
-export default MandatesReviewList;

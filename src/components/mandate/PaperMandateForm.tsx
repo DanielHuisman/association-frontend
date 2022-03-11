@@ -1,6 +1,5 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {RouteComponentProps} from 'react-router-dom';
 import {Field} from 'formik';
 import * as Yup from 'yup';
 import {isValidBIC, isValidIBAN} from 'ibantools';
@@ -12,9 +11,8 @@ import {CreatePaperMandateMutation} from '../../generated/graphql';
 import GetMember from '../../queries/GetMember.graphql';
 import CreatePaperMandate from '../../mutations/CreatePaperMandate.graphql';
 
-interface IProps {
+export interface PaperMandateFormProps {
     memberId: string;
-    history: RouteComponentProps['history'];
 }
 
 interface IValues {
@@ -43,7 +41,7 @@ const BIC_LOOKUP = {
     trio: 'TRIONL2U'
 };
 
-const FieldIBAN = (props: FieldInputProps) => (
+const FieldIBAN: React.FC<FieldInputProps> = (props) => (
     <FieldInput
         {...props}
         field={{
@@ -61,7 +59,7 @@ const FieldIBAN = (props: FieldInputProps) => (
     />
 );
 
-const PaperMandateForm = ({memberId, history}: IProps) => {
+export const PaperMandateForm: React.FC<PaperMandateFormProps> = ({memberId}) => {
     const {t} = useTranslation();
 
     return (
@@ -131,5 +129,3 @@ const PaperMandateForm = ({memberId, history}: IProps) => {
         </MutationFormPage>
     );
 };
-
-export default PaperMandateForm;

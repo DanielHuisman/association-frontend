@@ -3,12 +3,12 @@ import {useTranslation} from 'react-i18next';
 import {Table} from 'semantic-ui-react';
 import moment from 'moment';
 
-import MandateType from '../../components/mandate/MandateType';
-import TableSelectableRow from '../../components/table/TableSelectableRow';
-import YesNo from '../../components/util/YesNo';
+import {MandateType} from '../../components/mandate/MandateType';
+import {TableSelectableRow} from '../../components/table/TableSelectableRow';
+import {YesNo} from '../../components/util/YesNo';
 import {MandateFragment, MemberFragment} from '../../generated/graphql';
 
-interface IProps {
+export interface MandateTableProps {
     mandates: (MandateFragment & {
         member?: MemberFragment;
     })[];
@@ -17,7 +17,7 @@ interface IProps {
     hideIsFirstTransaction?: boolean;
 }
 
-const MandateTable = ({mandates, urlPrefix = '/mandates', hideMember = false, hideIsFirstTransaction = false}: IProps) => {
+export const MandateTable: React.FC<MandateTableProps> = ({mandates, urlPrefix = '/mandates', hideMember = false, hideIsFirstTransaction = false}) => {
     const {t} = useTranslation();
 
     return (
@@ -53,5 +53,3 @@ const MandateTable = ({mandates, urlPrefix = '/mandates', hideMember = false, hi
         </Table>
     );
 };
-
-export default MandateTable;

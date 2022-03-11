@@ -1,31 +1,33 @@
 import React, {useContext} from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation, Trans} from 'react-i18next';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import {useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
 import {UserContext} from '../../components/authentication/UserContext';
-import EndMembershipButton from '../../components/membership/EndMembershipButton';
-import MembershipType from '../../components/membership/MembershipType';
-import TableSelectableRow from '../../components/table/TableSelectableRow';
-import TransactionTable from '../../components/transactions/TransactionTable';
+import {EndMembershipButton} from '../../components/membership/EndMembershipButton';
+import {MembershipType} from '../../components/membership/MembershipType';
+import {TableSelectableRow} from '../../components/table/TableSelectableRow';
+import {TransactionTable} from '../../components/transactions/TransactionTable';
 import {GetMemberQuery, GetMemberQueryVariables, MandateStatus} from '../../generated/graphql';
 import GetMember from '../../queries/GetMember.graphql';
 import {hasAcceptedMandates} from '../../util';
 
 import styles from './Member.css';
 
-interface IRouteParams {
+type Params = {
     memberId: string;
-}
+};
 
-const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
+export const Overview: React.FC = () => {
+    const params = useParams<Params>();
     const {t} = useTranslation();
+
     const {loading, data, error} = useQuery<GetMemberQuery, GetMemberQueryVariables>(GetMember, {
         variables: {
-            id: match.params.memberId
+            id: params.memberId
         }
     });
 
@@ -153,7 +155,7 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
                                 </Trans>
                             </p>
 
-                            <Button as={Link} to={`${match.url}/mandates/sign`} color="blue">
+                            <Button as={Link} to="mandates/sign" color="blue">
                                 {t('mandates:sign.button', 'Sign a mandate')}
                             </Button>
                         </>
@@ -215,5 +217,3 @@ const Overview = ({match}: RouteComponentProps<IRouteParams>) => {
         </Container>
     );
 };
-
-export default Overview;

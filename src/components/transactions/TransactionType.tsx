@@ -3,11 +3,11 @@ import {useTranslation} from 'react-i18next';
 
 import {TransactionFragment} from '../../generated/graphql';
 
-interface IProps {
+export interface TransactionTypeProps {
     transaction: TransactionFragment;
 }
 
-const TransactionType = ({transaction}: IProps) => {
+export const TransactionType: React.FC<TransactionTypeProps> = ({transaction}) => {
     const {t} = useTranslation();
 
     return (
@@ -18,5 +18,3 @@ const TransactionType = ({transaction}: IProps) => {
         </>
     );
 };
-
-export default TransactionType;

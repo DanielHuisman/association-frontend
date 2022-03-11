@@ -1,24 +1,25 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import {Header, Table, Button, Icon, Message} from 'semantic-ui-react';
 import moment from 'moment';
 
-import TransactionType from '../../../components/transactions/TransactionType';
+import {TransactionType} from '../../../components/transactions/TransactionType';
 import {Page} from '../../../components/page/Page';
 import {GetMemberTransactionQuery} from '../../../generated/graphql';
 import GetMemberTransaction from '../../../queries/GetMemberTransaction.graphql';
 import {formatCurrency} from '../../../util';
 
-interface IRouteParams {
+type Params = {
     transactionId: string;
-}
+};
 
-const TransactionsDetails = ({match}: RouteComponentProps<IRouteParams>) => {
+export const Details: React.FC = () => {
+    const params = useParams<Params>();
     const {t} = useTranslation();
 
     return (
-        <Page<GetMemberTransactionQuery> query={GetMemberTransaction} queryVariables={{id: match.params.transactionId}}>
+        <Page<GetMemberTransactionQuery> query={GetMemberTransaction} queryVariables={{id: params.transactionId}}>
             {({data}) => {
                 return (
                     <>
@@ -71,5 +72,3 @@ const TransactionsDetails = ({match}: RouteComponentProps<IRouteParams>) => {
         </Page>
     );
 };
-
-export default TransactionsDetails;

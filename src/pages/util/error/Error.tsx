@@ -3,7 +3,7 @@ import {FallbackProps} from 'react-error-boundary';
 import {Helmet} from 'react-helmet';
 import {Container, Header} from 'semantic-ui-react';
 
-const ErrorPage = ({error}: FallbackProps) => (
+export const ErrorPage: React.FC<FallbackProps> = ({error}) => (
     <Container textAlign="center">
         <Helmet title="Error" />
         <Header size="huge">
@@ -13,5 +13,3 @@ const ErrorPage = ({error}: FallbackProps) => (
         <Header.Subheader><code>{error.message}</code></Header.Subheader>
     </Container>
 );
-
-export default ErrorPage;

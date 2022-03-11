@@ -1,22 +1,24 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
-import {Redirect} from 'react-router-dom';
+import {useNavigate, Navigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useMutation} from '@apollo/react-hooks';
 import {Header, Message} from 'semantic-ui-react';
 import {FormikHelpers} from 'formik';
 
-import SmallContainer from '../../../components/container/SmallContainer';
+import {SmallContainer} from '../../../components/container/SmallContainer';
 import {LoginMutation, LoginMutationVariables} from '../../../generated/graphql';
-import Login from '../../../mutations/Login.graphql';
+import LoginQL from '../../../mutations/Login.graphql';
 import {translateError} from '../../../util';
 
-import LoginForm, {IValues} from './LoginForm';
+import {LoginForm, IValues} from './LoginForm';
 import styles from './Login.css';
 
-const SignIn = ({history}) => {
+export const Login: React.FC = () => {
+    const navigate = useNavigate();
     const {t} = useTranslation();
-    const [login, {loading, data, error, client}] = useMutation<LoginMutation, LoginMutationVariables>(Login);
+
+    const [login, {loading, data, error, client}] = useMutation<LoginMutation, LoginMutationVariables>(LoginQL);
 
     const handleSubmit = async (values: IValues, helpers: FormikHelpers<IValues>) => {
         try {
@@ -35,7 +37,7 @@ const SignIn = ({history}) => {
             await client.resetStore();
 
             // Redirect to index
-            history.push('/');
+            navigate('/');
         } catch (err) {
             // Stop submitting to display the error
             helpers.setSubmitting(false);
@@ -47,7 +49,7 @@ const SignIn = ({history}) => {
             <Helmet title={t('auth:login.header', 'Sign in')} />
             <Header size="huge">{t('auth:login.header', 'Sign in')}</Header>
 
-            {!loading && !error && data && <Redirect to="/" />}
+            {!loading && !error && data && <Navigate to="/" />}
 
             <p className={styles.text}>{t('auth:login.text', 'Sign in with your Exaltio account:')}</p>
 
@@ -61,5 +63,3 @@ const SignIn = ({history}) => {
         </SmallContainer>
     );
 };
-
-export default SignIn;

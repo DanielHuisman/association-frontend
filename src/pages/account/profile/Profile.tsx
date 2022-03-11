@@ -8,10 +8,10 @@ import {Page} from '../../../components/page/Page';
 import {GetProfileQuery} from '../../../generated/graphql';
 import GetProfile from '../../../queries/GetProfile.graphql';
 
-import Image from './Image';
-import Information from './Information';
+import {Image} from './Image';
+import {Information} from './Information';
 
-const Profile = () => {
+export const Profile: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -51,5 +51,3 @@ const Profile = () => {
         </Page>
     );
 };
-
-export default Profile;

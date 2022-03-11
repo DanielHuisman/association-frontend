@@ -21,7 +21,7 @@ export interface IValues {
     studentType: StudentType;
 }
 
-interface IProps {
+export interface InformationFormProps {
     profile: MemberFragment & {
         providers: {
             values: ProviderFragment[];
@@ -61,7 +61,7 @@ const schema = Yup.object().shape({
         .oneOf(Object.values(StudentType)),
 });
 
-const InformationForm = ({profile, onSubmit}: IProps) => {
+export const InformationForm: React.FC<InformationFormProps> = ({profile, onSubmit}) => {
     const {t} = useTranslation();
 
     return (
@@ -123,5 +123,3 @@ const InformationForm = ({profile, onSubmit}: IProps) => {
         </Form>
     );
 };
-
-export default InformationForm;

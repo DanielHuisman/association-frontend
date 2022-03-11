@@ -1,9 +1,11 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -11,553 +13,15 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** The `Upload` scalar type represents a file upload. */
-  Upload: any;
   /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   Date: string;
-  /** A time string at UTC, such as 10:15:30Z, compliant with the `full-time` format outlined in section 5.6 of the RFC 3339profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  Time: string;
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: string;
+  /** A time string at UTC, such as 10:15:30Z, compliant with the `full-time` format outlined in section 5.6 of the RFC 3339profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  Time: string;
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: any;
 };
-
-export type CreateDigitalMandateInput = {
-  bic: Scalars['String'];
-  member: MemberWhereUniqueInput;
-};
-
-export type CreatePaperMandateInput = {
-  bic: Scalars['String'];
-  iban: Scalars['String'];
-  member: MemberWhereUniqueInput;
-};
-
-export type Bank = {
-  __typename?: 'Bank';
-  id: Scalars['String'];
-  bic: Scalars['String'];
-  country: Scalars['String'];
-  name: Scalars['String'];
-  isActive: Scalars['Boolean'];
-};
-
-export enum MandateStatus {
-  CREATED = 'CREATED',
-  UNACCEPTED = 'UNACCEPTED',
-  ACCEPTED = 'ACCEPTED',
-  ERROR = 'ERROR',
-  CANCELLED = 'CANCELLED',
-  INVALID = 'INVALID',
-  REJECTED = 'REJECTED'
-}
-
-export type Mandate = {
-  id: Scalars['String'];
-  mandateId: Scalars['String'];
-  status: MandateStatus;
-  createdAt: Scalars['DateTime'];
-  acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic: Scalars['String'];
-  iban?: Maybe<Scalars['String']>;
-  reason: Scalars['String'];
-  isFirstTransaction: Scalars['Boolean'];
-  errorMessage?: Maybe<Scalars['String']>;
-  member: Member;
-  instructions: DirectDebitInstructionList;
-};
-
-
-export type MandateinstructionsArgs = {
-  where?: Maybe<DirectDebitInstructionWhereInput>;
-  orderBy?: Maybe<DirectDebitInstructionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export type Transaction = {
-  id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  description: Scalars['String'];
-  amount: Scalars['Int'];
-  member: Member;
-  instruction?: Maybe<DirectDebitInstruction>;
-};
-
-export type DirectDebitInstruction = {
-  __typename?: 'DirectDebitInstruction';
-  id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  instructionId: Scalars['String'];
-  description: Scalars['String'];
-  batch: DirectDebitBatch;
-  transactions: TransactionList;
-  mandate: Mandate;
-  amount: Scalars['Int'];
-};
-
-
-export type DirectDebitInstructiontransactionsArgs = {
-  where?: Maybe<TransactionWhereInput>;
-  orderBy?: Maybe<TransactionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export enum SequenceType {
-  FIRST = 'FIRST',
-  RECURRENT = 'RECURRENT',
-  FINAL = 'FINAL',
-  ONE_OFF = 'ONE_OFF'
-}
-
-export type DirectDebitBatch = {
-  __typename?: 'DirectDebitBatch';
-  id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  batchId: Scalars['String'];
-  sequenceType: SequenceType;
-  directDebit: DirectDebit;
-  instructions: DirectDebitInstructionList;
-  instructionCount: Scalars['Int'];
-  amount: Scalars['Int'];
-};
-
-
-export type DirectDebitBatchinstructionsArgs = {
-  where?: Maybe<DirectDebitInstructionWhereInput>;
-  orderBy?: Maybe<DirectDebitInstructionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export type File = {
-  __typename?: 'File';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  mimeType: Scalars['String'];
-  url: Scalars['String'];
-};
-
-export enum DirectDebitStatus {
-  CREATED = 'CREATED',
-  GENERATED = 'GENERATED',
-  ACCEPTED = 'ACCEPTED',
-  REJECTED = 'REJECTED',
-  CANCELLED = 'CANCELLED'
-}
-
-export type DirectDebit = {
-  __typename?: 'DirectDebit';
-  id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  status: DirectDebitStatus;
-  messageId: Scalars['String'];
-  collectionDate: Scalars['String'];
-  batches: DirectDebitBatchList;
-  warnings: DirectDebitWarningList;
-  file?: Maybe<File>;
-  instructionCount: Scalars['Int'];
-  amount: Scalars['Int'];
-};
-
-
-export type DirectDebitbatchesArgs = {
-  where?: Maybe<DirectDebitBatchWhereInput>;
-  orderBy?: Maybe<DirectDebitBatchOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type DirectDebitwarningsArgs = {
-  where?: Maybe<DirectDebitWarningWhereInput>;
-  orderBy?: Maybe<DirectDebitWarningOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export type DirectDebitWarning = {
-  __typename?: 'DirectDebitWarning';
-  id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  description: Scalars['String'];
-  directDebit: DirectDebit;
-  member?: Maybe<Member>;
-};
-
-export type MembershipFeeTransaction = Transaction & {
-  __typename?: 'MembershipFeeTransaction';
-  id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  description: Scalars['String'];
-  amount: Scalars['Int'];
-  member: Member;
-  instruction?: Maybe<DirectDebitInstruction>;
-  year: Scalars['Int'];
-  membership: Membership;
-};
-
-export enum MembershipType {
-  NORMAL = 'NORMAL',
-  HONORARY = 'HONORARY',
-  EXTRAORDINARY = 'EXTRAORDINARY'
-}
-
-export type Membership = {
-  __typename?: 'Membership';
-  id: Scalars['String'];
-  type: MembershipType;
-  startedAt: Scalars['Date'];
-  endedAt?: Maybe<Scalars['Date']>;
-  member: Member;
-  transactions: MembershipFeeTransactionList;
-};
-
-
-export type MembershiptransactionsArgs = {
-  where?: Maybe<MembershipFeeTransactionWhereInput>;
-  orderBy?: Maybe<MembershipFeeTransactionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export enum Language {
-  NL = 'NL',
-  EN = 'EN'
-}
-
-export enum Pronouns {
-  HE_HIM = 'HE_HIM',
-  SHE_HER = 'SHE_HER',
-  THEY_THEM = 'THEY_THEM'
-}
-
-export enum StudentType {
-  UNIVERSITY_UT = 'UNIVERSITY_UT',
-  UNIVERSITY_OTHER = 'UNIVERSITY_OTHER',
-  HBO_SAXION = 'HBO_SAXION',
-  HBO_OTHER = 'HBO_OTHER',
-  MBO = 'MBO',
-  WORKING = 'WORKING'
-}
-
-export type Member = {
-  __typename?: 'Member';
-  id: Scalars['String'];
-  providers: ProviderList;
-  firstName: Scalars['String'];
-  initials: Scalars['String'];
-  lastName: Scalars['String'];
-  email: Scalars['String'];
-  address: Scalars['String'];
-  postalCode: Scalars['String'];
-  city: Scalars['String'];
-  phoneNumber: Scalars['String'];
-  birthdate: Scalars['Date'];
-  language: Language;
-  pronouns: Pronouns;
-  studentType: StudentType;
-  isAdmin: Scalars['Boolean'];
-  image?: Maybe<File>;
-  memberships: MembershipList;
-  groups: GroupList;
-  participations: ParticipationList;
-  mandates: MandateList;
-  transactions: TransactionList;
-  warnings: DirectDebitWarningList;
-  latestMembership: Membership;
-  hasMandate: Scalars['Boolean'];
-  hasPendingPaperMandates: Scalars['Boolean'];
-};
-
-
-export type MemberprovidersArgs = {
-  where?: Maybe<ProviderWhereInput>;
-  orderBy?: Maybe<ProviderOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MembermembershipsArgs = {
-  where?: Maybe<MembershipWhereInput>;
-  orderBy?: Maybe<MembershipOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MembergroupsArgs = {
-  where?: Maybe<GroupWhereInput>;
-  orderBy?: Maybe<GroupOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MemberparticipationsArgs = {
-  where?: Maybe<ParticipationWhereInput>;
-  orderBy?: Maybe<ParticipationOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MembermandatesArgs = {
-  where?: Maybe<MandateWhereInput>;
-  orderBy?: Maybe<MandateOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MembertransactionsArgs = {
-  where?: Maybe<TransactionWhereInput>;
-  orderBy?: Maybe<TransactionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MemberwarningsArgs = {
-  where?: Maybe<DirectDebitWarningWhereInput>;
-  orderBy?: Maybe<DirectDebitWarningOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export type Participation = {
-  __typename?: 'Participation';
-  id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  member: Member;
-  event: Event;
-};
-
-export type Translatable = {
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
-};
-
-export type ShortTranslatable = Translatable & {
-  __typename?: 'ShortTranslatable';
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
-};
-
-export type LongTranslatable = Translatable & {
-  __typename?: 'LongTranslatable';
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
-};
-
-export type Event = {
-  __typename?: 'Event';
-  id: Scalars['String'];
-  name: ShortTranslatable;
-  description: LongTranslatable;
-  startedAt: Scalars['DateTime'];
-  endedAt: Scalars['DateTime'];
-  isAllDay: Scalars['Boolean'];
-  isCanceled: Scalars['Boolean'];
-  openedAt: Scalars['DateTime'];
-  closedAt: Scalars['DateTime'];
-  isMembersOnly: Scalars['Boolean'];
-  isParticipationRequired: Scalars['Boolean'];
-  maxParticipations?: Maybe<Scalars['Int']>;
-  groups: GroupList;
-  participations: ParticipationList;
-};
-
-
-export type EventgroupsArgs = {
-  where?: Maybe<GroupWhereInput>;
-  orderBy?: Maybe<GroupOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type EventparticipationsArgs = {
-  where?: Maybe<ParticipationWhereInput>;
-  orderBy?: Maybe<ParticipationOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export type Group = {
-  id: Scalars['String'];
-  name: ShortTranslatable;
-  startedAt: Scalars['Date'];
-  endedAt?: Maybe<Scalars['Date']>;
-  members: MemberList;
-  events: EventList;
-};
-
-
-export type GroupmembersArgs = {
-  where?: Maybe<MemberWhereInput>;
-  orderBy?: Maybe<MemberOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type GroupeventsArgs = {
-  where?: Maybe<EventWhereInput>;
-  orderBy?: Maybe<EventOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export type BoardPeriod = Group & {
-  __typename?: 'BoardPeriod';
-  id: Scalars['String'];
-  name: ShortTranslatable;
-  startedAt: Scalars['Date'];
-  endedAt?: Maybe<Scalars['Date']>;
-  members: MemberList;
-  events: EventList;
-};
-
-
-export type BoardPeriodmembersArgs = {
-  where?: Maybe<MemberWhereInput>;
-  orderBy?: Maybe<MemberOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type BoardPeriodeventsArgs = {
-  where?: Maybe<EventWhereInput>;
-  orderBy?: Maybe<EventOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export type CommitteePeriod = Group & {
-  __typename?: 'CommitteePeriod';
-  id: Scalars['String'];
-  name: ShortTranslatable;
-  startedAt: Scalars['Date'];
-  endedAt?: Maybe<Scalars['Date']>;
-  members: MemberList;
-  events: EventList;
-  committee: Committee;
-};
-
-
-export type CommitteePeriodmembersArgs = {
-  where?: Maybe<MemberWhereInput>;
-  orderBy?: Maybe<MemberOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type CommitteePeriodeventsArgs = {
-  where?: Maybe<EventWhereInput>;
-  orderBy?: Maybe<EventOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export type Committee = {
-  __typename?: 'Committee';
-  id: Scalars['String'];
-  name: ShortTranslatable;
-  description: LongTranslatable;
-  periods: CommitteePeriodList;
-};
-
-
-export type CommitteeperiodsArgs = {
-  where?: Maybe<CommitteePeriodWhereInput>;
-  orderBy?: Maybe<CommitteePeriodOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export type DigitalMandate = Mandate & {
-  __typename?: 'DigitalMandate';
-  id: Scalars['String'];
-  mandateId: Scalars['String'];
-  status: MandateStatus;
-  createdAt: Scalars['DateTime'];
-  acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic: Scalars['String'];
-  iban?: Maybe<Scalars['String']>;
-  reason: Scalars['String'];
-  isFirstTransaction: Scalars['Boolean'];
-  errorMessage?: Maybe<Scalars['String']>;
-  member: Member;
-  instructions: DirectDebitInstructionList;
-  messageId: Scalars['String'];
-  entranceCode: Scalars['String'];
-  transactionId?: Maybe<Scalars['String']>;
-};
-
-
-export type DigitalMandateinstructionsArgs = {
-  where?: Maybe<DirectDebitInstructionWhereInput>;
-  orderBy?: Maybe<DirectDebitInstructionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export type Page = {
-  __typename?: 'Page';
-  id: Scalars['String'];
-  title: ShortTranslatable;
-  body: LongTranslatable;
-};
-
-export type PaperMandate = Mandate & {
-  __typename?: 'PaperMandate';
-  id: Scalars['String'];
-  mandateId: Scalars['String'];
-  status: MandateStatus;
-  createdAt: Scalars['DateTime'];
-  acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic: Scalars['String'];
-  iban?: Maybe<Scalars['String']>;
-  reason: Scalars['String'];
-  isFirstTransaction: Scalars['Boolean'];
-  errorMessage?: Maybe<Scalars['String']>;
-  member: Member;
-  instructions: DirectDebitInstructionList;
-  generatedFile?: Maybe<File>;
-  uploadedFile?: Maybe<File>;
-};
-
-
-export type PaperMandateinstructionsArgs = {
-  where?: Maybe<DirectDebitInstructionWhereInput>;
-  orderBy?: Maybe<DirectDebitInstructionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-export type Setting = {
-  __typename?: 'Setting';
-  key: Scalars['String'];
-  value: Scalars['String'];
-  isPublic: Scalars['Boolean'];
-};
-
-export type CreateDigitalMandateResult = {
-  __typename?: 'CreateDigitalMandateResult';
-  redirectUrl: Scalars['String'];
-  mandate: DigitalMandate;
-};
-
 
 export type AccessToken = {
   __typename?: 'AccessToken';
@@ -565,126 +29,21 @@ export type AccessToken = {
   expiresIn: Scalars['Int'];
 };
 
-export type Provider = {
-  __typename?: 'Provider';
+export type Bank = {
+  __typename?: 'Bank';
+  bic: Scalars['String'];
+  country: Scalars['String'];
   id: Scalars['String'];
-  type: Scalars['String'];
-  email: Scalars['String'];
-  isVerified: Scalars['Boolean'];
-  user: Member;
-};
-
-export enum TokenType {
-  VERIFY_EMAIL = 'VERIFY_EMAIL',
-  RESET_PASSWORD = 'RESET_PASSWORD'
-}
-
-export type Token = {
-  __typename?: 'Token';
-  id: Scalars['String'];
-  type: TokenType;
-  token: Scalars['String'];
-  expiresAt: Scalars['DateTime'];
-  provider: Provider;
-};
-
-
-
-
-export enum OrderByArg {
-  ASC = 'ASC',
-  DESC = 'DESC'
-}
-
-export type IntFilter = {
-  equals?: Maybe<Scalars['Int']>;
-  not?: Maybe<Scalars['Int']>;
-  in?: Maybe<Array<Scalars['Int']>>;
-  notIn?: Maybe<Array<Scalars['Int']>>;
-  lt?: Maybe<Scalars['Int']>;
-  lte?: Maybe<Scalars['Int']>;
-  gt?: Maybe<Scalars['Int']>;
-  gte?: Maybe<Scalars['Int']>;
-};
-
-export type FloatFilter = {
-  equals?: Maybe<Scalars['Float']>;
-  not?: Maybe<Scalars['Float']>;
-  in?: Maybe<Array<Scalars['Float']>>;
-  notIn?: Maybe<Array<Scalars['Float']>>;
-  lt?: Maybe<Scalars['Float']>;
-  lte?: Maybe<Scalars['Float']>;
-  gt?: Maybe<Scalars['Float']>;
-  gte?: Maybe<Scalars['Float']>;
-};
-
-export type StringFilter = {
-  equals?: Maybe<Scalars['String']>;
-  not?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  notIn?: Maybe<Array<Scalars['String']>>;
-  lt?: Maybe<Scalars['String']>;
-  lte?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  gte?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  startsWith?: Maybe<Scalars['String']>;
-  endsWith?: Maybe<Scalars['String']>;
-};
-
-export type DateTimeFilter = {
-  equals?: Maybe<Scalars['DateTime']>;
-  not?: Maybe<Scalars['DateTime']>;
-  in?: Maybe<Array<Scalars['DateTime']>>;
-  notIn?: Maybe<Array<Scalars['DateTime']>>;
-  lt?: Maybe<Scalars['DateTime']>;
-  lte?: Maybe<Scalars['DateTime']>;
-  gt?: Maybe<Scalars['DateTime']>;
-  gte?: Maybe<Scalars['DateTime']>;
-};
-
-export type ListInfo = {
-  __typename?: 'ListInfo';
-  count: Scalars['Int'];
-};
-
-export type BankWhereInput = {
-  id?: Maybe<StringFilter>;
-  bic?: Maybe<StringFilter>;
-  country?: Maybe<StringFilter>;
-  name?: Maybe<StringFilter>;
-  isActive?: Maybe<Scalars['Boolean']>;
-  AND?: Maybe<Array<BankWhereInput>>;
-  OR?: Maybe<Array<BankWhereInput>>;
-};
-
-export type BankOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  bic?: Maybe<OrderByArg>;
-  country?: Maybe<OrderByArg>;
-  name?: Maybe<OrderByArg>;
-  isActive?: Maybe<OrderByArg>;
+  isActive: Scalars['Boolean'];
+  name: Scalars['String'];
 };
 
 export type BankCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  bic?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
-export type BankUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  bic?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-};
-
-export type BankWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-  bic?: Maybe<Scalars['String']>;
+  bic?: InputMaybe<Scalars['String']>;
+  country?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  isActive?: InputMaybe<Scalars['Boolean']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 export type BankList = {
@@ -693,791 +52,70 @@ export type BankList = {
   values: Array<Bank>;
 };
 
-export type MandateWhereInput = {
-  id?: Maybe<StringFilter>;
-  mandateId?: Maybe<StringFilter>;
-  status?: Maybe<MandateStatusFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  acceptedAt?: Maybe<DateTimeFilter>;
-  bic?: Maybe<StringFilter>;
-  iban?: Maybe<StringFilter>;
-  reason?: Maybe<StringFilter>;
-  isFirstTransaction?: Maybe<Scalars['Boolean']>;
-  errorMessage?: Maybe<StringFilter>;
-  member?: Maybe<MemberWhereInput>;
-  instructions?: Maybe<DirectDebitInstructionWhereInput>;
-  AND?: Maybe<Array<MandateWhereInput>>;
-  OR?: Maybe<Array<MandateWhereInput>>;
+export type BankOrderByInput = {
+  bic?: InputMaybe<OrderByArg>;
+  country?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  isActive?: InputMaybe<OrderByArg>;
+  name?: InputMaybe<OrderByArg>;
 };
 
-export type MandateOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  mandateId?: Maybe<OrderByArg>;
-  status?: Maybe<OrderByArg>;
-  createdAt?: Maybe<OrderByArg>;
-  acceptedAt?: Maybe<OrderByArg>;
-  bic?: Maybe<OrderByArg>;
-  iban?: Maybe<OrderByArg>;
-  reason?: Maybe<OrderByArg>;
-  isFirstTransaction?: Maybe<OrderByArg>;
-  errorMessage?: Maybe<OrderByArg>;
-  member?: Maybe<MemberOrderByInput>;
+export type BankUpdateInput = {
+  bic?: InputMaybe<Scalars['String']>;
+  country?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  isActive?: InputMaybe<Scalars['Boolean']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
-export type MandateCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  mandateId?: Maybe<Scalars['String']>;
-  status?: Maybe<MandateStatus>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic?: Maybe<Scalars['String']>;
-  iban?: Maybe<Scalars['String']>;
-  reason?: Maybe<Scalars['String']>;
-  isFirstTransaction?: Maybe<Scalars['Boolean']>;
-  errorMessage?: Maybe<Scalars['String']>;
-  member?: Maybe<MemberCreateRelationInput>;
-  instructions?: Maybe<Array<DirectDebitInstructionCreateRelationInput>>;
+export type BankWhereInput = {
+  AND?: InputMaybe<Array<BankWhereInput>>;
+  bic?: InputMaybe<StringFilter>;
+  country?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  isActive?: InputMaybe<Scalars['Boolean']>;
+  name?: InputMaybe<StringFilter>;
+  OR?: InputMaybe<Array<BankWhereInput>>;
 };
 
-export type MandateUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  mandateId?: Maybe<Scalars['String']>;
-  status?: Maybe<MandateStatus>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic?: Maybe<Scalars['String']>;
-  iban?: Maybe<Scalars['String']>;
-  reason?: Maybe<Scalars['String']>;
-  isFirstTransaction?: Maybe<Scalars['Boolean']>;
-  errorMessage?: Maybe<Scalars['String']>;
-  member?: Maybe<MemberUpdateRelationInput>;
-  instructions?: Maybe<Array<DirectDebitInstructionUpdateRelationInput>>;
+export type BankWhereUniqueInput = {
+  bic?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
 };
 
-export type MandateWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type MandateList = {
-  __typename?: 'MandateList';
-  info: ListInfo;
-  values: Array<Mandate>;
-};
-
-export type TransactionWhereInput = {
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  updatedAt?: Maybe<DateTimeFilter>;
-  description?: Maybe<StringFilter>;
-  amount?: Maybe<IntFilter>;
-  member?: Maybe<MemberWhereInput>;
-  instruction?: Maybe<DirectDebitInstructionWhereInput>;
-  AND?: Maybe<Array<TransactionWhereInput>>;
-  OR?: Maybe<Array<TransactionWhereInput>>;
-};
-
-export type TransactionOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  createdAt?: Maybe<OrderByArg>;
-  updatedAt?: Maybe<OrderByArg>;
-  description?: Maybe<OrderByArg>;
-  amount?: Maybe<OrderByArg>;
-  member?: Maybe<MemberOrderByInput>;
-  instruction?: Maybe<DirectDebitInstructionOrderByInput>;
-};
-
-export type TransactionCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  description?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['Float']>;
-  member?: Maybe<MemberCreateRelationInput>;
-  instruction?: Maybe<DirectDebitInstructionCreateRelationInput>;
-};
-
-export type TransactionUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  description?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['Float']>;
-  member?: Maybe<MemberUpdateRelationInput>;
-  instruction?: Maybe<DirectDebitInstructionUpdateRelationInput>;
-};
-
-export type TransactionWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type TransactionList = {
-  __typename?: 'TransactionList';
-  info: ListInfo;
-  values: Array<Transaction>;
-};
-
-export type DirectDebitInstructionWhereInput = {
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  updatedAt?: Maybe<DateTimeFilter>;
-  instructionId?: Maybe<StringFilter>;
-  description?: Maybe<StringFilter>;
-  batch?: Maybe<DirectDebitBatchWhereInput>;
-  transactions?: Maybe<TransactionWhereInput>;
-  mandate?: Maybe<MandateWhereInput>;
-  AND?: Maybe<Array<DirectDebitInstructionWhereInput>>;
-  OR?: Maybe<Array<DirectDebitInstructionWhereInput>>;
-};
-
-export type DirectDebitInstructionOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  createdAt?: Maybe<OrderByArg>;
-  updatedAt?: Maybe<OrderByArg>;
-  instructionId?: Maybe<OrderByArg>;
-  description?: Maybe<OrderByArg>;
-  batch?: Maybe<DirectDebitBatchOrderByInput>;
-  mandate?: Maybe<MandateOrderByInput>;
-};
-
-export type DirectDebitInstructionCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  instructionId?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  batch?: Maybe<DirectDebitBatchCreateRelationInput>;
-  transactions?: Maybe<Array<TransactionCreateRelationInput>>;
-  mandate?: Maybe<MandateCreateRelationInput>;
-};
-
-export type DirectDebitInstructionUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  instructionId?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  batch?: Maybe<DirectDebitBatchUpdateRelationInput>;
-  transactions?: Maybe<Array<TransactionUpdateRelationInput>>;
-  mandate?: Maybe<MandateUpdateRelationInput>;
-};
-
-export type DirectDebitInstructionWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type DirectDebitInstructionList = {
-  __typename?: 'DirectDebitInstructionList';
-  info: ListInfo;
-  values: Array<DirectDebitInstruction>;
-};
-
-export type DirectDebitBatchWhereInput = {
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  updatedAt?: Maybe<DateTimeFilter>;
-  batchId?: Maybe<StringFilter>;
-  sequenceType?: Maybe<SequenceTypeFilter>;
-  directDebit?: Maybe<DirectDebitWhereInput>;
-  instructions?: Maybe<DirectDebitInstructionWhereInput>;
-  AND?: Maybe<Array<DirectDebitBatchWhereInput>>;
-  OR?: Maybe<Array<DirectDebitBatchWhereInput>>;
-};
-
-export type DirectDebitBatchOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  createdAt?: Maybe<OrderByArg>;
-  updatedAt?: Maybe<OrderByArg>;
-  batchId?: Maybe<OrderByArg>;
-  sequenceType?: Maybe<OrderByArg>;
-  directDebit?: Maybe<DirectDebitOrderByInput>;
-};
-
-export type DirectDebitBatchCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  batchId?: Maybe<Scalars['String']>;
-  sequenceType?: Maybe<SequenceType>;
-  directDebit?: Maybe<DirectDebitCreateRelationInput>;
-  instructions?: Maybe<Array<DirectDebitInstructionCreateRelationInput>>;
-};
-
-export type DirectDebitBatchUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  batchId?: Maybe<Scalars['String']>;
-  sequenceType?: Maybe<SequenceType>;
-  directDebit?: Maybe<DirectDebitUpdateRelationInput>;
-  instructions?: Maybe<Array<DirectDebitInstructionUpdateRelationInput>>;
-};
-
-export type DirectDebitBatchWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type DirectDebitBatchList = {
-  __typename?: 'DirectDebitBatchList';
-  info: ListInfo;
-  values: Array<DirectDebitBatch>;
-};
-
-export type FileWhereInput = {
-  id?: Maybe<StringFilter>;
-  name?: Maybe<StringFilter>;
-  mimeType?: Maybe<StringFilter>;
-  AND?: Maybe<Array<FileWhereInput>>;
-  OR?: Maybe<Array<FileWhereInput>>;
-};
-
-export type FileOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  name?: Maybe<OrderByArg>;
-  mimeType?: Maybe<OrderByArg>;
-};
-
-export type FileCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  mimeType?: Maybe<Scalars['String']>;
-};
-
-export type FileUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  mimeType?: Maybe<Scalars['String']>;
-};
-
-export type FileWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type FileList = {
-  __typename?: 'FileList';
-  info: ListInfo;
-  values: Array<File>;
-};
-
-export type DirectDebitWhereInput = {
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  updatedAt?: Maybe<DateTimeFilter>;
-  status?: Maybe<DirectDebitStatusFilter>;
-  messageId?: Maybe<StringFilter>;
-  collectionDate?: Maybe<StringFilter>;
-  batches?: Maybe<DirectDebitBatchWhereInput>;
-  warnings?: Maybe<DirectDebitWarningWhereInput>;
-  file?: Maybe<FileWhereInput>;
-  AND?: Maybe<Array<DirectDebitWhereInput>>;
-  OR?: Maybe<Array<DirectDebitWhereInput>>;
-};
-
-export type DirectDebitOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  createdAt?: Maybe<OrderByArg>;
-  updatedAt?: Maybe<OrderByArg>;
-  status?: Maybe<OrderByArg>;
-  messageId?: Maybe<OrderByArg>;
-  collectionDate?: Maybe<OrderByArg>;
-  file?: Maybe<FileOrderByInput>;
-};
-
-export type DirectDebitCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  status?: Maybe<DirectDebitStatus>;
-  messageId?: Maybe<Scalars['String']>;
-  collectionDate?: Maybe<Scalars['String']>;
-  batches?: Maybe<Array<DirectDebitBatchCreateRelationInput>>;
-  warnings?: Maybe<Array<DirectDebitWarningCreateRelationInput>>;
-  file?: Maybe<FileCreateRelationInput>;
-};
-
-export type DirectDebitUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  status?: Maybe<DirectDebitStatus>;
-  messageId?: Maybe<Scalars['String']>;
-  collectionDate?: Maybe<Scalars['String']>;
-  batches?: Maybe<Array<DirectDebitBatchUpdateRelationInput>>;
-  warnings?: Maybe<Array<DirectDebitWarningUpdateRelationInput>>;
-  file?: Maybe<FileUpdateRelationInput>;
-};
-
-export type DirectDebitWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type DirectDebitList = {
-  __typename?: 'DirectDebitList';
-  info: ListInfo;
-  values: Array<DirectDebit>;
-};
-
-export type DirectDebitWarningWhereInput = {
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  updatedAt?: Maybe<DateTimeFilter>;
-  description?: Maybe<StringFilter>;
-  directDebit?: Maybe<DirectDebitWhereInput>;
-  member?: Maybe<MemberWhereInput>;
-  AND?: Maybe<Array<DirectDebitWarningWhereInput>>;
-  OR?: Maybe<Array<DirectDebitWarningWhereInput>>;
-};
-
-export type DirectDebitWarningOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  createdAt?: Maybe<OrderByArg>;
-  updatedAt?: Maybe<OrderByArg>;
-  description?: Maybe<OrderByArg>;
-  directDebit?: Maybe<DirectDebitOrderByInput>;
-  member?: Maybe<MemberOrderByInput>;
-};
-
-export type DirectDebitWarningCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  description?: Maybe<Scalars['String']>;
-  directDebit?: Maybe<DirectDebitCreateRelationInput>;
-  member?: Maybe<MemberCreateRelationInput>;
-};
-
-export type DirectDebitWarningUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  description?: Maybe<Scalars['String']>;
-  directDebit?: Maybe<DirectDebitUpdateRelationInput>;
-  member?: Maybe<MemberUpdateRelationInput>;
-};
-
-export type DirectDebitWarningWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type DirectDebitWarningList = {
-  __typename?: 'DirectDebitWarningList';
-  info: ListInfo;
-  values: Array<DirectDebitWarning>;
-};
-
-export type MembershipFeeTransactionWhereInput = {
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  updatedAt?: Maybe<DateTimeFilter>;
-  description?: Maybe<StringFilter>;
-  amount?: Maybe<IntFilter>;
-  member?: Maybe<MemberWhereInput>;
-  instruction?: Maybe<DirectDebitInstructionWhereInput>;
-  year?: Maybe<IntFilter>;
-  membership?: Maybe<MembershipWhereInput>;
-  AND?: Maybe<Array<MembershipFeeTransactionWhereInput>>;
-  OR?: Maybe<Array<MembershipFeeTransactionWhereInput>>;
-};
-
-export type MembershipFeeTransactionOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  createdAt?: Maybe<OrderByArg>;
-  updatedAt?: Maybe<OrderByArg>;
-  description?: Maybe<OrderByArg>;
-  amount?: Maybe<OrderByArg>;
-  member?: Maybe<MemberOrderByInput>;
-  instruction?: Maybe<DirectDebitInstructionOrderByInput>;
-  year?: Maybe<OrderByArg>;
-  membership?: Maybe<MembershipOrderByInput>;
-};
-
-export type MembershipFeeTransactionCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  description?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['Float']>;
-  member?: Maybe<MemberCreateRelationInput>;
-  instruction?: Maybe<DirectDebitInstructionCreateRelationInput>;
-  year?: Maybe<Scalars['Float']>;
-  membership?: Maybe<MembershipCreateRelationInput>;
-};
-
-export type MembershipFeeTransactionUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  description?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['Float']>;
-  member?: Maybe<MemberUpdateRelationInput>;
-  instruction?: Maybe<DirectDebitInstructionUpdateRelationInput>;
-  year?: Maybe<Scalars['Float']>;
-  membership?: Maybe<MembershipUpdateRelationInput>;
-};
-
-export type MembershipFeeTransactionWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type MembershipFeeTransactionList = {
-  __typename?: 'MembershipFeeTransactionList';
-  info: ListInfo;
-  values: Array<MembershipFeeTransaction>;
-};
-
-export type MembershipWhereInput = {
-  id?: Maybe<StringFilter>;
-  type?: Maybe<MembershipTypeFilter>;
-  startedAt?: Maybe<DateTimeFilter>;
-  endedAt?: Maybe<DateTimeFilter>;
-  member?: Maybe<MemberWhereInput>;
-  transactions?: Maybe<MembershipFeeTransactionWhereInput>;
-  AND?: Maybe<Array<MembershipWhereInput>>;
-  OR?: Maybe<Array<MembershipWhereInput>>;
-};
-
-export type MembershipOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  type?: Maybe<OrderByArg>;
-  startedAt?: Maybe<OrderByArg>;
-  endedAt?: Maybe<OrderByArg>;
-  member?: Maybe<MemberOrderByInput>;
-};
-
-export type MembershipCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  type?: Maybe<MembershipType>;
-  startedAt?: Maybe<Scalars['Date']>;
+export type BoardPeriod = Group & {
+  __typename?: 'BoardPeriod';
   endedAt?: Maybe<Scalars['Date']>;
-  member?: Maybe<MemberCreateRelationInput>;
-  transactions?: Maybe<Array<MembershipFeeTransactionCreateRelationInput>>;
+  events: EventList;
+  id: Scalars['String'];
+  members: MemberList;
+  name: ShortTranslatable;
+  startedAt: Scalars['Date'];
 };
 
-export type MembershipUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  type?: Maybe<MembershipType>;
-  startedAt?: Maybe<Scalars['Date']>;
-  endedAt?: Maybe<Scalars['Date']>;
-  member?: Maybe<MemberUpdateRelationInput>;
-  transactions?: Maybe<Array<MembershipFeeTransactionUpdateRelationInput>>;
+
+export type BoardPeriodeventsArgs = {
+  orderBy?: InputMaybe<EventOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<EventWhereInput>;
 };
 
-export type MembershipWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
 
-export type MembershipList = {
-  __typename?: 'MembershipList';
-  info: ListInfo;
-  values: Array<Membership>;
-};
-
-export type MemberWhereInput = {
-  id?: Maybe<StringFilter>;
-  providers?: Maybe<ProviderWhereInput>;
-  firstName?: Maybe<StringFilter>;
-  initials?: Maybe<StringFilter>;
-  lastName?: Maybe<StringFilter>;
-  email?: Maybe<StringFilter>;
-  address?: Maybe<StringFilter>;
-  postalCode?: Maybe<StringFilter>;
-  city?: Maybe<StringFilter>;
-  phoneNumber?: Maybe<StringFilter>;
-  birthdate?: Maybe<DateTimeFilter>;
-  language?: Maybe<LanguageFilter>;
-  pronouns?: Maybe<PronounsFilter>;
-  studentType?: Maybe<StudentTypeFilter>;
-  isAdmin?: Maybe<Scalars['Boolean']>;
-  image?: Maybe<FileWhereInput>;
-  memberships?: Maybe<MembershipWhereInput>;
-  groups?: Maybe<GroupWhereInput>;
-  participations?: Maybe<ParticipationWhereInput>;
-  mandates?: Maybe<MandateWhereInput>;
-  transactions?: Maybe<TransactionWhereInput>;
-  warnings?: Maybe<DirectDebitWarningWhereInput>;
-  AND?: Maybe<Array<MemberWhereInput>>;
-  OR?: Maybe<Array<MemberWhereInput>>;
-};
-
-export type MemberOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  firstName?: Maybe<OrderByArg>;
-  initials?: Maybe<OrderByArg>;
-  lastName?: Maybe<OrderByArg>;
-  email?: Maybe<OrderByArg>;
-  address?: Maybe<OrderByArg>;
-  postalCode?: Maybe<OrderByArg>;
-  city?: Maybe<OrderByArg>;
-  phoneNumber?: Maybe<OrderByArg>;
-  birthdate?: Maybe<OrderByArg>;
-  language?: Maybe<OrderByArg>;
-  pronouns?: Maybe<OrderByArg>;
-  studentType?: Maybe<OrderByArg>;
-  isAdmin?: Maybe<OrderByArg>;
-  image?: Maybe<FileOrderByInput>;
-};
-
-export type MemberCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  providers?: Maybe<Array<ProviderCreateRelationInput>>;
-  firstName?: Maybe<Scalars['String']>;
-  initials?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  address?: Maybe<Scalars['String']>;
-  postalCode?: Maybe<Scalars['String']>;
-  city?: Maybe<Scalars['String']>;
-  phoneNumber?: Maybe<Scalars['String']>;
-  birthdate?: Maybe<Scalars['Date']>;
-  language?: Maybe<Language>;
-  pronouns?: Maybe<Pronouns>;
-  studentType?: Maybe<StudentType>;
-  isAdmin?: Maybe<Scalars['Boolean']>;
-  image?: Maybe<FileCreateRelationInput>;
-  memberships?: Maybe<Array<MembershipCreateRelationInput>>;
-  groups?: Maybe<Array<GroupCreateRelationInput>>;
-  participations?: Maybe<Array<ParticipationCreateRelationInput>>;
-  mandates?: Maybe<Array<MandateCreateRelationInput>>;
-  transactions?: Maybe<Array<TransactionCreateRelationInput>>;
-  warnings?: Maybe<Array<DirectDebitWarningCreateRelationInput>>;
-};
-
-export type MemberUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  providers?: Maybe<Array<ProviderUpdateRelationInput>>;
-  firstName?: Maybe<Scalars['String']>;
-  initials?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  address?: Maybe<Scalars['String']>;
-  postalCode?: Maybe<Scalars['String']>;
-  city?: Maybe<Scalars['String']>;
-  phoneNumber?: Maybe<Scalars['String']>;
-  birthdate?: Maybe<Scalars['Date']>;
-  language?: Maybe<Language>;
-  pronouns?: Maybe<Pronouns>;
-  studentType?: Maybe<StudentType>;
-  isAdmin?: Maybe<Scalars['Boolean']>;
-  image?: Maybe<FileUpdateRelationInput>;
-  memberships?: Maybe<Array<MembershipUpdateRelationInput>>;
-  groups?: Maybe<Array<GroupUpdateRelationInput>>;
-  participations?: Maybe<Array<ParticipationUpdateRelationInput>>;
-  mandates?: Maybe<Array<MandateUpdateRelationInput>>;
-  transactions?: Maybe<Array<TransactionUpdateRelationInput>>;
-  warnings?: Maybe<Array<DirectDebitWarningUpdateRelationInput>>;
-};
-
-export type MemberWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type MemberList = {
-  __typename?: 'MemberList';
-  info: ListInfo;
-  values: Array<Member>;
-};
-
-export type ParticipationWhereInput = {
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  member?: Maybe<MemberWhereInput>;
-  event?: Maybe<EventWhereInput>;
-  AND?: Maybe<Array<ParticipationWhereInput>>;
-  OR?: Maybe<Array<ParticipationWhereInput>>;
-};
-
-export type ParticipationOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  createdAt?: Maybe<OrderByArg>;
-  member?: Maybe<MemberOrderByInput>;
-  event?: Maybe<EventOrderByInput>;
-};
-
-export type ParticipationCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  member?: Maybe<MemberCreateRelationInput>;
-  event?: Maybe<EventCreateRelationInput>;
-};
-
-export type ParticipationUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  member?: Maybe<MemberUpdateRelationInput>;
-  event?: Maybe<EventUpdateRelationInput>;
-};
-
-export type ParticipationWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type ParticipationList = {
-  __typename?: 'ParticipationList';
-  info: ListInfo;
-  values: Array<Participation>;
-};
-
-export type EventWhereInput = {
-  id?: Maybe<StringFilter>;
-  name?: Maybe<ShortTranslatableWhereInput>;
-  description?: Maybe<LongTranslatableWhereInput>;
-  startedAt?: Maybe<DateTimeFilter>;
-  endedAt?: Maybe<DateTimeFilter>;
-  isAllDay?: Maybe<Scalars['Boolean']>;
-  isCanceled?: Maybe<Scalars['Boolean']>;
-  openedAt?: Maybe<DateTimeFilter>;
-  closedAt?: Maybe<DateTimeFilter>;
-  isMembersOnly?: Maybe<Scalars['Boolean']>;
-  isParticipationRequired?: Maybe<Scalars['Boolean']>;
-  maxParticipations?: Maybe<IntFilter>;
-  groups?: Maybe<GroupWhereInput>;
-  participations?: Maybe<ParticipationWhereInput>;
-  AND?: Maybe<Array<EventWhereInput>>;
-  OR?: Maybe<Array<EventWhereInput>>;
-};
-
-export type EventOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  name?: Maybe<ShortTranslatableOrderByInput>;
-  description?: Maybe<LongTranslatableOrderByInput>;
-  startedAt?: Maybe<OrderByArg>;
-  endedAt?: Maybe<OrderByArg>;
-  isAllDay?: Maybe<OrderByArg>;
-  isCanceled?: Maybe<OrderByArg>;
-  openedAt?: Maybe<OrderByArg>;
-  closedAt?: Maybe<OrderByArg>;
-  isMembersOnly?: Maybe<OrderByArg>;
-  isParticipationRequired?: Maybe<OrderByArg>;
-  maxParticipations?: Maybe<OrderByArg>;
-};
-
-export type EventCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatableCreateInput>;
-  description?: Maybe<LongTranslatableCreateInput>;
-  startedAt?: Maybe<Scalars['DateTime']>;
-  endedAt?: Maybe<Scalars['DateTime']>;
-  isAllDay?: Maybe<Scalars['Boolean']>;
-  isCanceled?: Maybe<Scalars['Boolean']>;
-  openedAt?: Maybe<Scalars['DateTime']>;
-  closedAt?: Maybe<Scalars['DateTime']>;
-  isMembersOnly?: Maybe<Scalars['Boolean']>;
-  isParticipationRequired?: Maybe<Scalars['Boolean']>;
-  maxParticipations?: Maybe<Scalars['Float']>;
-  groups?: Maybe<Array<GroupCreateRelationInput>>;
-  participations?: Maybe<Array<ParticipationCreateRelationInput>>;
-};
-
-export type EventUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatableUpdateInput>;
-  description?: Maybe<LongTranslatableUpdateInput>;
-  startedAt?: Maybe<Scalars['DateTime']>;
-  endedAt?: Maybe<Scalars['DateTime']>;
-  isAllDay?: Maybe<Scalars['Boolean']>;
-  isCanceled?: Maybe<Scalars['Boolean']>;
-  openedAt?: Maybe<Scalars['DateTime']>;
-  closedAt?: Maybe<Scalars['DateTime']>;
-  isMembersOnly?: Maybe<Scalars['Boolean']>;
-  isParticipationRequired?: Maybe<Scalars['Boolean']>;
-  maxParticipations?: Maybe<Scalars['Float']>;
-  groups?: Maybe<Array<GroupUpdateRelationInput>>;
-  participations?: Maybe<Array<ParticipationUpdateRelationInput>>;
-};
-
-export type EventWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type EventList = {
-  __typename?: 'EventList';
-  info: ListInfo;
-  values: Array<Event>;
-};
-
-export type GroupWhereInput = {
-  id?: Maybe<StringFilter>;
-  name?: Maybe<ShortTranslatableWhereInput>;
-  startedAt?: Maybe<DateTimeFilter>;
-  endedAt?: Maybe<DateTimeFilter>;
-  members?: Maybe<MemberWhereInput>;
-  events?: Maybe<EventWhereInput>;
-  AND?: Maybe<Array<GroupWhereInput>>;
-  OR?: Maybe<Array<GroupWhereInput>>;
-};
-
-export type GroupOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  name?: Maybe<ShortTranslatableOrderByInput>;
-  startedAt?: Maybe<OrderByArg>;
-  endedAt?: Maybe<OrderByArg>;
-};
-
-export type GroupCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatableCreateInput>;
-  startedAt?: Maybe<Scalars['Date']>;
-  endedAt?: Maybe<Scalars['Date']>;
-  members?: Maybe<Array<MemberCreateRelationInput>>;
-  events?: Maybe<Array<EventCreateRelationInput>>;
-};
-
-export type GroupUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatableUpdateInput>;
-  startedAt?: Maybe<Scalars['Date']>;
-  endedAt?: Maybe<Scalars['Date']>;
-  members?: Maybe<Array<MemberUpdateRelationInput>>;
-  events?: Maybe<Array<EventUpdateRelationInput>>;
-};
-
-export type GroupWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type GroupList = {
-  __typename?: 'GroupList';
-  info: ListInfo;
-  values: Array<Group>;
-};
-
-export type BoardPeriodWhereInput = {
-  id?: Maybe<StringFilter>;
-  name?: Maybe<ShortTranslatableWhereInput>;
-  startedAt?: Maybe<DateTimeFilter>;
-  endedAt?: Maybe<DateTimeFilter>;
-  members?: Maybe<MemberWhereInput>;
-  events?: Maybe<EventWhereInput>;
-  AND?: Maybe<Array<BoardPeriodWhereInput>>;
-  OR?: Maybe<Array<BoardPeriodWhereInput>>;
-};
-
-export type BoardPeriodOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  name?: Maybe<ShortTranslatableOrderByInput>;
-  startedAt?: Maybe<OrderByArg>;
-  endedAt?: Maybe<OrderByArg>;
+export type BoardPeriodmembersArgs = {
+  orderBy?: InputMaybe<MemberOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MemberWhereInput>;
 };
 
 export type BoardPeriodCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatableCreateInput>;
-  startedAt?: Maybe<Scalars['Date']>;
-  endedAt?: Maybe<Scalars['Date']>;
-  members?: Maybe<Array<MemberCreateRelationInput>>;
-  events?: Maybe<Array<EventCreateRelationInput>>;
-};
-
-export type BoardPeriodUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatableUpdateInput>;
-  startedAt?: Maybe<Scalars['Date']>;
-  endedAt?: Maybe<Scalars['Date']>;
-  members?: Maybe<Array<MemberUpdateRelationInput>>;
-  events?: Maybe<Array<EventUpdateRelationInput>>;
-};
-
-export type BoardPeriodWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
+  endedAt?: InputMaybe<Scalars['Date']>;
+  events?: InputMaybe<Array<EventCreateRelationInput>>;
+  id?: InputMaybe<Scalars['String']>;
+  members?: InputMaybe<Array<MemberCreateRelationInput>>;
+  name?: InputMaybe<ShortTranslatableCreateInput>;
+  startedAt?: InputMaybe<Scalars['Date']>;
 };
 
 export type BoardPeriodList = {
@@ -1486,87 +124,63 @@ export type BoardPeriodList = {
   values: Array<BoardPeriod>;
 };
 
-export type CommitteePeriodWhereInput = {
-  id?: Maybe<StringFilter>;
-  name?: Maybe<ShortTranslatableWhereInput>;
-  startedAt?: Maybe<DateTimeFilter>;
-  endedAt?: Maybe<DateTimeFilter>;
-  members?: Maybe<MemberWhereInput>;
-  events?: Maybe<EventWhereInput>;
-  committee?: Maybe<CommitteeWhereInput>;
-  AND?: Maybe<Array<CommitteePeriodWhereInput>>;
-  OR?: Maybe<Array<CommitteePeriodWhereInput>>;
+export type BoardPeriodOrderByInput = {
+  endedAt?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  name?: InputMaybe<ShortTranslatableOrderByInput>;
+  startedAt?: InputMaybe<OrderByArg>;
 };
 
-export type CommitteePeriodOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  name?: Maybe<ShortTranslatableOrderByInput>;
-  startedAt?: Maybe<OrderByArg>;
-  endedAt?: Maybe<OrderByArg>;
-  committee?: Maybe<CommitteeOrderByInput>;
+export type BoardPeriodUpdateInput = {
+  endedAt?: InputMaybe<Scalars['Date']>;
+  events?: InputMaybe<Array<EventUpdateRelationInput>>;
+  id?: InputMaybe<Scalars['String']>;
+  members?: InputMaybe<Array<MemberUpdateRelationInput>>;
+  name?: InputMaybe<ShortTranslatableUpdateInput>;
+  startedAt?: InputMaybe<Scalars['Date']>;
 };
 
-export type CommitteePeriodCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatableCreateInput>;
-  startedAt?: Maybe<Scalars['Date']>;
-  endedAt?: Maybe<Scalars['Date']>;
-  members?: Maybe<Array<MemberCreateRelationInput>>;
-  events?: Maybe<Array<EventCreateRelationInput>>;
-  committee?: Maybe<CommitteeCreateRelationInput>;
+export type BoardPeriodWhereInput = {
+  AND?: InputMaybe<Array<BoardPeriodWhereInput>>;
+  endedAt?: InputMaybe<DateTimeFilter>;
+  events?: InputMaybe<EventWhereInput>;
+  id?: InputMaybe<StringFilter>;
+  members?: InputMaybe<MemberWhereInput>;
+  name?: InputMaybe<ShortTranslatableWhereInput>;
+  OR?: InputMaybe<Array<BoardPeriodWhereInput>>;
+  startedAt?: InputMaybe<DateTimeFilter>;
 };
 
-export type CommitteePeriodUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatableUpdateInput>;
-  startedAt?: Maybe<Scalars['Date']>;
-  endedAt?: Maybe<Scalars['Date']>;
-  members?: Maybe<Array<MemberUpdateRelationInput>>;
-  events?: Maybe<Array<EventUpdateRelationInput>>;
-  committee?: Maybe<CommitteeUpdateRelationInput>;
+export type BoardPeriodWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
-export type CommitteePeriodWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
+export type Committee = {
+  __typename?: 'Committee';
+  description: LongTranslatable;
+  id: Scalars['String'];
+  name: ShortTranslatable;
+  periods: CommitteePeriodList;
 };
 
-export type CommitteePeriodList = {
-  __typename?: 'CommitteePeriodList';
-  info: ListInfo;
-  values: Array<CommitteePeriod>;
-};
 
-export type CommitteeWhereInput = {
-  id?: Maybe<StringFilter>;
-  name?: Maybe<ShortTranslatableWhereInput>;
-  description?: Maybe<LongTranslatableWhereInput>;
-  periods?: Maybe<CommitteePeriodWhereInput>;
-  AND?: Maybe<Array<CommitteeWhereInput>>;
-  OR?: Maybe<Array<CommitteeWhereInput>>;
-};
-
-export type CommitteeOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  name?: Maybe<ShortTranslatableOrderByInput>;
-  description?: Maybe<LongTranslatableOrderByInput>;
+export type CommitteeperiodsArgs = {
+  orderBy?: InputMaybe<CommitteePeriodOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CommitteePeriodWhereInput>;
 };
 
 export type CommitteeCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatableCreateInput>;
-  description?: Maybe<LongTranslatableCreateInput>;
-  periods?: Maybe<Array<CommitteePeriodCreateRelationInput>>;
+  description?: InputMaybe<LongTranslatableCreateInput>;
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<ShortTranslatableCreateInput>;
+  periods?: InputMaybe<Array<CommitteePeriodCreateRelationInput>>;
 };
 
-export type CommitteeUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<ShortTranslatableUpdateInput>;
-  description?: Maybe<LongTranslatableUpdateInput>;
-  periods?: Maybe<Array<CommitteePeriodUpdateRelationInput>>;
-};
-
-export type CommitteeWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
+export type CommitteeCreateRelationInput = {
+  connect?: InputMaybe<CommitteeWhereUniqueInput>;
+  create?: InputMaybe<CommitteeCreateInput>;
 };
 
 export type CommitteeList = {
@@ -1575,81 +189,197 @@ export type CommitteeList = {
   values: Array<Committee>;
 };
 
-export type DigitalMandateWhereInput = {
-  id?: Maybe<StringFilter>;
-  mandateId?: Maybe<StringFilter>;
-  status?: Maybe<MandateStatusFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  acceptedAt?: Maybe<DateTimeFilter>;
-  bic?: Maybe<StringFilter>;
-  iban?: Maybe<StringFilter>;
-  reason?: Maybe<StringFilter>;
-  isFirstTransaction?: Maybe<Scalars['Boolean']>;
-  errorMessage?: Maybe<StringFilter>;
-  member?: Maybe<MemberWhereInput>;
-  instructions?: Maybe<DirectDebitInstructionWhereInput>;
-  messageId?: Maybe<StringFilter>;
-  entranceCode?: Maybe<StringFilter>;
-  transactionId?: Maybe<StringFilter>;
-  AND?: Maybe<Array<DigitalMandateWhereInput>>;
-  OR?: Maybe<Array<DigitalMandateWhereInput>>;
+export type CommitteeOrderByInput = {
+  description?: InputMaybe<LongTranslatableOrderByInput>;
+  id?: InputMaybe<OrderByArg>;
+  name?: InputMaybe<ShortTranslatableOrderByInput>;
 };
 
-export type DigitalMandateOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  mandateId?: Maybe<OrderByArg>;
-  status?: Maybe<OrderByArg>;
-  createdAt?: Maybe<OrderByArg>;
-  acceptedAt?: Maybe<OrderByArg>;
-  bic?: Maybe<OrderByArg>;
-  iban?: Maybe<OrderByArg>;
-  reason?: Maybe<OrderByArg>;
-  isFirstTransaction?: Maybe<OrderByArg>;
-  errorMessage?: Maybe<OrderByArg>;
-  member?: Maybe<MemberOrderByInput>;
-  messageId?: Maybe<OrderByArg>;
-  entranceCode?: Maybe<OrderByArg>;
-  transactionId?: Maybe<OrderByArg>;
+export type CommitteePeriod = Group & {
+  __typename?: 'CommitteePeriod';
+  committee: Committee;
+  endedAt?: Maybe<Scalars['Date']>;
+  events: EventList;
+  id: Scalars['String'];
+  members: MemberList;
+  name: ShortTranslatable;
+  startedAt: Scalars['Date'];
+};
+
+
+export type CommitteePeriodeventsArgs = {
+  orderBy?: InputMaybe<EventOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<EventWhereInput>;
+};
+
+
+export type CommitteePeriodmembersArgs = {
+  orderBy?: InputMaybe<MemberOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MemberWhereInput>;
+};
+
+export type CommitteePeriodCreateInput = {
+  committee?: InputMaybe<CommitteeCreateRelationInput>;
+  endedAt?: InputMaybe<Scalars['Date']>;
+  events?: InputMaybe<Array<EventCreateRelationInput>>;
+  id?: InputMaybe<Scalars['String']>;
+  members?: InputMaybe<Array<MemberCreateRelationInput>>;
+  name?: InputMaybe<ShortTranslatableCreateInput>;
+  startedAt?: InputMaybe<Scalars['Date']>;
+};
+
+export type CommitteePeriodCreateRelationInput = {
+  connect?: InputMaybe<CommitteePeriodWhereUniqueInput>;
+  create?: InputMaybe<CommitteePeriodCreateInput>;
+};
+
+export type CommitteePeriodList = {
+  __typename?: 'CommitteePeriodList';
+  info: ListInfo;
+  values: Array<CommitteePeriod>;
+};
+
+export type CommitteePeriodOrderByInput = {
+  committee?: InputMaybe<CommitteeOrderByInput>;
+  endedAt?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  name?: InputMaybe<ShortTranslatableOrderByInput>;
+  startedAt?: InputMaybe<OrderByArg>;
+};
+
+export type CommitteePeriodUpdateInput = {
+  committee?: InputMaybe<CommitteeUpdateRelationInput>;
+  endedAt?: InputMaybe<Scalars['Date']>;
+  events?: InputMaybe<Array<EventUpdateRelationInput>>;
+  id?: InputMaybe<Scalars['String']>;
+  members?: InputMaybe<Array<MemberUpdateRelationInput>>;
+  name?: InputMaybe<ShortTranslatableUpdateInput>;
+  startedAt?: InputMaybe<Scalars['Date']>;
+};
+
+export type CommitteePeriodUpdateRelationInput = {
+  connect?: InputMaybe<CommitteePeriodWhereUniqueInput>;
+  create?: InputMaybe<CommitteePeriodCreateInput>;
+  disconnect?: InputMaybe<CommitteePeriodWhereUniqueInput>;
+};
+
+export type CommitteePeriodWhereInput = {
+  AND?: InputMaybe<Array<CommitteePeriodWhereInput>>;
+  committee?: InputMaybe<CommitteeWhereInput>;
+  endedAt?: InputMaybe<DateTimeFilter>;
+  events?: InputMaybe<EventWhereInput>;
+  id?: InputMaybe<StringFilter>;
+  members?: InputMaybe<MemberWhereInput>;
+  name?: InputMaybe<ShortTranslatableWhereInput>;
+  OR?: InputMaybe<Array<CommitteePeriodWhereInput>>;
+  startedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type CommitteePeriodWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type CommitteeUpdateInput = {
+  description?: InputMaybe<LongTranslatableUpdateInput>;
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<ShortTranslatableUpdateInput>;
+  periods?: InputMaybe<Array<CommitteePeriodUpdateRelationInput>>;
+};
+
+export type CommitteeUpdateRelationInput = {
+  connect?: InputMaybe<CommitteeWhereUniqueInput>;
+  create?: InputMaybe<CommitteeCreateInput>;
+  disconnect?: InputMaybe<CommitteeWhereUniqueInput>;
+};
+
+export type CommitteeWhereInput = {
+  AND?: InputMaybe<Array<CommitteeWhereInput>>;
+  description?: InputMaybe<LongTranslatableWhereInput>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<ShortTranslatableWhereInput>;
+  OR?: InputMaybe<Array<CommitteeWhereInput>>;
+  periods?: InputMaybe<CommitteePeriodWhereInput>;
+};
+
+export type CommitteeWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type CreateDigitalMandateInput = {
+  bic: Scalars['String'];
+  member: MemberWhereUniqueInput;
+};
+
+export type CreateDigitalMandateResult = {
+  __typename?: 'CreateDigitalMandateResult';
+  mandate: DigitalMandate;
+  redirectUrl: Scalars['String'];
+};
+
+export type CreatePaperMandateInput = {
+  bic: Scalars['String'];
+  iban: Scalars['String'];
+  member: MemberWhereUniqueInput;
+};
+
+export type DateTimeFilter = {
+  equals?: InputMaybe<Scalars['DateTime']>;
+  gt?: InputMaybe<Scalars['DateTime']>;
+  gte?: InputMaybe<Scalars['DateTime']>;
+  in?: InputMaybe<Array<Scalars['DateTime']>>;
+  lt?: InputMaybe<Scalars['DateTime']>;
+  lte?: InputMaybe<Scalars['DateTime']>;
+  not?: InputMaybe<Scalars['DateTime']>;
+  notIn?: InputMaybe<Array<Scalars['DateTime']>>;
+};
+
+export type DigitalMandate = Mandate & {
+  __typename?: 'DigitalMandate';
+  acceptedAt?: Maybe<Scalars['DateTime']>;
+  bic: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  entranceCode: Scalars['String'];
+  errorMessage?: Maybe<Scalars['String']>;
+  iban?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  instructions: DirectDebitInstructionList;
+  isFirstTransaction: Scalars['Boolean'];
+  mandateId: Scalars['String'];
+  member: Member;
+  messageId: Scalars['String'];
+  reason: Scalars['String'];
+  status: MandateStatus;
+  transactionId?: Maybe<Scalars['String']>;
+};
+
+
+export type DigitalMandateinstructionsArgs = {
+  orderBy?: InputMaybe<DirectDebitInstructionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitInstructionWhereInput>;
 };
 
 export type DigitalMandateCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  mandateId?: Maybe<Scalars['String']>;
-  status?: Maybe<MandateStatus>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic?: Maybe<Scalars['String']>;
-  iban?: Maybe<Scalars['String']>;
-  reason?: Maybe<Scalars['String']>;
-  isFirstTransaction?: Maybe<Scalars['Boolean']>;
-  errorMessage?: Maybe<Scalars['String']>;
-  member?: Maybe<MemberCreateRelationInput>;
-  instructions?: Maybe<Array<DirectDebitInstructionCreateRelationInput>>;
-  messageId?: Maybe<Scalars['String']>;
-  entranceCode?: Maybe<Scalars['String']>;
-  transactionId?: Maybe<Scalars['String']>;
-};
-
-export type DigitalMandateUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  mandateId?: Maybe<Scalars['String']>;
-  status?: Maybe<MandateStatus>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic?: Maybe<Scalars['String']>;
-  iban?: Maybe<Scalars['String']>;
-  reason?: Maybe<Scalars['String']>;
-  isFirstTransaction?: Maybe<Scalars['Boolean']>;
-  errorMessage?: Maybe<Scalars['String']>;
-  member?: Maybe<MemberUpdateRelationInput>;
-  instructions?: Maybe<Array<DirectDebitInstructionUpdateRelationInput>>;
-  messageId?: Maybe<Scalars['String']>;
-  entranceCode?: Maybe<Scalars['String']>;
-  transactionId?: Maybe<Scalars['String']>;
-};
-
-export type DigitalMandateWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
+  acceptedAt?: InputMaybe<Scalars['DateTime']>;
+  bic?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  entranceCode?: InputMaybe<Scalars['String']>;
+  errorMessage?: InputMaybe<Scalars['String']>;
+  iban?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  instructions?: InputMaybe<Array<DirectDebitInstructionCreateRelationInput>>;
+  isFirstTransaction?: InputMaybe<Scalars['Boolean']>;
+  mandateId?: InputMaybe<Scalars['String']>;
+  member?: InputMaybe<MemberCreateRelationInput>;
+  messageId?: InputMaybe<Scalars['String']>;
+  reason?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<MandateStatus>;
+  transactionId?: InputMaybe<Scalars['String']>;
 };
 
 export type DigitalMandateList = {
@@ -1658,1021 +388,1354 @@ export type DigitalMandateList = {
   values: Array<DigitalMandate>;
 };
 
-export type PageWhereInput = {
-  id?: Maybe<StringFilter>;
-  title?: Maybe<ShortTranslatableWhereInput>;
-  body?: Maybe<LongTranslatableWhereInput>;
-  AND?: Maybe<Array<PageWhereInput>>;
-  OR?: Maybe<Array<PageWhereInput>>;
+export type DigitalMandateOrderByInput = {
+  acceptedAt?: InputMaybe<OrderByArg>;
+  bic?: InputMaybe<OrderByArg>;
+  createdAt?: InputMaybe<OrderByArg>;
+  entranceCode?: InputMaybe<OrderByArg>;
+  errorMessage?: InputMaybe<OrderByArg>;
+  iban?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  isFirstTransaction?: InputMaybe<OrderByArg>;
+  mandateId?: InputMaybe<OrderByArg>;
+  member?: InputMaybe<MemberOrderByInput>;
+  messageId?: InputMaybe<OrderByArg>;
+  reason?: InputMaybe<OrderByArg>;
+  status?: InputMaybe<OrderByArg>;
+  transactionId?: InputMaybe<OrderByArg>;
 };
 
-export type PageOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  title?: Maybe<ShortTranslatableOrderByInput>;
-  body?: Maybe<LongTranslatableOrderByInput>;
+export type DigitalMandateUpdateInput = {
+  acceptedAt?: InputMaybe<Scalars['DateTime']>;
+  bic?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  entranceCode?: InputMaybe<Scalars['String']>;
+  errorMessage?: InputMaybe<Scalars['String']>;
+  iban?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  instructions?: InputMaybe<Array<DirectDebitInstructionUpdateRelationInput>>;
+  isFirstTransaction?: InputMaybe<Scalars['Boolean']>;
+  mandateId?: InputMaybe<Scalars['String']>;
+  member?: InputMaybe<MemberUpdateRelationInput>;
+  messageId?: InputMaybe<Scalars['String']>;
+  reason?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<MandateStatus>;
+  transactionId?: InputMaybe<Scalars['String']>;
 };
 
-export type PageCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  title?: Maybe<ShortTranslatableCreateInput>;
-  body?: Maybe<LongTranslatableCreateInput>;
+export type DigitalMandateWhereInput = {
+  acceptedAt?: InputMaybe<DateTimeFilter>;
+  AND?: InputMaybe<Array<DigitalMandateWhereInput>>;
+  bic?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  entranceCode?: InputMaybe<StringFilter>;
+  errorMessage?: InputMaybe<StringFilter>;
+  iban?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  instructions?: InputMaybe<DirectDebitInstructionWhereInput>;
+  isFirstTransaction?: InputMaybe<Scalars['Boolean']>;
+  mandateId?: InputMaybe<StringFilter>;
+  member?: InputMaybe<MemberWhereInput>;
+  messageId?: InputMaybe<StringFilter>;
+  OR?: InputMaybe<Array<DigitalMandateWhereInput>>;
+  reason?: InputMaybe<StringFilter>;
+  status?: InputMaybe<MandateStatusFilter>;
+  transactionId?: InputMaybe<StringFilter>;
 };
 
-export type PageUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  title?: Maybe<ShortTranslatableUpdateInput>;
-  body?: Maybe<LongTranslatableUpdateInput>;
+export type DigitalMandateWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
-export type PageWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
+export type DirectDebit = {
+  __typename?: 'DirectDebit';
+  amount: Scalars['Int'];
+  batches: DirectDebitBatchList;
+  collectionDate: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  file?: Maybe<File>;
+  id: Scalars['String'];
+  instructionCount: Scalars['Int'];
+  messageId: Scalars['String'];
+  status: DirectDebitStatus;
+  updatedAt: Scalars['DateTime'];
+  warnings: DirectDebitWarningList;
 };
 
-export type PageList = {
-  __typename?: 'PageList';
-  info: ListInfo;
-  values: Array<Page>;
+
+export type DirectDebitbatchesArgs = {
+  orderBy?: InputMaybe<DirectDebitBatchOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitBatchWhereInput>;
 };
 
-export type PaperMandateWhereInput = {
-  id?: Maybe<StringFilter>;
-  mandateId?: Maybe<StringFilter>;
-  status?: Maybe<MandateStatusFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  acceptedAt?: Maybe<DateTimeFilter>;
-  bic?: Maybe<StringFilter>;
-  iban?: Maybe<StringFilter>;
-  reason?: Maybe<StringFilter>;
-  isFirstTransaction?: Maybe<Scalars['Boolean']>;
-  errorMessage?: Maybe<StringFilter>;
-  member?: Maybe<MemberWhereInput>;
-  instructions?: Maybe<DirectDebitInstructionWhereInput>;
-  generatedFile?: Maybe<FileWhereInput>;
-  uploadedFile?: Maybe<FileWhereInput>;
-  AND?: Maybe<Array<PaperMandateWhereInput>>;
-  OR?: Maybe<Array<PaperMandateWhereInput>>;
+
+export type DirectDebitwarningsArgs = {
+  orderBy?: InputMaybe<DirectDebitWarningOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitWarningWhereInput>;
 };
 
-export type PaperMandateOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  mandateId?: Maybe<OrderByArg>;
-  status?: Maybe<OrderByArg>;
-  createdAt?: Maybe<OrderByArg>;
-  acceptedAt?: Maybe<OrderByArg>;
-  bic?: Maybe<OrderByArg>;
-  iban?: Maybe<OrderByArg>;
-  reason?: Maybe<OrderByArg>;
-  isFirstTransaction?: Maybe<OrderByArg>;
-  errorMessage?: Maybe<OrderByArg>;
-  member?: Maybe<MemberOrderByInput>;
-  generatedFile?: Maybe<FileOrderByInput>;
-  uploadedFile?: Maybe<FileOrderByInput>;
+export type DirectDebitBatch = {
+  __typename?: 'DirectDebitBatch';
+  amount: Scalars['Int'];
+  batchId: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  directDebit: DirectDebit;
+  id: Scalars['String'];
+  instructionCount: Scalars['Int'];
+  instructions: DirectDebitInstructionList;
+  sequenceType: SequenceType;
+  updatedAt: Scalars['DateTime'];
 };
 
-export type PaperMandateCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  mandateId?: Maybe<Scalars['String']>;
-  status?: Maybe<MandateStatus>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic?: Maybe<Scalars['String']>;
-  iban?: Maybe<Scalars['String']>;
-  reason?: Maybe<Scalars['String']>;
-  isFirstTransaction?: Maybe<Scalars['Boolean']>;
-  errorMessage?: Maybe<Scalars['String']>;
-  member?: Maybe<MemberCreateRelationInput>;
-  instructions?: Maybe<Array<DirectDebitInstructionCreateRelationInput>>;
-  generatedFile?: Maybe<FileCreateRelationInput>;
-  uploadedFile?: Maybe<FileCreateRelationInput>;
+
+export type DirectDebitBatchinstructionsArgs = {
+  orderBy?: InputMaybe<DirectDebitInstructionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitInstructionWhereInput>;
 };
 
-export type PaperMandateUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  mandateId?: Maybe<Scalars['String']>;
-  status?: Maybe<MandateStatus>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  acceptedAt?: Maybe<Scalars['DateTime']>;
-  bic?: Maybe<Scalars['String']>;
-  iban?: Maybe<Scalars['String']>;
-  reason?: Maybe<Scalars['String']>;
-  isFirstTransaction?: Maybe<Scalars['Boolean']>;
-  errorMessage?: Maybe<Scalars['String']>;
-  member?: Maybe<MemberUpdateRelationInput>;
-  instructions?: Maybe<Array<DirectDebitInstructionUpdateRelationInput>>;
-  generatedFile?: Maybe<FileUpdateRelationInput>;
-  uploadedFile?: Maybe<FileUpdateRelationInput>;
-};
-
-export type PaperMandateWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type PaperMandateList = {
-  __typename?: 'PaperMandateList';
-  info: ListInfo;
-  values: Array<PaperMandate>;
-};
-
-export type SettingWhereInput = {
-  key?: Maybe<StringFilter>;
-  value?: Maybe<StringFilter>;
-  isPublic?: Maybe<Scalars['Boolean']>;
-  AND?: Maybe<Array<SettingWhereInput>>;
-  OR?: Maybe<Array<SettingWhereInput>>;
-};
-
-export type SettingOrderByInput = {
-  key?: Maybe<OrderByArg>;
-  value?: Maybe<OrderByArg>;
-  isPublic?: Maybe<OrderByArg>;
-};
-
-export type SettingCreateInput = {
-  key?: Maybe<Scalars['String']>;
-  value?: Maybe<Scalars['String']>;
-  isPublic?: Maybe<Scalars['Boolean']>;
-};
-
-export type SettingUpdateInput = {
-  key?: Maybe<Scalars['String']>;
-  value?: Maybe<Scalars['String']>;
-  isPublic?: Maybe<Scalars['Boolean']>;
-};
-
-export type SettingWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type SettingList = {
-  __typename?: 'SettingList';
-  info: ListInfo;
-  values: Array<Setting>;
-};
-
-export type ProviderWhereInput = {
-  id?: Maybe<StringFilter>;
-  type?: Maybe<StringFilter>;
-  email?: Maybe<StringFilter>;
-  isVerified?: Maybe<Scalars['Boolean']>;
-  user?: Maybe<MemberWhereInput>;
-  AND?: Maybe<Array<ProviderWhereInput>>;
-  OR?: Maybe<Array<ProviderWhereInput>>;
-};
-
-export type ProviderOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  type?: Maybe<OrderByArg>;
-  email?: Maybe<OrderByArg>;
-  isVerified?: Maybe<OrderByArg>;
-  user?: Maybe<MemberOrderByInput>;
-};
-
-export type ProviderCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  isVerified?: Maybe<Scalars['Boolean']>;
-  user?: Maybe<MemberCreateRelationInput>;
-};
-
-export type ProviderUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  isVerified?: Maybe<Scalars['Boolean']>;
-  user?: Maybe<MemberUpdateRelationInput>;
-};
-
-export type ProviderWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type ProviderList = {
-  __typename?: 'ProviderList';
-  info: ListInfo;
-  values: Array<Provider>;
-};
-
-export type TokenWhereInput = {
-  id?: Maybe<StringFilter>;
-  type?: Maybe<TokenTypeFilter>;
-  token?: Maybe<StringFilter>;
-  expiresAt?: Maybe<DateTimeFilter>;
-  provider?: Maybe<ProviderWhereInput>;
-  AND?: Maybe<Array<TokenWhereInput>>;
-  OR?: Maybe<Array<TokenWhereInput>>;
-};
-
-export type TokenOrderByInput = {
-  id?: Maybe<OrderByArg>;
-  type?: Maybe<OrderByArg>;
-  token?: Maybe<OrderByArg>;
-  expiresAt?: Maybe<OrderByArg>;
-  provider?: Maybe<ProviderOrderByInput>;
-};
-
-export type TokenCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  type?: Maybe<TokenType>;
-  token?: Maybe<Scalars['String']>;
-  expiresAt?: Maybe<Scalars['DateTime']>;
-  provider?: Maybe<ProviderCreateRelationInput>;
-};
-
-export type TokenUpdateInput = {
-  id?: Maybe<Scalars['String']>;
-  type?: Maybe<TokenType>;
-  token?: Maybe<Scalars['String']>;
-  expiresAt?: Maybe<Scalars['DateTime']>;
-  provider?: Maybe<ProviderUpdateRelationInput>;
-};
-
-export type TokenWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
-  token?: Maybe<Scalars['String']>;
-};
-
-export type TokenList = {
-  __typename?: 'TokenList';
-  info: ListInfo;
-  values: Array<Token>;
-};
-
-export type RegisterInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
-  passwordRepeat: Scalars['String'];
-  firstName: Scalars['String'];
-  initials: Scalars['String'];
-  lastName: Scalars['String'];
-  address: Scalars['String'];
-  postalCode: Scalars['String'];
-  city: Scalars['String'];
-  phoneNumber: Scalars['String'];
-  birthdate: Scalars['Date'];
-  language: Language;
-  pronouns: Pronouns;
-  studentType: StudentType;
-};
-
-export type MandateStatusFilter = {
-  equals?: Maybe<MandateStatus>;
-  not?: Maybe<MandateStatus>;
-  in?: Maybe<Array<MandateStatus>>;
-  notIn?: Maybe<Array<MandateStatus>>;
-};
-
-export type MemberCreateRelationInput = {
-  create?: Maybe<MemberCreateInput>;
-  connect?: Maybe<MemberWhereUniqueInput>;
-};
-
-export type DirectDebitInstructionCreateRelationInput = {
-  create?: Maybe<DirectDebitInstructionCreateInput>;
-  connect?: Maybe<DirectDebitInstructionWhereUniqueInput>;
-};
-
-export type MemberUpdateRelationInput = {
-  create?: Maybe<MemberCreateInput>;
-  connect?: Maybe<MemberWhereUniqueInput>;
-  disconnect?: Maybe<MemberWhereUniqueInput>;
-};
-
-export type DirectDebitInstructionUpdateRelationInput = {
-  create?: Maybe<DirectDebitInstructionCreateInput>;
-  connect?: Maybe<DirectDebitInstructionWhereUniqueInput>;
-  disconnect?: Maybe<DirectDebitInstructionWhereUniqueInput>;
+export type DirectDebitBatchCreateInput = {
+  batchId?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  directDebit?: InputMaybe<DirectDebitCreateRelationInput>;
+  id?: InputMaybe<Scalars['String']>;
+  instructions?: InputMaybe<Array<DirectDebitInstructionCreateRelationInput>>;
+  sequenceType?: InputMaybe<SequenceType>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type DirectDebitBatchCreateRelationInput = {
-  create?: Maybe<DirectDebitBatchCreateInput>;
-  connect?: Maybe<DirectDebitBatchWhereUniqueInput>;
+  connect?: InputMaybe<DirectDebitBatchWhereUniqueInput>;
+  create?: InputMaybe<DirectDebitBatchCreateInput>;
 };
 
-export type TransactionCreateRelationInput = {
-  create?: Maybe<TransactionCreateInput>;
-  connect?: Maybe<TransactionWhereUniqueInput>;
+export type DirectDebitBatchList = {
+  __typename?: 'DirectDebitBatchList';
+  info: ListInfo;
+  values: Array<DirectDebitBatch>;
 };
 
-export type MandateCreateRelationInput = {
-  create?: Maybe<MandateCreateInput>;
-  connect?: Maybe<MandateWhereUniqueInput>;
+export type DirectDebitBatchOrderByInput = {
+  batchId?: InputMaybe<OrderByArg>;
+  createdAt?: InputMaybe<OrderByArg>;
+  directDebit?: InputMaybe<DirectDebitOrderByInput>;
+  id?: InputMaybe<OrderByArg>;
+  sequenceType?: InputMaybe<OrderByArg>;
+  updatedAt?: InputMaybe<OrderByArg>;
+};
+
+export type DirectDebitBatchUpdateInput = {
+  batchId?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  directDebit?: InputMaybe<DirectDebitUpdateRelationInput>;
+  id?: InputMaybe<Scalars['String']>;
+  instructions?: InputMaybe<Array<DirectDebitInstructionUpdateRelationInput>>;
+  sequenceType?: InputMaybe<SequenceType>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type DirectDebitBatchUpdateRelationInput = {
-  create?: Maybe<DirectDebitBatchCreateInput>;
-  connect?: Maybe<DirectDebitBatchWhereUniqueInput>;
-  disconnect?: Maybe<DirectDebitBatchWhereUniqueInput>;
+  connect?: InputMaybe<DirectDebitBatchWhereUniqueInput>;
+  create?: InputMaybe<DirectDebitBatchCreateInput>;
+  disconnect?: InputMaybe<DirectDebitBatchWhereUniqueInput>;
 };
 
-export type TransactionUpdateRelationInput = {
-  create?: Maybe<TransactionCreateInput>;
-  connect?: Maybe<TransactionWhereUniqueInput>;
-  disconnect?: Maybe<TransactionWhereUniqueInput>;
+export type DirectDebitBatchWhereInput = {
+  AND?: InputMaybe<Array<DirectDebitBatchWhereInput>>;
+  batchId?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  directDebit?: InputMaybe<DirectDebitWhereInput>;
+  id?: InputMaybe<StringFilter>;
+  instructions?: InputMaybe<DirectDebitInstructionWhereInput>;
+  OR?: InputMaybe<Array<DirectDebitBatchWhereInput>>;
+  sequenceType?: InputMaybe<SequenceTypeFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
 };
 
-export type MandateUpdateRelationInput = {
-  create?: Maybe<MandateCreateInput>;
-  connect?: Maybe<MandateWhereUniqueInput>;
-  disconnect?: Maybe<MandateWhereUniqueInput>;
+export type DirectDebitBatchWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
-export type SequenceTypeFilter = {
-  equals?: Maybe<SequenceType>;
-  not?: Maybe<SequenceType>;
-  in?: Maybe<Array<SequenceType>>;
-  notIn?: Maybe<Array<SequenceType>>;
+export type DirectDebitCreateInput = {
+  batches?: InputMaybe<Array<DirectDebitBatchCreateRelationInput>>;
+  collectionDate?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  file?: InputMaybe<FileCreateRelationInput>;
+  id?: InputMaybe<Scalars['String']>;
+  messageId?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<DirectDebitStatus>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  warnings?: InputMaybe<Array<DirectDebitWarningCreateRelationInput>>;
 };
 
 export type DirectDebitCreateRelationInput = {
-  create?: Maybe<DirectDebitCreateInput>;
-  connect?: Maybe<DirectDebitWhereUniqueInput>;
+  connect?: InputMaybe<DirectDebitWhereUniqueInput>;
+  create?: InputMaybe<DirectDebitCreateInput>;
+};
+
+export type DirectDebitInstruction = {
+  __typename?: 'DirectDebitInstruction';
+  amount: Scalars['Int'];
+  batch: DirectDebitBatch;
+  createdAt: Scalars['DateTime'];
+  description: Scalars['String'];
+  id: Scalars['String'];
+  instructionId: Scalars['String'];
+  mandate: Mandate;
+  transactions: TransactionList;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+export type DirectDebitInstructiontransactionsArgs = {
+  orderBy?: InputMaybe<TransactionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TransactionWhereInput>;
+};
+
+export type DirectDebitInstructionCreateInput = {
+  batch?: InputMaybe<DirectDebitBatchCreateRelationInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  instructionId?: InputMaybe<Scalars['String']>;
+  mandate?: InputMaybe<MandateCreateRelationInput>;
+  transactions?: InputMaybe<Array<TransactionCreateRelationInput>>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type DirectDebitInstructionCreateRelationInput = {
+  connect?: InputMaybe<DirectDebitInstructionWhereUniqueInput>;
+  create?: InputMaybe<DirectDebitInstructionCreateInput>;
+};
+
+export type DirectDebitInstructionList = {
+  __typename?: 'DirectDebitInstructionList';
+  info: ListInfo;
+  values: Array<DirectDebitInstruction>;
+};
+
+export type DirectDebitInstructionOrderByInput = {
+  batch?: InputMaybe<DirectDebitBatchOrderByInput>;
+  createdAt?: InputMaybe<OrderByArg>;
+  description?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  instructionId?: InputMaybe<OrderByArg>;
+  mandate?: InputMaybe<MandateOrderByInput>;
+  updatedAt?: InputMaybe<OrderByArg>;
+};
+
+export type DirectDebitInstructionUpdateInput = {
+  batch?: InputMaybe<DirectDebitBatchUpdateRelationInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  instructionId?: InputMaybe<Scalars['String']>;
+  mandate?: InputMaybe<MandateUpdateRelationInput>;
+  transactions?: InputMaybe<Array<TransactionUpdateRelationInput>>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type DirectDebitInstructionUpdateRelationInput = {
+  connect?: InputMaybe<DirectDebitInstructionWhereUniqueInput>;
+  create?: InputMaybe<DirectDebitInstructionCreateInput>;
+  disconnect?: InputMaybe<DirectDebitInstructionWhereUniqueInput>;
+};
+
+export type DirectDebitInstructionWhereInput = {
+  AND?: InputMaybe<Array<DirectDebitInstructionWhereInput>>;
+  batch?: InputMaybe<DirectDebitBatchWhereInput>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  instructionId?: InputMaybe<StringFilter>;
+  mandate?: InputMaybe<MandateWhereInput>;
+  OR?: InputMaybe<Array<DirectDebitInstructionWhereInput>>;
+  transactions?: InputMaybe<TransactionWhereInput>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type DirectDebitInstructionWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type DirectDebitList = {
+  __typename?: 'DirectDebitList';
+  info: ListInfo;
+  values: Array<DirectDebit>;
+};
+
+export type DirectDebitOrderByInput = {
+  collectionDate?: InputMaybe<OrderByArg>;
+  createdAt?: InputMaybe<OrderByArg>;
+  file?: InputMaybe<FileOrderByInput>;
+  id?: InputMaybe<OrderByArg>;
+  messageId?: InputMaybe<OrderByArg>;
+  status?: InputMaybe<OrderByArg>;
+  updatedAt?: InputMaybe<OrderByArg>;
+};
+
+export enum DirectDebitStatus {
+  ACCEPTED = 'ACCEPTED',
+  CANCELLED = 'CANCELLED',
+  CREATED = 'CREATED',
+  GENERATED = 'GENERATED',
+  REJECTED = 'REJECTED'
+}
+
+export type DirectDebitStatusFilter = {
+  equals?: InputMaybe<DirectDebitStatus>;
+  in?: InputMaybe<Array<DirectDebitStatus>>;
+  not?: InputMaybe<DirectDebitStatus>;
+  notIn?: InputMaybe<Array<DirectDebitStatus>>;
+};
+
+export type DirectDebitUpdateInput = {
+  batches?: InputMaybe<Array<DirectDebitBatchUpdateRelationInput>>;
+  collectionDate?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  file?: InputMaybe<FileUpdateRelationInput>;
+  id?: InputMaybe<Scalars['String']>;
+  messageId?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<DirectDebitStatus>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  warnings?: InputMaybe<Array<DirectDebitWarningUpdateRelationInput>>;
 };
 
 export type DirectDebitUpdateRelationInput = {
-  create?: Maybe<DirectDebitCreateInput>;
-  connect?: Maybe<DirectDebitWhereUniqueInput>;
-  disconnect?: Maybe<DirectDebitWhereUniqueInput>;
+  connect?: InputMaybe<DirectDebitWhereUniqueInput>;
+  create?: InputMaybe<DirectDebitCreateInput>;
+  disconnect?: InputMaybe<DirectDebitWhereUniqueInput>;
 };
 
-export type DirectDebitStatusFilter = {
-  equals?: Maybe<DirectDebitStatus>;
-  not?: Maybe<DirectDebitStatus>;
-  in?: Maybe<Array<DirectDebitStatus>>;
-  notIn?: Maybe<Array<DirectDebitStatus>>;
+export type DirectDebitWarning = {
+  __typename?: 'DirectDebitWarning';
+  createdAt: Scalars['DateTime'];
+  description: Scalars['String'];
+  directDebit: DirectDebit;
+  id: Scalars['String'];
+  member?: Maybe<Member>;
+  updatedAt: Scalars['DateTime'];
+};
+
+export type DirectDebitWarningCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<Scalars['String']>;
+  directDebit?: InputMaybe<DirectDebitCreateRelationInput>;
+  id?: InputMaybe<Scalars['String']>;
+  member?: InputMaybe<MemberCreateRelationInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type DirectDebitWarningCreateRelationInput = {
-  create?: Maybe<DirectDebitWarningCreateInput>;
-  connect?: Maybe<DirectDebitWarningWhereUniqueInput>;
+  connect?: InputMaybe<DirectDebitWarningWhereUniqueInput>;
+  create?: InputMaybe<DirectDebitWarningCreateInput>;
 };
 
-export type FileCreateRelationInput = {
-  create?: Maybe<FileCreateInput>;
-  connect?: Maybe<FileWhereUniqueInput>;
+export type DirectDebitWarningList = {
+  __typename?: 'DirectDebitWarningList';
+  info: ListInfo;
+  values: Array<DirectDebitWarning>;
+};
+
+export type DirectDebitWarningOrderByInput = {
+  createdAt?: InputMaybe<OrderByArg>;
+  description?: InputMaybe<OrderByArg>;
+  directDebit?: InputMaybe<DirectDebitOrderByInput>;
+  id?: InputMaybe<OrderByArg>;
+  member?: InputMaybe<MemberOrderByInput>;
+  updatedAt?: InputMaybe<OrderByArg>;
+};
+
+export type DirectDebitWarningUpdateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<Scalars['String']>;
+  directDebit?: InputMaybe<DirectDebitUpdateRelationInput>;
+  id?: InputMaybe<Scalars['String']>;
+  member?: InputMaybe<MemberUpdateRelationInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type DirectDebitWarningUpdateRelationInput = {
-  create?: Maybe<DirectDebitWarningCreateInput>;
-  connect?: Maybe<DirectDebitWarningWhereUniqueInput>;
-  disconnect?: Maybe<DirectDebitWarningWhereUniqueInput>;
+  connect?: InputMaybe<DirectDebitWarningWhereUniqueInput>;
+  create?: InputMaybe<DirectDebitWarningCreateInput>;
+  disconnect?: InputMaybe<DirectDebitWarningWhereUniqueInput>;
 };
 
-export type FileUpdateRelationInput = {
-  create?: Maybe<FileCreateInput>;
-  connect?: Maybe<FileWhereUniqueInput>;
-  disconnect?: Maybe<FileWhereUniqueInput>;
+export type DirectDebitWarningWhereInput = {
+  AND?: InputMaybe<Array<DirectDebitWarningWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  directDebit?: InputMaybe<DirectDebitWhereInput>;
+  id?: InputMaybe<StringFilter>;
+  member?: InputMaybe<MemberWhereInput>;
+  OR?: InputMaybe<Array<DirectDebitWarningWhereInput>>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
 };
 
-export type MembershipCreateRelationInput = {
-  create?: Maybe<MembershipCreateInput>;
-  connect?: Maybe<MembershipWhereUniqueInput>;
+export type DirectDebitWarningWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
-export type MembershipUpdateRelationInput = {
-  create?: Maybe<MembershipCreateInput>;
-  connect?: Maybe<MembershipWhereUniqueInput>;
-  disconnect?: Maybe<MembershipWhereUniqueInput>;
+export type DirectDebitWhereInput = {
+  AND?: InputMaybe<Array<DirectDebitWhereInput>>;
+  batches?: InputMaybe<DirectDebitBatchWhereInput>;
+  collectionDate?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  file?: InputMaybe<FileWhereInput>;
+  id?: InputMaybe<StringFilter>;
+  messageId?: InputMaybe<StringFilter>;
+  OR?: InputMaybe<Array<DirectDebitWhereInput>>;
+  status?: InputMaybe<DirectDebitStatusFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  warnings?: InputMaybe<DirectDebitWarningWhereInput>;
 };
 
-export type MembershipTypeFilter = {
-  equals?: Maybe<MembershipType>;
-  not?: Maybe<MembershipType>;
-  in?: Maybe<Array<MembershipType>>;
-  notIn?: Maybe<Array<MembershipType>>;
+export type DirectDebitWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
-export type MembershipFeeTransactionCreateRelationInput = {
-  create?: Maybe<MembershipFeeTransactionCreateInput>;
-  connect?: Maybe<MembershipFeeTransactionWhereUniqueInput>;
+export type Event = {
+  __typename?: 'Event';
+  closedAt: Scalars['DateTime'];
+  description: LongTranslatable;
+  endedAt: Scalars['DateTime'];
+  groups: GroupList;
+  id: Scalars['String'];
+  isAllDay: Scalars['Boolean'];
+  isCanceled: Scalars['Boolean'];
+  isMembersOnly: Scalars['Boolean'];
+  isParticipationRequired: Scalars['Boolean'];
+  maxParticipations?: Maybe<Scalars['Int']>;
+  name: ShortTranslatable;
+  openedAt: Scalars['DateTime'];
+  participations: ParticipationList;
+  startedAt: Scalars['DateTime'];
 };
 
-export type MembershipFeeTransactionUpdateRelationInput = {
-  create?: Maybe<MembershipFeeTransactionCreateInput>;
-  connect?: Maybe<MembershipFeeTransactionWhereUniqueInput>;
-  disconnect?: Maybe<MembershipFeeTransactionWhereUniqueInput>;
+
+export type EventgroupsArgs = {
+  orderBy?: InputMaybe<GroupOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<GroupWhereInput>;
 };
 
-export type LanguageFilter = {
-  equals?: Maybe<Language>;
-  not?: Maybe<Language>;
-  in?: Maybe<Array<Language>>;
-  notIn?: Maybe<Array<Language>>;
+
+export type EventparticipationsArgs = {
+  orderBy?: InputMaybe<ParticipationOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ParticipationWhereInput>;
 };
 
-export type PronounsFilter = {
-  equals?: Maybe<Pronouns>;
-  not?: Maybe<Pronouns>;
-  in?: Maybe<Array<Pronouns>>;
-  notIn?: Maybe<Array<Pronouns>>;
-};
-
-export type StudentTypeFilter = {
-  equals?: Maybe<StudentType>;
-  not?: Maybe<StudentType>;
-  in?: Maybe<Array<StudentType>>;
-  notIn?: Maybe<Array<StudentType>>;
-};
-
-export type ProviderCreateRelationInput = {
-  create?: Maybe<ProviderCreateInput>;
-  connect?: Maybe<ProviderWhereUniqueInput>;
-};
-
-export type GroupCreateRelationInput = {
-  create?: Maybe<GroupCreateInput>;
-  connect?: Maybe<GroupWhereUniqueInput>;
-};
-
-export type ParticipationCreateRelationInput = {
-  create?: Maybe<ParticipationCreateInput>;
-  connect?: Maybe<ParticipationWhereUniqueInput>;
-};
-
-export type ProviderUpdateRelationInput = {
-  create?: Maybe<ProviderCreateInput>;
-  connect?: Maybe<ProviderWhereUniqueInput>;
-  disconnect?: Maybe<ProviderWhereUniqueInput>;
-};
-
-export type GroupUpdateRelationInput = {
-  create?: Maybe<GroupCreateInput>;
-  connect?: Maybe<GroupWhereUniqueInput>;
-  disconnect?: Maybe<GroupWhereUniqueInput>;
-};
-
-export type ParticipationUpdateRelationInput = {
-  create?: Maybe<ParticipationCreateInput>;
-  connect?: Maybe<ParticipationWhereUniqueInput>;
-  disconnect?: Maybe<ParticipationWhereUniqueInput>;
+export type EventCreateInput = {
+  closedAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<LongTranslatableCreateInput>;
+  endedAt?: InputMaybe<Scalars['DateTime']>;
+  groups?: InputMaybe<Array<GroupCreateRelationInput>>;
+  id?: InputMaybe<Scalars['String']>;
+  isAllDay?: InputMaybe<Scalars['Boolean']>;
+  isCanceled?: InputMaybe<Scalars['Boolean']>;
+  isMembersOnly?: InputMaybe<Scalars['Boolean']>;
+  isParticipationRequired?: InputMaybe<Scalars['Boolean']>;
+  maxParticipations?: InputMaybe<Scalars['Float']>;
+  name?: InputMaybe<ShortTranslatableCreateInput>;
+  openedAt?: InputMaybe<Scalars['DateTime']>;
+  participations?: InputMaybe<Array<ParticipationCreateRelationInput>>;
+  startedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type EventCreateRelationInput = {
-  create?: Maybe<EventCreateInput>;
-  connect?: Maybe<EventWhereUniqueInput>;
+  connect?: InputMaybe<EventWhereUniqueInput>;
+  create?: InputMaybe<EventCreateInput>;
+};
+
+export type EventList = {
+  __typename?: 'EventList';
+  info: ListInfo;
+  values: Array<Event>;
+};
+
+export type EventOrderByInput = {
+  closedAt?: InputMaybe<OrderByArg>;
+  description?: InputMaybe<LongTranslatableOrderByInput>;
+  endedAt?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  isAllDay?: InputMaybe<OrderByArg>;
+  isCanceled?: InputMaybe<OrderByArg>;
+  isMembersOnly?: InputMaybe<OrderByArg>;
+  isParticipationRequired?: InputMaybe<OrderByArg>;
+  maxParticipations?: InputMaybe<OrderByArg>;
+  name?: InputMaybe<ShortTranslatableOrderByInput>;
+  openedAt?: InputMaybe<OrderByArg>;
+  startedAt?: InputMaybe<OrderByArg>;
+};
+
+export type EventUpdateInput = {
+  closedAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<LongTranslatableUpdateInput>;
+  endedAt?: InputMaybe<Scalars['DateTime']>;
+  groups?: InputMaybe<Array<GroupUpdateRelationInput>>;
+  id?: InputMaybe<Scalars['String']>;
+  isAllDay?: InputMaybe<Scalars['Boolean']>;
+  isCanceled?: InputMaybe<Scalars['Boolean']>;
+  isMembersOnly?: InputMaybe<Scalars['Boolean']>;
+  isParticipationRequired?: InputMaybe<Scalars['Boolean']>;
+  maxParticipations?: InputMaybe<Scalars['Float']>;
+  name?: InputMaybe<ShortTranslatableUpdateInput>;
+  openedAt?: InputMaybe<Scalars['DateTime']>;
+  participations?: InputMaybe<Array<ParticipationUpdateRelationInput>>;
+  startedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type EventUpdateRelationInput = {
-  create?: Maybe<EventCreateInput>;
-  connect?: Maybe<EventWhereUniqueInput>;
-  disconnect?: Maybe<EventWhereUniqueInput>;
+  connect?: InputMaybe<EventWhereUniqueInput>;
+  create?: InputMaybe<EventCreateInput>;
+  disconnect?: InputMaybe<EventWhereUniqueInput>;
 };
 
-export type ShortTranslatableWhereInput = {
-  en?: Maybe<StringFilter>;
-  nl?: Maybe<StringFilter>;
-  AND?: Maybe<Array<ShortTranslatableWhereInput>>;
-  OR?: Maybe<Array<ShortTranslatableWhereInput>>;
+export type EventWhereInput = {
+  AND?: InputMaybe<Array<EventWhereInput>>;
+  closedAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<LongTranslatableWhereInput>;
+  endedAt?: InputMaybe<DateTimeFilter>;
+  groups?: InputMaybe<GroupWhereInput>;
+  id?: InputMaybe<StringFilter>;
+  isAllDay?: InputMaybe<Scalars['Boolean']>;
+  isCanceled?: InputMaybe<Scalars['Boolean']>;
+  isMembersOnly?: InputMaybe<Scalars['Boolean']>;
+  isParticipationRequired?: InputMaybe<Scalars['Boolean']>;
+  maxParticipations?: InputMaybe<IntFilter>;
+  name?: InputMaybe<ShortTranslatableWhereInput>;
+  openedAt?: InputMaybe<DateTimeFilter>;
+  OR?: InputMaybe<Array<EventWhereInput>>;
+  participations?: InputMaybe<ParticipationWhereInput>;
+  startedAt?: InputMaybe<DateTimeFilter>;
 };
 
-export type LongTranslatableWhereInput = {
-  en?: Maybe<StringFilter>;
-  nl?: Maybe<StringFilter>;
-  AND?: Maybe<Array<LongTranslatableWhereInput>>;
-  OR?: Maybe<Array<LongTranslatableWhereInput>>;
+export type EventWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
-export type ShortTranslatableOrderByInput = {
-  en?: Maybe<OrderByArg>;
-  nl?: Maybe<OrderByArg>;
+export type File = {
+  __typename?: 'File';
+  id: Scalars['String'];
+  mimeType: Scalars['String'];
+  name: Scalars['String'];
+  url: Scalars['String'];
 };
 
-export type LongTranslatableOrderByInput = {
-  en?: Maybe<OrderByArg>;
-  nl?: Maybe<OrderByArg>;
+export type FileCreateInput = {
+  id?: InputMaybe<Scalars['String']>;
+  mimeType?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
-export type ShortTranslatableCreateInput = {
+export type FileCreateRelationInput = {
+  connect?: InputMaybe<FileWhereUniqueInput>;
+  create?: InputMaybe<FileCreateInput>;
+};
+
+export type FileList = {
+  __typename?: 'FileList';
+  info: ListInfo;
+  values: Array<File>;
+};
+
+export type FileOrderByInput = {
+  id?: InputMaybe<OrderByArg>;
+  mimeType?: InputMaybe<OrderByArg>;
+  name?: InputMaybe<OrderByArg>;
+};
+
+export type FileUpdateInput = {
+  id?: InputMaybe<Scalars['String']>;
+  mimeType?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+export type FileUpdateRelationInput = {
+  connect?: InputMaybe<FileWhereUniqueInput>;
+  create?: InputMaybe<FileCreateInput>;
+  disconnect?: InputMaybe<FileWhereUniqueInput>;
+};
+
+export type FileWhereInput = {
+  AND?: InputMaybe<Array<FileWhereInput>>;
+  id?: InputMaybe<StringFilter>;
+  mimeType?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  OR?: InputMaybe<Array<FileWhereInput>>;
+};
+
+export type FileWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type FloatFilter = {
+  equals?: InputMaybe<Scalars['Float']>;
+  gt?: InputMaybe<Scalars['Float']>;
+  gte?: InputMaybe<Scalars['Float']>;
+  in?: InputMaybe<Array<Scalars['Float']>>;
+  lt?: InputMaybe<Scalars['Float']>;
+  lte?: InputMaybe<Scalars['Float']>;
+  not?: InputMaybe<Scalars['Float']>;
+  notIn?: InputMaybe<Array<Scalars['Float']>>;
+};
+
+export type Group = {
+  endedAt?: Maybe<Scalars['Date']>;
+  events: EventList;
+  id: Scalars['String'];
+  members: MemberList;
+  name: ShortTranslatable;
+  startedAt: Scalars['Date'];
+};
+
+
+export type GroupeventsArgs = {
+  orderBy?: InputMaybe<EventOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<EventWhereInput>;
+};
+
+
+export type GroupmembersArgs = {
+  orderBy?: InputMaybe<MemberOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MemberWhereInput>;
+};
+
+export type GroupCreateInput = {
+  endedAt?: InputMaybe<Scalars['Date']>;
+  events?: InputMaybe<Array<EventCreateRelationInput>>;
+  id?: InputMaybe<Scalars['String']>;
+  members?: InputMaybe<Array<MemberCreateRelationInput>>;
+  name?: InputMaybe<ShortTranslatableCreateInput>;
+  startedAt?: InputMaybe<Scalars['Date']>;
+};
+
+export type GroupCreateRelationInput = {
+  connect?: InputMaybe<GroupWhereUniqueInput>;
+  create?: InputMaybe<GroupCreateInput>;
+};
+
+export type GroupList = {
+  __typename?: 'GroupList';
+  info: ListInfo;
+  values: Array<Group>;
+};
+
+export type GroupOrderByInput = {
+  endedAt?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  name?: InputMaybe<ShortTranslatableOrderByInput>;
+  startedAt?: InputMaybe<OrderByArg>;
+};
+
+export type GroupUpdateInput = {
+  endedAt?: InputMaybe<Scalars['Date']>;
+  events?: InputMaybe<Array<EventUpdateRelationInput>>;
+  id?: InputMaybe<Scalars['String']>;
+  members?: InputMaybe<Array<MemberUpdateRelationInput>>;
+  name?: InputMaybe<ShortTranslatableUpdateInput>;
+  startedAt?: InputMaybe<Scalars['Date']>;
+};
+
+export type GroupUpdateRelationInput = {
+  connect?: InputMaybe<GroupWhereUniqueInput>;
+  create?: InputMaybe<GroupCreateInput>;
+  disconnect?: InputMaybe<GroupWhereUniqueInput>;
+};
+
+export type GroupWhereInput = {
+  AND?: InputMaybe<Array<GroupWhereInput>>;
+  endedAt?: InputMaybe<DateTimeFilter>;
+  events?: InputMaybe<EventWhereInput>;
+  id?: InputMaybe<StringFilter>;
+  members?: InputMaybe<MemberWhereInput>;
+  name?: InputMaybe<ShortTranslatableWhereInput>;
+  OR?: InputMaybe<Array<GroupWhereInput>>;
+  startedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type GroupWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type IntFilter = {
+  equals?: InputMaybe<Scalars['Int']>;
+  gt?: InputMaybe<Scalars['Int']>;
+  gte?: InputMaybe<Scalars['Int']>;
+  in?: InputMaybe<Array<Scalars['Int']>>;
+  lt?: InputMaybe<Scalars['Int']>;
+  lte?: InputMaybe<Scalars['Int']>;
+  not?: InputMaybe<Scalars['Int']>;
+  notIn?: InputMaybe<Array<Scalars['Int']>>;
+};
+
+export enum Language {
+  EN = 'EN',
+  NL = 'NL'
+}
+
+export type LanguageFilter = {
+  equals?: InputMaybe<Language>;
+  in?: InputMaybe<Array<Language>>;
+  not?: InputMaybe<Language>;
+  notIn?: InputMaybe<Array<Language>>;
+};
+
+export type ListInfo = {
+  __typename?: 'ListInfo';
+  count: Scalars['Int'];
+};
+
+export type LongTranslatable = Translatable & {
+  __typename?: 'LongTranslatable';
   en?: Maybe<Scalars['String']>;
   nl?: Maybe<Scalars['String']>;
 };
 
 export type LongTranslatableCreateInput = {
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
+  en?: InputMaybe<Scalars['String']>;
+  nl?: InputMaybe<Scalars['String']>;
 };
 
-export type ShortTranslatableUpdateInput = {
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
+export type LongTranslatableOrderByInput = {
+  en?: InputMaybe<OrderByArg>;
+  nl?: InputMaybe<OrderByArg>;
 };
 
 export type LongTranslatableUpdateInput = {
-  en?: Maybe<Scalars['String']>;
-  nl?: Maybe<Scalars['String']>;
+  en?: InputMaybe<Scalars['String']>;
+  nl?: InputMaybe<Scalars['String']>;
 };
 
-export type CommitteeCreateRelationInput = {
-  create?: Maybe<CommitteeCreateInput>;
-  connect?: Maybe<CommitteeWhereUniqueInput>;
+export type LongTranslatableWhereInput = {
+  AND?: InputMaybe<Array<LongTranslatableWhereInput>>;
+  en?: InputMaybe<StringFilter>;
+  nl?: InputMaybe<StringFilter>;
+  OR?: InputMaybe<Array<LongTranslatableWhereInput>>;
 };
 
-export type CommitteeUpdateRelationInput = {
-  create?: Maybe<CommitteeCreateInput>;
-  connect?: Maybe<CommitteeWhereUniqueInput>;
-  disconnect?: Maybe<CommitteeWhereUniqueInput>;
-};
-
-export type CommitteePeriodCreateRelationInput = {
-  create?: Maybe<CommitteePeriodCreateInput>;
-  connect?: Maybe<CommitteePeriodWhereUniqueInput>;
-};
-
-export type CommitteePeriodUpdateRelationInput = {
-  create?: Maybe<CommitteePeriodCreateInput>;
-  connect?: Maybe<CommitteePeriodWhereUniqueInput>;
-  disconnect?: Maybe<CommitteePeriodWhereUniqueInput>;
-};
-
-export type TokenTypeFilter = {
-  equals?: Maybe<TokenType>;
-  not?: Maybe<TokenType>;
-  in?: Maybe<Array<TokenType>>;
-  notIn?: Maybe<Array<TokenType>>;
-};
-
-export type Query = {
-  __typename?: 'Query';
-  bank: Bank;
-  banks: BankList;
-  mandate: Mandate;
-  mandates: MandateList;
-  transaction: Transaction;
-  transactions: TransactionList;
-  directDebitInstruction: DirectDebitInstruction;
-  directDebitInstructions: DirectDebitInstructionList;
-  directDebitBatch: DirectDebitBatch;
-  directDebitBatches: DirectDebitBatchList;
-  file: File;
-  files: FileList;
-  directDebit: DirectDebit;
-  directDebits: DirectDebitList;
-  directDebitWarning: DirectDebitWarning;
-  directDebitWarnings: DirectDebitWarningList;
-  membershipFeeTransaction: MembershipFeeTransaction;
-  membershipFeeTransactions: MembershipFeeTransactionList;
-  membership: Membership;
-  memberships: MembershipList;
+export type Mandate = {
+  acceptedAt?: Maybe<Scalars['DateTime']>;
+  bic: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  errorMessage?: Maybe<Scalars['String']>;
+  iban?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  instructions: DirectDebitInstructionList;
+  isFirstTransaction: Scalars['Boolean'];
+  mandateId: Scalars['String'];
   member: Member;
-  members: MemberList;
-  participation: Participation;
-  participations: ParticipationList;
-  event: Event;
-  events: EventList;
-  group: Group;
+  reason: Scalars['String'];
+  status: MandateStatus;
+};
+
+
+export type MandateinstructionsArgs = {
+  orderBy?: InputMaybe<DirectDebitInstructionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitInstructionWhereInput>;
+};
+
+export type MandateCreateInput = {
+  acceptedAt?: InputMaybe<Scalars['DateTime']>;
+  bic?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  errorMessage?: InputMaybe<Scalars['String']>;
+  iban?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  instructions?: InputMaybe<Array<DirectDebitInstructionCreateRelationInput>>;
+  isFirstTransaction?: InputMaybe<Scalars['Boolean']>;
+  mandateId?: InputMaybe<Scalars['String']>;
+  member?: InputMaybe<MemberCreateRelationInput>;
+  reason?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<MandateStatus>;
+};
+
+export type MandateCreateRelationInput = {
+  connect?: InputMaybe<MandateWhereUniqueInput>;
+  create?: InputMaybe<MandateCreateInput>;
+};
+
+export type MandateList = {
+  __typename?: 'MandateList';
+  info: ListInfo;
+  values: Array<Mandate>;
+};
+
+export type MandateOrderByInput = {
+  acceptedAt?: InputMaybe<OrderByArg>;
+  bic?: InputMaybe<OrderByArg>;
+  createdAt?: InputMaybe<OrderByArg>;
+  errorMessage?: InputMaybe<OrderByArg>;
+  iban?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  isFirstTransaction?: InputMaybe<OrderByArg>;
+  mandateId?: InputMaybe<OrderByArg>;
+  member?: InputMaybe<MemberOrderByInput>;
+  reason?: InputMaybe<OrderByArg>;
+  status?: InputMaybe<OrderByArg>;
+};
+
+export enum MandateStatus {
+  ACCEPTED = 'ACCEPTED',
+  CANCELLED = 'CANCELLED',
+  CREATED = 'CREATED',
+  ERROR = 'ERROR',
+  INVALID = 'INVALID',
+  REJECTED = 'REJECTED',
+  UNACCEPTED = 'UNACCEPTED'
+}
+
+export type MandateStatusFilter = {
+  equals?: InputMaybe<MandateStatus>;
+  in?: InputMaybe<Array<MandateStatus>>;
+  not?: InputMaybe<MandateStatus>;
+  notIn?: InputMaybe<Array<MandateStatus>>;
+};
+
+export type MandateUpdateInput = {
+  acceptedAt?: InputMaybe<Scalars['DateTime']>;
+  bic?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  errorMessage?: InputMaybe<Scalars['String']>;
+  iban?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  instructions?: InputMaybe<Array<DirectDebitInstructionUpdateRelationInput>>;
+  isFirstTransaction?: InputMaybe<Scalars['Boolean']>;
+  mandateId?: InputMaybe<Scalars['String']>;
+  member?: InputMaybe<MemberUpdateRelationInput>;
+  reason?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<MandateStatus>;
+};
+
+export type MandateUpdateRelationInput = {
+  connect?: InputMaybe<MandateWhereUniqueInput>;
+  create?: InputMaybe<MandateCreateInput>;
+  disconnect?: InputMaybe<MandateWhereUniqueInput>;
+};
+
+export type MandateWhereInput = {
+  acceptedAt?: InputMaybe<DateTimeFilter>;
+  AND?: InputMaybe<Array<MandateWhereInput>>;
+  bic?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  errorMessage?: InputMaybe<StringFilter>;
+  iban?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  instructions?: InputMaybe<DirectDebitInstructionWhereInput>;
+  isFirstTransaction?: InputMaybe<Scalars['Boolean']>;
+  mandateId?: InputMaybe<StringFilter>;
+  member?: InputMaybe<MemberWhereInput>;
+  OR?: InputMaybe<Array<MandateWhereInput>>;
+  reason?: InputMaybe<StringFilter>;
+  status?: InputMaybe<MandateStatusFilter>;
+};
+
+export type MandateWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type Member = {
+  __typename?: 'Member';
+  address: Scalars['String'];
+  birthdate: Scalars['Date'];
+  city: Scalars['String'];
+  email: Scalars['String'];
+  firstName: Scalars['String'];
   groups: GroupList;
-  boardPeriod: BoardPeriod;
-  boardPeriods: BoardPeriodList;
-  committeePeriod: CommitteePeriod;
-  committeePeriods: CommitteePeriodList;
-  committee: Committee;
-  committees: CommitteeList;
-  digitalMandate: DigitalMandate;
-  digitalMandates: DigitalMandateList;
-  page: Page;
-  pages: PageList;
-  paperMandate: PaperMandate;
-  paperMandates: PaperMandateList;
-  setting: Setting;
-  settings: SettingList;
-  provider: Provider;
+  hasMandate: Scalars['Boolean'];
+  hasPendingPaperMandates: Scalars['Boolean'];
+  id: Scalars['String'];
+  image?: Maybe<File>;
+  initials: Scalars['String'];
+  isAdmin: Scalars['Boolean'];
+  language: Language;
+  lastName: Scalars['String'];
+  latestMembership: Membership;
+  mandates: MandateList;
+  memberships: MembershipList;
+  participations: ParticipationList;
+  phoneNumber: Scalars['String'];
+  postalCode: Scalars['String'];
+  pronouns: Pronouns;
   providers: ProviderList;
-  token: Token;
-  tokens: TokenList;
-  me?: Maybe<Member>;
+  studentType: StudentType;
+  transactions: TransactionList;
+  warnings: DirectDebitWarningList;
 };
 
 
-export type QuerybankArgs = {
-  where: BankWhereUniqueInput;
+export type MembergroupsArgs = {
+  orderBy?: InputMaybe<GroupOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<GroupWhereInput>;
 };
 
 
-export type QuerybanksArgs = {
-  where?: Maybe<BankWhereInput>;
-  orderBy?: Maybe<BankOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MembermandatesArgs = {
+  orderBy?: InputMaybe<MandateOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MandateWhereInput>;
 };
 
 
-export type QuerymandateArgs = {
-  where: MandateWhereUniqueInput;
+export type MembermembershipsArgs = {
+  orderBy?: InputMaybe<MembershipOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MembershipWhereInput>;
 };
 
 
-export type QuerymandatesArgs = {
-  where?: Maybe<MandateWhereInput>;
-  orderBy?: Maybe<MandateOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MemberparticipationsArgs = {
+  orderBy?: InputMaybe<ParticipationOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ParticipationWhereInput>;
 };
 
 
-export type QuerytransactionArgs = {
-  where: TransactionWhereUniqueInput;
+export type MemberprovidersArgs = {
+  orderBy?: InputMaybe<ProviderOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ProviderWhereInput>;
 };
 
 
-export type QuerytransactionsArgs = {
-  where?: Maybe<TransactionWhereInput>;
-  orderBy?: Maybe<TransactionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MembertransactionsArgs = {
+  orderBy?: InputMaybe<TransactionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TransactionWhereInput>;
 };
 
 
-export type QuerydirectDebitInstructionArgs = {
-  where: DirectDebitInstructionWhereUniqueInput;
+export type MemberwarningsArgs = {
+  orderBy?: InputMaybe<DirectDebitWarningOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitWarningWhereInput>;
+};
+
+export type MemberCreateInput = {
+  address?: InputMaybe<Scalars['String']>;
+  birthdate?: InputMaybe<Scalars['Date']>;
+  city?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  groups?: InputMaybe<Array<GroupCreateRelationInput>>;
+  id?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<FileCreateRelationInput>;
+  initials?: InputMaybe<Scalars['String']>;
+  isAdmin?: InputMaybe<Scalars['Boolean']>;
+  language?: InputMaybe<Language>;
+  lastName?: InputMaybe<Scalars['String']>;
+  mandates?: InputMaybe<Array<MandateCreateRelationInput>>;
+  memberships?: InputMaybe<Array<MembershipCreateRelationInput>>;
+  participations?: InputMaybe<Array<ParticipationCreateRelationInput>>;
+  phoneNumber?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
+  pronouns?: InputMaybe<Pronouns>;
+  providers?: InputMaybe<Array<ProviderCreateRelationInput>>;
+  studentType?: InputMaybe<StudentType>;
+  transactions?: InputMaybe<Array<TransactionCreateRelationInput>>;
+  warnings?: InputMaybe<Array<DirectDebitWarningCreateRelationInput>>;
+};
+
+export type MemberCreateRelationInput = {
+  connect?: InputMaybe<MemberWhereUniqueInput>;
+  create?: InputMaybe<MemberCreateInput>;
+};
+
+export type MemberList = {
+  __typename?: 'MemberList';
+  info: ListInfo;
+  values: Array<Member>;
+};
+
+export type MemberOrderByInput = {
+  address?: InputMaybe<OrderByArg>;
+  birthdate?: InputMaybe<OrderByArg>;
+  city?: InputMaybe<OrderByArg>;
+  email?: InputMaybe<OrderByArg>;
+  firstName?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  image?: InputMaybe<FileOrderByInput>;
+  initials?: InputMaybe<OrderByArg>;
+  isAdmin?: InputMaybe<OrderByArg>;
+  language?: InputMaybe<OrderByArg>;
+  lastName?: InputMaybe<OrderByArg>;
+  phoneNumber?: InputMaybe<OrderByArg>;
+  postalCode?: InputMaybe<OrderByArg>;
+  pronouns?: InputMaybe<OrderByArg>;
+  studentType?: InputMaybe<OrderByArg>;
+};
+
+export type Membership = {
+  __typename?: 'Membership';
+  endedAt?: Maybe<Scalars['Date']>;
+  id: Scalars['String'];
+  isAccepted: Scalars['Boolean'];
+  member: Member;
+  startedAt: Scalars['Date'];
+  transactions: MembershipFeeTransactionList;
+  type: MembershipType;
 };
 
 
-export type QuerydirectDebitInstructionsArgs = {
-  where?: Maybe<DirectDebitInstructionWhereInput>;
-  orderBy?: Maybe<DirectDebitInstructionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MembershiptransactionsArgs = {
+  orderBy?: InputMaybe<MembershipFeeTransactionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MembershipFeeTransactionWhereInput>;
 };
 
-
-export type QuerydirectDebitBatchArgs = {
-  where: DirectDebitBatchWhereUniqueInput;
+export type MembershipCreateInput = {
+  endedAt?: InputMaybe<Scalars['Date']>;
+  id?: InputMaybe<Scalars['String']>;
+  isAccepted?: InputMaybe<Scalars['Boolean']>;
+  member?: InputMaybe<MemberCreateRelationInput>;
+  startedAt?: InputMaybe<Scalars['Date']>;
+  transactions?: InputMaybe<Array<MembershipFeeTransactionCreateRelationInput>>;
+  type?: InputMaybe<MembershipType>;
 };
 
-
-export type QuerydirectDebitBatchesArgs = {
-  where?: Maybe<DirectDebitBatchWhereInput>;
-  orderBy?: Maybe<DirectDebitBatchOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MembershipCreateRelationInput = {
+  connect?: InputMaybe<MembershipWhereUniqueInput>;
+  create?: InputMaybe<MembershipCreateInput>;
 };
 
-
-export type QueryfileArgs = {
-  where: FileWhereUniqueInput;
+export type MembershipFeeTransaction = Transaction & {
+  __typename?: 'MembershipFeeTransaction';
+  amount: Scalars['Int'];
+  createdAt: Scalars['DateTime'];
+  description: Scalars['String'];
+  id: Scalars['String'];
+  instruction?: Maybe<DirectDebitInstruction>;
+  member: Member;
+  membership: Membership;
+  updatedAt: Scalars['DateTime'];
+  year: Scalars['Int'];
 };
 
-
-export type QueryfilesArgs = {
-  where?: Maybe<FileWhereInput>;
-  orderBy?: Maybe<FileOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MembershipFeeTransactionCreateInput = {
+  amount?: InputMaybe<Scalars['Float']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  instruction?: InputMaybe<DirectDebitInstructionCreateRelationInput>;
+  member?: InputMaybe<MemberCreateRelationInput>;
+  membership?: InputMaybe<MembershipCreateRelationInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  year?: InputMaybe<Scalars['Float']>;
 };
 
-
-export type QuerydirectDebitArgs = {
-  where: DirectDebitWhereUniqueInput;
+export type MembershipFeeTransactionCreateRelationInput = {
+  connect?: InputMaybe<MembershipFeeTransactionWhereUniqueInput>;
+  create?: InputMaybe<MembershipFeeTransactionCreateInput>;
 };
 
-
-export type QuerydirectDebitsArgs = {
-  where?: Maybe<DirectDebitWhereInput>;
-  orderBy?: Maybe<DirectDebitOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MembershipFeeTransactionList = {
+  __typename?: 'MembershipFeeTransactionList';
+  info: ListInfo;
+  values: Array<MembershipFeeTransaction>;
 };
 
-
-export type QuerydirectDebitWarningArgs = {
-  where: DirectDebitWarningWhereUniqueInput;
+export type MembershipFeeTransactionOrderByInput = {
+  amount?: InputMaybe<OrderByArg>;
+  createdAt?: InputMaybe<OrderByArg>;
+  description?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  instruction?: InputMaybe<DirectDebitInstructionOrderByInput>;
+  member?: InputMaybe<MemberOrderByInput>;
+  membership?: InputMaybe<MembershipOrderByInput>;
+  updatedAt?: InputMaybe<OrderByArg>;
+  year?: InputMaybe<OrderByArg>;
 };
 
-
-export type QuerydirectDebitWarningsArgs = {
-  where?: Maybe<DirectDebitWarningWhereInput>;
-  orderBy?: Maybe<DirectDebitWarningOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MembershipFeeTransactionUpdateInput = {
+  amount?: InputMaybe<Scalars['Float']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  instruction?: InputMaybe<DirectDebitInstructionUpdateRelationInput>;
+  member?: InputMaybe<MemberUpdateRelationInput>;
+  membership?: InputMaybe<MembershipUpdateRelationInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  year?: InputMaybe<Scalars['Float']>;
 };
 
-
-export type QuerymembershipFeeTransactionArgs = {
-  where: MembershipFeeTransactionWhereUniqueInput;
+export type MembershipFeeTransactionUpdateRelationInput = {
+  connect?: InputMaybe<MembershipFeeTransactionWhereUniqueInput>;
+  create?: InputMaybe<MembershipFeeTransactionCreateInput>;
+  disconnect?: InputMaybe<MembershipFeeTransactionWhereUniqueInput>;
 };
 
-
-export type QuerymembershipFeeTransactionsArgs = {
-  where?: Maybe<MembershipFeeTransactionWhereInput>;
-  orderBy?: Maybe<MembershipFeeTransactionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MembershipFeeTransactionWhereInput = {
+  amount?: InputMaybe<IntFilter>;
+  AND?: InputMaybe<Array<MembershipFeeTransactionWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  instruction?: InputMaybe<DirectDebitInstructionWhereInput>;
+  member?: InputMaybe<MemberWhereInput>;
+  membership?: InputMaybe<MembershipWhereInput>;
+  OR?: InputMaybe<Array<MembershipFeeTransactionWhereInput>>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  year?: InputMaybe<IntFilter>;
 };
 
-
-export type QuerymembershipArgs = {
-  where: MembershipWhereUniqueInput;
+export type MembershipFeeTransactionWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
-
-export type QuerymembershipsArgs = {
-  where?: Maybe<MembershipWhereInput>;
-  orderBy?: Maybe<MembershipOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MembershipList = {
+  __typename?: 'MembershipList';
+  info: ListInfo;
+  values: Array<Membership>;
 };
 
-
-export type QuerymemberArgs = {
-  where: MemberWhereUniqueInput;
+export type MembershipOrderByInput = {
+  endedAt?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  isAccepted?: InputMaybe<OrderByArg>;
+  member?: InputMaybe<MemberOrderByInput>;
+  startedAt?: InputMaybe<OrderByArg>;
+  type?: InputMaybe<OrderByArg>;
 };
 
+export enum MembershipType {
+  EXTRAORDINARY = 'EXTRAORDINARY',
+  HONORARY = 'HONORARY',
+  NORMAL = 'NORMAL'
+}
 
-export type QuerymembersArgs = {
-  where?: Maybe<MemberWhereInput>;
-  orderBy?: Maybe<MemberOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MembershipTypeFilter = {
+  equals?: InputMaybe<MembershipType>;
+  in?: InputMaybe<Array<MembershipType>>;
+  not?: InputMaybe<MembershipType>;
+  notIn?: InputMaybe<Array<MembershipType>>;
 };
 
-
-export type QueryparticipationArgs = {
-  where: ParticipationWhereUniqueInput;
+export type MembershipUpdateInput = {
+  endedAt?: InputMaybe<Scalars['Date']>;
+  id?: InputMaybe<Scalars['String']>;
+  isAccepted?: InputMaybe<Scalars['Boolean']>;
+  member?: InputMaybe<MemberUpdateRelationInput>;
+  startedAt?: InputMaybe<Scalars['Date']>;
+  transactions?: InputMaybe<Array<MembershipFeeTransactionUpdateRelationInput>>;
+  type?: InputMaybe<MembershipType>;
 };
 
-
-export type QueryparticipationsArgs = {
-  where?: Maybe<ParticipationWhereInput>;
-  orderBy?: Maybe<ParticipationOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MembershipUpdateRelationInput = {
+  connect?: InputMaybe<MembershipWhereUniqueInput>;
+  create?: InputMaybe<MembershipCreateInput>;
+  disconnect?: InputMaybe<MembershipWhereUniqueInput>;
 };
 
-
-export type QueryeventArgs = {
-  where: EventWhereUniqueInput;
+export type MembershipWhereInput = {
+  AND?: InputMaybe<Array<MembershipWhereInput>>;
+  endedAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  isAccepted?: InputMaybe<Scalars['Boolean']>;
+  member?: InputMaybe<MemberWhereInput>;
+  OR?: InputMaybe<Array<MembershipWhereInput>>;
+  startedAt?: InputMaybe<DateTimeFilter>;
+  transactions?: InputMaybe<MembershipFeeTransactionWhereInput>;
+  type?: InputMaybe<MembershipTypeFilter>;
 };
 
-
-export type QueryeventsArgs = {
-  where?: Maybe<EventWhereInput>;
-  orderBy?: Maybe<EventOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MembershipWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
-
-export type QuerygroupArgs = {
-  where: GroupWhereUniqueInput;
+export type MemberUpdateInput = {
+  address?: InputMaybe<Scalars['String']>;
+  birthdate?: InputMaybe<Scalars['Date']>;
+  city?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  groups?: InputMaybe<Array<GroupUpdateRelationInput>>;
+  id?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<FileUpdateRelationInput>;
+  initials?: InputMaybe<Scalars['String']>;
+  isAdmin?: InputMaybe<Scalars['Boolean']>;
+  language?: InputMaybe<Language>;
+  lastName?: InputMaybe<Scalars['String']>;
+  mandates?: InputMaybe<Array<MandateUpdateRelationInput>>;
+  memberships?: InputMaybe<Array<MembershipUpdateRelationInput>>;
+  participations?: InputMaybe<Array<ParticipationUpdateRelationInput>>;
+  phoneNumber?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
+  pronouns?: InputMaybe<Pronouns>;
+  providers?: InputMaybe<Array<ProviderUpdateRelationInput>>;
+  studentType?: InputMaybe<StudentType>;
+  transactions?: InputMaybe<Array<TransactionUpdateRelationInput>>;
+  warnings?: InputMaybe<Array<DirectDebitWarningUpdateRelationInput>>;
 };
 
-
-export type QuerygroupsArgs = {
-  where?: Maybe<GroupWhereInput>;
-  orderBy?: Maybe<GroupOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MemberUpdateRelationInput = {
+  connect?: InputMaybe<MemberWhereUniqueInput>;
+  create?: InputMaybe<MemberCreateInput>;
+  disconnect?: InputMaybe<MemberWhereUniqueInput>;
 };
 
-
-export type QueryboardPeriodArgs = {
-  where: BoardPeriodWhereUniqueInput;
+export type MemberWhereInput = {
+  address?: InputMaybe<StringFilter>;
+  AND?: InputMaybe<Array<MemberWhereInput>>;
+  birthdate?: InputMaybe<DateTimeFilter>;
+  city?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  firstName?: InputMaybe<StringFilter>;
+  groups?: InputMaybe<GroupWhereInput>;
+  id?: InputMaybe<StringFilter>;
+  image?: InputMaybe<FileWhereInput>;
+  initials?: InputMaybe<StringFilter>;
+  isAdmin?: InputMaybe<Scalars['Boolean']>;
+  language?: InputMaybe<LanguageFilter>;
+  lastName?: InputMaybe<StringFilter>;
+  mandates?: InputMaybe<MandateWhereInput>;
+  memberships?: InputMaybe<MembershipWhereInput>;
+  OR?: InputMaybe<Array<MemberWhereInput>>;
+  participations?: InputMaybe<ParticipationWhereInput>;
+  phoneNumber?: InputMaybe<StringFilter>;
+  postalCode?: InputMaybe<StringFilter>;
+  pronouns?: InputMaybe<PronounsFilter>;
+  providers?: InputMaybe<ProviderWhereInput>;
+  studentType?: InputMaybe<StudentTypeFilter>;
+  transactions?: InputMaybe<TransactionWhereInput>;
+  warnings?: InputMaybe<DirectDebitWarningWhereInput>;
 };
 
-
-export type QueryboardPeriodsArgs = {
-  where?: Maybe<BoardPeriodWhereInput>;
-  orderBy?: Maybe<BoardPeriodOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QuerycommitteePeriodArgs = {
-  where: CommitteePeriodWhereUniqueInput;
-};
-
-
-export type QuerycommitteePeriodsArgs = {
-  where?: Maybe<CommitteePeriodWhereInput>;
-  orderBy?: Maybe<CommitteePeriodOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QuerycommitteeArgs = {
-  where: CommitteeWhereUniqueInput;
-};
-
-
-export type QuerycommitteesArgs = {
-  where?: Maybe<CommitteeWhereInput>;
-  orderBy?: Maybe<CommitteeOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QuerydigitalMandateArgs = {
-  where: DigitalMandateWhereUniqueInput;
-};
-
-
-export type QuerydigitalMandatesArgs = {
-  where?: Maybe<DigitalMandateWhereInput>;
-  orderBy?: Maybe<DigitalMandateOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QuerypageArgs = {
-  where: PageWhereUniqueInput;
-};
-
-
-export type QuerypagesArgs = {
-  where?: Maybe<PageWhereInput>;
-  orderBy?: Maybe<PageOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QuerypaperMandateArgs = {
-  where: PaperMandateWhereUniqueInput;
-};
-
-
-export type QuerypaperMandatesArgs = {
-  where?: Maybe<PaperMandateWhereInput>;
-  orderBy?: Maybe<PaperMandateOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QuerysettingArgs = {
-  where: SettingWhereUniqueInput;
-};
-
-
-export type QuerysettingsArgs = {
-  where?: Maybe<SettingWhereInput>;
-  orderBy?: Maybe<SettingOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryproviderArgs = {
-  where: ProviderWhereUniqueInput;
-};
-
-
-export type QueryprovidersArgs = {
-  where?: Maybe<ProviderWhereInput>;
-  orderBy?: Maybe<ProviderOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QuerytokenArgs = {
-  where: TokenWhereUniqueInput;
-};
-
-
-export type QuerytokensArgs = {
-  where?: Maybe<TokenWhereInput>;
-  orderBy?: Maybe<TokenOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+export type MemberWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  invalidateMandate?: Maybe<Mandate>;
-  sendMandateReminders?: Maybe<Scalars['Boolean']>;
-  createDigitalMandate?: Maybe<CreateDigitalMandateResult>;
-  createPaperMandate?: Maybe<PaperMandate>;
-  cancelPaperMandate?: Maybe<PaperMandate>;
   acceptPaperMandate?: Maybe<PaperMandate>;
-  rejectPaperMandate?: Maybe<PaperMandate>;
-  generateMembershipFeeTransactions?: Maybe<Scalars['Int']>;
-  sendContactForm?: Maybe<Scalars['Boolean']>;
-  generateDirectDebit?: Maybe<DirectDebit>;
-  generateDirectDebitFile?: Maybe<DirectDebit>;
-  uploadMemberImage?: Maybe<Member>;
-  uploadPaperMandate?: Maybe<PaperMandate>;
-  createBank: Bank;
-  updateBank: Bank;
-  deleteBank: Bank;
-  deleteBanks: BankList;
-  createMandate: Mandate;
-  updateMandate: Mandate;
-  deleteMandate: Mandate;
-  deleteMandates: MandateList;
-  createTransaction: Transaction;
-  updateTransaction: Transaction;
-  deleteTransaction: Transaction;
-  deleteTransactions: TransactionList;
-  createDirectDebitInstruction: DirectDebitInstruction;
-  updateDirectDebitInstruction: DirectDebitInstruction;
-  deleteDirectDebitInstruction: DirectDebitInstruction;
-  deleteDirectDebitInstructions: DirectDebitInstructionList;
-  createDirectDebitBatch: DirectDebitBatch;
-  updateDirectDebitBatch: DirectDebitBatch;
-  deleteDirectDebitBatch: DirectDebitBatch;
-  deleteDirectDebitBatches: DirectDebitBatchList;
-  createFile: File;
-  updateFile: File;
-  deleteFile: File;
-  deleteFiles: FileList;
-  createDirectDebit: DirectDebit;
-  updateDirectDebit: DirectDebit;
-  deleteDirectDebit: DirectDebit;
-  deleteDirectDebits: DirectDebitList;
-  createDirectDebitWarning: DirectDebitWarning;
-  updateDirectDebitWarning: DirectDebitWarning;
-  deleteDirectDebitWarning: DirectDebitWarning;
-  deleteDirectDebitWarnings: DirectDebitWarningList;
-  createMembershipFeeTransaction: MembershipFeeTransaction;
-  updateMembershipFeeTransaction: MembershipFeeTransaction;
-  deleteMembershipFeeTransaction: MembershipFeeTransaction;
-  deleteMembershipFeeTransactions: MembershipFeeTransactionList;
-  createMembership: Membership;
-  updateMembership: Membership;
-  deleteMembership: Membership;
-  deleteMemberships: MembershipList;
-  createMember: Member;
-  updateMember: Member;
-  deleteMember: Member;
-  deleteMembers: MemberList;
-  createParticipation: Participation;
-  updateParticipation: Participation;
-  deleteParticipation: Participation;
-  deleteParticipations: ParticipationList;
-  createEvent: Event;
-  updateEvent: Event;
-  deleteEvent: Event;
-  deleteEvents: EventList;
-  createGroup: Group;
-  updateGroup: Group;
-  deleteGroup: Group;
-  deleteGroups: GroupList;
-  createBoardPeriod: BoardPeriod;
-  updateBoardPeriod: BoardPeriod;
-  deleteBoardPeriod: BoardPeriod;
-  deleteBoardPeriods: BoardPeriodList;
-  createCommitteePeriod: CommitteePeriod;
-  updateCommitteePeriod: CommitteePeriod;
-  deleteCommitteePeriod: CommitteePeriod;
-  deleteCommitteePeriods: CommitteePeriodList;
-  createCommittee: Committee;
-  updateCommittee: Committee;
-  deleteCommittee: Committee;
-  deleteCommittees: CommitteeList;
-  createPage: Page;
-  updatePage: Page;
-  deletePage: Page;
-  deletePages: PageList;
-  createSetting: Setting;
-  updateSetting: Setting;
-  deleteSetting: Setting;
-  deleteSettings: SettingList;
-  createProvider: Provider;
-  updateProvider: Provider;
-  deleteProvider: Provider;
-  deleteProviders: ProviderList;
-  createToken: Token;
-  updateToken: Token;
-  deleteToken: Token;
-  deleteTokens: TokenList;
-  register?: Maybe<Scalars['Boolean']>;
-  login?: Maybe<AccessToken>;
+  cancelPaperMandate?: Maybe<PaperMandate>;
   changeEmail?: Maybe<Scalars['Boolean']>;
   changePassword?: Maybe<Scalars['Boolean']>;
-  requestVerifyEmail?: Maybe<Scalars['Boolean']>;
+  createBank: Bank;
+  createBoardPeriod: BoardPeriod;
+  createCommittee: Committee;
+  createCommitteePeriod: CommitteePeriod;
+  createDigitalMandate?: Maybe<CreateDigitalMandateResult>;
+  createDirectDebit: DirectDebit;
+  createDirectDebitBatch: DirectDebitBatch;
+  createDirectDebitInstruction: DirectDebitInstruction;
+  createDirectDebitWarning: DirectDebitWarning;
+  createEvent: Event;
+  createFile: File;
+  createGroup: Group;
+  createMandate: Mandate;
+  createMember: Member;
+  createMembership: Membership;
+  createMembershipFeeTransaction: MembershipFeeTransaction;
+  createPage: Page;
+  createPaperMandate?: Maybe<PaperMandate>;
+  createParticipation: Participation;
+  createProvider: Provider;
+  createSetting: Setting;
+  createToken: Token;
+  createTransaction: Transaction;
+  deleteBank: Bank;
+  deleteBanks: BankList;
+  deleteBoardPeriod: BoardPeriod;
+  deleteBoardPeriods: BoardPeriodList;
+  deleteCommittee: Committee;
+  deleteCommitteePeriod: CommitteePeriod;
+  deleteCommitteePeriods: CommitteePeriodList;
+  deleteCommittees: CommitteeList;
+  deleteDirectDebit: DirectDebit;
+  deleteDirectDebitBatch: DirectDebitBatch;
+  deleteDirectDebitBatches: DirectDebitBatchList;
+  deleteDirectDebitInstruction: DirectDebitInstruction;
+  deleteDirectDebitInstructions: DirectDebitInstructionList;
+  deleteDirectDebits: DirectDebitList;
+  deleteDirectDebitWarning: DirectDebitWarning;
+  deleteDirectDebitWarnings: DirectDebitWarningList;
+  deleteEvent: Event;
+  deleteEvents: EventList;
+  deleteFile: File;
+  deleteFiles: FileList;
+  deleteGroup: Group;
+  deleteGroups: GroupList;
+  deleteMandate: Mandate;
+  deleteMandates: MandateList;
+  deleteMember: Member;
+  deleteMembers: MemberList;
+  deleteMembership: Membership;
+  deleteMembershipFeeTransaction: MembershipFeeTransaction;
+  deleteMembershipFeeTransactions: MembershipFeeTransactionList;
+  deleteMemberships: MembershipList;
+  deletePage: Page;
+  deletePages: PageList;
+  deleteParticipation: Participation;
+  deleteParticipations: ParticipationList;
+  deleteProvider: Provider;
+  deleteProviders: ProviderList;
+  deleteSetting: Setting;
+  deleteSettings: SettingList;
+  deleteToken: Token;
+  deleteTokens: TokenList;
+  deleteTransaction: Transaction;
+  deleteTransactions: TransactionList;
+  generateDirectDebit?: Maybe<DirectDebit>;
+  generateDirectDebitFile?: Maybe<DirectDebit>;
+  generateMembershipFeeTransactions?: Maybe<Scalars['Int']>;
+  invalidateMandate?: Maybe<Mandate>;
+  login?: Maybe<AccessToken>;
+  register?: Maybe<Scalars['Boolean']>;
+  rejectPaperMandate?: Maybe<PaperMandate>;
   requestResetPassword?: Maybe<Scalars['Boolean']>;
-  verifyEmail?: Maybe<Scalars['Boolean']>;
+  requestVerifyEmail?: Maybe<Scalars['Boolean']>;
   resetPassword?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type MutationinvalidateMandateArgs = {
-  mandate: MandateWhereUniqueInput;
-};
-
-
-export type MutationsendMandateRemindersArgs = {
-  beforeDate: Scalars['Date'];
-};
-
-
-export type MutationcreateDigitalMandateArgs = {
-  data: CreateDigitalMandateInput;
-};
-
-
-export type MutationcreatePaperMandateArgs = {
-  data: CreatePaperMandateInput;
-};
-
-
-export type MutationcancelPaperMandateArgs = {
-  mandate: PaperMandateWhereUniqueInput;
+  sendContactForm?: Maybe<Scalars['Boolean']>;
+  sendMandateReminders?: Maybe<Scalars['Boolean']>;
+  updateBank: Bank;
+  updateBoardPeriod: BoardPeriod;
+  updateCommittee: Committee;
+  updateCommitteePeriod: CommitteePeriod;
+  updateDirectDebit: DirectDebit;
+  updateDirectDebitBatch: DirectDebitBatch;
+  updateDirectDebitInstruction: DirectDebitInstruction;
+  updateDirectDebitWarning: DirectDebitWarning;
+  updateEvent: Event;
+  updateFile: File;
+  updateGroup: Group;
+  updateMandate: Mandate;
+  updateMember: Member;
+  updateMembership: Membership;
+  updateMembershipFeeTransaction: MembershipFeeTransaction;
+  updatePage: Page;
+  updateParticipation: Participation;
+  updateProvider: Provider;
+  updateSetting: Setting;
+  updateToken: Token;
+  updateTransaction: Transaction;
+  uploadMemberImage?: Maybe<Member>;
+  uploadPaperMandate?: Maybe<PaperMandate>;
+  verifyEmail?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -2681,560 +1744,8 @@ export type MutationacceptPaperMandateArgs = {
 };
 
 
-export type MutationrejectPaperMandateArgs = {
+export type MutationcancelPaperMandateArgs = {
   mandate: PaperMandateWhereUniqueInput;
-  reason: Scalars['String'];
-};
-
-
-export type MutationgenerateMembershipFeeTransactionsArgs = {
-  year: Scalars['Int'];
-};
-
-
-export type MutationsendContactFormArgs = {
-  name: Scalars['String'];
-  email: Scalars['String'];
-  subject: Scalars['String'];
-  message: Scalars['String'];
-  recaptcha: Scalars['String'];
-};
-
-
-export type MutationgenerateDirectDebitArgs = {
-  collectionDate: Scalars['Date'];
-};
-
-
-export type MutationgenerateDirectDebitFileArgs = {
-  directDebit: DirectDebitWhereUniqueInput;
-};
-
-
-export type MutationuploadMemberImageArgs = {
-  member: MemberWhereUniqueInput;
-  file: Scalars['Upload'];
-};
-
-
-export type MutationuploadPaperMandateArgs = {
-  paperMandate: PaperMandateWhereUniqueInput;
-  file: Scalars['Upload'];
-};
-
-
-export type MutationcreateBankArgs = {
-  data: BankCreateInput;
-};
-
-
-export type MutationupdateBankArgs = {
-  where: BankWhereUniqueInput;
-  data: BankUpdateInput;
-};
-
-
-export type MutationdeleteBankArgs = {
-  where: BankWhereUniqueInput;
-};
-
-
-export type MutationdeleteBanksArgs = {
-  where?: Maybe<BankWhereInput>;
-  orderBy?: Maybe<BankOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateMandateArgs = {
-  data: MandateCreateInput;
-};
-
-
-export type MutationupdateMandateArgs = {
-  where: MandateWhereUniqueInput;
-  data: MandateUpdateInput;
-};
-
-
-export type MutationdeleteMandateArgs = {
-  where: MandateWhereUniqueInput;
-};
-
-
-export type MutationdeleteMandatesArgs = {
-  where?: Maybe<MandateWhereInput>;
-  orderBy?: Maybe<MandateOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateTransactionArgs = {
-  data: TransactionCreateInput;
-};
-
-
-export type MutationupdateTransactionArgs = {
-  where: TransactionWhereUniqueInput;
-  data: TransactionUpdateInput;
-};
-
-
-export type MutationdeleteTransactionArgs = {
-  where: TransactionWhereUniqueInput;
-};
-
-
-export type MutationdeleteTransactionsArgs = {
-  where?: Maybe<TransactionWhereInput>;
-  orderBy?: Maybe<TransactionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateDirectDebitInstructionArgs = {
-  data: DirectDebitInstructionCreateInput;
-};
-
-
-export type MutationupdateDirectDebitInstructionArgs = {
-  where: DirectDebitInstructionWhereUniqueInput;
-  data: DirectDebitInstructionUpdateInput;
-};
-
-
-export type MutationdeleteDirectDebitInstructionArgs = {
-  where: DirectDebitInstructionWhereUniqueInput;
-};
-
-
-export type MutationdeleteDirectDebitInstructionsArgs = {
-  where?: Maybe<DirectDebitInstructionWhereInput>;
-  orderBy?: Maybe<DirectDebitInstructionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateDirectDebitBatchArgs = {
-  data: DirectDebitBatchCreateInput;
-};
-
-
-export type MutationupdateDirectDebitBatchArgs = {
-  where: DirectDebitBatchWhereUniqueInput;
-  data: DirectDebitBatchUpdateInput;
-};
-
-
-export type MutationdeleteDirectDebitBatchArgs = {
-  where: DirectDebitBatchWhereUniqueInput;
-};
-
-
-export type MutationdeleteDirectDebitBatchesArgs = {
-  where?: Maybe<DirectDebitBatchWhereInput>;
-  orderBy?: Maybe<DirectDebitBatchOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateFileArgs = {
-  data: FileCreateInput;
-};
-
-
-export type MutationupdateFileArgs = {
-  where: FileWhereUniqueInput;
-  data: FileUpdateInput;
-};
-
-
-export type MutationdeleteFileArgs = {
-  where: FileWhereUniqueInput;
-};
-
-
-export type MutationdeleteFilesArgs = {
-  where?: Maybe<FileWhereInput>;
-  orderBy?: Maybe<FileOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateDirectDebitArgs = {
-  data: DirectDebitCreateInput;
-};
-
-
-export type MutationupdateDirectDebitArgs = {
-  where: DirectDebitWhereUniqueInput;
-  data: DirectDebitUpdateInput;
-};
-
-
-export type MutationdeleteDirectDebitArgs = {
-  where: DirectDebitWhereUniqueInput;
-};
-
-
-export type MutationdeleteDirectDebitsArgs = {
-  where?: Maybe<DirectDebitWhereInput>;
-  orderBy?: Maybe<DirectDebitOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateDirectDebitWarningArgs = {
-  data: DirectDebitWarningCreateInput;
-};
-
-
-export type MutationupdateDirectDebitWarningArgs = {
-  where: DirectDebitWarningWhereUniqueInput;
-  data: DirectDebitWarningUpdateInput;
-};
-
-
-export type MutationdeleteDirectDebitWarningArgs = {
-  where: DirectDebitWarningWhereUniqueInput;
-};
-
-
-export type MutationdeleteDirectDebitWarningsArgs = {
-  where?: Maybe<DirectDebitWarningWhereInput>;
-  orderBy?: Maybe<DirectDebitWarningOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateMembershipFeeTransactionArgs = {
-  data: MembershipFeeTransactionCreateInput;
-};
-
-
-export type MutationupdateMembershipFeeTransactionArgs = {
-  where: MembershipFeeTransactionWhereUniqueInput;
-  data: MembershipFeeTransactionUpdateInput;
-};
-
-
-export type MutationdeleteMembershipFeeTransactionArgs = {
-  where: MembershipFeeTransactionWhereUniqueInput;
-};
-
-
-export type MutationdeleteMembershipFeeTransactionsArgs = {
-  where?: Maybe<MembershipFeeTransactionWhereInput>;
-  orderBy?: Maybe<MembershipFeeTransactionOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateMembershipArgs = {
-  data: MembershipCreateInput;
-};
-
-
-export type MutationupdateMembershipArgs = {
-  where: MembershipWhereUniqueInput;
-  data: MembershipUpdateInput;
-};
-
-
-export type MutationdeleteMembershipArgs = {
-  where: MembershipWhereUniqueInput;
-};
-
-
-export type MutationdeleteMembershipsArgs = {
-  where?: Maybe<MembershipWhereInput>;
-  orderBy?: Maybe<MembershipOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateMemberArgs = {
-  data: MemberCreateInput;
-};
-
-
-export type MutationupdateMemberArgs = {
-  where: MemberWhereUniqueInput;
-  data: MemberUpdateInput;
-};
-
-
-export type MutationdeleteMemberArgs = {
-  where: MemberWhereUniqueInput;
-};
-
-
-export type MutationdeleteMembersArgs = {
-  where?: Maybe<MemberWhereInput>;
-  orderBy?: Maybe<MemberOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateParticipationArgs = {
-  data: ParticipationCreateInput;
-};
-
-
-export type MutationupdateParticipationArgs = {
-  where: ParticipationWhereUniqueInput;
-  data: ParticipationUpdateInput;
-};
-
-
-export type MutationdeleteParticipationArgs = {
-  where: ParticipationWhereUniqueInput;
-};
-
-
-export type MutationdeleteParticipationsArgs = {
-  where?: Maybe<ParticipationWhereInput>;
-  orderBy?: Maybe<ParticipationOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateEventArgs = {
-  data: EventCreateInput;
-};
-
-
-export type MutationupdateEventArgs = {
-  where: EventWhereUniqueInput;
-  data: EventUpdateInput;
-};
-
-
-export type MutationdeleteEventArgs = {
-  where: EventWhereUniqueInput;
-};
-
-
-export type MutationdeleteEventsArgs = {
-  where?: Maybe<EventWhereInput>;
-  orderBy?: Maybe<EventOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateGroupArgs = {
-  data: GroupCreateInput;
-};
-
-
-export type MutationupdateGroupArgs = {
-  where: GroupWhereUniqueInput;
-  data: GroupUpdateInput;
-};
-
-
-export type MutationdeleteGroupArgs = {
-  where: GroupWhereUniqueInput;
-};
-
-
-export type MutationdeleteGroupsArgs = {
-  where?: Maybe<GroupWhereInput>;
-  orderBy?: Maybe<GroupOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateBoardPeriodArgs = {
-  data: BoardPeriodCreateInput;
-};
-
-
-export type MutationupdateBoardPeriodArgs = {
-  where: BoardPeriodWhereUniqueInput;
-  data: BoardPeriodUpdateInput;
-};
-
-
-export type MutationdeleteBoardPeriodArgs = {
-  where: BoardPeriodWhereUniqueInput;
-};
-
-
-export type MutationdeleteBoardPeriodsArgs = {
-  where?: Maybe<BoardPeriodWhereInput>;
-  orderBy?: Maybe<BoardPeriodOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateCommitteePeriodArgs = {
-  data: CommitteePeriodCreateInput;
-};
-
-
-export type MutationupdateCommitteePeriodArgs = {
-  where: CommitteePeriodWhereUniqueInput;
-  data: CommitteePeriodUpdateInput;
-};
-
-
-export type MutationdeleteCommitteePeriodArgs = {
-  where: CommitteePeriodWhereUniqueInput;
-};
-
-
-export type MutationdeleteCommitteePeriodsArgs = {
-  where?: Maybe<CommitteePeriodWhereInput>;
-  orderBy?: Maybe<CommitteePeriodOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateCommitteeArgs = {
-  data: CommitteeCreateInput;
-};
-
-
-export type MutationupdateCommitteeArgs = {
-  where: CommitteeWhereUniqueInput;
-  data: CommitteeUpdateInput;
-};
-
-
-export type MutationdeleteCommitteeArgs = {
-  where: CommitteeWhereUniqueInput;
-};
-
-
-export type MutationdeleteCommitteesArgs = {
-  where?: Maybe<CommitteeWhereInput>;
-  orderBy?: Maybe<CommitteeOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreatePageArgs = {
-  data: PageCreateInput;
-};
-
-
-export type MutationupdatePageArgs = {
-  where: PageWhereUniqueInput;
-  data: PageUpdateInput;
-};
-
-
-export type MutationdeletePageArgs = {
-  where: PageWhereUniqueInput;
-};
-
-
-export type MutationdeletePagesArgs = {
-  where?: Maybe<PageWhereInput>;
-  orderBy?: Maybe<PageOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateSettingArgs = {
-  data: SettingCreateInput;
-};
-
-
-export type MutationupdateSettingArgs = {
-  where: SettingWhereUniqueInput;
-  data: SettingUpdateInput;
-};
-
-
-export type MutationdeleteSettingArgs = {
-  where: SettingWhereUniqueInput;
-};
-
-
-export type MutationdeleteSettingsArgs = {
-  where?: Maybe<SettingWhereInput>;
-  orderBy?: Maybe<SettingOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateProviderArgs = {
-  data: ProviderCreateInput;
-};
-
-
-export type MutationupdateProviderArgs = {
-  where: ProviderWhereUniqueInput;
-  data: ProviderUpdateInput;
-};
-
-
-export type MutationdeleteProviderArgs = {
-  where: ProviderWhereUniqueInput;
-};
-
-
-export type MutationdeleteProvidersArgs = {
-  where?: Maybe<ProviderWhereInput>;
-  orderBy?: Maybe<ProviderOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationcreateTokenArgs = {
-  data: TokenCreateInput;
-};
-
-
-export type MutationupdateTokenArgs = {
-  where: TokenWhereUniqueInput;
-  data: TokenUpdateInput;
-};
-
-
-export type MutationdeleteTokenArgs = {
-  where: TokenWhereUniqueInput;
-};
-
-
-export type MutationdeleteTokensArgs = {
-  where?: Maybe<TokenWhereInput>;
-  orderBy?: Maybe<TokenOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type MutationregisterArgs = {
-  data?: Maybe<RegisterInput>;
-};
-
-
-export type MutationloginArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
 };
 
 
@@ -3249,8 +1760,428 @@ export type MutationchangePasswordArgs = {
 };
 
 
-export type MutationrequestVerifyEmailArgs = {
+export type MutationcreateBankArgs = {
+  data: BankCreateInput;
+};
+
+
+export type MutationcreateBoardPeriodArgs = {
+  data: BoardPeriodCreateInput;
+};
+
+
+export type MutationcreateCommitteeArgs = {
+  data: CommitteeCreateInput;
+};
+
+
+export type MutationcreateCommitteePeriodArgs = {
+  data: CommitteePeriodCreateInput;
+};
+
+
+export type MutationcreateDigitalMandateArgs = {
+  data: CreateDigitalMandateInput;
+};
+
+
+export type MutationcreateDirectDebitArgs = {
+  data: DirectDebitCreateInput;
+};
+
+
+export type MutationcreateDirectDebitBatchArgs = {
+  data: DirectDebitBatchCreateInput;
+};
+
+
+export type MutationcreateDirectDebitInstructionArgs = {
+  data: DirectDebitInstructionCreateInput;
+};
+
+
+export type MutationcreateDirectDebitWarningArgs = {
+  data: DirectDebitWarningCreateInput;
+};
+
+
+export type MutationcreateEventArgs = {
+  data: EventCreateInput;
+};
+
+
+export type MutationcreateFileArgs = {
+  data: FileCreateInput;
+};
+
+
+export type MutationcreateGroupArgs = {
+  data: GroupCreateInput;
+};
+
+
+export type MutationcreateMandateArgs = {
+  data: MandateCreateInput;
+};
+
+
+export type MutationcreateMemberArgs = {
+  data: MemberCreateInput;
+};
+
+
+export type MutationcreateMembershipArgs = {
+  data: MembershipCreateInput;
+};
+
+
+export type MutationcreateMembershipFeeTransactionArgs = {
+  data: MembershipFeeTransactionCreateInput;
+};
+
+
+export type MutationcreatePageArgs = {
+  data: PageCreateInput;
+};
+
+
+export type MutationcreatePaperMandateArgs = {
+  data: CreatePaperMandateInput;
+};
+
+
+export type MutationcreateParticipationArgs = {
+  data: ParticipationCreateInput;
+};
+
+
+export type MutationcreateProviderArgs = {
+  data: ProviderCreateInput;
+};
+
+
+export type MutationcreateSettingArgs = {
+  data: SettingCreateInput;
+};
+
+
+export type MutationcreateTokenArgs = {
+  data: TokenCreateInput;
+};
+
+
+export type MutationcreateTransactionArgs = {
+  data: TransactionCreateInput;
+};
+
+
+export type MutationdeleteBankArgs = {
+  where: BankWhereUniqueInput;
+};
+
+
+export type MutationdeleteBanksArgs = {
+  orderBy?: InputMaybe<BankOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<BankWhereInput>;
+};
+
+
+export type MutationdeleteBoardPeriodArgs = {
+  where: BoardPeriodWhereUniqueInput;
+};
+
+
+export type MutationdeleteBoardPeriodsArgs = {
+  orderBy?: InputMaybe<BoardPeriodOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<BoardPeriodWhereInput>;
+};
+
+
+export type MutationdeleteCommitteeArgs = {
+  where: CommitteeWhereUniqueInput;
+};
+
+
+export type MutationdeleteCommitteePeriodArgs = {
+  where: CommitteePeriodWhereUniqueInput;
+};
+
+
+export type MutationdeleteCommitteePeriodsArgs = {
+  orderBy?: InputMaybe<CommitteePeriodOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CommitteePeriodWhereInput>;
+};
+
+
+export type MutationdeleteCommitteesArgs = {
+  orderBy?: InputMaybe<CommitteeOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CommitteeWhereInput>;
+};
+
+
+export type MutationdeleteDirectDebitArgs = {
+  where: DirectDebitWhereUniqueInput;
+};
+
+
+export type MutationdeleteDirectDebitBatchArgs = {
+  where: DirectDebitBatchWhereUniqueInput;
+};
+
+
+export type MutationdeleteDirectDebitBatchesArgs = {
+  orderBy?: InputMaybe<DirectDebitBatchOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitBatchWhereInput>;
+};
+
+
+export type MutationdeleteDirectDebitInstructionArgs = {
+  where: DirectDebitInstructionWhereUniqueInput;
+};
+
+
+export type MutationdeleteDirectDebitInstructionsArgs = {
+  orderBy?: InputMaybe<DirectDebitInstructionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitInstructionWhereInput>;
+};
+
+
+export type MutationdeleteDirectDebitsArgs = {
+  orderBy?: InputMaybe<DirectDebitOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitWhereInput>;
+};
+
+
+export type MutationdeleteDirectDebitWarningArgs = {
+  where: DirectDebitWarningWhereUniqueInput;
+};
+
+
+export type MutationdeleteDirectDebitWarningsArgs = {
+  orderBy?: InputMaybe<DirectDebitWarningOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitWarningWhereInput>;
+};
+
+
+export type MutationdeleteEventArgs = {
+  where: EventWhereUniqueInput;
+};
+
+
+export type MutationdeleteEventsArgs = {
+  orderBy?: InputMaybe<EventOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<EventWhereInput>;
+};
+
+
+export type MutationdeleteFileArgs = {
+  where: FileWhereUniqueInput;
+};
+
+
+export type MutationdeleteFilesArgs = {
+  orderBy?: InputMaybe<FileOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<FileWhereInput>;
+};
+
+
+export type MutationdeleteGroupArgs = {
+  where: GroupWhereUniqueInput;
+};
+
+
+export type MutationdeleteGroupsArgs = {
+  orderBy?: InputMaybe<GroupOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<GroupWhereInput>;
+};
+
+
+export type MutationdeleteMandateArgs = {
+  where: MandateWhereUniqueInput;
+};
+
+
+export type MutationdeleteMandatesArgs = {
+  orderBy?: InputMaybe<MandateOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MandateWhereInput>;
+};
+
+
+export type MutationdeleteMemberArgs = {
+  where: MemberWhereUniqueInput;
+};
+
+
+export type MutationdeleteMembersArgs = {
+  orderBy?: InputMaybe<MemberOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MemberWhereInput>;
+};
+
+
+export type MutationdeleteMembershipArgs = {
+  where: MembershipWhereUniqueInput;
+};
+
+
+export type MutationdeleteMembershipFeeTransactionArgs = {
+  where: MembershipFeeTransactionWhereUniqueInput;
+};
+
+
+export type MutationdeleteMembershipFeeTransactionsArgs = {
+  orderBy?: InputMaybe<MembershipFeeTransactionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MembershipFeeTransactionWhereInput>;
+};
+
+
+export type MutationdeleteMembershipsArgs = {
+  orderBy?: InputMaybe<MembershipOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MembershipWhereInput>;
+};
+
+
+export type MutationdeletePageArgs = {
+  where: PageWhereUniqueInput;
+};
+
+
+export type MutationdeletePagesArgs = {
+  orderBy?: InputMaybe<PageOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageWhereInput>;
+};
+
+
+export type MutationdeleteParticipationArgs = {
+  where: ParticipationWhereUniqueInput;
+};
+
+
+export type MutationdeleteParticipationsArgs = {
+  orderBy?: InputMaybe<ParticipationOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ParticipationWhereInput>;
+};
+
+
+export type MutationdeleteProviderArgs = {
+  where: ProviderWhereUniqueInput;
+};
+
+
+export type MutationdeleteProvidersArgs = {
+  orderBy?: InputMaybe<ProviderOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ProviderWhereInput>;
+};
+
+
+export type MutationdeleteSettingArgs = {
+  where: SettingWhereUniqueInput;
+};
+
+
+export type MutationdeleteSettingsArgs = {
+  orderBy?: InputMaybe<SettingOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<SettingWhereInput>;
+};
+
+
+export type MutationdeleteTokenArgs = {
+  where: TokenWhereUniqueInput;
+};
+
+
+export type MutationdeleteTokensArgs = {
+  orderBy?: InputMaybe<TokenOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TokenWhereInput>;
+};
+
+
+export type MutationdeleteTransactionArgs = {
+  where: TransactionWhereUniqueInput;
+};
+
+
+export type MutationdeleteTransactionsArgs = {
+  orderBy?: InputMaybe<TransactionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TransactionWhereInput>;
+};
+
+
+export type MutationgenerateDirectDebitArgs = {
+  collectionDate: Scalars['Date'];
+};
+
+
+export type MutationgenerateDirectDebitFileArgs = {
+  directDebit: DirectDebitWhereUniqueInput;
+};
+
+
+export type MutationgenerateMembershipFeeTransactionsArgs = {
+  year: Scalars['Int'];
+};
+
+
+export type MutationinvalidateMandateArgs = {
+  mandate: MandateWhereUniqueInput;
+};
+
+
+export type MutationloginArgs = {
   email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
+export type MutationregisterArgs = {
+  data?: InputMaybe<RegisterInput>;
+};
+
+
+export type MutationrejectPaperMandateArgs = {
+  mandate: PaperMandateWhereUniqueInput;
+  reason: Scalars['String'];
 };
 
 
@@ -3259,176 +2190,1149 @@ export type MutationrequestResetPasswordArgs = {
 };
 
 
-export type MutationverifyEmailArgs = {
-  token: Scalars['String'];
+export type MutationrequestVerifyEmailArgs = {
+  email: Scalars['String'];
 };
 
 
 export type MutationresetPasswordArgs = {
-  token: Scalars['String'];
   password: Scalars['String'];
   passwordRepeat: Scalars['String'];
+  token: Scalars['String'];
 };
 
-export type BankFragment = (
-  { __typename?: 'Bank' }
-  & Pick<Bank, 'id' | 'bic' | 'country' | 'name' | 'isActive'>
-);
 
-export type CommitteeFragment = (
-  { __typename?: 'Committee' }
-  & Pick<Committee, 'id'>
-  & { name: (
-    { __typename?: 'ShortTranslatable' }
-    & TranslatableFragment_ShortTranslatable_
-  ), description: (
-    { __typename?: 'LongTranslatable' }
-    & TranslatableFragment_LongTranslatable_
-  ) }
-);
+export type MutationsendContactFormArgs = {
+  email: Scalars['String'];
+  message: Scalars['String'];
+  name: Scalars['String'];
+  recaptcha: Scalars['String'];
+  subject: Scalars['String'];
+};
 
-export type DirectDebitFragment = (
-  { __typename?: 'DirectDebit' }
-  & Pick<DirectDebit, 'id' | 'createdAt' | 'updatedAt' | 'status' | 'messageId' | 'collectionDate' | 'instructionCount' | 'amount'>
-);
 
-export type DirectDebitBatchFragment = (
-  { __typename?: 'DirectDebitBatch' }
-  & Pick<DirectDebitBatch, 'id' | 'createdAt' | 'updatedAt' | 'batchId' | 'sequenceType' | 'instructionCount' | 'amount'>
-);
+export type MutationsendMandateRemindersArgs = {
+  beforeDate: Scalars['Date'];
+};
 
-export type DirectDebitInstructionFragment = (
-  { __typename?: 'DirectDebitInstruction' }
-  & Pick<DirectDebitInstruction, 'id' | 'createdAt' | 'updatedAt' | 'instructionId' | 'description' | 'amount'>
-);
 
-export type DirectDebitWarningFragment = (
-  { __typename?: 'DirectDebitWarning' }
-  & Pick<DirectDebitWarning, 'id' | 'createdAt' | 'updatedAt' | 'description'>
-  & { member?: Maybe<(
-    { __typename?: 'Member' }
-    & Pick<Member, 'id' | 'firstName' | 'lastName'>
-  )> }
-);
+export type MutationupdateBankArgs = {
+  data: BankUpdateInput;
+  where: BankWhereUniqueInput;
+};
 
-export type FileFragment = (
-  { __typename?: 'File' }
-  & Pick<File, 'id' | 'name' | 'url' | 'mimeType'>
-);
 
-export type MandateFragment_DigitalMandate_ = (
-  { __typename?: 'DigitalMandate' }
-  & Pick<DigitalMandate, 'id' | 'mandateId' | 'status' | 'createdAt' | 'acceptedAt' | 'bic' | 'iban' | 'reason' | 'isFirstTransaction' | 'errorMessage'>
-);
+export type MutationupdateBoardPeriodArgs = {
+  data: BoardPeriodUpdateInput;
+  where: BoardPeriodWhereUniqueInput;
+};
 
-export type MandateFragment_PaperMandate_ = (
-  { __typename?: 'PaperMandate' }
-  & Pick<PaperMandate, 'id' | 'mandateId' | 'status' | 'createdAt' | 'acceptedAt' | 'bic' | 'iban' | 'reason' | 'isFirstTransaction' | 'errorMessage'>
-  & PaperMandateFragment
-);
+
+export type MutationupdateCommitteeArgs = {
+  data: CommitteeUpdateInput;
+  where: CommitteeWhereUniqueInput;
+};
+
+
+export type MutationupdateCommitteePeriodArgs = {
+  data: CommitteePeriodUpdateInput;
+  where: CommitteePeriodWhereUniqueInput;
+};
+
+
+export type MutationupdateDirectDebitArgs = {
+  data: DirectDebitUpdateInput;
+  where: DirectDebitWhereUniqueInput;
+};
+
+
+export type MutationupdateDirectDebitBatchArgs = {
+  data: DirectDebitBatchUpdateInput;
+  where: DirectDebitBatchWhereUniqueInput;
+};
+
+
+export type MutationupdateDirectDebitInstructionArgs = {
+  data: DirectDebitInstructionUpdateInput;
+  where: DirectDebitInstructionWhereUniqueInput;
+};
+
+
+export type MutationupdateDirectDebitWarningArgs = {
+  data: DirectDebitWarningUpdateInput;
+  where: DirectDebitWarningWhereUniqueInput;
+};
+
+
+export type MutationupdateEventArgs = {
+  data: EventUpdateInput;
+  where: EventWhereUniqueInput;
+};
+
+
+export type MutationupdateFileArgs = {
+  data: FileUpdateInput;
+  where: FileWhereUniqueInput;
+};
+
+
+export type MutationupdateGroupArgs = {
+  data: GroupUpdateInput;
+  where: GroupWhereUniqueInput;
+};
+
+
+export type MutationupdateMandateArgs = {
+  data: MandateUpdateInput;
+  where: MandateWhereUniqueInput;
+};
+
+
+export type MutationupdateMemberArgs = {
+  data: MemberUpdateInput;
+  where: MemberWhereUniqueInput;
+};
+
+
+export type MutationupdateMembershipArgs = {
+  data: MembershipUpdateInput;
+  where: MembershipWhereUniqueInput;
+};
+
+
+export type MutationupdateMembershipFeeTransactionArgs = {
+  data: MembershipFeeTransactionUpdateInput;
+  where: MembershipFeeTransactionWhereUniqueInput;
+};
+
+
+export type MutationupdatePageArgs = {
+  data: PageUpdateInput;
+  where: PageWhereUniqueInput;
+};
+
+
+export type MutationupdateParticipationArgs = {
+  data: ParticipationUpdateInput;
+  where: ParticipationWhereUniqueInput;
+};
+
+
+export type MutationupdateProviderArgs = {
+  data: ProviderUpdateInput;
+  where: ProviderWhereUniqueInput;
+};
+
+
+export type MutationupdateSettingArgs = {
+  data: SettingUpdateInput;
+  where: SettingWhereUniqueInput;
+};
+
+
+export type MutationupdateTokenArgs = {
+  data: TokenUpdateInput;
+  where: TokenWhereUniqueInput;
+};
+
+
+export type MutationupdateTransactionArgs = {
+  data: TransactionUpdateInput;
+  where: TransactionWhereUniqueInput;
+};
+
+
+export type MutationuploadMemberImageArgs = {
+  file: Scalars['Upload'];
+  member: MemberWhereUniqueInput;
+};
+
+
+export type MutationuploadPaperMandateArgs = {
+  file: Scalars['Upload'];
+  paperMandate: PaperMandateWhereUniqueInput;
+};
+
+
+export type MutationverifyEmailArgs = {
+  token: Scalars['String'];
+};
+
+export enum OrderByArg {
+  ASC = 'ASC',
+  DESC = 'DESC'
+}
+
+export type Page = {
+  __typename?: 'Page';
+  body: LongTranslatable;
+  id: Scalars['String'];
+  title: ShortTranslatable;
+};
+
+export type PageCreateInput = {
+  body?: InputMaybe<LongTranslatableCreateInput>;
+  id?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<ShortTranslatableCreateInput>;
+};
+
+export type PageList = {
+  __typename?: 'PageList';
+  info: ListInfo;
+  values: Array<Page>;
+};
+
+export type PageOrderByInput = {
+  body?: InputMaybe<LongTranslatableOrderByInput>;
+  id?: InputMaybe<OrderByArg>;
+  title?: InputMaybe<ShortTranslatableOrderByInput>;
+};
+
+export type PageUpdateInput = {
+  body?: InputMaybe<LongTranslatableUpdateInput>;
+  id?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<ShortTranslatableUpdateInput>;
+};
+
+export type PageWhereInput = {
+  AND?: InputMaybe<Array<PageWhereInput>>;
+  body?: InputMaybe<LongTranslatableWhereInput>;
+  id?: InputMaybe<StringFilter>;
+  OR?: InputMaybe<Array<PageWhereInput>>;
+  title?: InputMaybe<ShortTranslatableWhereInput>;
+};
+
+export type PageWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type PaperMandate = Mandate & {
+  __typename?: 'PaperMandate';
+  acceptedAt?: Maybe<Scalars['DateTime']>;
+  bic: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  errorMessage?: Maybe<Scalars['String']>;
+  generatedFile?: Maybe<File>;
+  iban?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  instructions: DirectDebitInstructionList;
+  isFirstTransaction: Scalars['Boolean'];
+  mandateId: Scalars['String'];
+  member: Member;
+  reason: Scalars['String'];
+  status: MandateStatus;
+  uploadedFile?: Maybe<File>;
+};
+
+
+export type PaperMandateinstructionsArgs = {
+  orderBy?: InputMaybe<DirectDebitInstructionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitInstructionWhereInput>;
+};
+
+export type PaperMandateCreateInput = {
+  acceptedAt?: InputMaybe<Scalars['DateTime']>;
+  bic?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  errorMessage?: InputMaybe<Scalars['String']>;
+  generatedFile?: InputMaybe<FileCreateRelationInput>;
+  iban?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  instructions?: InputMaybe<Array<DirectDebitInstructionCreateRelationInput>>;
+  isFirstTransaction?: InputMaybe<Scalars['Boolean']>;
+  mandateId?: InputMaybe<Scalars['String']>;
+  member?: InputMaybe<MemberCreateRelationInput>;
+  reason?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<MandateStatus>;
+  uploadedFile?: InputMaybe<FileCreateRelationInput>;
+};
+
+export type PaperMandateList = {
+  __typename?: 'PaperMandateList';
+  info: ListInfo;
+  values: Array<PaperMandate>;
+};
+
+export type PaperMandateOrderByInput = {
+  acceptedAt?: InputMaybe<OrderByArg>;
+  bic?: InputMaybe<OrderByArg>;
+  createdAt?: InputMaybe<OrderByArg>;
+  errorMessage?: InputMaybe<OrderByArg>;
+  generatedFile?: InputMaybe<FileOrderByInput>;
+  iban?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  isFirstTransaction?: InputMaybe<OrderByArg>;
+  mandateId?: InputMaybe<OrderByArg>;
+  member?: InputMaybe<MemberOrderByInput>;
+  reason?: InputMaybe<OrderByArg>;
+  status?: InputMaybe<OrderByArg>;
+  uploadedFile?: InputMaybe<FileOrderByInput>;
+};
+
+export type PaperMandateUpdateInput = {
+  acceptedAt?: InputMaybe<Scalars['DateTime']>;
+  bic?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  errorMessage?: InputMaybe<Scalars['String']>;
+  generatedFile?: InputMaybe<FileUpdateRelationInput>;
+  iban?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  instructions?: InputMaybe<Array<DirectDebitInstructionUpdateRelationInput>>;
+  isFirstTransaction?: InputMaybe<Scalars['Boolean']>;
+  mandateId?: InputMaybe<Scalars['String']>;
+  member?: InputMaybe<MemberUpdateRelationInput>;
+  reason?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<MandateStatus>;
+  uploadedFile?: InputMaybe<FileUpdateRelationInput>;
+};
+
+export type PaperMandateWhereInput = {
+  acceptedAt?: InputMaybe<DateTimeFilter>;
+  AND?: InputMaybe<Array<PaperMandateWhereInput>>;
+  bic?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  errorMessage?: InputMaybe<StringFilter>;
+  generatedFile?: InputMaybe<FileWhereInput>;
+  iban?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  instructions?: InputMaybe<DirectDebitInstructionWhereInput>;
+  isFirstTransaction?: InputMaybe<Scalars['Boolean']>;
+  mandateId?: InputMaybe<StringFilter>;
+  member?: InputMaybe<MemberWhereInput>;
+  OR?: InputMaybe<Array<PaperMandateWhereInput>>;
+  reason?: InputMaybe<StringFilter>;
+  status?: InputMaybe<MandateStatusFilter>;
+  uploadedFile?: InputMaybe<FileWhereInput>;
+};
+
+export type PaperMandateWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type Participation = {
+  __typename?: 'Participation';
+  createdAt: Scalars['DateTime'];
+  event: Event;
+  id: Scalars['String'];
+  member: Member;
+};
+
+export type ParticipationCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  event?: InputMaybe<EventCreateRelationInput>;
+  id?: InputMaybe<Scalars['String']>;
+  member?: InputMaybe<MemberCreateRelationInput>;
+};
+
+export type ParticipationCreateRelationInput = {
+  connect?: InputMaybe<ParticipationWhereUniqueInput>;
+  create?: InputMaybe<ParticipationCreateInput>;
+};
+
+export type ParticipationList = {
+  __typename?: 'ParticipationList';
+  info: ListInfo;
+  values: Array<Participation>;
+};
+
+export type ParticipationOrderByInput = {
+  createdAt?: InputMaybe<OrderByArg>;
+  event?: InputMaybe<EventOrderByInput>;
+  id?: InputMaybe<OrderByArg>;
+  member?: InputMaybe<MemberOrderByInput>;
+};
+
+export type ParticipationUpdateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  event?: InputMaybe<EventUpdateRelationInput>;
+  id?: InputMaybe<Scalars['String']>;
+  member?: InputMaybe<MemberUpdateRelationInput>;
+};
+
+export type ParticipationUpdateRelationInput = {
+  connect?: InputMaybe<ParticipationWhereUniqueInput>;
+  create?: InputMaybe<ParticipationCreateInput>;
+  disconnect?: InputMaybe<ParticipationWhereUniqueInput>;
+};
+
+export type ParticipationWhereInput = {
+  AND?: InputMaybe<Array<ParticipationWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  event?: InputMaybe<EventWhereInput>;
+  id?: InputMaybe<StringFilter>;
+  member?: InputMaybe<MemberWhereInput>;
+  OR?: InputMaybe<Array<ParticipationWhereInput>>;
+};
+
+export type ParticipationWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export enum Pronouns {
+  HE_HIM = 'HE_HIM',
+  SHE_HER = 'SHE_HER',
+  THEY_THEM = 'THEY_THEM'
+}
+
+export type PronounsFilter = {
+  equals?: InputMaybe<Pronouns>;
+  in?: InputMaybe<Array<Pronouns>>;
+  not?: InputMaybe<Pronouns>;
+  notIn?: InputMaybe<Array<Pronouns>>;
+};
+
+export type Provider = {
+  __typename?: 'Provider';
+  email: Scalars['String'];
+  id: Scalars['String'];
+  isVerified: Scalars['Boolean'];
+  type: Scalars['String'];
+  user: Member;
+};
+
+export type ProviderCreateInput = {
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  isVerified?: InputMaybe<Scalars['Boolean']>;
+  type?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<MemberCreateRelationInput>;
+};
+
+export type ProviderCreateRelationInput = {
+  connect?: InputMaybe<ProviderWhereUniqueInput>;
+  create?: InputMaybe<ProviderCreateInput>;
+};
+
+export type ProviderList = {
+  __typename?: 'ProviderList';
+  info: ListInfo;
+  values: Array<Provider>;
+};
+
+export type ProviderOrderByInput = {
+  email?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  isVerified?: InputMaybe<OrderByArg>;
+  type?: InputMaybe<OrderByArg>;
+  user?: InputMaybe<MemberOrderByInput>;
+};
+
+export type ProviderUpdateInput = {
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  isVerified?: InputMaybe<Scalars['Boolean']>;
+  type?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<MemberUpdateRelationInput>;
+};
+
+export type ProviderUpdateRelationInput = {
+  connect?: InputMaybe<ProviderWhereUniqueInput>;
+  create?: InputMaybe<ProviderCreateInput>;
+  disconnect?: InputMaybe<ProviderWhereUniqueInput>;
+};
+
+export type ProviderWhereInput = {
+  AND?: InputMaybe<Array<ProviderWhereInput>>;
+  email?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  isVerified?: InputMaybe<Scalars['Boolean']>;
+  OR?: InputMaybe<Array<ProviderWhereInput>>;
+  type?: InputMaybe<StringFilter>;
+  user?: InputMaybe<MemberWhereInput>;
+};
+
+export type ProviderWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type Query = {
+  __typename?: 'Query';
+  bank: Bank;
+  banks: BankList;
+  boardPeriod: BoardPeriod;
+  boardPeriods: BoardPeriodList;
+  committee: Committee;
+  committeePeriod: CommitteePeriod;
+  committeePeriods: CommitteePeriodList;
+  committees: CommitteeList;
+  digitalMandate: DigitalMandate;
+  digitalMandates: DigitalMandateList;
+  directDebit: DirectDebit;
+  directDebitBatch: DirectDebitBatch;
+  directDebitBatches: DirectDebitBatchList;
+  directDebitInstruction: DirectDebitInstruction;
+  directDebitInstructions: DirectDebitInstructionList;
+  directDebits: DirectDebitList;
+  directDebitWarning: DirectDebitWarning;
+  directDebitWarnings: DirectDebitWarningList;
+  event: Event;
+  events: EventList;
+  file: File;
+  files: FileList;
+  group: Group;
+  groups: GroupList;
+  mandate: Mandate;
+  mandates: MandateList;
+  me?: Maybe<Member>;
+  member: Member;
+  members: MemberList;
+  membership: Membership;
+  membershipFeeTransaction: MembershipFeeTransaction;
+  membershipFeeTransactions: MembershipFeeTransactionList;
+  memberships: MembershipList;
+  page: Page;
+  pages: PageList;
+  paperMandate: PaperMandate;
+  paperMandates: PaperMandateList;
+  participation: Participation;
+  participations: ParticipationList;
+  provider: Provider;
+  providers: ProviderList;
+  setting: Setting;
+  settings: SettingList;
+  token: Token;
+  tokens: TokenList;
+  transaction: Transaction;
+  transactions: TransactionList;
+};
+
+
+export type QuerybankArgs = {
+  where: BankWhereUniqueInput;
+};
+
+
+export type QuerybanksArgs = {
+  orderBy?: InputMaybe<BankOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<BankWhereInput>;
+};
+
+
+export type QueryboardPeriodArgs = {
+  where: BoardPeriodWhereUniqueInput;
+};
+
+
+export type QueryboardPeriodsArgs = {
+  orderBy?: InputMaybe<BoardPeriodOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<BoardPeriodWhereInput>;
+};
+
+
+export type QuerycommitteeArgs = {
+  where: CommitteeWhereUniqueInput;
+};
+
+
+export type QuerycommitteePeriodArgs = {
+  where: CommitteePeriodWhereUniqueInput;
+};
+
+
+export type QuerycommitteePeriodsArgs = {
+  orderBy?: InputMaybe<CommitteePeriodOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CommitteePeriodWhereInput>;
+};
+
+
+export type QuerycommitteesArgs = {
+  orderBy?: InputMaybe<CommitteeOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CommitteeWhereInput>;
+};
+
+
+export type QuerydigitalMandateArgs = {
+  where: DigitalMandateWhereUniqueInput;
+};
+
+
+export type QuerydigitalMandatesArgs = {
+  orderBy?: InputMaybe<DigitalMandateOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DigitalMandateWhereInput>;
+};
+
+
+export type QuerydirectDebitArgs = {
+  where: DirectDebitWhereUniqueInput;
+};
+
+
+export type QuerydirectDebitBatchArgs = {
+  where: DirectDebitBatchWhereUniqueInput;
+};
+
+
+export type QuerydirectDebitBatchesArgs = {
+  orderBy?: InputMaybe<DirectDebitBatchOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitBatchWhereInput>;
+};
+
+
+export type QuerydirectDebitInstructionArgs = {
+  where: DirectDebitInstructionWhereUniqueInput;
+};
+
+
+export type QuerydirectDebitInstructionsArgs = {
+  orderBy?: InputMaybe<DirectDebitInstructionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitInstructionWhereInput>;
+};
+
+
+export type QuerydirectDebitsArgs = {
+  orderBy?: InputMaybe<DirectDebitOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitWhereInput>;
+};
+
+
+export type QuerydirectDebitWarningArgs = {
+  where: DirectDebitWarningWhereUniqueInput;
+};
+
+
+export type QuerydirectDebitWarningsArgs = {
+  orderBy?: InputMaybe<DirectDebitWarningOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitWarningWhereInput>;
+};
+
+
+export type QueryeventArgs = {
+  where: EventWhereUniqueInput;
+};
+
+
+export type QueryeventsArgs = {
+  orderBy?: InputMaybe<EventOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<EventWhereInput>;
+};
+
+
+export type QueryfileArgs = {
+  where: FileWhereUniqueInput;
+};
+
+
+export type QueryfilesArgs = {
+  orderBy?: InputMaybe<FileOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<FileWhereInput>;
+};
+
+
+export type QuerygroupArgs = {
+  where: GroupWhereUniqueInput;
+};
+
+
+export type QuerygroupsArgs = {
+  orderBy?: InputMaybe<GroupOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<GroupWhereInput>;
+};
+
+
+export type QuerymandateArgs = {
+  where: MandateWhereUniqueInput;
+};
+
+
+export type QuerymandatesArgs = {
+  orderBy?: InputMaybe<MandateOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MandateWhereInput>;
+};
+
+
+export type QuerymemberArgs = {
+  where: MemberWhereUniqueInput;
+};
+
+
+export type QuerymembersArgs = {
+  orderBy?: InputMaybe<MemberOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MemberWhereInput>;
+};
+
+
+export type QuerymembershipArgs = {
+  where: MembershipWhereUniqueInput;
+};
+
+
+export type QuerymembershipFeeTransactionArgs = {
+  where: MembershipFeeTransactionWhereUniqueInput;
+};
+
+
+export type QuerymembershipFeeTransactionsArgs = {
+  orderBy?: InputMaybe<MembershipFeeTransactionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MembershipFeeTransactionWhereInput>;
+};
+
+
+export type QuerymembershipsArgs = {
+  orderBy?: InputMaybe<MembershipOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MembershipWhereInput>;
+};
+
+
+export type QuerypageArgs = {
+  where: PageWhereUniqueInput;
+};
+
+
+export type QuerypagesArgs = {
+  orderBy?: InputMaybe<PageOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PageWhereInput>;
+};
+
+
+export type QuerypaperMandateArgs = {
+  where: PaperMandateWhereUniqueInput;
+};
+
+
+export type QuerypaperMandatesArgs = {
+  orderBy?: InputMaybe<PaperMandateOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PaperMandateWhereInput>;
+};
+
+
+export type QueryparticipationArgs = {
+  where: ParticipationWhereUniqueInput;
+};
+
+
+export type QueryparticipationsArgs = {
+  orderBy?: InputMaybe<ParticipationOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ParticipationWhereInput>;
+};
+
+
+export type QueryproviderArgs = {
+  where: ProviderWhereUniqueInput;
+};
+
+
+export type QueryprovidersArgs = {
+  orderBy?: InputMaybe<ProviderOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ProviderWhereInput>;
+};
+
+
+export type QuerysettingArgs = {
+  where: SettingWhereUniqueInput;
+};
+
+
+export type QuerysettingsArgs = {
+  orderBy?: InputMaybe<SettingOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<SettingWhereInput>;
+};
+
+
+export type QuerytokenArgs = {
+  where: TokenWhereUniqueInput;
+};
+
+
+export type QuerytokensArgs = {
+  orderBy?: InputMaybe<TokenOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TokenWhereInput>;
+};
+
+
+export type QuerytransactionArgs = {
+  where: TransactionWhereUniqueInput;
+};
+
+
+export type QuerytransactionsArgs = {
+  orderBy?: InputMaybe<TransactionOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TransactionWhereInput>;
+};
+
+export type RegisterInput = {
+  address: Scalars['String'];
+  birthdate: Scalars['Date'];
+  city: Scalars['String'];
+  email: Scalars['String'];
+  firstName: Scalars['String'];
+  initials: Scalars['String'];
+  language: Language;
+  lastName: Scalars['String'];
+  password: Scalars['String'];
+  passwordRepeat: Scalars['String'];
+  phoneNumber: Scalars['String'];
+  postalCode: Scalars['String'];
+  pronouns: Pronouns;
+  studentType: StudentType;
+};
+
+export enum SequenceType {
+  FINAL = 'FINAL',
+  FIRST = 'FIRST',
+  ONE_OFF = 'ONE_OFF',
+  RECURRENT = 'RECURRENT'
+}
+
+export type SequenceTypeFilter = {
+  equals?: InputMaybe<SequenceType>;
+  in?: InputMaybe<Array<SequenceType>>;
+  not?: InputMaybe<SequenceType>;
+  notIn?: InputMaybe<Array<SequenceType>>;
+};
+
+export type Setting = {
+  __typename?: 'Setting';
+  isPublic: Scalars['Boolean'];
+  key: Scalars['String'];
+  value: Scalars['String'];
+};
+
+export type SettingCreateInput = {
+  isPublic?: InputMaybe<Scalars['Boolean']>;
+  key?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+export type SettingList = {
+  __typename?: 'SettingList';
+  info: ListInfo;
+  values: Array<Setting>;
+};
+
+export type SettingOrderByInput = {
+  isPublic?: InputMaybe<OrderByArg>;
+  key?: InputMaybe<OrderByArg>;
+  value?: InputMaybe<OrderByArg>;
+};
+
+export type SettingUpdateInput = {
+  isPublic?: InputMaybe<Scalars['Boolean']>;
+  key?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+export type SettingWhereInput = {
+  AND?: InputMaybe<Array<SettingWhereInput>>;
+  isPublic?: InputMaybe<Scalars['Boolean']>;
+  key?: InputMaybe<StringFilter>;
+  OR?: InputMaybe<Array<SettingWhereInput>>;
+  value?: InputMaybe<StringFilter>;
+};
+
+export type SettingWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type ShortTranslatable = Translatable & {
+  __typename?: 'ShortTranslatable';
+  en?: Maybe<Scalars['String']>;
+  nl?: Maybe<Scalars['String']>;
+};
+
+export type ShortTranslatableCreateInput = {
+  en?: InputMaybe<Scalars['String']>;
+  nl?: InputMaybe<Scalars['String']>;
+};
+
+export type ShortTranslatableOrderByInput = {
+  en?: InputMaybe<OrderByArg>;
+  nl?: InputMaybe<OrderByArg>;
+};
+
+export type ShortTranslatableUpdateInput = {
+  en?: InputMaybe<Scalars['String']>;
+  nl?: InputMaybe<Scalars['String']>;
+};
+
+export type ShortTranslatableWhereInput = {
+  AND?: InputMaybe<Array<ShortTranslatableWhereInput>>;
+  en?: InputMaybe<StringFilter>;
+  nl?: InputMaybe<StringFilter>;
+  OR?: InputMaybe<Array<ShortTranslatableWhereInput>>;
+};
+
+export type StringFilter = {
+  contains?: InputMaybe<Scalars['String']>;
+  endsWith?: InputMaybe<Scalars['String']>;
+  equals?: InputMaybe<Scalars['String']>;
+  gt?: InputMaybe<Scalars['String']>;
+  gte?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<Array<Scalars['String']>>;
+  lt?: InputMaybe<Scalars['String']>;
+  lte?: InputMaybe<Scalars['String']>;
+  not?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']>>;
+  startsWith?: InputMaybe<Scalars['String']>;
+};
+
+export enum StudentType {
+  HBO_OTHER = 'HBO_OTHER',
+  HBO_SAXION = 'HBO_SAXION',
+  MBO = 'MBO',
+  UNIVERSITY_OTHER = 'UNIVERSITY_OTHER',
+  UNIVERSITY_UT = 'UNIVERSITY_UT',
+  WORKING = 'WORKING'
+}
+
+export type StudentTypeFilter = {
+  equals?: InputMaybe<StudentType>;
+  in?: InputMaybe<Array<StudentType>>;
+  not?: InputMaybe<StudentType>;
+  notIn?: InputMaybe<Array<StudentType>>;
+};
+
+export type Token = {
+  __typename?: 'Token';
+  expiresAt: Scalars['DateTime'];
+  id: Scalars['String'];
+  provider: Provider;
+  token: Scalars['String'];
+  type: TokenType;
+};
+
+export type TokenCreateInput = {
+  expiresAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<ProviderCreateRelationInput>;
+  token?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<TokenType>;
+};
+
+export type TokenList = {
+  __typename?: 'TokenList';
+  info: ListInfo;
+  values: Array<Token>;
+};
+
+export type TokenOrderByInput = {
+  expiresAt?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  provider?: InputMaybe<ProviderOrderByInput>;
+  token?: InputMaybe<OrderByArg>;
+  type?: InputMaybe<OrderByArg>;
+};
+
+export enum TokenType {
+  RESET_PASSWORD = 'RESET_PASSWORD',
+  VERIFY_EMAIL = 'VERIFY_EMAIL'
+}
+
+export type TokenTypeFilter = {
+  equals?: InputMaybe<TokenType>;
+  in?: InputMaybe<Array<TokenType>>;
+  not?: InputMaybe<TokenType>;
+  notIn?: InputMaybe<Array<TokenType>>;
+};
+
+export type TokenUpdateInput = {
+  expiresAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<ProviderUpdateRelationInput>;
+  token?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<TokenType>;
+};
+
+export type TokenWhereInput = {
+  AND?: InputMaybe<Array<TokenWhereInput>>;
+  expiresAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  OR?: InputMaybe<Array<TokenWhereInput>>;
+  provider?: InputMaybe<ProviderWhereInput>;
+  token?: InputMaybe<StringFilter>;
+  type?: InputMaybe<TokenTypeFilter>;
+};
+
+export type TokenWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+  token?: InputMaybe<Scalars['String']>;
+};
+
+export type Transaction = {
+  amount: Scalars['Int'];
+  createdAt: Scalars['DateTime'];
+  description: Scalars['String'];
+  id: Scalars['String'];
+  instruction?: Maybe<DirectDebitInstruction>;
+  member: Member;
+  updatedAt: Scalars['DateTime'];
+};
+
+export type TransactionCreateInput = {
+  amount?: InputMaybe<Scalars['Float']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  instruction?: InputMaybe<DirectDebitInstructionCreateRelationInput>;
+  member?: InputMaybe<MemberCreateRelationInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type TransactionCreateRelationInput = {
+  connect?: InputMaybe<TransactionWhereUniqueInput>;
+  create?: InputMaybe<TransactionCreateInput>;
+};
+
+export type TransactionList = {
+  __typename?: 'TransactionList';
+  info: ListInfo;
+  values: Array<Transaction>;
+};
+
+export type TransactionOrderByInput = {
+  amount?: InputMaybe<OrderByArg>;
+  createdAt?: InputMaybe<OrderByArg>;
+  description?: InputMaybe<OrderByArg>;
+  id?: InputMaybe<OrderByArg>;
+  instruction?: InputMaybe<DirectDebitInstructionOrderByInput>;
+  member?: InputMaybe<MemberOrderByInput>;
+  updatedAt?: InputMaybe<OrderByArg>;
+};
+
+export type TransactionUpdateInput = {
+  amount?: InputMaybe<Scalars['Float']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  instruction?: InputMaybe<DirectDebitInstructionUpdateRelationInput>;
+  member?: InputMaybe<MemberUpdateRelationInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type TransactionUpdateRelationInput = {
+  connect?: InputMaybe<TransactionWhereUniqueInput>;
+  create?: InputMaybe<TransactionCreateInput>;
+  disconnect?: InputMaybe<TransactionWhereUniqueInput>;
+};
+
+export type TransactionWhereInput = {
+  amount?: InputMaybe<IntFilter>;
+  AND?: InputMaybe<Array<TransactionWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  instruction?: InputMaybe<DirectDebitInstructionWhereInput>;
+  member?: InputMaybe<MemberWhereInput>;
+  OR?: InputMaybe<Array<TransactionWhereInput>>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type TransactionWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type Translatable = {
+  en?: Maybe<Scalars['String']>;
+  nl?: Maybe<Scalars['String']>;
+};
+
+export type BankFragment = { __typename?: 'Bank', id: string, bic: string, country: string, name: string, isActive: boolean };
+
+export type CommitteeFragment = { __typename?: 'Committee', id: string, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null }, description: { __typename?: 'LongTranslatable', en?: string | null, nl?: string | null } };
+
+export type DirectDebitFragment = { __typename?: 'DirectDebit', id: string, createdAt: string, updatedAt: string, status: DirectDebitStatus, messageId: string, collectionDate: string, instructionCount: number, amount: number };
+
+export type DirectDebitBatchFragment = { __typename?: 'DirectDebitBatch', id: string, createdAt: string, updatedAt: string, batchId: string, sequenceType: SequenceType, instructionCount: number, amount: number };
+
+export type DirectDebitInstructionFragment = { __typename?: 'DirectDebitInstruction', id: string, createdAt: string, updatedAt: string, instructionId: string, description: string, amount: number };
+
+export type DirectDebitWarningFragment = { __typename?: 'DirectDebitWarning', id: string, createdAt: string, updatedAt: string, description: string, member?: { __typename?: 'Member', id: string, firstName: string, lastName: string } | null };
+
+export type FileFragment = { __typename?: 'File', id: string, name: string, url: string, mimeType: string };
+
+export type MandateFragment_DigitalMandate_ = { __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null };
+
+export type MandateFragment_PaperMandate_ = { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null };
 
 export type MandateFragment = MandateFragment_DigitalMandate_ | MandateFragment_PaperMandate_;
 
-export type PaperMandateFragment = (
-  { __typename?: 'PaperMandate' }
-  & { generatedFile?: Maybe<(
-    { __typename?: 'File' }
-    & FileFragment
-  )>, uploadedFile?: Maybe<(
-    { __typename?: 'File' }
-    & FileFragment
-  )> }
-);
+export type PaperMandateFragment = { __typename?: 'PaperMandate', generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null };
 
-export type MemberFragment = (
-  { __typename?: 'Member' }
-  & Pick<Member, 'id' | 'firstName' | 'initials' | 'lastName' | 'email' | 'address' | 'postalCode' | 'city' | 'phoneNumber' | 'birthdate' | 'language' | 'pronouns' | 'studentType' | 'isAdmin'>
-  & { image?: Maybe<(
-    { __typename?: 'File' }
-    & FileFragment
-  )> }
-);
+export type MemberFragment = { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null };
 
-export type MembershipFragment = (
-  { __typename?: 'Membership' }
-  & Pick<Membership, 'id' | 'type' | 'startedAt' | 'endedAt'>
-);
+export type MembershipFragment = { __typename?: 'Membership', id: string, type: MembershipType, startedAt: string, endedAt?: string | null };
 
-export type PageFragment = (
-  { __typename?: 'Page' }
-  & Pick<Page, 'id'>
-  & { title: (
-    { __typename?: 'ShortTranslatable' }
-    & TranslatableFragment_ShortTranslatable_
-  ), body: (
-    { __typename?: 'LongTranslatable' }
-    & TranslatableFragment_LongTranslatable_
-  ) }
-);
+export type PageFragment = { __typename?: 'Page', id: string, title: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null }, body: { __typename?: 'LongTranslatable', en?: string | null, nl?: string | null } };
 
-export type ProviderFragment = (
-  { __typename?: 'Provider' }
-  & Pick<Provider, 'id' | 'type' | 'email'>
-);
+export type ProviderFragment = { __typename?: 'Provider', id: string, type: string, email: string };
 
-export type TransactionFragment = (
-  { __typename?: 'MembershipFeeTransaction' }
-  & Pick<MembershipFeeTransaction, 'id' | 'createdAt' | 'updatedAt' | 'description' | 'amount'>
-  & MembershipFeeTransactionFragment
-);
+export type TransactionFragment = { __typename?: 'MembershipFeeTransaction', id: string, createdAt: string, updatedAt: string, description: string, amount: number, year: number };
 
-export type MembershipFeeTransactionFragment = (
-  { __typename?: 'MembershipFeeTransaction' }
-  & Pick<MembershipFeeTransaction, 'year'>
-);
+export type MembershipFeeTransactionFragment = { __typename?: 'MembershipFeeTransaction', year: number };
 
-export type TranslatableFragment_ShortTranslatable_ = (
-  { __typename?: 'ShortTranslatable' }
-  & Pick<ShortTranslatable, 'en' | 'nl'>
-);
+export type TranslatableFragment_LongTranslatable_ = { __typename?: 'LongTranslatable', en?: string | null, nl?: string | null };
 
-export type TranslatableFragment_LongTranslatable_ = (
-  { __typename?: 'LongTranslatable' }
-  & Pick<LongTranslatable, 'en' | 'nl'>
-);
+export type TranslatableFragment_ShortTranslatable_ = { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null };
 
-export type TranslatableFragment = TranslatableFragment_ShortTranslatable_ | TranslatableFragment_LongTranslatable_;
+export type TranslatableFragment = TranslatableFragment_LongTranslatable_ | TranslatableFragment_ShortTranslatable_;
 
 export type AcceptPaperMandateMutationVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type AcceptPaperMandateMutation = (
-  { __typename?: 'Mutation' }
-  & { acceptPaperMandate?: Maybe<(
-    { __typename?: 'PaperMandate' }
-    & MandateFragment_PaperMandate_
-  )> }
-);
+export type AcceptPaperMandateMutation = { __typename?: 'Mutation', acceptPaperMandate?: { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } | null };
 
 export type CancelPaperMandateMutationVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type CancelPaperMandateMutation = (
-  { __typename?: 'Mutation' }
-  & { cancelPaperMandate?: Maybe<(
-    { __typename?: 'PaperMandate' }
-    & MandateFragment_PaperMandate_
-  )> }
-);
+export type CancelPaperMandateMutation = { __typename?: 'Mutation', cancelPaperMandate?: { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } | null };
 
 export type ChangeEmailMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type ChangeEmailMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'changeEmail'>
-);
+export type ChangeEmailMutation = { __typename?: 'Mutation', changeEmail?: boolean | null };
 
 export type ChangePasswordMutationVariables = Exact<{
   password: Scalars['String'];
@@ -3436,36 +3340,21 @@ export type ChangePasswordMutationVariables = Exact<{
 }>;
 
 
-export type ChangePasswordMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'changePassword'>
-);
+export type ChangePasswordMutation = { __typename?: 'Mutation', changePassword?: boolean | null };
 
 export type CreateDigitalMandateMutationVariables = Exact<{
   data: CreateDigitalMandateInput;
 }>;
 
 
-export type CreateDigitalMandateMutation = (
-  { __typename?: 'Mutation' }
-  & { createDigitalMandate?: Maybe<(
-    { __typename?: 'CreateDigitalMandateResult' }
-    & Pick<CreateDigitalMandateResult, 'redirectUrl'>
-  )> }
-);
+export type CreateDigitalMandateMutation = { __typename?: 'Mutation', createDigitalMandate?: { __typename?: 'CreateDigitalMandateResult', redirectUrl: string } | null };
 
 export type CreatePaperMandateMutationVariables = Exact<{
   data: CreatePaperMandateInput;
 }>;
 
 
-export type CreatePaperMandateMutation = (
-  { __typename?: 'Mutation' }
-  & { createPaperMandate?: Maybe<(
-    { __typename?: 'PaperMandate' }
-    & MandateFragment_PaperMandate_
-  )> }
-);
+export type CreatePaperMandateMutation = { __typename?: 'Mutation', createPaperMandate?: { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } | null };
 
 export type EndMembershipMutationVariables = Exact<{
   id: Scalars['String'];
@@ -3473,29 +3362,14 @@ export type EndMembershipMutationVariables = Exact<{
 }>;
 
 
-export type EndMembershipMutation = (
-  { __typename?: 'Mutation' }
-  & { updateMembership: (
-    { __typename?: 'Membership' }
-    & MembershipFragment
-  ) }
-);
+export type EndMembershipMutation = { __typename?: 'Mutation', updateMembership: { __typename?: 'Membership', id: string, type: MembershipType, startedAt: string, endedAt?: string | null } };
 
 export type InvalidateMandateMutationVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type InvalidateMandateMutation = (
-  { __typename?: 'Mutation' }
-  & { invalidateMandate?: Maybe<(
-    { __typename?: 'DigitalMandate' }
-    & MandateFragment_DigitalMandate_
-  ) | (
-    { __typename?: 'PaperMandate' }
-    & MandateFragment_PaperMandate_
-  )> }
-);
+export type InvalidateMandateMutation = { __typename?: 'Mutation', invalidateMandate?: { __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } | null };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -3503,23 +3377,14 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = (
-  { __typename?: 'Mutation' }
-  & { login?: Maybe<(
-    { __typename?: 'AccessToken' }
-    & Pick<AccessToken, 'accessToken' | 'expiresIn'>
-  )> }
-);
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'AccessToken', accessToken: string, expiresIn: number } | null };
 
 export type RegisterMutationVariables = Exact<{
   data: RegisterInput;
 }>;
 
 
-export type RegisterMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'register'>
-);
+export type RegisterMutation = { __typename?: 'Mutation', register?: boolean | null };
 
 export type RejectPaperMandateMutationVariables = Exact<{
   id: Scalars['String'];
@@ -3527,33 +3392,21 @@ export type RejectPaperMandateMutationVariables = Exact<{
 }>;
 
 
-export type RejectPaperMandateMutation = (
-  { __typename?: 'Mutation' }
-  & { rejectPaperMandate?: Maybe<(
-    { __typename?: 'PaperMandate' }
-    & MandateFragment_PaperMandate_
-  )> }
-);
+export type RejectPaperMandateMutation = { __typename?: 'Mutation', rejectPaperMandate?: { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } | null };
 
 export type RequestResetPasswordMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type RequestResetPasswordMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'requestResetPassword'>
-);
+export type RequestResetPasswordMutation = { __typename?: 'Mutation', requestResetPassword?: boolean | null };
 
 export type RequestVerifyEmailMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type RequestVerifyEmailMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'requestVerifyEmail'>
-);
+export type RequestVerifyEmailMutation = { __typename?: 'Mutation', requestVerifyEmail?: boolean | null };
 
 export type ResetPasswordMutationVariables = Exact<{
   token: Scalars['String'];
@@ -3562,10 +3415,7 @@ export type ResetPasswordMutationVariables = Exact<{
 }>;
 
 
-export type ResetPasswordMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'resetPassword'>
-);
+export type ResetPasswordMutation = { __typename?: 'Mutation', resetPassword?: boolean | null };
 
 export type UpdateMemberMutationVariables = Exact<{
   where: MemberWhereUniqueInput;
@@ -3573,13 +3423,7 @@ export type UpdateMemberMutationVariables = Exact<{
 }>;
 
 
-export type UpdateMemberMutation = (
-  { __typename?: 'Mutation' }
-  & { updateMember: (
-    { __typename?: 'Member' }
-    & MemberFragment
-  ) }
-);
+export type UpdateMemberMutation = { __typename?: 'Mutation', updateMember: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } };
 
 export type UploadMemberImageMutationVariables = Exact<{
   member: MemberWhereUniqueInput;
@@ -3587,13 +3431,7 @@ export type UploadMemberImageMutationVariables = Exact<{
 }>;
 
 
-export type UploadMemberImageMutation = (
-  { __typename?: 'Mutation' }
-  & { uploadMemberImage?: Maybe<(
-    { __typename?: 'Member' }
-    & MemberFragment
-  )> }
-);
+export type UploadMemberImageMutation = { __typename?: 'Mutation', uploadMemberImage?: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } | null };
 
 export type UploadPaperMandateMutationVariables = Exact<{
   paperMandateId: Scalars['String'];
@@ -3601,458 +3439,126 @@ export type UploadPaperMandateMutationVariables = Exact<{
 }>;
 
 
-export type UploadPaperMandateMutation = (
-  { __typename?: 'Mutation' }
-  & { uploadPaperMandate?: Maybe<(
-    { __typename?: 'PaperMandate' }
-    & MandateFragment_PaperMandate_
-  )> }
-);
+export type UploadPaperMandateMutation = { __typename?: 'Mutation', uploadPaperMandate?: { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } | null };
 
 export type VerifyEmailMutationVariables = Exact<{
   token: Scalars['String'];
 }>;
 
 
-export type VerifyEmailMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'verifyEmail'>
-);
+export type VerifyEmailMutation = { __typename?: 'Mutation', verifyEmail?: boolean | null };
 
 export type GetBanksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBanksQuery = (
-  { __typename?: 'Query' }
-  & { banks: (
-    { __typename?: 'BankList' }
-    & { values: Array<(
-      { __typename?: 'Bank' }
-      & BankFragment
-    )> }
-  ) }
-);
+export type GetBanksQuery = { __typename?: 'Query', banks: { __typename?: 'BankList', values: Array<{ __typename?: 'Bank', id: string, bic: string, country: string, name: string, isActive: boolean }> } };
 
 export type GetCommitteesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCommitteesQuery = (
-  { __typename?: 'Query' }
-  & { committees: (
-    { __typename?: 'CommitteeList' }
-    & { values: Array<(
-      { __typename?: 'Committee' }
-      & CommitteeFragment
-    )> }
-  ) }
-);
+export type GetCommitteesQuery = { __typename?: 'Query', committees: { __typename?: 'CommitteeList', values: Array<{ __typename?: 'Committee', id: string, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null }, description: { __typename?: 'LongTranslatable', en?: string | null, nl?: string | null } }> } };
 
 export type GetDirectDebitQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetDirectDebitQuery = (
-  { __typename?: 'Query' }
-  & { directDebit: (
-    { __typename?: 'DirectDebit' }
-    & { batches: (
-      { __typename?: 'DirectDebitBatchList' }
-      & { values: Array<(
-        { __typename?: 'DirectDebitBatch' }
-        & { instructions: (
-          { __typename?: 'DirectDebitInstructionList' }
-          & { values: Array<(
-            { __typename?: 'DirectDebitInstruction' }
-            & { mandate: (
-              { __typename?: 'DigitalMandate' }
-              & { member: (
-                { __typename?: 'Member' }
-                & MemberFragment
-              ) }
-              & MandateFragment_DigitalMandate_
-            ) | (
-              { __typename?: 'PaperMandate' }
-              & { member: (
-                { __typename?: 'Member' }
-                & MemberFragment
-              ) }
-              & MandateFragment_PaperMandate_
-            ) }
-            & DirectDebitInstructionFragment
-          )> }
-        ) }
-        & DirectDebitBatchFragment
-      )> }
-    ), warnings: (
-      { __typename?: 'DirectDebitWarningList' }
-      & { values: Array<(
-        { __typename?: 'DirectDebitWarning' }
-        & DirectDebitWarningFragment
-      )> }
-    ), file?: Maybe<(
-      { __typename?: 'File' }
-      & FileFragment
-    )> }
-    & DirectDebitFragment
-  ) }
-);
+export type GetDirectDebitQuery = { __typename?: 'Query', directDebit: { __typename?: 'DirectDebit', id: string, createdAt: string, updatedAt: string, status: DirectDebitStatus, messageId: string, collectionDate: string, instructionCount: number, amount: number, batches: { __typename?: 'DirectDebitBatchList', values: Array<{ __typename?: 'DirectDebitBatch', id: string, createdAt: string, updatedAt: string, batchId: string, sequenceType: SequenceType, instructionCount: number, amount: number, instructions: { __typename?: 'DirectDebitInstructionList', values: Array<{ __typename?: 'DirectDebitInstruction', id: string, createdAt: string, updatedAt: string, instructionId: string, description: string, amount: number, mandate: { __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } }> } }> }, warnings: { __typename?: 'DirectDebitWarningList', values: Array<{ __typename?: 'DirectDebitWarning', id: string, createdAt: string, updatedAt: string, description: string, member?: { __typename?: 'Member', id: string, firstName: string, lastName: string } | null }> }, file?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } };
 
 export type GetDirectDebitBatchQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetDirectDebitBatchQuery = (
-  { __typename?: 'Query' }
-  & { directDebitBatch: (
-    { __typename?: 'DirectDebitBatch' }
-    & { instructions: (
-      { __typename?: 'DirectDebitInstructionList' }
-      & { values: Array<(
-        { __typename?: 'DirectDebitInstruction' }
-        & { mandate: (
-          { __typename?: 'DigitalMandate' }
-          & { member: (
-            { __typename?: 'Member' }
-            & MemberFragment
-          ) }
-          & MandateFragment_DigitalMandate_
-        ) | (
-          { __typename?: 'PaperMandate' }
-          & { member: (
-            { __typename?: 'Member' }
-            & MemberFragment
-          ) }
-          & MandateFragment_PaperMandate_
-        ) }
-        & DirectDebitInstructionFragment
-      )> }
-    ), directDebit: (
-      { __typename?: 'DirectDebit' }
-      & DirectDebitFragment
-    ) }
-    & DirectDebitBatchFragment
-  ) }
-);
+export type GetDirectDebitBatchQuery = { __typename?: 'Query', directDebitBatch: { __typename?: 'DirectDebitBatch', id: string, createdAt: string, updatedAt: string, batchId: string, sequenceType: SequenceType, instructionCount: number, amount: number, instructions: { __typename?: 'DirectDebitInstructionList', values: Array<{ __typename?: 'DirectDebitInstruction', id: string, createdAt: string, updatedAt: string, instructionId: string, description: string, amount: number, mandate: { __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } }> }, directDebit: { __typename?: 'DirectDebit', id: string, createdAt: string, updatedAt: string, status: DirectDebitStatus, messageId: string, collectionDate: string, instructionCount: number, amount: number } } };
 
 export type GetDirectDebitInstructionQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetDirectDebitInstructionQuery = (
-  { __typename?: 'Query' }
-  & { directDebitInstruction: (
-    { __typename?: 'DirectDebitInstruction' }
-    & { batch: (
-      { __typename?: 'DirectDebitBatch' }
-      & { directDebit: (
-        { __typename?: 'DirectDebit' }
-        & DirectDebitFragment
-      ) }
-      & DirectDebitBatchFragment
-    ), transactions: (
-      { __typename?: 'TransactionList' }
-      & { values: Array<(
-        { __typename?: 'MembershipFeeTransaction' }
-        & TransactionFragment
-      )> }
-    ), mandate: (
-      { __typename?: 'DigitalMandate' }
-      & { member: (
-        { __typename?: 'Member' }
-        & MemberFragment
-      ) }
-      & MandateFragment_DigitalMandate_
-    ) | (
-      { __typename?: 'PaperMandate' }
-      & { member: (
-        { __typename?: 'Member' }
-        & MemberFragment
-      ) }
-      & MandateFragment_PaperMandate_
-    ) }
-    & DirectDebitInstructionFragment
-  ) }
-);
+export type GetDirectDebitInstructionQuery = { __typename?: 'Query', directDebitInstruction: { __typename?: 'DirectDebitInstruction', id: string, createdAt: string, updatedAt: string, instructionId: string, description: string, amount: number, batch: { __typename?: 'DirectDebitBatch', id: string, createdAt: string, updatedAt: string, batchId: string, sequenceType: SequenceType, instructionCount: number, amount: number, directDebit: { __typename?: 'DirectDebit', id: string, createdAt: string, updatedAt: string, status: DirectDebitStatus, messageId: string, collectionDate: string, instructionCount: number, amount: number } }, transactions: { __typename?: 'TransactionList', values: Array<{ __typename?: 'MembershipFeeTransaction', id: string, createdAt: string, updatedAt: string, description: string, amount: number, year: number }> }, mandate: { __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } } };
 
 export type GetDirectDebitsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetDirectDebitsQuery = (
-  { __typename?: 'Query' }
-  & { directDebits: (
-    { __typename?: 'DirectDebitList' }
-    & { values: Array<(
-      { __typename?: 'DirectDebit' }
-      & DirectDebitFragment
-    )> }
-  ) }
-);
+export type GetDirectDebitsQuery = { __typename?: 'Query', directDebits: { __typename?: 'DirectDebitList', values: Array<{ __typename?: 'DirectDebit', id: string, createdAt: string, updatedAt: string, status: DirectDebitStatus, messageId: string, collectionDate: string, instructionCount: number, amount: number }> } };
 
 export type GetMandateQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetMandateQuery = (
-  { __typename?: 'Query' }
-  & { mandate: (
-    { __typename?: 'DigitalMandate' }
-    & { member: (
-      { __typename?: 'Member' }
-      & MemberFragment
-    ) }
-    & MandateFragment_DigitalMandate_
-  ) | (
-    { __typename?: 'PaperMandate' }
-    & { member: (
-      { __typename?: 'Member' }
-      & MemberFragment
-    ) }
-    & MandateFragment_PaperMandate_
-  ) }
-);
+export type GetMandateQuery = { __typename?: 'Query', mandate: { __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } };
 
 export type GetMandatesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMandatesQuery = (
-  { __typename?: 'Query' }
-  & { mandates: (
-    { __typename?: 'MandateList' }
-    & { values: Array<(
-      { __typename?: 'DigitalMandate' }
-      & { member: (
-        { __typename?: 'Member' }
-        & MemberFragment
-      ) }
-      & MandateFragment_DigitalMandate_
-    ) | (
-      { __typename?: 'PaperMandate' }
-      & { member: (
-        { __typename?: 'Member' }
-        & MemberFragment
-      ) }
-      & MandateFragment_PaperMandate_
-    )> }
-  ) }
-);
+export type GetMandatesQuery = { __typename?: 'Query', mandates: { __typename?: 'MandateList', values: Array<{ __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }> } };
 
 export type GetMemberQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetMemberQuery = (
-  { __typename?: 'Query' }
-  & { member: (
-    { __typename?: 'Member' }
-    & { memberships: (
-      { __typename?: 'MembershipList' }
-      & { values: Array<(
-        { __typename?: 'Membership' }
-        & MembershipFragment
-      )> }
-    ), mandates: (
-      { __typename?: 'MandateList' }
-      & { values: Array<(
-        { __typename?: 'DigitalMandate' }
-        & MandateFragment_DigitalMandate_
-      ) | (
-        { __typename?: 'PaperMandate' }
-        & MandateFragment_PaperMandate_
-      )> }
-    ), transactions: (
-      { __typename?: 'TransactionList' }
-      & { values: Array<(
-        { __typename?: 'MembershipFeeTransaction' }
-        & TransactionFragment
-      )> }
-    ) }
-    & MemberFragment
-  ) }
-);
+export type GetMemberQuery = { __typename?: 'Query', member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, memberships: { __typename?: 'MembershipList', values: Array<{ __typename?: 'Membership', id: string, type: MembershipType, startedAt: string, endedAt?: string | null }> }, mandates: { __typename?: 'MandateList', values: Array<{ __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }> }, transactions: { __typename?: 'TransactionList', values: Array<{ __typename?: 'MembershipFeeTransaction', id: string, createdAt: string, updatedAt: string, description: string, amount: number, year: number }> }, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } };
 
 export type GetMemberMandatesQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetMemberMandatesQuery = (
-  { __typename?: 'Query' }
-  & { member: (
-    { __typename?: 'Member' }
-    & { mandates: (
-      { __typename?: 'MandateList' }
-      & { values: Array<(
-        { __typename?: 'DigitalMandate' }
-        & MandateFragment_DigitalMandate_
-      ) | (
-        { __typename?: 'PaperMandate' }
-        & MandateFragment_PaperMandate_
-      )> }
-    ) }
-  ) }
-);
+export type GetMemberMandatesQuery = { __typename?: 'Query', member: { __typename?: 'Member', mandates: { __typename?: 'MandateList', values: Array<{ __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }> } } };
 
 export type GetMemberTransactionQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetMemberTransactionQuery = (
-  { __typename?: 'Query' }
-  & { transaction: (
-    { __typename?: 'MembershipFeeTransaction' }
-    & TransactionFragment
-  ) }
-);
+export type GetMemberTransactionQuery = { __typename?: 'Query', transaction: { __typename?: 'MembershipFeeTransaction', id: string, createdAt: string, updatedAt: string, description: string, amount: number, year: number } };
 
 export type GetMemberTransactionsQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetMemberTransactionsQuery = (
-  { __typename?: 'Query' }
-  & { member: (
-    { __typename?: 'Member' }
-    & { transactions: (
-      { __typename?: 'TransactionList' }
-      & { values: Array<(
-        { __typename?: 'MembershipFeeTransaction' }
-        & TransactionFragment
-      )> }
-    ) }
-  ) }
-);
+export type GetMemberTransactionsQuery = { __typename?: 'Query', member: { __typename?: 'Member', transactions: { __typename?: 'TransactionList', values: Array<{ __typename?: 'MembershipFeeTransaction', id: string, createdAt: string, updatedAt: string, description: string, amount: number, year: number }> } } };
 
 export type GetMembersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMembersQuery = (
-  { __typename?: 'Query' }
-  & { members: (
-    { __typename?: 'MemberList' }
-    & { values: Array<(
-      { __typename?: 'Member' }
-      & { latestMembership: (
-        { __typename?: 'Membership' }
-        & MembershipFragment
-      ), mandates: (
-        { __typename?: 'MandateList' }
-        & { values: Array<(
-          { __typename?: 'DigitalMandate' }
-          & MandateFragment_DigitalMandate_
-        ) | (
-          { __typename?: 'PaperMandate' }
-          & MandateFragment_PaperMandate_
-        )> }
-      ) }
-      & MemberFragment
-    )> }
-  ) }
-);
+export type GetMembersQuery = { __typename?: 'Query', members: { __typename?: 'MemberList', values: Array<{ __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, latestMembership: { __typename?: 'Membership', id: string, type: MembershipType, startedAt: string, endedAt?: string | null }, mandates: { __typename?: 'MandateList', values: Array<{ __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }> }, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }> } };
 
 export type GetPageQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetPageQuery = (
-  { __typename?: 'Query' }
-  & { page: (
-    { __typename?: 'Page' }
-    & PageFragment
-  ) }
-);
+export type GetPageQuery = { __typename?: 'Query', page: { __typename?: 'Page', id: string, title: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null }, body: { __typename?: 'LongTranslatable', en?: string | null, nl?: string | null } } };
 
 export type GetPagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPagesQuery = (
-  { __typename?: 'Query' }
-  & { pages: (
-    { __typename?: 'PageList' }
-    & { values: Array<(
-      { __typename?: 'Page' }
-      & PageFragment
-    )> }
-  ) }
-);
+export type GetPagesQuery = { __typename?: 'Query', pages: { __typename?: 'PageList', values: Array<{ __typename?: 'Page', id: string, title: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null }, body: { __typename?: 'LongTranslatable', en?: string | null, nl?: string | null } }> } };
 
 export type GetPaperMandatesQueryVariables = Exact<{
-  status?: Maybe<MandateStatus>;
+  status?: InputMaybe<MandateStatus>;
 }>;
 
 
-export type GetPaperMandatesQuery = (
-  { __typename?: 'Query' }
-  & { paperMandates: (
-    { __typename?: 'PaperMandateList' }
-    & { values: Array<(
-      { __typename?: 'PaperMandate' }
-      & { member: (
-        { __typename?: 'Member' }
-        & MemberFragment
-      ) }
-      & MandateFragment_PaperMandate_
-    )> }
-  ) }
-);
+export type GetPaperMandatesQuery = { __typename?: 'Query', paperMandates: { __typename?: 'PaperMandateList', values: Array<{ __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }> } };
 
 export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProfileQuery = (
-  { __typename?: 'Query' }
-  & { me?: Maybe<(
-    { __typename?: 'Member' }
-    & Pick<Member, 'hasMandate' | 'hasPendingPaperMandates'>
-    & { providers: (
-      { __typename?: 'ProviderList' }
-      & { values: Array<(
-        { __typename?: 'Provider' }
-        & ProviderFragment
-      )> }
-    ) }
-    & MemberFragment
-  )> }
-);
+export type GetProfileQuery = { __typename?: 'Query', me?: { __typename?: 'Member', hasMandate: boolean, hasPendingPaperMandates: boolean, id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, providers: { __typename?: 'ProviderList', values: Array<{ __typename?: 'Provider', id: string, type: string, email: string }> }, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } | null };
 
 export type GetTransactionQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetTransactionQuery = (
-  { __typename?: 'Query' }
-  & { transaction: (
-    { __typename?: 'MembershipFeeTransaction' }
-    & { member: (
-      { __typename?: 'Member' }
-      & { latestMembership: (
-        { __typename?: 'Membership' }
-        & MembershipFragment
-      ) }
-      & MemberFragment
-    ), instruction?: Maybe<(
-      { __typename?: 'DirectDebitInstruction' }
-      & { batch: (
-        { __typename?: 'DirectDebitBatch' }
-        & { directDebit: (
-          { __typename?: 'DirectDebit' }
-          & DirectDebitFragment
-        ) }
-        & DirectDebitBatchFragment
-      ) }
-      & DirectDebitInstructionFragment
-    )> }
-    & TransactionFragment
-  ) }
-);
+export type GetTransactionQuery = { __typename?: 'Query', transaction: { __typename?: 'MembershipFeeTransaction', id: string, createdAt: string, updatedAt: string, description: string, amount: number, year: number, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, latestMembership: { __typename?: 'Membership', id: string, type: MembershipType, startedAt: string, endedAt?: string | null }, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }, instruction?: { __typename?: 'DirectDebitInstruction', id: string, createdAt: string, updatedAt: string, instructionId: string, description: string, amount: number, batch: { __typename?: 'DirectDebitBatch', id: string, createdAt: string, updatedAt: string, batchId: string, sequenceType: SequenceType, instructionCount: number, amount: number, directDebit: { __typename?: 'DirectDebit', id: string, createdAt: string, updatedAt: string, status: DirectDebitStatus, messageId: string, collectionDate: string, instructionCount: number, amount: number } } } | null } };
 
 export const BankFragmentDoc = gql`
     fragment BankFragment on Bank {
@@ -4248,7 +3754,8 @@ export type AcceptPaperMandateMutationFn = Apollo.MutationFunction<AcceptPaperMa
  * });
  */
 export function useAcceptPaperMandateMutation(baseOptions?: Apollo.MutationHookOptions<AcceptPaperMandateMutation, AcceptPaperMandateMutationVariables>) {
-        return Apollo.useMutation<AcceptPaperMandateMutation, AcceptPaperMandateMutationVariables>(AcceptPaperMandateDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AcceptPaperMandateMutation, AcceptPaperMandateMutationVariables>(AcceptPaperMandateDocument, options);
       }
 export type AcceptPaperMandateMutationHookResult = ReturnType<typeof useAcceptPaperMandateMutation>;
 export type AcceptPaperMandateMutationResult = Apollo.MutationResult<AcceptPaperMandateMutation>;
@@ -4280,7 +3787,8 @@ export type CancelPaperMandateMutationFn = Apollo.MutationFunction<CancelPaperMa
  * });
  */
 export function useCancelPaperMandateMutation(baseOptions?: Apollo.MutationHookOptions<CancelPaperMandateMutation, CancelPaperMandateMutationVariables>) {
-        return Apollo.useMutation<CancelPaperMandateMutation, CancelPaperMandateMutationVariables>(CancelPaperMandateDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CancelPaperMandateMutation, CancelPaperMandateMutationVariables>(CancelPaperMandateDocument, options);
       }
 export type CancelPaperMandateMutationHookResult = ReturnType<typeof useCancelPaperMandateMutation>;
 export type CancelPaperMandateMutationResult = Apollo.MutationResult<CancelPaperMandateMutation>;
@@ -4310,7 +3818,8 @@ export type ChangeEmailMutationFn = Apollo.MutationFunction<ChangeEmailMutation,
  * });
  */
 export function useChangeEmailMutation(baseOptions?: Apollo.MutationHookOptions<ChangeEmailMutation, ChangeEmailMutationVariables>) {
-        return Apollo.useMutation<ChangeEmailMutation, ChangeEmailMutationVariables>(ChangeEmailDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ChangeEmailMutation, ChangeEmailMutationVariables>(ChangeEmailDocument, options);
       }
 export type ChangeEmailMutationHookResult = ReturnType<typeof useChangeEmailMutation>;
 export type ChangeEmailMutationResult = Apollo.MutationResult<ChangeEmailMutation>;
@@ -4341,7 +3850,8 @@ export type ChangePasswordMutationFn = Apollo.MutationFunction<ChangePasswordMut
  * });
  */
 export function useChangePasswordMutation(baseOptions?: Apollo.MutationHookOptions<ChangePasswordMutation, ChangePasswordMutationVariables>) {
-        return Apollo.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument, options);
       }
 export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswordMutation>;
 export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
@@ -4373,7 +3883,8 @@ export type CreateDigitalMandateMutationFn = Apollo.MutationFunction<CreateDigit
  * });
  */
 export function useCreateDigitalMandateMutation(baseOptions?: Apollo.MutationHookOptions<CreateDigitalMandateMutation, CreateDigitalMandateMutationVariables>) {
-        return Apollo.useMutation<CreateDigitalMandateMutation, CreateDigitalMandateMutationVariables>(CreateDigitalMandateDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateDigitalMandateMutation, CreateDigitalMandateMutationVariables>(CreateDigitalMandateDocument, options);
       }
 export type CreateDigitalMandateMutationHookResult = ReturnType<typeof useCreateDigitalMandateMutation>;
 export type CreateDigitalMandateMutationResult = Apollo.MutationResult<CreateDigitalMandateMutation>;
@@ -4405,7 +3916,8 @@ export type CreatePaperMandateMutationFn = Apollo.MutationFunction<CreatePaperMa
  * });
  */
 export function useCreatePaperMandateMutation(baseOptions?: Apollo.MutationHookOptions<CreatePaperMandateMutation, CreatePaperMandateMutationVariables>) {
-        return Apollo.useMutation<CreatePaperMandateMutation, CreatePaperMandateMutationVariables>(CreatePaperMandateDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePaperMandateMutation, CreatePaperMandateMutationVariables>(CreatePaperMandateDocument, options);
       }
 export type CreatePaperMandateMutationHookResult = ReturnType<typeof useCreatePaperMandateMutation>;
 export type CreatePaperMandateMutationResult = Apollo.MutationResult<CreatePaperMandateMutation>;
@@ -4438,7 +3950,8 @@ export type EndMembershipMutationFn = Apollo.MutationFunction<EndMembershipMutat
  * });
  */
 export function useEndMembershipMutation(baseOptions?: Apollo.MutationHookOptions<EndMembershipMutation, EndMembershipMutationVariables>) {
-        return Apollo.useMutation<EndMembershipMutation, EndMembershipMutationVariables>(EndMembershipDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EndMembershipMutation, EndMembershipMutationVariables>(EndMembershipDocument, options);
       }
 export type EndMembershipMutationHookResult = ReturnType<typeof useEndMembershipMutation>;
 export type EndMembershipMutationResult = Apollo.MutationResult<EndMembershipMutation>;
@@ -4470,7 +3983,8 @@ export type InvalidateMandateMutationFn = Apollo.MutationFunction<InvalidateMand
  * });
  */
 export function useInvalidateMandateMutation(baseOptions?: Apollo.MutationHookOptions<InvalidateMandateMutation, InvalidateMandateMutationVariables>) {
-        return Apollo.useMutation<InvalidateMandateMutation, InvalidateMandateMutationVariables>(InvalidateMandateDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InvalidateMandateMutation, InvalidateMandateMutationVariables>(InvalidateMandateDocument, options);
       }
 export type InvalidateMandateMutationHookResult = ReturnType<typeof useInvalidateMandateMutation>;
 export type InvalidateMandateMutationResult = Apollo.MutationResult<InvalidateMandateMutation>;
@@ -4504,7 +4018,8 @@ export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutati
  * });
  */
 export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
       }
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
@@ -4534,7 +4049,8 @@ export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, Regis
  * });
  */
 export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
-        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
       }
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
@@ -4567,7 +4083,8 @@ export type RejectPaperMandateMutationFn = Apollo.MutationFunction<RejectPaperMa
  * });
  */
 export function useRejectPaperMandateMutation(baseOptions?: Apollo.MutationHookOptions<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>) {
-        return Apollo.useMutation<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>(RejectPaperMandateDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>(RejectPaperMandateDocument, options);
       }
 export type RejectPaperMandateMutationHookResult = ReturnType<typeof useRejectPaperMandateMutation>;
 export type RejectPaperMandateMutationResult = Apollo.MutationResult<RejectPaperMandateMutation>;
@@ -4597,7 +4114,8 @@ export type RequestResetPasswordMutationFn = Apollo.MutationFunction<RequestRese
  * });
  */
 export function useRequestResetPasswordMutation(baseOptions?: Apollo.MutationHookOptions<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>) {
-        return Apollo.useMutation<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>(RequestResetPasswordDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RequestResetPasswordMutation, RequestResetPasswordMutationVariables>(RequestResetPasswordDocument, options);
       }
 export type RequestResetPasswordMutationHookResult = ReturnType<typeof useRequestResetPasswordMutation>;
 export type RequestResetPasswordMutationResult = Apollo.MutationResult<RequestResetPasswordMutation>;
@@ -4627,7 +4145,8 @@ export type RequestVerifyEmailMutationFn = Apollo.MutationFunction<RequestVerify
  * });
  */
 export function useRequestVerifyEmailMutation(baseOptions?: Apollo.MutationHookOptions<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>) {
-        return Apollo.useMutation<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>(RequestVerifyEmailDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RequestVerifyEmailMutation, RequestVerifyEmailMutationVariables>(RequestVerifyEmailDocument, options);
       }
 export type RequestVerifyEmailMutationHookResult = ReturnType<typeof useRequestVerifyEmailMutation>;
 export type RequestVerifyEmailMutationResult = Apollo.MutationResult<RequestVerifyEmailMutation>;
@@ -4663,7 +4182,8 @@ export type ResetPasswordMutationFn = Apollo.MutationFunction<ResetPasswordMutat
  * });
  */
 export function useResetPasswordMutation(baseOptions?: Apollo.MutationHookOptions<ResetPasswordMutation, ResetPasswordMutationVariables>) {
-        return Apollo.useMutation<ResetPasswordMutation, ResetPasswordMutationVariables>(ResetPasswordDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ResetPasswordMutation, ResetPasswordMutationVariables>(ResetPasswordDocument, options);
       }
 export type ResetPasswordMutationHookResult = ReturnType<typeof useResetPasswordMutation>;
 export type ResetPasswordMutationResult = Apollo.MutationResult<ResetPasswordMutation>;
@@ -4696,7 +4216,8 @@ export type UpdateMemberMutationFn = Apollo.MutationFunction<UpdateMemberMutatio
  * });
  */
 export function useUpdateMemberMutation(baseOptions?: Apollo.MutationHookOptions<UpdateMemberMutation, UpdateMemberMutationVariables>) {
-        return Apollo.useMutation<UpdateMemberMutation, UpdateMemberMutationVariables>(UpdateMemberDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateMemberMutation, UpdateMemberMutationVariables>(UpdateMemberDocument, options);
       }
 export type UpdateMemberMutationHookResult = ReturnType<typeof useUpdateMemberMutation>;
 export type UpdateMemberMutationResult = Apollo.MutationResult<UpdateMemberMutation>;
@@ -4729,7 +4250,8 @@ export type UploadMemberImageMutationFn = Apollo.MutationFunction<UploadMemberIm
  * });
  */
 export function useUploadMemberImageMutation(baseOptions?: Apollo.MutationHookOptions<UploadMemberImageMutation, UploadMemberImageMutationVariables>) {
-        return Apollo.useMutation<UploadMemberImageMutation, UploadMemberImageMutationVariables>(UploadMemberImageDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UploadMemberImageMutation, UploadMemberImageMutationVariables>(UploadMemberImageDocument, options);
       }
 export type UploadMemberImageMutationHookResult = ReturnType<typeof useUploadMemberImageMutation>;
 export type UploadMemberImageMutationResult = Apollo.MutationResult<UploadMemberImageMutation>;
@@ -4762,7 +4284,8 @@ export type UploadPaperMandateMutationFn = Apollo.MutationFunction<UploadPaperMa
  * });
  */
 export function useUploadPaperMandateMutation(baseOptions?: Apollo.MutationHookOptions<UploadPaperMandateMutation, UploadPaperMandateMutationVariables>) {
-        return Apollo.useMutation<UploadPaperMandateMutation, UploadPaperMandateMutationVariables>(UploadPaperMandateDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UploadPaperMandateMutation, UploadPaperMandateMutationVariables>(UploadPaperMandateDocument, options);
       }
 export type UploadPaperMandateMutationHookResult = ReturnType<typeof useUploadPaperMandateMutation>;
 export type UploadPaperMandateMutationResult = Apollo.MutationResult<UploadPaperMandateMutation>;
@@ -4792,7 +4315,8 @@ export type VerifyEmailMutationFn = Apollo.MutationFunction<VerifyEmailMutation,
  * });
  */
 export function useVerifyEmailMutation(baseOptions?: Apollo.MutationHookOptions<VerifyEmailMutation, VerifyEmailMutationVariables>) {
-        return Apollo.useMutation<VerifyEmailMutation, VerifyEmailMutationVariables>(VerifyEmailDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<VerifyEmailMutation, VerifyEmailMutationVariables>(VerifyEmailDocument, options);
       }
 export type VerifyEmailMutationHookResult = ReturnType<typeof useVerifyEmailMutation>;
 export type VerifyEmailMutationResult = Apollo.MutationResult<VerifyEmailMutation>;
@@ -4823,10 +4347,12 @@ export const GetBanksDocument = gql`
  * });
  */
 export function useGetBanksQuery(baseOptions?: Apollo.QueryHookOptions<GetBanksQuery, GetBanksQueryVariables>) {
-        return Apollo.useQuery<GetBanksQuery, GetBanksQueryVariables>(GetBanksDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBanksQuery, GetBanksQueryVariables>(GetBanksDocument, options);
       }
 export function useGetBanksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBanksQuery, GetBanksQueryVariables>) {
-          return Apollo.useLazyQuery<GetBanksQuery, GetBanksQueryVariables>(GetBanksDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBanksQuery, GetBanksQueryVariables>(GetBanksDocument, options);
         }
 export type GetBanksQueryHookResult = ReturnType<typeof useGetBanksQuery>;
 export type GetBanksLazyQueryHookResult = ReturnType<typeof useGetBanksLazyQuery>;
@@ -4857,10 +4383,12 @@ export const GetCommitteesDocument = gql`
  * });
  */
 export function useGetCommitteesQuery(baseOptions?: Apollo.QueryHookOptions<GetCommitteesQuery, GetCommitteesQueryVariables>) {
-        return Apollo.useQuery<GetCommitteesQuery, GetCommitteesQueryVariables>(GetCommitteesDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCommitteesQuery, GetCommitteesQueryVariables>(GetCommitteesDocument, options);
       }
 export function useGetCommitteesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCommitteesQuery, GetCommitteesQueryVariables>) {
-          return Apollo.useLazyQuery<GetCommitteesQuery, GetCommitteesQueryVariables>(GetCommitteesDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCommitteesQuery, GetCommitteesQueryVariables>(GetCommitteesDocument, options);
         }
 export type GetCommitteesQueryHookResult = ReturnType<typeof useGetCommitteesQuery>;
 export type GetCommitteesLazyQueryHookResult = ReturnType<typeof useGetCommitteesLazyQuery>;
@@ -4920,10 +4448,12 @@ ${FileFragmentDoc}`;
  * });
  */
 export function useGetDirectDebitQuery(baseOptions: Apollo.QueryHookOptions<GetDirectDebitQuery, GetDirectDebitQueryVariables>) {
-        return Apollo.useQuery<GetDirectDebitQuery, GetDirectDebitQueryVariables>(GetDirectDebitDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDirectDebitQuery, GetDirectDebitQueryVariables>(GetDirectDebitDocument, options);
       }
 export function useGetDirectDebitLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDirectDebitQuery, GetDirectDebitQueryVariables>) {
-          return Apollo.useLazyQuery<GetDirectDebitQuery, GetDirectDebitQueryVariables>(GetDirectDebitDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDirectDebitQuery, GetDirectDebitQueryVariables>(GetDirectDebitDocument, options);
         }
 export type GetDirectDebitQueryHookResult = ReturnType<typeof useGetDirectDebitQuery>;
 export type GetDirectDebitLazyQueryHookResult = ReturnType<typeof useGetDirectDebitLazyQuery>;
@@ -4971,10 +4501,12 @@ ${DirectDebitFragmentDoc}`;
  * });
  */
 export function useGetDirectDebitBatchQuery(baseOptions: Apollo.QueryHookOptions<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>) {
-        return Apollo.useQuery<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>(GetDirectDebitBatchDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>(GetDirectDebitBatchDocument, options);
       }
 export function useGetDirectDebitBatchLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>) {
-          return Apollo.useLazyQuery<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>(GetDirectDebitBatchDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>(GetDirectDebitBatchDocument, options);
         }
 export type GetDirectDebitBatchQueryHookResult = ReturnType<typeof useGetDirectDebitBatchQuery>;
 export type GetDirectDebitBatchLazyQueryHookResult = ReturnType<typeof useGetDirectDebitBatchLazyQuery>;
@@ -5026,10 +4558,12 @@ ${MemberFragmentDoc}`;
  * });
  */
 export function useGetDirectDebitInstructionQuery(baseOptions: Apollo.QueryHookOptions<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>) {
-        return Apollo.useQuery<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>(GetDirectDebitInstructionDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>(GetDirectDebitInstructionDocument, options);
       }
 export function useGetDirectDebitInstructionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>) {
-          return Apollo.useLazyQuery<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>(GetDirectDebitInstructionDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>(GetDirectDebitInstructionDocument, options);
         }
 export type GetDirectDebitInstructionQueryHookResult = ReturnType<typeof useGetDirectDebitInstructionQuery>;
 export type GetDirectDebitInstructionLazyQueryHookResult = ReturnType<typeof useGetDirectDebitInstructionLazyQuery>;
@@ -5060,10 +4594,12 @@ export const GetDirectDebitsDocument = gql`
  * });
  */
 export function useGetDirectDebitsQuery(baseOptions?: Apollo.QueryHookOptions<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>) {
-        return Apollo.useQuery<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>(GetDirectDebitsDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>(GetDirectDebitsDocument, options);
       }
 export function useGetDirectDebitsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>) {
-          return Apollo.useLazyQuery<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>(GetDirectDebitsDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>(GetDirectDebitsDocument, options);
         }
 export type GetDirectDebitsQueryHookResult = ReturnType<typeof useGetDirectDebitsQuery>;
 export type GetDirectDebitsLazyQueryHookResult = ReturnType<typeof useGetDirectDebitsLazyQuery>;
@@ -5097,10 +4633,12 @@ ${MemberFragmentDoc}`;
  * });
  */
 export function useGetMandateQuery(baseOptions: Apollo.QueryHookOptions<GetMandateQuery, GetMandateQueryVariables>) {
-        return Apollo.useQuery<GetMandateQuery, GetMandateQueryVariables>(GetMandateDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMandateQuery, GetMandateQueryVariables>(GetMandateDocument, options);
       }
 export function useGetMandateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMandateQuery, GetMandateQueryVariables>) {
-          return Apollo.useLazyQuery<GetMandateQuery, GetMandateQueryVariables>(GetMandateDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMandateQuery, GetMandateQueryVariables>(GetMandateDocument, options);
         }
 export type GetMandateQueryHookResult = ReturnType<typeof useGetMandateQuery>;
 export type GetMandateLazyQueryHookResult = ReturnType<typeof useGetMandateLazyQuery>;
@@ -5135,10 +4673,12 @@ ${MemberFragmentDoc}`;
  * });
  */
 export function useGetMandatesQuery(baseOptions?: Apollo.QueryHookOptions<GetMandatesQuery, GetMandatesQueryVariables>) {
-        return Apollo.useQuery<GetMandatesQuery, GetMandatesQueryVariables>(GetMandatesDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMandatesQuery, GetMandatesQueryVariables>(GetMandatesDocument, options);
       }
 export function useGetMandatesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMandatesQuery, GetMandatesQueryVariables>) {
-          return Apollo.useLazyQuery<GetMandatesQuery, GetMandatesQueryVariables>(GetMandatesDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMandatesQuery, GetMandatesQueryVariables>(GetMandatesDocument, options);
         }
 export type GetMandatesQueryHookResult = ReturnType<typeof useGetMandatesQuery>;
 export type GetMandatesLazyQueryHookResult = ReturnType<typeof useGetMandatesLazyQuery>;
@@ -5186,10 +4726,12 @@ ${TransactionFragmentDoc}`;
  * });
  */
 export function useGetMemberQuery(baseOptions: Apollo.QueryHookOptions<GetMemberQuery, GetMemberQueryVariables>) {
-        return Apollo.useQuery<GetMemberQuery, GetMemberQueryVariables>(GetMemberDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMemberQuery, GetMemberQueryVariables>(GetMemberDocument, options);
       }
 export function useGetMemberLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMemberQuery, GetMemberQueryVariables>) {
-          return Apollo.useLazyQuery<GetMemberQuery, GetMemberQueryVariables>(GetMemberDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMemberQuery, GetMemberQueryVariables>(GetMemberDocument, options);
         }
 export type GetMemberQueryHookResult = ReturnType<typeof useGetMemberQuery>;
 export type GetMemberLazyQueryHookResult = ReturnType<typeof useGetMemberLazyQuery>;
@@ -5223,10 +4765,12 @@ export const GetMemberMandatesDocument = gql`
  * });
  */
 export function useGetMemberMandatesQuery(baseOptions: Apollo.QueryHookOptions<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>) {
-        return Apollo.useQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(GetMemberMandatesDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(GetMemberMandatesDocument, options);
       }
 export function useGetMemberMandatesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>) {
-          return Apollo.useLazyQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(GetMemberMandatesDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(GetMemberMandatesDocument, options);
         }
 export type GetMemberMandatesQueryHookResult = ReturnType<typeof useGetMemberMandatesQuery>;
 export type GetMemberMandatesLazyQueryHookResult = ReturnType<typeof useGetMemberMandatesLazyQuery>;
@@ -5256,10 +4800,12 @@ export const GetMemberTransactionDocument = gql`
  * });
  */
 export function useGetMemberTransactionQuery(baseOptions: Apollo.QueryHookOptions<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>) {
-        return Apollo.useQuery<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>(GetMemberTransactionDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>(GetMemberTransactionDocument, options);
       }
 export function useGetMemberTransactionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>) {
-          return Apollo.useLazyQuery<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>(GetMemberTransactionDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMemberTransactionQuery, GetMemberTransactionQueryVariables>(GetMemberTransactionDocument, options);
         }
 export type GetMemberTransactionQueryHookResult = ReturnType<typeof useGetMemberTransactionQuery>;
 export type GetMemberTransactionLazyQueryHookResult = ReturnType<typeof useGetMemberTransactionLazyQuery>;
@@ -5293,10 +4839,12 @@ export const GetMemberTransactionsDocument = gql`
  * });
  */
 export function useGetMemberTransactionsQuery(baseOptions: Apollo.QueryHookOptions<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>) {
-        return Apollo.useQuery<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>(GetMemberTransactionsDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>(GetMemberTransactionsDocument, options);
       }
 export function useGetMemberTransactionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>) {
-          return Apollo.useLazyQuery<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>(GetMemberTransactionsDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMemberTransactionsQuery, GetMemberTransactionsQueryVariables>(GetMemberTransactionsDocument, options);
         }
 export type GetMemberTransactionsQueryHookResult = ReturnType<typeof useGetMemberTransactionsQuery>;
 export type GetMemberTransactionsLazyQueryHookResult = ReturnType<typeof useGetMemberTransactionsLazyQuery>;
@@ -5337,10 +4885,12 @@ ${MandateFragmentDoc}`;
  * });
  */
 export function useGetMembersQuery(baseOptions?: Apollo.QueryHookOptions<GetMembersQuery, GetMembersQueryVariables>) {
-        return Apollo.useQuery<GetMembersQuery, GetMembersQueryVariables>(GetMembersDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMembersQuery, GetMembersQueryVariables>(GetMembersDocument, options);
       }
 export function useGetMembersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMembersQuery, GetMembersQueryVariables>) {
-          return Apollo.useLazyQuery<GetMembersQuery, GetMembersQueryVariables>(GetMembersDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMembersQuery, GetMembersQueryVariables>(GetMembersDocument, options);
         }
 export type GetMembersQueryHookResult = ReturnType<typeof useGetMembersQuery>;
 export type GetMembersLazyQueryHookResult = ReturnType<typeof useGetMembersLazyQuery>;
@@ -5370,10 +4920,12 @@ export const GetPageDocument = gql`
  * });
  */
 export function useGetPageQuery(baseOptions: Apollo.QueryHookOptions<GetPageQuery, GetPageQueryVariables>) {
-        return Apollo.useQuery<GetPageQuery, GetPageQueryVariables>(GetPageDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPageQuery, GetPageQueryVariables>(GetPageDocument, options);
       }
 export function useGetPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPageQuery, GetPageQueryVariables>) {
-          return Apollo.useLazyQuery<GetPageQuery, GetPageQueryVariables>(GetPageDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPageQuery, GetPageQueryVariables>(GetPageDocument, options);
         }
 export type GetPageQueryHookResult = ReturnType<typeof useGetPageQuery>;
 export type GetPageLazyQueryHookResult = ReturnType<typeof useGetPageLazyQuery>;
@@ -5404,10 +4956,12 @@ export const GetPagesDocument = gql`
  * });
  */
 export function useGetPagesQuery(baseOptions?: Apollo.QueryHookOptions<GetPagesQuery, GetPagesQueryVariables>) {
-        return Apollo.useQuery<GetPagesQuery, GetPagesQueryVariables>(GetPagesDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPagesQuery, GetPagesQueryVariables>(GetPagesDocument, options);
       }
 export function useGetPagesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPagesQuery, GetPagesQueryVariables>) {
-          return Apollo.useLazyQuery<GetPagesQuery, GetPagesQueryVariables>(GetPagesDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPagesQuery, GetPagesQueryVariables>(GetPagesDocument, options);
         }
 export type GetPagesQueryHookResult = ReturnType<typeof useGetPagesQuery>;
 export type GetPagesLazyQueryHookResult = ReturnType<typeof useGetPagesLazyQuery>;
@@ -5443,10 +4997,12 @@ ${MemberFragmentDoc}`;
  * });
  */
 export function useGetPaperMandatesQuery(baseOptions?: Apollo.QueryHookOptions<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>) {
-        return Apollo.useQuery<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>(GetPaperMandatesDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>(GetPaperMandatesDocument, options);
       }
 export function useGetPaperMandatesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>) {
-          return Apollo.useLazyQuery<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>(GetPaperMandatesDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPaperMandatesQuery, GetPaperMandatesQueryVariables>(GetPaperMandatesDocument, options);
         }
 export type GetPaperMandatesQueryHookResult = ReturnType<typeof useGetPaperMandatesQuery>;
 export type GetPaperMandatesLazyQueryHookResult = ReturnType<typeof useGetPaperMandatesLazyQuery>;
@@ -5483,10 +5039,12 @@ ${ProviderFragmentDoc}`;
  * });
  */
 export function useGetProfileQuery(baseOptions?: Apollo.QueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
-        return Apollo.useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, options);
       }
 export function useGetProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
-          return Apollo.useLazyQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, options);
         }
 export type GetProfileQueryHookResult = ReturnType<typeof useGetProfileQuery>;
 export type GetProfileLazyQueryHookResult = ReturnType<typeof useGetProfileLazyQuery>;
@@ -5536,10 +5094,12 @@ ${DirectDebitFragmentDoc}`;
  * });
  */
 export function useGetTransactionQuery(baseOptions: Apollo.QueryHookOptions<GetTransactionQuery, GetTransactionQueryVariables>) {
-        return Apollo.useQuery<GetTransactionQuery, GetTransactionQueryVariables>(GetTransactionDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTransactionQuery, GetTransactionQueryVariables>(GetTransactionDocument, options);
       }
 export function useGetTransactionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTransactionQuery, GetTransactionQueryVariables>) {
-          return Apollo.useLazyQuery<GetTransactionQuery, GetTransactionQueryVariables>(GetTransactionDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTransactionQuery, GetTransactionQueryVariables>(GetTransactionDocument, options);
         }
 export type GetTransactionQueryHookResult = ReturnType<typeof useGetTransactionQuery>;
 export type GetTransactionLazyQueryHookResult = ReturnType<typeof useGetTransactionLazyQuery>;

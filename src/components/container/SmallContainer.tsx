@@ -1,11 +1,7 @@
 import React from 'react';
 import {Container, Grid} from 'semantic-ui-react';
 
-interface IProps {
-    children: React.ReactNode;
-}
-
-const SmallContainer = ({children}: IProps) => (
+export const SmallContainer: React.FC = ({children}) => (
     <Container>
         <Grid centered>
             <Grid.Row>
@@ -16,5 +12,3 @@ const SmallContainer = ({children}: IProps) => (
         </Grid>
     </Container>
 );
-
-export default SmallContainer;

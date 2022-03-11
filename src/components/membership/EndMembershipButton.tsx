@@ -6,13 +6,13 @@ import {Button, Icon} from 'semantic-ui-react';
 import {EndMembershipMutation, EndMembershipMutationVariables} from '../../generated/graphql';
 import EndMembership from '../../mutations/EndMembership.graphql';
 
-import EndMembershipModal, {IValues} from './EndMembershipModal';
+import {EndMembershipModal, IValues} from './EndMembershipModal';
 
-interface IProps {
+export interface EndMembershipButtonProps {
     membershipId: string;
 }
 
-const EndMembershipButton = ({membershipId}: IProps) => {
+export const EndMembershipButton: React.FC<EndMembershipButtonProps> = ({membershipId}) => {
     const {t} = useTranslation();
 
     const [reject, {loading, error}] = useMutation<EndMembershipMutation, EndMembershipMutationVariables>(EndMembership, {
@@ -40,5 +40,3 @@ const EndMembershipButton = ({membershipId}: IProps) => {
         />
     );
 };
-
-export default EndMembershipButton;

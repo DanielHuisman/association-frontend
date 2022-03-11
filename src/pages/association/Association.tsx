@@ -1,20 +1,18 @@
 import React from 'react';
-import {Switch, Route, RouteComponentProps} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 
-import About from './About';
-import Board from './Board';
-import Committees from './Committees';
-import Collaborations from './Collaborations';
+import {About} from './About';
+import {Board} from './Board';
+import {Committees} from './Committees';
+import {Collaborations} from './Collaborations';
 
-const Association = ({match}: RouteComponentProps) => {
+export const Association: React.FC = () => {
     return (
-        <Switch>
-            <Route exact path={`${match.url}/`} component={About} />
-            <Route exact path={`${match.url}/board`} component={Board} />
-            <Route exact path={`${match.url}/committees`} component={Committees} />
-            <Route exact path={`${match.url}/collaborations`} component={Collaborations} />
-        </Switch>
+        <Routes>
+            <Route index element={<About />} />
+            <Route path="board" element={<Board />} />
+            <Route path="committees" element={<Committees />} />
+            <Route path="collaborations" element={<Collaborations />} />
+        </Routes>
     );
 };
-
-export default Association;

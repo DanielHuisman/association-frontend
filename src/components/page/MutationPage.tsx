@@ -7,7 +7,7 @@ import {translateError} from '../../util';
 
 export type ResultFn<MutationType> = (mutationResult: MutationResult<MutationType>) => React.ReactNode;
 
-interface IProps<MutationType> {
+export interface MutationPageProps<MutationType> {
     mutation?: MutationHookOptions['mutation'];
     mutationVariables?: MutationHookOptions['variables'];
     mutationProps?: Partial<MutationHookOptions>;
@@ -22,10 +22,6 @@ interface IProps<MutationType> {
     ) => JSX.Element | null;
 }
 
-export {
-    IProps as IMutationPageProps
-};
-
 // NOTE: The X generic variable is only there so TypeScript doesn't confuse it with JSX
 export const MutationPage = <MutationType, X = any>({
     mutation,
@@ -36,7 +32,7 @@ export const MutationPage = <MutationType, X = any>({
     children,
     defaultBehaviour = true,
     loader = true
-}: IProps<MutationType>) => {
+}: MutationPageProps<MutationType>): ReturnType<React.FC> => {
     const {t} = useTranslation();
 
     const [mutateFn, mutationResult] = useMutation<MutationType>(mutation, {

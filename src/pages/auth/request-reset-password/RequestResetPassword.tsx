@@ -2,14 +2,14 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Header} from 'semantic-ui-react';
 
-import SmallContainer from '../../../components/container/SmallContainer';
+import {SmallContainer} from '../../../components/container/SmallContainer';
 import {MutationFormPage} from '../../../components/page';
 import {RequestResetPasswordMutation} from '../../../generated/graphql';
-import RequestResetPasswordDocument from '../../../mutations/RequestResetPassword.graphql';
+import RequestResetPasswordQL from '../../../mutations/RequestResetPassword.graphql';
 
-import RequestResetPasswordForm, {IValues} from './RequestResetPasswordForm';
+import {RequestResetPasswordForm, IValues} from './RequestResetPasswordForm';
 
-const RequestResetPassword = () => {
+export const RequestResetPassword: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -17,7 +17,7 @@ const RequestResetPassword = () => {
             <Header size="huge">{t('auth:requestResetPassword.header', 'Request password reset')}</Header>
 
             <MutationFormPage<RequestResetPasswordMutation, IValues>
-                mutation={RequestResetPasswordDocument}
+                mutation={RequestResetPasswordQL}
 
                 data={(values) => ({
                     variables: values
@@ -35,5 +35,3 @@ const RequestResetPassword = () => {
         </SmallContainer>
     );
 };
-
-export default RequestResetPassword;

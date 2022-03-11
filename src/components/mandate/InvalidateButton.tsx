@@ -6,11 +6,11 @@ import {Button, Icon} from 'semantic-ui-react';
 import {InvalidateMandateMutation, InvalidateMandateMutationVariables} from '../../generated/graphql';
 import InvalidateMandate from '../../mutations/InvalidateMandate.graphql';
 
-interface IProps {
+export interface InvalidateButtonProps {
     mandateId: string;
 }
 
-const InvalidateButton = ({mandateId}: IProps) => {
+export const InvalidateButton: React.FC<InvalidateButtonProps> = ({mandateId}) => {
     const {t} = useTranslation();
 
     const [invalidate, {loading}] = useMutation<InvalidateMandateMutation, InvalidateMandateMutationVariables>(InvalidateMandate, {
@@ -26,5 +26,3 @@ const InvalidateButton = ({mandateId}: IProps) => {
         </Button>
     );
 };
-
-export default InvalidateButton;

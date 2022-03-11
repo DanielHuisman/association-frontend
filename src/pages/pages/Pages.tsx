@@ -4,11 +4,11 @@ import {useTranslation} from 'react-i18next';
 import {useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table} from 'semantic-ui-react';
 
-import TableSelectableRow from '../../components/table/TableSelectableRow';
+import {TableSelectableRow} from '../../components/table/TableSelectableRow';
 import {GetPagesQuery, GetPagesQueryVariables} from '../../generated/graphql';
 import GetPages from '../../queries/GetPages.graphql';
 
-const Pages = () => {
+export const Pages: React.FC = () => {
     const {t} = useTranslation();
     const {loading, data, error} = useQuery<GetPagesQuery, GetPagesQueryVariables>(GetPages);
 
@@ -46,5 +46,3 @@ const Pages = () => {
         </Container>
     );
 };
-
-export default Pages;

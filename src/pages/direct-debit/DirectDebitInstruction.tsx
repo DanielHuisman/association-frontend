@@ -1,26 +1,28 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import {useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
-import TransactionTable from '../../components/transactions/TransactionTable';
+import {TransactionTable} from '../../components/transactions/TransactionTable';
 import {GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables} from '../../generated/graphql';
 import GetDirectDebitInstruction from '../../queries/GetDirectDebitInstruction.graphql';
 import {formatCurrency} from '../../util';
 
-interface IRouteParams {
+type Params = {
     directDebitId: string;
     directDebitInstructionId: string;
-}
+};
 
-const DirectDebitInstruction = ({match}: RouteComponentProps<IRouteParams>) => {
+export const DirectDebitInstruction: React.FC = () => {
+    const params = useParams<Params>();
     const {t} = useTranslation();
+
     const {loading, data, error} = useQuery<GetDirectDebitInstructionQuery, GetDirectDebitInstructionQueryVariables>(GetDirectDebitInstruction, {
         variables: {
-            id: match.params.directDebitInstructionId
+            id: params.directDebitInstructionId
         }
     });
 
@@ -140,5 +142,3 @@ const DirectDebitInstruction = ({match}: RouteComponentProps<IRouteParams>) => {
         </Container>
     );
 };
-
-export default DirectDebitInstruction;

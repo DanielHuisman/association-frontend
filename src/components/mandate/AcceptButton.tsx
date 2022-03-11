@@ -8,11 +8,11 @@ import GetMandates from '../../queries/GetMandates.graphql';
 import GetPaperMandates from '../../queries/GetPaperMandates.graphql';
 import AcceptPaperMandate from '../../mutations/AcceptPaperMandate.graphql';
 
-interface IProps {
+export interface AcceptButtonProps {
     mandateId: string;
 }
 
-const AcceptButton = ({mandateId}: IProps) => {
+export const AcceptButton: React.FC<AcceptButtonProps> = ({mandateId}) => {
     const {t} = useTranslation();
 
     const [accept, {loading}] = useMutation<AcceptPaperMandateMutation, AcceptPaperMandateMutationVariables>(AcceptPaperMandate, {
@@ -36,5 +36,3 @@ const AcceptButton = ({mandateId}: IProps) => {
         </Button>
     );
 };
-
-export default AcceptButton;

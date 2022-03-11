@@ -3,9 +3,9 @@ import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
 import {Container, Header} from 'semantic-ui-react';
 
-import Text from '../../components/text/Text';
+import {Text} from '../../components/text/Text';
 
-const Board = () => {
+export const Board: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -17,5 +17,3 @@ const Board = () => {
         </Container>
     );
 };
-
-export default Board;

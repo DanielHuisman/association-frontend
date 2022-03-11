@@ -2,19 +2,22 @@ import i18n from 'i18next';
 import React, {useEffect, useState} from 'react';
 import {ErrorBoundary} from 'react-error-boundary';
 import {Helmet} from 'react-helmet';
-import {withRouter, RouteComponentProps} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {useQuery} from '@apollo/react-hooks';
 
 import {GetProfileQuery, GetProfileQueryVariables} from '../../generated/graphql';
 import GetProfile from '../../queries/GetProfile.graphql';
 import {UserProvider} from '../authentication/UserContext';
-import Sidebar from '../navigation/Sidebar';
+import {Sidebar} from '../navigation/Sidebar';
 
-import Header from './Header';
-import Main from './Main';
-import Footer from './Footer';
+import {Header} from './Header';
+import {Main} from './Main';
+import {Footer} from './Footer';
 
-const App = ({history, location}: RouteComponentProps) => {
+export const App: React.FC = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const [isSidebarVisible, setSidebarVisible] = useState(false);
     const {loading, data, error} = useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfile);
 
@@ -32,7 +35,7 @@ const App = ({history, location}: RouteComponentProps) => {
 
             // Check if the user has pending paper mandates
             if (user.hasPendingPaperMandates && !location.pathname.startsWith('/sign/paper')) {
-                history.push(`/sign/paper`);
+                navigate(`/sign/paper`);
             }
 
             // Change user language if needed
@@ -56,5 +59,3 @@ const App = ({history, location}: RouteComponentProps) => {
         </ErrorBoundary>
     );
 };
-
-export default withRouter(App);

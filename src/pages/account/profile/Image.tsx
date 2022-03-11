@@ -7,9 +7,9 @@ import {GetProfileQuery, UploadMemberImageMutation} from '../../../generated/gra
 import GetProfile from '../../../queries/GetProfile.graphql';
 import UploadMemberImage from '../../../mutations/UploadMemberImage.graphql';
 
-import ImageForm, {IValues} from './ImageForm';
+import {ImageForm, IValues} from './ImageForm';
 
-const Image = () => {
+export const Image: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -41,5 +41,3 @@ const Image = () => {
         </>
     );
 };
-
-export default Image;

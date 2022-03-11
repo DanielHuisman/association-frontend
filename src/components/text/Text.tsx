@@ -2,16 +2,16 @@ import React from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import {Placeholder} from 'semantic-ui-react';
 
-import Markdown from '../../components/text/Markdown';
+import {Markdown} from '../../components/text/Markdown';
 import {GetPageQuery, GetPageQueryVariables} from '../../generated/graphql';
 import GetPage from '../../queries/GetPage.graphql';
 import {useTranslate} from '../../util';
 
-interface IProps {
+export interface TextProps {
     name: string;
 }
 
-const Text = ({name}: IProps) => {
+export const Text: React.FC<TextProps> = ({name}) => {
     const translate = useTranslate();
     const {loading, data, error} = useQuery<GetPageQuery, GetPageQueryVariables>(GetPage, {
         variables: {
@@ -38,5 +38,3 @@ const Text = ({name}: IProps) => {
         </>
     );
 };
-
-export default Text;

@@ -6,7 +6,7 @@ import gb from '../../../public/images/gb.svg';
 import nl from '../../../public/images/nl.svg';
 import {client} from '../../graphql';
 
-const LanguageMenuItem = () => {
+export const LanguageMenuItem: React.FC = () => {
     const {i18n} = useTranslation();
 
     const handleClick = async () => {
@@ -23,5 +23,3 @@ const LanguageMenuItem = () => {
         </Menu.Item>
     );
 };
-
-export default LanguageMenuItem;

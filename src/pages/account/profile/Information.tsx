@@ -9,9 +9,9 @@ import {GetProfileQuery, UpdateMemberMutation} from '../../../generated/graphql'
 import GetProfile from '../../../queries/GetProfile.graphql';
 import UpdateMember from '../../../mutations/UpdateMember.graphql';
 
-import InformationForm, {IValues} from './InformationForm';
+import {InformationForm, IValues} from './InformationForm';
 
-const Information = () => {
+export const Information: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -46,5 +46,3 @@ const Information = () => {
         </>
     );
 };
-
-export default Information;

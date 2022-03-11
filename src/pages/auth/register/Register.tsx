@@ -5,14 +5,14 @@ import {Container, Header} from 'semantic-ui-react';
 import omit from 'lodash.omit';
 
 import {MutationFormPage} from '../../../components/page/MutationFormPage';
-import Text from '../../../components/text/Text';
+import {Text} from '../../../components/text/Text';
 import {Spoiler} from '../../../components/util/Spoiler';
 import {RegisterMutation} from '../../../generated/graphql';
 import RegisterQL from '../../../mutations/Register.graphql';
 
-import RegisterForm, {IValues} from './RegisterForm';
+import {RegisterForm, IValues} from './RegisterForm';
 
-const Register = () => {
+export const Register: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -43,5 +43,3 @@ const Register = () => {
         </Container>
     );
 };
-
-export default Register;

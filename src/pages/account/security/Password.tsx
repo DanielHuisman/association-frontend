@@ -6,9 +6,9 @@ import {MutationFormPage} from '../../../components/page';
 import ChangePassword from '../../../mutations/ChangePassword.graphql';
 import {ChangePasswordMutation} from '../../../generated/graphql';
 
-import PasswordForm, {IValues} from './PasswordForm';
+import {PasswordForm, IValues} from './PasswordForm';
 
-const Password = () => {
+export const Password: React.FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -34,5 +34,3 @@ const Password = () => {
         </>
     );
 };
-
-export default Password;

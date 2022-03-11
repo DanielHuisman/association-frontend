@@ -2,9 +2,9 @@ import React from 'react';
 import {useQuery, QueryResult, QueryHookOptions, MutationFunction, MutationResult} from '@apollo/react-hooks';
 import {Loader, Message} from 'semantic-ui-react';
 
-import {MutationPage, IMutationPageProps} from './MutationPage';
+import {MutationPage, MutationPageProps} from './MutationPage';
 
-interface IProps<QueryType, MutationType> extends Omit<IMutationPageProps<MutationType>, 'children'> {
+export interface PageProps<QueryType, MutationType> extends Omit<MutationPageProps<MutationType>, 'children'> {
     query: QueryHookOptions['query'];
     queryVariables?: QueryHookOptions['variables'];
     queryProps?: Partial<QueryHookOptions>;
@@ -15,10 +15,6 @@ interface IProps<QueryType, MutationType> extends Omit<IMutationPageProps<Mutati
         ...args: any[]
     ) => JSX.Element | null;
 }
-
-export {
-    IProps as IPageProps
-};
 
 export const Page = <QueryType, MutationType = any>({
     query,
@@ -32,7 +28,7 @@ export const Page = <QueryType, MutationType = any>({
     children,
     defaultBehaviour = true,
     loader = true
-}: IProps<QueryType, MutationType>) => {
+}: PageProps<QueryType, MutationType>): ReturnType<React.FC> => {
     const queryResult = useQuery<QueryType>(query, {
         variables: queryVariables,
         ...queryProps

@@ -4,13 +4,13 @@ import {Message, Icon} from 'semantic-ui-react';
 import {Field} from 'formik';
 
 import {FieldFile} from '../../components/form';
-import CancelButton from '../../components/mandate/CancelButton';
+import {CancelButton} from '../../components/mandate/CancelButton';
 import {Form, SubmitButton} from '../form';
 import {MutationFormPage} from '../page';
 import {UploadPaperMandateMutation} from '../../generated/graphql';
 import UploadPaperMandate from '../../mutations/UploadPaperMandate.graphql';
 
-interface IProps {
+export interface PaperMandateUploadFormProps {
     paperMandateId: string;
 }
 
@@ -18,7 +18,7 @@ interface IValues {
     file: File;
 }
 
-const PaperMandateUploadForm = ({paperMandateId}: IProps) => {
+export const PaperMandateUploadForm: React.FC<PaperMandateUploadFormProps> = ({paperMandateId}) => {
     const {t} = useTranslation();
 
     return (
@@ -66,5 +66,3 @@ const PaperMandateUploadForm = ({paperMandateId}: IProps) => {
         </MutationFormPage>
     );
 };
-
-export default PaperMandateUploadForm;
