@@ -11,6 +11,7 @@ import {EndMembershipButton} from '../../components/membership/EndMembershipButt
 import {MembershipType} from '../../components/membership/MembershipType';
 import {TableSelectableRow} from '../../components/table/TableSelectableRow';
 import {TransactionTable} from '../../components/transactions/TransactionTable';
+import {YesNo} from '../../components/util/YesNo';
 import {GetMemberQuery, GetMemberQueryVariables, MandateStatus} from '../../generated/graphql';
 import GetMember from '../../queries/GetMember.graphql';
 import {hasAcceptedMandates} from '../../util';
@@ -124,6 +125,7 @@ export const Overview: React.FC = () => {
                                 <Table.HeaderCell>{t('members:membership.type', 'Membership type')}</Table.HeaderCell>
                                 <Table.HeaderCell>{t('members:membership.startedAt', 'Start of membership')}</Table.HeaderCell>
                                 <Table.HeaderCell>{t('members:membership.endedAt', 'End of membership')}</Table.HeaderCell>
+                                <Table.HeaderCell>{t('members:membership.isAccepted', 'Is accepted')}</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
@@ -138,6 +140,7 @@ export const Overview: React.FC = () => {
                                                 <i>{t('members:membership.endedAtNone', 'Still a member')}</i>
                                             }
                                         </Table.Cell>
+                                        <Table.Cell><YesNo value={membership.isAccepted} /></Table.Cell>
                                     </Table.Row>
                                 ))
                             }

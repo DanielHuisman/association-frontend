@@ -3,4 +3,5 @@ fragment MembershipFragment on Membership {
     type
     startedAt
     endedAt
+    isAccepted
 }

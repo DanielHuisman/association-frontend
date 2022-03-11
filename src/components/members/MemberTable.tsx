@@ -41,7 +41,7 @@ export const MemberTable: React.FC<MemberTableProps> = ({members}) => {
                         <Table.Cell>{member.email}</Table.Cell>
                         <Table.Cell>{t(`members:member.languages.${member.language}`)}</Table.Cell>
                         <Table.Cell>
-                            <YesNo value={!member.latestMembership.endedAt} />
+                            <YesNo value={!member.latestMembership.endedAt && member.latestMembership.isAccepted} />
                         </Table.Cell>
                         <Table.Cell>
                             <YesNo value={hasAcceptedMandates(member.mandates.values)} />

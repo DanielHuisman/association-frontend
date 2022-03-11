@@ -39,6 +39,11 @@
   },
   "members": {
     "header": "Leden",
+    "menu": {
+      "current": "Huidige leden",
+      "new": "Nieuwe leden",
+      "old": "Oude leden"
+    },
     "withMandate": "Leden met incassomachtiging:"
   },
   "membership": {
@@ -51,6 +56,7 @@
     },
     "endedAt": "Einde lidmaatschap",
     "endedAtNone": "Nog lid",
+    "isAccepted": "Is geaccepteerd",
     "startedAt": "Begin lidmaatschap",
     "type": "Lidmaatschapstype",
     "types": {
