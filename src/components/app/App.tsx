@@ -21,7 +21,7 @@ export const App: React.FC = () => {
     const [isSidebarVisible, setSidebarVisible] = useState(false);
     const {loading, data, error} = useQuery<GetProfileQuery, GetProfileQueryVariables>(gql(GetProfile));
 
-    const user = loading || error ? null : data.me;
+    const user = loading || error || !data ? null : data.me;
 
     useEffect(() => {
         if (user) {

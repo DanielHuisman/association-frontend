@@ -12,5 +12,5 @@ export const NoAuth: React.FC = ({children}) => {
         return null;
     }
 
-    return !error && data.me ? <Navigate to="/" /> : <>{children}</>;
+    return !error && data && data.me ? <Navigate to="/" /> : <>{children}</>;
 };

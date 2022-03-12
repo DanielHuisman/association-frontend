@@ -12,5 +12,5 @@ export const Admin: React.FC = ({children}) => {
         return null;
     }
 
-    return !error && data.me && data.me.isAdmin ? <>{children}</> : <Navigate to="/unauthorized" />;
+    return !error && data && data.me && data.me.isAdmin ? <>{children}</> : <Navigate to="/unauthorized" />;
 };

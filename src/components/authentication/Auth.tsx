@@ -12,5 +12,5 @@ export const Auth: React.FC = ({children}) => {
         return null;
     }
 
-    return !error && data.me ? <>{children}</> : <Navigate to="/login" />;
+    return !error && data && data.me ? <>{children}</> : <Navigate to="/login" />;
 };
