@@ -2,6 +2,7 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Header} from 'semantic-ui-react';
 import omit from 'lodash.omit';
+import {gql} from '@apollo/react-hooks';
 
 import {FormPage} from '../../../components/page/FormPage';
 import {Spoiler} from '../../../components/util/Spoiler';
@@ -10,7 +11,6 @@ import GetProfile from '../../../queries/GetProfile.graphql';
 import UpdateMember from '../../../mutations/UpdateMember.graphql';
 
 import {InformationForm, IValues} from './InformationForm';
-import {gql} from '@apollo/react-hooks';
 
 export const Information: React.FC = () => {
     const {t} = useTranslation();

@@ -56,7 +56,6 @@
     "digital": {
       "bank": "Select a bank",
       "error": {
-        "button": "Try again",
         "description": "An error occurred or the mandate was cancelled. Please try again, possibly using a different method. If you continue to have this problem, please contact the board.",
         "header": "Failed to sign a mandate"
       },

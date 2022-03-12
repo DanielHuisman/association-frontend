@@ -1,20 +1,20 @@
 import React from 'react';
 import {Trans, useTranslation} from 'react-i18next';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {useParams, useSearchParams, Link} from 'react-router-dom';
 import {Message, Button} from 'semantic-ui-react';
 
 import {MandateStatus} from '../../generated/graphql';
-import {useSimpleQueryParams} from '../../util';
 
-interface IRouteParams {
+type Params = {
     memberId: string;
-}
+};
 
-const Digital = ({match}: RouteComponentProps<IRouteParams>) => {
+export const Digital: React.FC = () => {
+    const params = useParams<Params>();
+    const [searchParams] = useSearchParams();
     const {t} = useTranslation();
-    const [params] = useSimpleQueryParams();
 
-    const status =  MandateStatus[params.status] || MandateStatus.ERROR;
+    const status = MandateStatus[searchParams.get('status')] || MandateStatus.ERROR;
 
     return (
         <>
@@ -29,7 +29,7 @@ const Digital = ({match}: RouteComponentProps<IRouteParams>) => {
                         </Message.Content>
                     </Message>
 
-                    <Button as={Link} to={`/members/${match.params.memberId}`} color="blue">
+                    <Button as={Link} to={`/members/${params.memberId}`} color="blue">
                         {t('mandates:sign.digital.success.button', 'View mandate details')}
                     </Button>
                 </>
@@ -48,7 +48,7 @@ const Digital = ({match}: RouteComponentProps<IRouteParams>) => {
                         </Message.Content>
                     </Message>
 
-                    <Button as={Link} to={`/members/${match.params.memberId}/mandates/sign`} color="blue">
+                    <Button as={Link} to={`/members/${params.memberId}/mandates/sign`} color="blue">
                         <Trans i18nKey="mandates:sign.digital.error.button">Try again</Trans>
                     </Button>
                 </>
@@ -56,5 +56,3 @@ const Digital = ({match}: RouteComponentProps<IRouteParams>) => {
         </>
     );
 };
-
-export default Digital;

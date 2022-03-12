@@ -3,6 +3,7 @@ import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
 import {Container, Header} from 'semantic-ui-react';
 import omit from 'lodash.omit';
+import {gql} from '@apollo/react-hooks';
 
 import {MutationFormPage} from '../../../components/page/MutationFormPage';
 import {Text} from '../../../components/text/Text';
@@ -11,7 +12,6 @@ import {RegisterMutation} from '../../../generated/graphql';
 import RegisterQL from '../../../mutations/Register.graphql';
 
 import {RegisterForm, IValues} from './RegisterForm';
-import {gql} from '@apollo/react-hooks';
 
 export const Register: React.FC = () => {
     const {t} = useTranslation();

@@ -56,7 +56,6 @@
     "digital": {
       "bank": "Selecteer een bank",
       "error": {
-        "button": "Try again",
         "description": "Er is een fout opgetreden of de incassomachtiging is geannuleerd. Probeer het opnieuw, mogelijk met een andere methode. Neem contact op met het bestuur als dit probleem blijft aanhouden.",
         "header": "Tekenen van incassomachtiging is mislukt"
       },

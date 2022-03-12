@@ -1,20 +1,21 @@
 import React, {useContext, useEffect} from 'react';
 import {Trans, useTranslation} from 'react-i18next';
-import {RouteComponentProps} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {gql, useQuery} from '@apollo/react-hooks';
 import {Loader, Header, List, Button, Icon} from 'semantic-ui-react';
 
 import {UserContext} from '../../components/authentication/UserContext';
-import PaperMandateUploadForm from '../../components/mandate/PaperMandateUploadForm';
+import {PaperMandateUploadForm} from '../../components/mandate/PaperMandateUploadForm';
 import {GetMemberMandatesQuery, GetMemberMandatesQueryVariables, MandateStatus, MandateFragment_PaperMandate_} from '../../generated/graphql';
 import GetMemberMandates from '../../queries/GetMemberMandates.graphql';
 import {getPendingPaperMandates} from '../../util';
 
 import styles from './Sign.css';
 
-const Paper = ({history}: RouteComponentProps) => {
-    const user = useContext(UserContext);
+export const Paper: React.FC = () => {
+    const navigate = useNavigate();
     const {t} = useTranslation();
+    const user = useContext(UserContext);
 
     const {loading, data, error} = useQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(gql(GetMemberMandates), {
         variables: {
@@ -26,7 +27,7 @@ const Paper = ({history}: RouteComponentProps) => {
 
     useEffect(() => {
         if (data && !paperMandate) {
-            history.push('/sign');
+            navigate('/sign');
         }
     }, [paperMandate]);
 
@@ -89,5 +90,3 @@ const Paper = ({history}: RouteComponentProps) => {
         </>
     );
 };
-
-export default Paper;

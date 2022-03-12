@@ -1,11 +1,11 @@
 import React, {useContext} from 'react';
+import {gql} from '@apollo/react-hooks';
 
 import {UserContext} from '../../../components/authentication/UserContext';
 import {TransactionTable} from '../../../components/transactions/TransactionTable';
 import {Page} from '../../../components/page/Page';
 import {GetMemberTransactionsQuery} from '../../../generated/graphql';
 import GetMemberTransactions from '../../../queries/GetMemberTransactions.graphql';
-import {gql} from '@apollo/react-hooks';
 
 export const List: React.FC = () => {
     const member = useContext(UserContext);

@@ -4,9 +4,9 @@ import {useTranslation} from 'react-i18next';
 import {Route, Routes} from 'react-router-dom';
 import {Container, Header} from 'semantic-ui-react';
 
-import Intro from './Intro';
-import Digital from './Digital';
-import Paper from './Paper';
+import {Intro} from './Intro';
+import {Digital} from './Digital';
+import {Paper} from './Paper';
 
 export const Sign: React.FC = () => {
     const {t} = useTranslation();

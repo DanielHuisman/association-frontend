@@ -1,13 +1,13 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Header} from 'semantic-ui-react';
+import {gql} from '@apollo/react-hooks';
 
 import {MutationFormPage} from '../../../components/page';
 import ChangePassword from '../../../mutations/ChangePassword.graphql';
 import {ChangePasswordMutation} from '../../../generated/graphql';
 
 import {PasswordForm, IValues} from './PasswordForm';
-import {gql} from '@apollo/react-hooks';
 
 export const Password: React.FC = () => {
     const {t} = useTranslation();
