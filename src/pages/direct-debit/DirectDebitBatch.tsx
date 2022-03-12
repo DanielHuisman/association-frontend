@@ -2,7 +2,7 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
 import {useParams, Link} from 'react-router-dom';
-import {useQuery} from '@apollo/react-hooks';
+import {gql, useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
@@ -20,7 +20,7 @@ export const DirectDebitBatch: React.FC = () => {
     const params = useParams<Params>();
     const {t} = useTranslation();
 
-    const {loading, data, error} = useQuery<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>(GetDirectDebitBatch, {
+    const {loading, data, error} = useQuery<GetDirectDebitBatchQuery, GetDirectDebitBatchQueryVariables>(gql(GetDirectDebitBatch), {
         variables: {
             id: params.directDebitBatchId
         }

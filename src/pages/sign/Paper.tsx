@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import {Trans, useTranslation} from 'react-i18next';
 import {RouteComponentProps} from 'react-router-dom';
-import {useQuery} from '@apollo/react-hooks';
+import {gql, useQuery} from '@apollo/react-hooks';
 import {Loader, Header, List, Button, Icon} from 'semantic-ui-react';
 
 import {UserContext} from '../../components/authentication/UserContext';
@@ -16,7 +16,7 @@ const Paper = ({history}: RouteComponentProps) => {
     const user = useContext(UserContext);
     const {t} = useTranslation();
 
-    const {loading, data, error} = useQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(GetMemberMandates, {
+    const {loading, data, error} = useQuery<GetMemberMandatesQuery, GetMemberMandatesQueryVariables>(gql(GetMemberMandates), {
         variables: {
             id: user.id
         }

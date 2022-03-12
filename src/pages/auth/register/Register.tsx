@@ -11,6 +11,7 @@ import {RegisterMutation} from '../../../generated/graphql';
 import RegisterQL from '../../../mutations/Register.graphql';
 
 import {RegisterForm, IValues} from './RegisterForm';
+import {gql} from '@apollo/react-hooks';
 
 export const Register: React.FC = () => {
     const {t} = useTranslation();
@@ -23,7 +24,7 @@ export const Register: React.FC = () => {
             <Text name="join" />
 
             <MutationFormPage<RegisterMutation, IValues>
-                mutation={RegisterQL}
+                mutation={gql(RegisterQL)}
 
                 data={(values) => ({
                     variables: {

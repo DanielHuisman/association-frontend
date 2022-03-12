@@ -1,6 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Header} from 'semantic-ui-react';
+import {gql} from '@apollo/react-hooks';
 
 import {FormPage} from '../../../components/page/FormPage';
 import {GetProfileQuery, UploadMemberImageMutation} from '../../../generated/graphql';
@@ -17,8 +18,8 @@ export const Image: React.FC = () => {
             <Header size="large">{t('account:profile.image.header', 'Image')}</Header>
 
             <FormPage<GetProfileQuery, UploadMemberImageMutation, IValues>
-                query={GetProfile}
-                mutation={UploadMemberImage}
+                query={gql(GetProfile)}
+                mutation={gql(UploadMemberImage)}
 
                 data={({file}, {data}) => ({
                     variables: {

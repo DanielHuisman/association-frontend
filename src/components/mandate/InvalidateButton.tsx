@@ -1,6 +1,6 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {useMutation} from '@apollo/react-hooks';
+import {gql, useMutation} from '@apollo/react-hooks';
 import {Button, Icon} from 'semantic-ui-react';
 
 import {InvalidateMandateMutation, InvalidateMandateMutationVariables} from '../../generated/graphql';
@@ -13,7 +13,7 @@ export interface InvalidateButtonProps {
 export const InvalidateButton: React.FC<InvalidateButtonProps> = ({mandateId}) => {
     const {t} = useTranslation();
 
-    const [invalidate, {loading}] = useMutation<InvalidateMandateMutation, InvalidateMandateMutationVariables>(InvalidateMandate, {
+    const [invalidate, {loading}] = useMutation<InvalidateMandateMutation, InvalidateMandateMutationVariables>(gql(InvalidateMandate), {
         variables: {
             id: mandateId
         }

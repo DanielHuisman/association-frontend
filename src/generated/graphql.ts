@@ -70,12 +70,12 @@ export type BankUpdateInput = {
 
 export type BankWhereInput = {
   AND?: InputMaybe<Array<BankWhereInput>>;
+  OR?: InputMaybe<Array<BankWhereInput>>;
   bic?: InputMaybe<StringFilter>;
   country?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
   isActive?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<StringFilter>;
-  OR?: InputMaybe<Array<BankWhereInput>>;
 };
 
 export type BankWhereUniqueInput = {
@@ -142,12 +142,12 @@ export type BoardPeriodUpdateInput = {
 
 export type BoardPeriodWhereInput = {
   AND?: InputMaybe<Array<BoardPeriodWhereInput>>;
+  OR?: InputMaybe<Array<BoardPeriodWhereInput>>;
   endedAt?: InputMaybe<DateTimeFilter>;
   events?: InputMaybe<EventWhereInput>;
   id?: InputMaybe<StringFilter>;
   members?: InputMaybe<MemberWhereInput>;
   name?: InputMaybe<ShortTranslatableWhereInput>;
-  OR?: InputMaybe<Array<BoardPeriodWhereInput>>;
   startedAt?: InputMaybe<DateTimeFilter>;
 };
 
@@ -269,13 +269,13 @@ export type CommitteePeriodUpdateRelationInput = {
 
 export type CommitteePeriodWhereInput = {
   AND?: InputMaybe<Array<CommitteePeriodWhereInput>>;
+  OR?: InputMaybe<Array<CommitteePeriodWhereInput>>;
   committee?: InputMaybe<CommitteeWhereInput>;
   endedAt?: InputMaybe<DateTimeFilter>;
   events?: InputMaybe<EventWhereInput>;
   id?: InputMaybe<StringFilter>;
   members?: InputMaybe<MemberWhereInput>;
   name?: InputMaybe<ShortTranslatableWhereInput>;
-  OR?: InputMaybe<Array<CommitteePeriodWhereInput>>;
   startedAt?: InputMaybe<DateTimeFilter>;
 };
 
@@ -298,10 +298,10 @@ export type CommitteeUpdateRelationInput = {
 
 export type CommitteeWhereInput = {
   AND?: InputMaybe<Array<CommitteeWhereInput>>;
+  OR?: InputMaybe<Array<CommitteeWhereInput>>;
   description?: InputMaybe<LongTranslatableWhereInput>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<ShortTranslatableWhereInput>;
-  OR?: InputMaybe<Array<CommitteeWhereInput>>;
   periods?: InputMaybe<CommitteePeriodWhereInput>;
 };
 
@@ -424,8 +424,9 @@ export type DigitalMandateUpdateInput = {
 };
 
 export type DigitalMandateWhereInput = {
-  acceptedAt?: InputMaybe<DateTimeFilter>;
   AND?: InputMaybe<Array<DigitalMandateWhereInput>>;
+  OR?: InputMaybe<Array<DigitalMandateWhereInput>>;
+  acceptedAt?: InputMaybe<DateTimeFilter>;
   bic?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   entranceCode?: InputMaybe<StringFilter>;
@@ -437,7 +438,6 @@ export type DigitalMandateWhereInput = {
   mandateId?: InputMaybe<StringFilter>;
   member?: InputMaybe<MemberWhereInput>;
   messageId?: InputMaybe<StringFilter>;
-  OR?: InputMaybe<Array<DigitalMandateWhereInput>>;
   reason?: InputMaybe<StringFilter>;
   status?: InputMaybe<MandateStatusFilter>;
   transactionId?: InputMaybe<StringFilter>;
@@ -547,12 +547,12 @@ export type DirectDebitBatchUpdateRelationInput = {
 
 export type DirectDebitBatchWhereInput = {
   AND?: InputMaybe<Array<DirectDebitBatchWhereInput>>;
+  OR?: InputMaybe<Array<DirectDebitBatchWhereInput>>;
   batchId?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   directDebit?: InputMaybe<DirectDebitWhereInput>;
   id?: InputMaybe<StringFilter>;
   instructions?: InputMaybe<DirectDebitInstructionWhereInput>;
-  OR?: InputMaybe<Array<DirectDebitBatchWhereInput>>;
   sequenceType?: InputMaybe<SequenceTypeFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
@@ -650,13 +650,13 @@ export type DirectDebitInstructionUpdateRelationInput = {
 
 export type DirectDebitInstructionWhereInput = {
   AND?: InputMaybe<Array<DirectDebitInstructionWhereInput>>;
+  OR?: InputMaybe<Array<DirectDebitInstructionWhereInput>>;
   batch?: InputMaybe<DirectDebitBatchWhereInput>;
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
   instructionId?: InputMaybe<StringFilter>;
   mandate?: InputMaybe<MandateWhereInput>;
-  OR?: InputMaybe<Array<DirectDebitInstructionWhereInput>>;
   transactions?: InputMaybe<TransactionWhereInput>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
@@ -770,12 +770,12 @@ export type DirectDebitWarningUpdateRelationInput = {
 
 export type DirectDebitWarningWhereInput = {
   AND?: InputMaybe<Array<DirectDebitWarningWhereInput>>;
+  OR?: InputMaybe<Array<DirectDebitWarningWhereInput>>;
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   directDebit?: InputMaybe<DirectDebitWhereInput>;
   id?: InputMaybe<StringFilter>;
   member?: InputMaybe<MemberWhereInput>;
-  OR?: InputMaybe<Array<DirectDebitWarningWhereInput>>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
 
@@ -785,13 +785,13 @@ export type DirectDebitWarningWhereUniqueInput = {
 
 export type DirectDebitWhereInput = {
   AND?: InputMaybe<Array<DirectDebitWhereInput>>;
+  OR?: InputMaybe<Array<DirectDebitWhereInput>>;
   batches?: InputMaybe<DirectDebitBatchWhereInput>;
   collectionDate?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   file?: InputMaybe<FileWhereInput>;
   id?: InputMaybe<StringFilter>;
   messageId?: InputMaybe<StringFilter>;
-  OR?: InputMaybe<Array<DirectDebitWhereInput>>;
   status?: InputMaybe<DirectDebitStatusFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
   warnings?: InputMaybe<DirectDebitWarningWhereInput>;
@@ -903,6 +903,7 @@ export type EventUpdateRelationInput = {
 
 export type EventWhereInput = {
   AND?: InputMaybe<Array<EventWhereInput>>;
+  OR?: InputMaybe<Array<EventWhereInput>>;
   closedAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<LongTranslatableWhereInput>;
   endedAt?: InputMaybe<DateTimeFilter>;
@@ -915,7 +916,6 @@ export type EventWhereInput = {
   maxParticipations?: InputMaybe<IntFilter>;
   name?: InputMaybe<ShortTranslatableWhereInput>;
   openedAt?: InputMaybe<DateTimeFilter>;
-  OR?: InputMaybe<Array<EventWhereInput>>;
   participations?: InputMaybe<ParticipationWhereInput>;
   startedAt?: InputMaybe<DateTimeFilter>;
 };
@@ -969,10 +969,10 @@ export type FileUpdateRelationInput = {
 
 export type FileWhereInput = {
   AND?: InputMaybe<Array<FileWhereInput>>;
+  OR?: InputMaybe<Array<FileWhereInput>>;
   id?: InputMaybe<StringFilter>;
   mimeType?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
-  OR?: InputMaybe<Array<FileWhereInput>>;
 };
 
 export type FileWhereUniqueInput = {
@@ -1059,12 +1059,12 @@ export type GroupUpdateRelationInput = {
 
 export type GroupWhereInput = {
   AND?: InputMaybe<Array<GroupWhereInput>>;
+  OR?: InputMaybe<Array<GroupWhereInput>>;
   endedAt?: InputMaybe<DateTimeFilter>;
   events?: InputMaybe<EventWhereInput>;
   id?: InputMaybe<StringFilter>;
   members?: InputMaybe<MemberWhereInput>;
   name?: InputMaybe<ShortTranslatableWhereInput>;
-  OR?: InputMaybe<Array<GroupWhereInput>>;
   startedAt?: InputMaybe<DateTimeFilter>;
 };
 
@@ -1123,9 +1123,9 @@ export type LongTranslatableUpdateInput = {
 
 export type LongTranslatableWhereInput = {
   AND?: InputMaybe<Array<LongTranslatableWhereInput>>;
+  OR?: InputMaybe<Array<LongTranslatableWhereInput>>;
   en?: InputMaybe<StringFilter>;
   nl?: InputMaybe<StringFilter>;
-  OR?: InputMaybe<Array<LongTranslatableWhereInput>>;
 };
 
 export type Mandate = {
@@ -1230,8 +1230,9 @@ export type MandateUpdateRelationInput = {
 };
 
 export type MandateWhereInput = {
-  acceptedAt?: InputMaybe<DateTimeFilter>;
   AND?: InputMaybe<Array<MandateWhereInput>>;
+  OR?: InputMaybe<Array<MandateWhereInput>>;
+  acceptedAt?: InputMaybe<DateTimeFilter>;
   bic?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   errorMessage?: InputMaybe<StringFilter>;
@@ -1241,7 +1242,6 @@ export type MandateWhereInput = {
   isFirstTransaction?: InputMaybe<Scalars['Boolean']>;
   mandateId?: InputMaybe<StringFilter>;
   member?: InputMaybe<MemberWhereInput>;
-  OR?: InputMaybe<Array<MandateWhereInput>>;
   reason?: InputMaybe<StringFilter>;
   status?: InputMaybe<MandateStatusFilter>;
 };
@@ -1389,6 +1389,68 @@ export type MemberOrderByInput = {
   studentType?: InputMaybe<OrderByArg>;
 };
 
+export type MemberUpdateInput = {
+  address?: InputMaybe<Scalars['String']>;
+  birthdate?: InputMaybe<Scalars['Date']>;
+  city?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  groups?: InputMaybe<Array<GroupUpdateRelationInput>>;
+  id?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<FileUpdateRelationInput>;
+  initials?: InputMaybe<Scalars['String']>;
+  isAdmin?: InputMaybe<Scalars['Boolean']>;
+  language?: InputMaybe<Language>;
+  lastName?: InputMaybe<Scalars['String']>;
+  mandates?: InputMaybe<Array<MandateUpdateRelationInput>>;
+  memberships?: InputMaybe<Array<MembershipUpdateRelationInput>>;
+  participations?: InputMaybe<Array<ParticipationUpdateRelationInput>>;
+  phoneNumber?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
+  pronouns?: InputMaybe<Pronouns>;
+  providers?: InputMaybe<Array<ProviderUpdateRelationInput>>;
+  studentType?: InputMaybe<StudentType>;
+  transactions?: InputMaybe<Array<TransactionUpdateRelationInput>>;
+  warnings?: InputMaybe<Array<DirectDebitWarningUpdateRelationInput>>;
+};
+
+export type MemberUpdateRelationInput = {
+  connect?: InputMaybe<MemberWhereUniqueInput>;
+  create?: InputMaybe<MemberCreateInput>;
+  disconnect?: InputMaybe<MemberWhereUniqueInput>;
+};
+
+export type MemberWhereInput = {
+  AND?: InputMaybe<Array<MemberWhereInput>>;
+  OR?: InputMaybe<Array<MemberWhereInput>>;
+  address?: InputMaybe<StringFilter>;
+  birthdate?: InputMaybe<DateTimeFilter>;
+  city?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  firstName?: InputMaybe<StringFilter>;
+  groups?: InputMaybe<GroupWhereInput>;
+  id?: InputMaybe<StringFilter>;
+  image?: InputMaybe<FileWhereInput>;
+  initials?: InputMaybe<StringFilter>;
+  isAdmin?: InputMaybe<Scalars['Boolean']>;
+  language?: InputMaybe<LanguageFilter>;
+  lastName?: InputMaybe<StringFilter>;
+  mandates?: InputMaybe<MandateWhereInput>;
+  memberships?: InputMaybe<MembershipWhereInput>;
+  participations?: InputMaybe<ParticipationWhereInput>;
+  phoneNumber?: InputMaybe<StringFilter>;
+  postalCode?: InputMaybe<StringFilter>;
+  pronouns?: InputMaybe<PronounsFilter>;
+  providers?: InputMaybe<ProviderWhereInput>;
+  studentType?: InputMaybe<StudentTypeFilter>;
+  transactions?: InputMaybe<TransactionWhereInput>;
+  warnings?: InputMaybe<DirectDebitWarningWhereInput>;
+};
+
+export type MemberWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
 export type Membership = {
   __typename?: 'Membership';
   endedAt?: Maybe<Scalars['Date']>;
@@ -1490,15 +1552,15 @@ export type MembershipFeeTransactionUpdateRelationInput = {
 };
 
 export type MembershipFeeTransactionWhereInput = {
-  amount?: InputMaybe<IntFilter>;
   AND?: InputMaybe<Array<MembershipFeeTransactionWhereInput>>;
+  OR?: InputMaybe<Array<MembershipFeeTransactionWhereInput>>;
+  amount?: InputMaybe<IntFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
   instruction?: InputMaybe<DirectDebitInstructionWhereInput>;
   member?: InputMaybe<MemberWhereInput>;
   membership?: InputMaybe<MembershipWhereInput>;
-  OR?: InputMaybe<Array<MembershipFeeTransactionWhereInput>>;
   updatedAt?: InputMaybe<DateTimeFilter>;
   year?: InputMaybe<IntFilter>;
 };
@@ -1553,79 +1615,17 @@ export type MembershipUpdateRelationInput = {
 
 export type MembershipWhereInput = {
   AND?: InputMaybe<Array<MembershipWhereInput>>;
+  OR?: InputMaybe<Array<MembershipWhereInput>>;
   endedAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   isAccepted?: InputMaybe<Scalars['Boolean']>;
   member?: InputMaybe<MemberWhereInput>;
-  OR?: InputMaybe<Array<MembershipWhereInput>>;
   startedAt?: InputMaybe<DateTimeFilter>;
   transactions?: InputMaybe<MembershipFeeTransactionWhereInput>;
   type?: InputMaybe<MembershipTypeFilter>;
 };
 
 export type MembershipWhereUniqueInput = {
-  id?: InputMaybe<Scalars['String']>;
-};
-
-export type MemberUpdateInput = {
-  address?: InputMaybe<Scalars['String']>;
-  birthdate?: InputMaybe<Scalars['Date']>;
-  city?: InputMaybe<Scalars['String']>;
-  email?: InputMaybe<Scalars['String']>;
-  firstName?: InputMaybe<Scalars['String']>;
-  groups?: InputMaybe<Array<GroupUpdateRelationInput>>;
-  id?: InputMaybe<Scalars['String']>;
-  image?: InputMaybe<FileUpdateRelationInput>;
-  initials?: InputMaybe<Scalars['String']>;
-  isAdmin?: InputMaybe<Scalars['Boolean']>;
-  language?: InputMaybe<Language>;
-  lastName?: InputMaybe<Scalars['String']>;
-  mandates?: InputMaybe<Array<MandateUpdateRelationInput>>;
-  memberships?: InputMaybe<Array<MembershipUpdateRelationInput>>;
-  participations?: InputMaybe<Array<ParticipationUpdateRelationInput>>;
-  phoneNumber?: InputMaybe<Scalars['String']>;
-  postalCode?: InputMaybe<Scalars['String']>;
-  pronouns?: InputMaybe<Pronouns>;
-  providers?: InputMaybe<Array<ProviderUpdateRelationInput>>;
-  studentType?: InputMaybe<StudentType>;
-  transactions?: InputMaybe<Array<TransactionUpdateRelationInput>>;
-  warnings?: InputMaybe<Array<DirectDebitWarningUpdateRelationInput>>;
-};
-
-export type MemberUpdateRelationInput = {
-  connect?: InputMaybe<MemberWhereUniqueInput>;
-  create?: InputMaybe<MemberCreateInput>;
-  disconnect?: InputMaybe<MemberWhereUniqueInput>;
-};
-
-export type MemberWhereInput = {
-  address?: InputMaybe<StringFilter>;
-  AND?: InputMaybe<Array<MemberWhereInput>>;
-  birthdate?: InputMaybe<DateTimeFilter>;
-  city?: InputMaybe<StringFilter>;
-  email?: InputMaybe<StringFilter>;
-  firstName?: InputMaybe<StringFilter>;
-  groups?: InputMaybe<GroupWhereInput>;
-  id?: InputMaybe<StringFilter>;
-  image?: InputMaybe<FileWhereInput>;
-  initials?: InputMaybe<StringFilter>;
-  isAdmin?: InputMaybe<Scalars['Boolean']>;
-  language?: InputMaybe<LanguageFilter>;
-  lastName?: InputMaybe<StringFilter>;
-  mandates?: InputMaybe<MandateWhereInput>;
-  memberships?: InputMaybe<MembershipWhereInput>;
-  OR?: InputMaybe<Array<MemberWhereInput>>;
-  participations?: InputMaybe<ParticipationWhereInput>;
-  phoneNumber?: InputMaybe<StringFilter>;
-  postalCode?: InputMaybe<StringFilter>;
-  pronouns?: InputMaybe<PronounsFilter>;
-  providers?: InputMaybe<ProviderWhereInput>;
-  studentType?: InputMaybe<StudentTypeFilter>;
-  transactions?: InputMaybe<TransactionWhereInput>;
-  warnings?: InputMaybe<DirectDebitWarningWhereInput>;
-};
-
-export type MemberWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
@@ -1671,9 +1671,9 @@ export type Mutation = {
   deleteDirectDebitBatches: DirectDebitBatchList;
   deleteDirectDebitInstruction: DirectDebitInstruction;
   deleteDirectDebitInstructions: DirectDebitInstructionList;
-  deleteDirectDebits: DirectDebitList;
   deleteDirectDebitWarning: DirectDebitWarning;
   deleteDirectDebitWarnings: DirectDebitWarningList;
+  deleteDirectDebits: DirectDebitList;
   deleteEvent: Event;
   deleteEvents: EventList;
   deleteFile: File;
@@ -1958,14 +1958,6 @@ export type MutationdeleteDirectDebitInstructionsArgs = {
 };
 
 
-export type MutationdeleteDirectDebitsArgs = {
-  orderBy?: InputMaybe<DirectDebitOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<DirectDebitWhereInput>;
-};
-
-
 export type MutationdeleteDirectDebitWarningArgs = {
   where: DirectDebitWarningWhereUniqueInput;
 };
@@ -1976,6 +1968,14 @@ export type MutationdeleteDirectDebitWarningsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<DirectDebitWarningWhereInput>;
+};
+
+
+export type MutationdeleteDirectDebitsArgs = {
+  orderBy?: InputMaybe<DirectDebitOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitWhereInput>;
 };
 
 
@@ -2396,9 +2396,9 @@ export type PageUpdateInput = {
 
 export type PageWhereInput = {
   AND?: InputMaybe<Array<PageWhereInput>>;
+  OR?: InputMaybe<Array<PageWhereInput>>;
   body?: InputMaybe<LongTranslatableWhereInput>;
   id?: InputMaybe<StringFilter>;
-  OR?: InputMaybe<Array<PageWhereInput>>;
   title?: InputMaybe<ShortTranslatableWhereInput>;
 };
 
@@ -2489,8 +2489,9 @@ export type PaperMandateUpdateInput = {
 };
 
 export type PaperMandateWhereInput = {
-  acceptedAt?: InputMaybe<DateTimeFilter>;
   AND?: InputMaybe<Array<PaperMandateWhereInput>>;
+  OR?: InputMaybe<Array<PaperMandateWhereInput>>;
+  acceptedAt?: InputMaybe<DateTimeFilter>;
   bic?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   errorMessage?: InputMaybe<StringFilter>;
@@ -2501,7 +2502,6 @@ export type PaperMandateWhereInput = {
   isFirstTransaction?: InputMaybe<Scalars['Boolean']>;
   mandateId?: InputMaybe<StringFilter>;
   member?: InputMaybe<MemberWhereInput>;
-  OR?: InputMaybe<Array<PaperMandateWhereInput>>;
   reason?: InputMaybe<StringFilter>;
   status?: InputMaybe<MandateStatusFilter>;
   uploadedFile?: InputMaybe<FileWhereInput>;
@@ -2559,11 +2559,11 @@ export type ParticipationUpdateRelationInput = {
 
 export type ParticipationWhereInput = {
   AND?: InputMaybe<Array<ParticipationWhereInput>>;
+  OR?: InputMaybe<Array<ParticipationWhereInput>>;
   createdAt?: InputMaybe<DateTimeFilter>;
   event?: InputMaybe<EventWhereInput>;
   id?: InputMaybe<StringFilter>;
   member?: InputMaybe<MemberWhereInput>;
-  OR?: InputMaybe<Array<ParticipationWhereInput>>;
 };
 
 export type ParticipationWhereUniqueInput = {
@@ -2635,10 +2635,10 @@ export type ProviderUpdateRelationInput = {
 
 export type ProviderWhereInput = {
   AND?: InputMaybe<Array<ProviderWhereInput>>;
+  OR?: InputMaybe<Array<ProviderWhereInput>>;
   email?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
   isVerified?: InputMaybe<Scalars['Boolean']>;
-  OR?: InputMaybe<Array<ProviderWhereInput>>;
   type?: InputMaybe<StringFilter>;
   user?: InputMaybe<MemberWhereInput>;
 };
@@ -2664,9 +2664,9 @@ export type Query = {
   directDebitBatches: DirectDebitBatchList;
   directDebitInstruction: DirectDebitInstruction;
   directDebitInstructions: DirectDebitInstructionList;
-  directDebits: DirectDebitList;
   directDebitWarning: DirectDebitWarning;
   directDebitWarnings: DirectDebitWarningList;
+  directDebits: DirectDebitList;
   event: Event;
   events: EventList;
   file: File;
@@ -2795,14 +2795,6 @@ export type QuerydirectDebitInstructionsArgs = {
 };
 
 
-export type QuerydirectDebitsArgs = {
-  orderBy?: InputMaybe<DirectDebitOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<DirectDebitWhereInput>;
-};
-
-
 export type QuerydirectDebitWarningArgs = {
   where: DirectDebitWarningWhereUniqueInput;
 };
@@ -2813,6 +2805,14 @@ export type QuerydirectDebitWarningsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<DirectDebitWarningWhereInput>;
+};
+
+
+export type QuerydirectDebitsArgs = {
+  orderBy?: InputMaybe<DirectDebitOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<DirectDebitWhereInput>;
 };
 
 
@@ -3061,9 +3061,9 @@ export type SettingUpdateInput = {
 
 export type SettingWhereInput = {
   AND?: InputMaybe<Array<SettingWhereInput>>;
+  OR?: InputMaybe<Array<SettingWhereInput>>;
   isPublic?: InputMaybe<Scalars['Boolean']>;
   key?: InputMaybe<StringFilter>;
-  OR?: InputMaybe<Array<SettingWhereInput>>;
   value?: InputMaybe<StringFilter>;
 };
 
@@ -3094,9 +3094,9 @@ export type ShortTranslatableUpdateInput = {
 
 export type ShortTranslatableWhereInput = {
   AND?: InputMaybe<Array<ShortTranslatableWhereInput>>;
+  OR?: InputMaybe<Array<ShortTranslatableWhereInput>>;
   en?: InputMaybe<StringFilter>;
   nl?: InputMaybe<StringFilter>;
-  OR?: InputMaybe<Array<ShortTranslatableWhereInput>>;
 };
 
 export type StringFilter = {
@@ -3182,9 +3182,9 @@ export type TokenUpdateInput = {
 
 export type TokenWhereInput = {
   AND?: InputMaybe<Array<TokenWhereInput>>;
+  OR?: InputMaybe<Array<TokenWhereInput>>;
   expiresAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
-  OR?: InputMaybe<Array<TokenWhereInput>>;
   provider?: InputMaybe<ProviderWhereInput>;
   token?: InputMaybe<StringFilter>;
   type?: InputMaybe<TokenTypeFilter>;
@@ -3253,14 +3253,14 @@ export type TransactionUpdateRelationInput = {
 };
 
 export type TransactionWhereInput = {
-  amount?: InputMaybe<IntFilter>;
   AND?: InputMaybe<Array<TransactionWhereInput>>;
+  OR?: InputMaybe<Array<TransactionWhereInput>>;
+  amount?: InputMaybe<IntFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
   instruction?: InputMaybe<DirectDebitInstructionWhereInput>;
   member?: InputMaybe<MemberWhereInput>;
-  OR?: InputMaybe<Array<TransactionWhereInput>>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
 

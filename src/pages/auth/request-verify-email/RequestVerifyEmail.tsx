@@ -1,3 +1,4 @@
+import {gql} from '@apollo/react-hooks';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Header} from 'semantic-ui-react';
@@ -17,7 +18,7 @@ export const RequestVerifyEmail: React.FC = () => {
             <Header size="huge">{t('auth:requestVerifyEmail.header', 'Resend verification email')}</Header>
 
             <MutationFormPage<RequestVerifyEmailMutation, IValues>
-                mutation={RequestVerifyEmailQL}
+                mutation={gql(RequestVerifyEmailQL)}
 
                 data={(values) => ({
                     variables: values

@@ -1,6 +1,6 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {useQuery} from '@apollo/react-hooks';
+import {gql, useQuery} from '@apollo/react-hooks';
 import {Loader} from 'semantic-ui-react';
 
 import {MemberTable} from '../../components/members/MemberTable';
@@ -15,7 +15,7 @@ export interface ListProps {
 
 export const List: React.FC<ListProps> = ({filter, showMandatesCounter = false}) => {
     const {t} = useTranslation();
-    const {loading, data, error} = useQuery<GetMembersQuery, GetMembersQueryVariables>(GetMembers);
+    const {loading, data, error} = useQuery<GetMembersQuery, GetMembersQueryVariables>(gql(GetMembers));
 
     if (error) {
         throw error;

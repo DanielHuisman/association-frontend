@@ -1,3 +1,4 @@
+import {gql} from '@apollo/react-hooks';
 import React, {useState, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useParams, Link} from 'react-router-dom';
@@ -24,7 +25,7 @@ export const VerifyEmail: React.FC = () => {
         (async () => {
             try {
                 await client.mutate<VerifyEmailMutation>({
-                    mutation: VerifyEmailQL,
+                    mutation: gql(VerifyEmailQL),
                     variables: {
                         token: params.token
                     }

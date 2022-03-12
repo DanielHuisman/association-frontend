@@ -10,6 +10,7 @@ import GetProfile from '../../../queries/GetProfile.graphql';
 import UpdateMember from '../../../mutations/UpdateMember.graphql';
 
 import {InformationForm, IValues} from './InformationForm';
+import {gql} from '@apollo/react-hooks';
 
 export const Information: React.FC = () => {
     const {t} = useTranslation();
@@ -19,8 +20,8 @@ export const Information: React.FC = () => {
             <Header size="large">{t('account:profile.information.header', 'Information')}</Header>
 
             <FormPage<GetProfileQuery, UpdateMemberMutation, IValues>
-                query={GetProfile}
-                mutation={UpdateMember}
+                query={gql(GetProfile)}
+                mutation={gql(UpdateMember)}
 
                 data={(values, {data}) => ({
                     variables: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {useQuery} from '@apollo/react-hooks';
+import {gql, useQuery} from '@apollo/react-hooks';
 import {Loader} from 'semantic-ui-react';
 
 import {MandateTable} from '../../components/mandates/MandateTable';
@@ -7,7 +7,7 @@ import {GetMandatesQuery, GetMandatesQueryVariables} from '../../generated/graph
 import GetMandates from '../../queries/GetMandates.graphql';
 
 export const List: React.FC = () => {
-    const {loading, data, error} = useQuery<GetMandatesQuery, GetMandatesQueryVariables>(GetMandates);
+    const {loading, data, error} = useQuery<GetMandatesQuery, GetMandatesQueryVariables>(gql(GetMandates));
 
     if (error) {
         throw error;

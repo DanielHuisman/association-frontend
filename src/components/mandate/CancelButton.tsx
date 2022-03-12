@@ -1,6 +1,6 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {useMutation} from '@apollo/react-hooks';
+import {gql, useMutation} from '@apollo/react-hooks';
 import {Button, Icon} from 'semantic-ui-react';
 
 import CancelPaperMandate from '../../mutations/CancelPaperMandate.graphql';
@@ -13,7 +13,7 @@ export interface CancelButtonProps {
 export const CancelButton: React.FC<CancelButtonProps> = ({mandateId}) => {
     const {t} = useTranslation();
 
-    const [cancel, {loading}] = useMutation<CancelPaperMandateMutation>(CancelPaperMandate, {
+    const [cancel, {loading}] = useMutation<CancelPaperMandateMutation>(gql(CancelPaperMandate), {
         variables: {
             id: mandateId
         }

@@ -4,6 +4,7 @@ import {Field} from 'formik';
 import * as Yup from 'yup';
 import {isValidBIC, isValidIBAN} from 'ibantools';
 import {Message, Icon} from 'semantic-ui-react';
+import {gql} from '@apollo/react-hooks';
 
 import {Form, FieldInput, FieldInputProps, SubmitButton} from '../form';
 import {MutationFormPage} from '../page';
@@ -64,10 +65,10 @@ export const PaperMandateForm: React.FC<PaperMandateFormProps> = ({memberId}) =>
 
     return (
         <MutationFormPage<CreatePaperMandateMutation, IValues>
-            mutation={CreatePaperMandate}
+            mutation={gql(CreatePaperMandate)}
             mutationProps={{
                 refetchQueries: [{
-                    query: GetMember,
+                    query: gql(GetMember),
                     variables: {
                         id: memberId
                     }

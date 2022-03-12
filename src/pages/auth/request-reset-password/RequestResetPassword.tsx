@@ -1,3 +1,4 @@
+import {gql} from '@apollo/react-hooks';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Header} from 'semantic-ui-react';
@@ -17,7 +18,7 @@ export const RequestResetPassword: React.FC = () => {
             <Header size="huge">{t('auth:requestResetPassword.header', 'Request password reset')}</Header>
 
             <MutationFormPage<RequestResetPasswordMutation, IValues>
-                mutation={RequestResetPasswordQL}
+                mutation={gql(RequestResetPasswordQL)}
 
                 data={(values) => ({
                     variables: values

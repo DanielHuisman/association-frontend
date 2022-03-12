@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
-import {useQuery} from '@apollo/react-hooks';
+import {gql, useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader} from 'semantic-ui-react';
 
 import {Text} from '../../components/text/Text';
@@ -14,7 +14,7 @@ export const Committees: React.FC = () => {
     const {t} = useTranslation();
     const translate = useTranslate();
 
-    const {loading, data, error} = useQuery<GetCommitteesQuery, GetCommitteesQueryVariables>(GetCommittees);
+    const {loading, data, error} = useQuery<GetCommitteesQuery, GetCommitteesQueryVariables>(gql(GetCommittees));
 
     if (loading) {
         return <Loader active />;

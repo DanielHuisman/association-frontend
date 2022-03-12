@@ -3,6 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {useParams, Link} from 'react-router-dom';
 import {Header, Table, Button, Icon, Message} from 'semantic-ui-react';
 import moment from 'moment';
+import {gql} from '@apollo/react-hooks';
 
 import {TransactionType} from '../../../components/transactions/TransactionType';
 import {Page} from '../../../components/page/Page';
@@ -19,7 +20,7 @@ export const Details: React.FC = () => {
     const {t} = useTranslation();
 
     return (
-        <Page<GetMemberTransactionQuery> query={GetMemberTransaction} queryVariables={{id: params.transactionId}}>
+        <Page<GetMemberTransactionQuery> query={gql(GetMemberTransaction)} queryVariables={{id: params.transactionId}}>
             {({data}) => {
                 return (
                     <>

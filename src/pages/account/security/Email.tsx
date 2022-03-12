@@ -1,3 +1,4 @@
+import {gql} from '@apollo/react-hooks';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Header} from 'semantic-ui-react';
@@ -23,7 +24,7 @@ export const Email: React.FC<EmailProps> = ({provider}) => {
             <Header size="large">{t('account:security.email.header', 'Email address')}</Header>
 
             <MutationFormPage<ChangeEmailMutation, IValues>
-                mutation={ChangeEmail}
+                mutation={gql(ChangeEmail)}
 
                 data={(values) => ({
                     variables: {

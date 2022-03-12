@@ -1,6 +1,6 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {useMutation} from '@apollo/react-hooks';
+import {gql, useMutation} from '@apollo/react-hooks';
 import {Button, Icon} from 'semantic-ui-react';
 
 import {RejectPaperMandateMutation, RejectPaperMandateMutationVariables, MandateStatus} from '../../generated/graphql';
@@ -17,15 +17,15 @@ export interface RejectButtonProps {
 export const RejectButton: React.FC<RejectButtonProps> = ({mandateId}) => {
     const {t} = useTranslation();
 
-    const [reject, {loading, error}] = useMutation<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>(RejectPaperMandate, {
+    const [reject, {loading, error}] = useMutation<RejectPaperMandateMutation, RejectPaperMandateMutationVariables>(gql(RejectPaperMandate), {
         variables: {
             id: mandateId,
             reason: undefined
         },
         refetchQueries: [{
-            query: GetMandates
+            query: gql(GetMandates)
         }, {
-            query: GetPaperMandates,
+            query: gql(GetPaperMandates),
             variables: {
                 status: MandateStatus.UNACCEPTED
             }

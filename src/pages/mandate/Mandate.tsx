@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
 import {useParams, Link} from 'react-router-dom';
-import {useQuery} from '@apollo/react-hooks';
+import {gql, useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
@@ -24,7 +24,7 @@ export const Mandate: React.FC = () => {
     const {t} = useTranslation();
     const user = useContext(UserContext);
 
-    const {loading, data, error} = useQuery<GetMandateQuery, GetMandateQueryVariables>(GetMandate, {
+    const {loading, data, error} = useQuery<GetMandateQuery, GetMandateQueryVariables>(gql(GetMandate), {
         variables: {
             id: params.mandateId
         }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {useQuery} from '@apollo/react-hooks';
+import {gql, useQuery} from '@apollo/react-hooks';
 import {Placeholder} from 'semantic-ui-react';
 
 import {Markdown} from '../../components/text/Markdown';
@@ -13,7 +13,7 @@ export interface TextProps {
 
 export const Text: React.FC<TextProps> = ({name}) => {
     const translate = useTranslate();
-    const {loading, data, error} = useQuery<GetPageQuery, GetPageQueryVariables>(GetPage, {
+    const {loading, data, error} = useQuery<GetPageQuery, GetPageQueryVariables>(gql(GetPage), {
         variables: {
             id: name
         }

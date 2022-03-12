@@ -2,7 +2,7 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import {useNavigate, Navigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
-import {useMutation} from '@apollo/react-hooks';
+import {gql, useMutation} from '@apollo/react-hooks';
 import {Header, Message} from 'semantic-ui-react';
 import {FormikHelpers} from 'formik';
 
@@ -18,7 +18,7 @@ export const Login: React.FC = () => {
     const navigate = useNavigate();
     const {t} = useTranslation();
 
-    const [login, {loading, data, error, client}] = useMutation<LoginMutation, LoginMutationVariables>(LoginQL);
+    const [login, {loading, data, error, client}] = useMutation<LoginMutation, LoginMutationVariables>(gql(LoginQL));
 
     const handleSubmit = async (values: IValues, helpers: FormikHelpers<IValues>) => {
         try {

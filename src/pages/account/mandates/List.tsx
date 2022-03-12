@@ -1,3 +1,4 @@
+import {gql} from '@apollo/react-hooks';
 import React, {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Link} from 'react-router-dom';
@@ -14,7 +15,7 @@ export const List: React.FC = () => {
     const member = useContext(UserContext);
 
     return (
-        <Page<GetMemberMandatesQuery> query={GetMemberMandates} queryVariables={{id: member.id}}>
+        <Page<GetMemberMandatesQuery> query={gql(GetMemberMandates)} queryVariables={{id: member.id}}>
             {({data}) => {
                 return (
                     <>

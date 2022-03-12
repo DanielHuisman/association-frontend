@@ -7,6 +7,7 @@ import ChangePassword from '../../../mutations/ChangePassword.graphql';
 import {ChangePasswordMutation} from '../../../generated/graphql';
 
 import {PasswordForm, IValues} from './PasswordForm';
+import {gql} from '@apollo/react-hooks';
 
 export const Password: React.FC = () => {
     const {t} = useTranslation();
@@ -16,7 +17,7 @@ export const Password: React.FC = () => {
             <Header size="large">{t('account:security.password.header', 'Password')}</Header>
 
             <MutationFormPage<ChangePasswordMutation, IValues>
-                mutation={ChangePassword}
+                mutation={gql(ChangePassword)}
 
                 data={(values) => ({
                     variables: values

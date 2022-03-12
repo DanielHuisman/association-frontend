@@ -3,6 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {Field} from 'formik';
 import * as Yup from 'yup';
 import {Loader, Icon, Message} from 'semantic-ui-react';
+import {gql} from '@apollo/react-hooks';
 
 import {Form, FieldDropdown, SubmitButton} from '../form';
 import {FormPage} from '../page';
@@ -27,8 +28,8 @@ export const DigitalMandateForm: React.FC<DigitalMandateFormProps> = ({memberId}
 
     return (
         <FormPage<GetBanksQuery, CreateDigitalMandateMutation, IValues>
-            query={GetBanks}
-            mutation={CreateDigitalMandate}
+            query={gql(GetBanks)}
+            mutation={gql(CreateDigitalMandate)}
 
             loader={false}
             data={(values) => {

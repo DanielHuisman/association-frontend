@@ -1,3 +1,4 @@
+import {gql} from '@apollo/react-hooks';
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import {Trans, useTranslation} from 'react-i18next';
@@ -15,7 +16,7 @@ export const Profile: React.FC = () => {
     const {t} = useTranslation();
 
     return (
-        <Page<GetProfileQuery> query={GetProfile}>
+        <Page<GetProfileQuery> query={gql(GetProfile)}>
             {({data}) => {
                 return (
                     <>

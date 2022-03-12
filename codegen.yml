@@ -1,4 +1,4 @@
-schema: http://localhost:5003/graphql
+schema: ${API_URL}
 documents: src/**/*.graphql
 generates:
     ./src/generated/graphql.ts:
@@ -19,7 +19,8 @@ generates:
             withHooks: true
     ./src/generated/graphqlModules.d.ts:
         plugins:
-            - typescript-graphql-files-modules
+            - typescript-graphql-files-modules:
+                type: string
     ./src/generated/fragmentTypes.json:
         plugins:
             - fragment-matcher

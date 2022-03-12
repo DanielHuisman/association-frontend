@@ -5,12 +5,13 @@ import {TransactionTable} from '../../../components/transactions/TransactionTabl
 import {Page} from '../../../components/page/Page';
 import {GetMemberTransactionsQuery} from '../../../generated/graphql';
 import GetMemberTransactions from '../../../queries/GetMemberTransactions.graphql';
+import {gql} from '@apollo/react-hooks';
 
 export const List: React.FC = () => {
     const member = useContext(UserContext);
 
     return (
-        <Page<GetMemberTransactionsQuery> query={GetMemberTransactions} queryVariables={{id: member.id}}>
+        <Page<GetMemberTransactionsQuery> query={gql(GetMemberTransactions)} queryVariables={{id: member.id}}>
             {({data}) => {
                 return (
                     <TransactionTable transactions={data.member.transactions.values} urlPrefix="/account/transactions" hideUpdatedAt />

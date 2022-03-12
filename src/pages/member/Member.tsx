@@ -1,6 +1,6 @@
 import React from 'react';
 import {useParams, Route, Routes} from 'react-router-dom';
-import {useQuery} from '@apollo/react-hooks';
+import {gql, useQuery} from '@apollo/react-hooks';
 import {Container, Loader} from 'semantic-ui-react';
 
 import {GetMemberQuery, GetMandateQueryVariables} from '../../generated/graphql';
@@ -16,7 +16,7 @@ type Params = {
 export const Member: React.FC = () => {
     const params = useParams<Params>();
 
-    const {loading, data, error} = useQuery<GetMemberQuery, GetMandateQueryVariables>(GetMember, {
+    const {loading, data, error} = useQuery<GetMemberQuery, GetMandateQueryVariables>(gql(GetMember), {
         variables: {
             id: params.memberId
         }

@@ -3,6 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {useParams, Link} from 'react-router-dom';
 import {Header, Table, Button, Icon, Message} from 'semantic-ui-react';
 import moment from 'moment';
+import {gql} from '@apollo/react-hooks';
 
 import {MandateType} from '../../../components/mandate/MandateType';
 import {Page} from '../../../components/page/Page';
@@ -19,7 +20,7 @@ export const Details: React.FC = () => {
     const {t} = useTranslation();
 
     return (
-        <Page<GetMandateQuery> query={GetMandate} queryVariables={{id: params.mandateId}}>
+        <Page<GetMandateQuery> query={gql(GetMandate)} queryVariables={{id: params.mandateId}}>
             {({data}) => {
                 return (
                     <>

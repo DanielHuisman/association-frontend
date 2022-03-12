@@ -1,7 +1,7 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
-import {useQuery} from '@apollo/react-hooks';
+import {gql, useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table} from 'semantic-ui-react';
 
 import {TableSelectableRow} from '../../components/table/TableSelectableRow';
@@ -10,7 +10,7 @@ import GetPages from '../../queries/GetPages.graphql';
 
 export const Pages: React.FC = () => {
     const {t} = useTranslation();
-    const {loading, data, error} = useQuery<GetPagesQuery, GetPagesQueryVariables>(GetPages);
+    const {loading, data, error} = useQuery<GetPagesQuery, GetPagesQueryVariables>(gql(GetPages));
 
     if (error) {
         throw error;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
-import {useQuery} from '@apollo/react-hooks';
+import {gql, useQuery} from '@apollo/react-hooks';
 import {Container, Loader, Header} from 'semantic-ui-react';
 
 import {DirectDebitTable} from '../../components/direct-debits/DirectDebitTable';
@@ -10,7 +10,7 @@ import GetDirectDebits from '../../queries/GetDirectDebits.graphql';
 
 export const DirectDebits: React.FC = () => {
     const {t} = useTranslation();
-    const {loading, data, error} = useQuery<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>(GetDirectDebits);
+    const {loading, data, error} = useQuery<GetDirectDebitsQuery, GetDirectDebitsQueryVariables>(gql(GetDirectDebits));
 
     if (error) {
         throw error;

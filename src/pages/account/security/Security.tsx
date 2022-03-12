@@ -2,6 +2,7 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
 import {Header, Divider} from 'semantic-ui-react';
+import {gql} from '@apollo/react-hooks';
 
 import {Page} from '../../../components/page/Page';
 import GetProfile from '../../../queries/GetProfile.graphql';
@@ -14,7 +15,7 @@ export const Security: React.FC = () => {
     const {t} = useTranslation();
 
     return (
-        <Page<GetProfileQuery> query={GetProfile}>
+        <Page<GetProfileQuery> query={gql(GetProfile)}>
             {({data}) => {
                 const localProvider = data.me.providers.values.find((provider) => provider.type === 'local');
 

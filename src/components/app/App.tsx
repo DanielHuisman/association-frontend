@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {ErrorBoundary} from 'react-error-boundary';
 import {Helmet} from 'react-helmet';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {useQuery} from '@apollo/react-hooks';
+import {gql, useQuery} from '@apollo/react-hooks';
 
 import {GetProfileQuery, GetProfileQueryVariables} from '../../generated/graphql';
 import GetProfile from '../../queries/GetProfile.graphql';
@@ -19,7 +19,7 @@ export const App: React.FC = () => {
     const location = useLocation();
 
     const [isSidebarVisible, setSidebarVisible] = useState(false);
-    const {loading, data, error} = useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfile);
+    const {loading, data, error} = useQuery<GetProfileQuery, GetProfileQueryVariables>(gql(GetProfile));
 
     const user = loading || error ? null : data.me;
 

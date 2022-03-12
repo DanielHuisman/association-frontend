@@ -1,6 +1,6 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {useMutation} from '@apollo/react-hooks';
+import {gql, useMutation} from '@apollo/react-hooks';
 import {Button, Icon} from 'semantic-ui-react';
 
 import {EndMembershipMutation, EndMembershipMutationVariables} from '../../generated/graphql';
@@ -15,7 +15,7 @@ export interface EndMembershipButtonProps {
 export const EndMembershipButton: React.FC<EndMembershipButtonProps> = ({membershipId}) => {
     const {t} = useTranslation();
 
-    const [reject, {loading, error}] = useMutation<EndMembershipMutation, EndMembershipMutationVariables>(EndMembership, {
+    const [reject, {loading, error}] = useMutation<EndMembershipMutation, EndMembershipMutationVariables>(gql(EndMembership), {
         variables: {
             id: membershipId,
             date: undefined

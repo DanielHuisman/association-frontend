@@ -1,12 +1,12 @@
 import React from 'react';
 import {Navigate} from 'react-router-dom';
-import {useQuery} from '@apollo/react-hooks';
+import {gql, useQuery} from '@apollo/react-hooks';
 
 import {GetProfileQuery, GetProfileQueryVariables} from '../../generated/graphql';
 import GetProfile from '../../queries/GetProfile.graphql';
 
 export const NoAuth: React.FC = ({children}) => {
-    const {loading, data, error} = useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfile);
+    const {loading, data, error} = useQuery<GetProfileQuery, GetProfileQueryVariables>(gql(GetProfile));
 
     if (loading) {
         return null;
