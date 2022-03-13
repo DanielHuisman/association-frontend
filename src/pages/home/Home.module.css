@@ -17,6 +17,7 @@
     top: 250px;
     left: 50%;
     margin-left: -250px;
+    object-fit: contain;
 }
 
 @media(max-width: 1199px) {
