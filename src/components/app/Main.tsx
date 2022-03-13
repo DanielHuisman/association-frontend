@@ -7,7 +7,8 @@ import {Home} from '../../pages/home/Home';
 import {Association} from '../../pages/association/Association';
 import {Calendar} from '../../pages/calendar/Calendar';
 import {Contact} from '../../pages/contact/Contact';
-import {Register} from '../../pages/auth/register/Register';
+// import {Register} from '../../pages/auth/register/Register';
+import {Join} from '../../pages/join/Join';
 import {Login} from '../../pages/auth/login/Login';
 import {Logout} from '../../pages/auth/logout/Logout';
 import {VerifyEmail} from '../../pages/auth/verify-email/VerifyEmail';
@@ -44,8 +45,10 @@ export const Main: React.FC<MainProps> = ({jumbotron = false}) => {
                     <Route path="calendar" element={<Calendar />} />
                     <Route path="contact" element={<Contact />} />
 
-                    <Route path="register" element={<NoAuth><Register /></NoAuth>} />
-                    <Route path="join" element={<NoAuth><Register /></NoAuth>} />
+                    {/* <Route path="register" element={<NoAuth><Register /></NoAuth>} />
+                    <Route path="join" element={<NoAuth><Register /></NoAuth>} /> */}
+                    <Route path="register" element={<NoAuth><Join /></NoAuth>} />
+                    <Route path="join" element={<NoAuth><Join /></NoAuth>} />
                     <Route path="login" element={<NoAuth><Login /></NoAuth>} />
                     <Route path="logout" element={<Auth><Logout /></Auth>} />
                     <Route path="verify/:token" element={<VerifyEmail />} />
