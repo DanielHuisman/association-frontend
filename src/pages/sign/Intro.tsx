@@ -6,7 +6,7 @@ import {UserContext} from '../../components/authentication/UserContext';
 // import {DigitalMandateForm} from '../../components/mandate/DigitalMandateForm';
 import {PaperMandateForm} from '../../components/mandate/PaperMandateForm';
 
-import styles from './Sign.css';
+import * as styles from './Sign.module.css';
 
 export const Intro: React.FC = () => {
     // const {t} = useTranslation();

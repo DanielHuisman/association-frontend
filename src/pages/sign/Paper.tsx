@@ -10,7 +10,7 @@ import {GetMemberMandatesQuery, GetMemberMandatesQueryVariables, MandateStatus, 
 import GetMemberMandates from '../../queries/GetMemberMandates.graphql';
 import {getPendingPaperMandates} from '../../util';
 
-import styles from './Sign.css';
+import * as styles from './Sign.module.css';
 
 export const Paper: React.FC = () => {
     const navigate = useNavigate();

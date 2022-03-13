@@ -8,7 +8,7 @@ import {MemberImage} from '../member/MemberImage';
 
 import {LanguageMenuItem} from './LanguageMenuItem';
 import {LogoMenuItem} from './LogoMenuItem';
-import styles from './Navigation.css';
+import * as styles from './Navigation.module.css';
 
 export interface BaseProps {
     user?: MemberFragment;

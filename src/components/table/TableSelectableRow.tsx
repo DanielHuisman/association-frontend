@@ -2,7 +2,7 @@ import React, {MouseEvent, ReactNode} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Table} from 'semantic-ui-react';
 
-import styles from './Table.css';
+import * as styles from './Table.module.css';
 
 export interface TableSelectableRowProps {
     to: string;

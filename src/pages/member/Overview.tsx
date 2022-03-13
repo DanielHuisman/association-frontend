@@ -16,7 +16,7 @@ import {GetMemberQuery, GetMemberQueryVariables, MandateStatus} from '../../gene
 import GetMember from '../../queries/GetMember.graphql';
 import {hasAcceptedMandates} from '../../util';
 
-import styles from './Member.css';
+import * as styles from './Member.module.css';
 
 type Params = {
     memberId: string;

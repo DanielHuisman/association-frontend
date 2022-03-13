@@ -4,7 +4,7 @@ import {Sidebar as SESidebar, Menu} from 'semantic-ui-react';
 import {MemberFragment} from '../../generated/graphql';
 
 import {Base} from './Base';
-import styles from './Navigation.css';
+import * as styles from './Navigation.module.css';
 
 export interface SidebarProps {
     user?: MemberFragment;

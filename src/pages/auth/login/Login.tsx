@@ -12,7 +12,7 @@ import LoginQL from '../../../mutations/Login.graphql';
 import {translateError} from '../../../util';
 
 import {LoginForm, IValues} from './LoginForm';
-import styles from './Login.css';
+import * as styles from './Login.module.css';
 
 export const Login: React.FC = () => {
     const navigate = useNavigate();

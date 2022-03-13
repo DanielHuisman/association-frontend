@@ -11,7 +11,7 @@ import photo3 from '../../../public/images/photo3.jpg';
 import photo4 from '../../../public/images/photo4.jpg';
 import {Text} from '../../components/text/Text';
 
-import styles from './Home.css';
+import * as styles from './Home.module.css';
 
 export const Home: React.FC = () => {
     const {t} = useTranslation();

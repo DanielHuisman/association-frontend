@@ -1,36 +1,36 @@
-:global(html, body) {
+html, body {
     margin: 0px;
 }
 
-:global(main) {
+main {
     padding-top: 6em;
     padding-bottom: 3em;
 }
 
-:global(main.jumbotron) {
+main.jumbotron {
     padding-top: 0em;
     padding-bottom: 0em;
 }
 
 /* Add compact option to Semantic UI Grid (https://github.com/Semantic-Org/Semantic-UI/issues/2968#issuecomment-414727481) */
-:global(.ui.compact.grid .row:not(:first-child), .ui.grid .compact.row) {
+.ui.compact.grid .row:not(:first-child), .ui.grid .compact.row {
     padding-top: 0;
 }
 
-:global(.ui.compact.grid .row:not(:last-child), .ui.grid .compact.row) {
+.ui.compact.grid .row:not(:last-child), .ui.grid .compact.row {
     padding-bottom: 0;
 }
 
-:global(.ui.compact.grid .column:not(:first-child), .ui.grid .compact.row .column:not(:first-child), .ui.grid .compact.column) {
+.ui.compact.grid .column:not(:first-child), .ui.grid .compact.row .column:not(:first-child), .ui.grid .compact.column {
     padding-left: 0;
 }
 
-:global(.ui.compact.grid .column:not(:last-child), .ui.grid .compact.row .column:not(:last-child), .ui.grid .compact.column) {
+.ui.compact.grid .column:not(:last-child), .ui.grid .compact.row .column:not(:last-child), .ui.grid .compact.column {
     padding-right: 0;
 }
 
 /* Support icon groups in headers */
-:global(.ui.header > .icons) {
+.ui.header > .icons {
     display: table-cell;
     opacity: 1;
     font-size: 1.5em;
@@ -38,22 +38,22 @@
     vertical-align: middle;
 }
 
-:global(.ui.header>.icons+.content) {
+.ui.header>.icons+.content {
     padding-left: .75rem;
     display: table-cell;
     vertical-align: middle;
 }
 
-:global(.ui.menu.vertical-compact .item) {
+.ui.menu.vertical-compact .item {
     padding-top: 0.7em !important;
     padding-bottom: 0.7em !important;
 }
 
-:global(.ui.sidebar) {
+.ui.sidebar {
     overflow-y: visible !important;
 }
 
-:global(.rainbow) {
+.rainbow {
     width: 18rem;
     height: 0.25rem;
     margin-left: auto;
@@ -63,7 +63,7 @@
 }
 
 @media(max-width: 991px) {
-    :global(.rainbow) {
+    .rainbow {
         width: 15rem;
     }
 }
