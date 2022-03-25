@@ -90,6 +90,15 @@ declare module '*/Membership.graphql' {
 }
     
 
+declare module '*/MembershipType.graphql' {
+  
+  const defaultDocument: string;
+  export const MembershipTypeFragment: string;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/Page.graphql' {
   
   const defaultDocument: string;

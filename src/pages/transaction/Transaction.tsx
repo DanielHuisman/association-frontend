@@ -6,11 +6,10 @@ import {gql, useQuery} from '@apollo/react-hooks';
 import {Container, Header, Loader, Table, Button} from 'semantic-ui-react';
 import moment from 'moment';
 
-import {MembershipType} from '../../components/membership/MembershipType';
 import {TransactionType} from '../../components/transactions/TransactionType';
 import {GetTransactionQuery, GetTransactionQueryVariables} from '../../generated/graphql';
 import GetTransaction from '../../queries/GetTransaction.graphql';
-import {formatCurrency} from '../../util';
+import {formatCurrency, useTranslate} from '../../util';
 
 type Params = {
     transactionId: string;
@@ -19,6 +18,7 @@ type Params = {
 export const Transaction = () => {
     const params = useParams<Params>();
     const {t} = useTranslation();
+    const translate = useTranslate();
 
     const {loading, data, error} = useQuery<GetTransactionQuery, GetTransactionQueryVariables>(gql(GetTransaction), {
         variables: {
@@ -87,7 +87,7 @@ export const Transaction = () => {
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>{t('members:membership.type', 'Membership type')}</Table.Cell>
-                                <Table.Cell><MembershipType membership={data.transaction.member.latestMembership} /></Table.Cell>
+                                <Table.Cell>{translate(data.transaction.member.latestMembership.type.name)}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>{t('members:membership.startedAt', 'Start of membership')}</Table.Cell>

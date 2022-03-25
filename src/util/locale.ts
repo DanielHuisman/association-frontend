@@ -3,6 +3,7 @@ import {TFunction} from 'i18next';
 import {useTranslation} from 'react-i18next';
 
 import {Language, TranslatableFragment} from '../generated/graphql';
+
 export const useTranslate = () => {
     const {i18n} = useTranslation();
 

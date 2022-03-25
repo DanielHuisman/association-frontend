@@ -1,7 +1,12 @@
+# import './MembershipType.graphql'
+
 fragment MembershipFragment on Membership {
     id
-    type
     startedAt
     endedAt
     isAccepted
+
+    type {
+        ...MembershipTypeFragment
+    }
 }

@@ -8,13 +8,12 @@ import moment from 'moment';
 
 import {UserContext} from '../../components/authentication/UserContext';
 import {EndMembershipButton} from '../../components/membership/EndMembershipButton';
-import {MembershipType} from '../../components/membership/MembershipType';
 import {TableSelectableRow} from '../../components/table/TableSelectableRow';
 import {TransactionTable} from '../../components/transactions/TransactionTable';
 import {YesNo} from '../../components/util/YesNo';
 import {GetMemberQuery, GetMemberQueryVariables, MandateStatus} from '../../generated/graphql';
 import GetMember from '../../queries/GetMember.graphql';
-import {hasAcceptedMandates} from '../../util';
+import {formatCurrency, hasAcceptedMandates, useTranslate} from '../../util';
 
 import * as styles from './Member.module.css';
 
@@ -25,6 +24,7 @@ type Params = {
 export const Overview: React.FC = () => {
     const params = useParams<Params>();
     const {t} = useTranslation();
+    const translate = useTranslate();
 
     const {loading, data, error} = useQuery<GetMemberQuery, GetMemberQueryVariables>(gql(GetMember), {
         variables: {
@@ -126,13 +126,14 @@ export const Overview: React.FC = () => {
                                 <Table.HeaderCell>{t('members:membership.startedAt', 'Start of membership')}</Table.HeaderCell>
                                 <Table.HeaderCell>{t('members:membership.endedAt', 'End of membership')}</Table.HeaderCell>
                                 <Table.HeaderCell>{t('members:membership.isAccepted', 'Is accepted')}</Table.HeaderCell>
+                                <Table.HeaderCell>{t('members:membership.fee', 'Membership fee')}</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
                             {data.member.memberships.values
                                 .map((membership) => (
                                     <Table.Row key={membership.id}>
-                                        <Table.Cell><MembershipType membership={membership} /></Table.Cell>
+                                        <Table.Cell>{translate(membership.type.name)}</Table.Cell>
                                         <Table.Cell>{moment(membership.startedAt).format('YYYY-MM-DD')}</Table.Cell>
                                         <Table.Cell>
                                             {membership.endedAt ?
@@ -141,6 +142,7 @@ export const Overview: React.FC = () => {
                                             }
                                         </Table.Cell>
                                         <Table.Cell><YesNo value={membership.isAccepted} /></Table.Cell>
+                                        <Table.Cell>{formatCurrency(membership.type.fee)}</Table.Cell>
                                     </Table.Row>
                                 ))
                             }

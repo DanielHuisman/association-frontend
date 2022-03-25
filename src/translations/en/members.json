@@ -56,6 +56,7 @@
     },
     "endedAt": "End of membership",
     "endedAtNone": "Still a member",
+    "fee": "Membership fee",
     "isAccepted": "Is accepted",
     "startedAt": "Start of membership",
     "type": "Membership type",

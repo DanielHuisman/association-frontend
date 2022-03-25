@@ -1,0 +1,10 @@
+# import './Translatable.graphql'
+
+fragment MembershipTypeFragment on MembershipType {
+    id
+    name {
+        ...TranslatableFragment
+    }
+    fee
+    isDefault
+}
