@@ -1,13 +1,17 @@
 {
-    "name": "frontend",
-    "description": "Frontend for the Exaltio website.",
+    "name": "association-frontend",
+    "description": "Administration system for associations.",
     "version": "1.0.0",
     "license": "UNLICENSED",
     "private": true,
-    "author": "Daniel Huisman <daniel@huisman.me> (https://danielhuisman.io)",
-    "repository": "git@ssh.danielhuisman.io:exaltio/frontend.git",
+    "contributors": [
+        "Daniel Huisman <daniel@huisman.me> (https://danielhuisman.io)"
+    ],
+    "repository": "github:DanielHuisman/association-frontend",
     "keywords": [
-        "exaltio",
+        "association",
+        "administration",
+        "system",
         "frontend"
     ],
     "scripts": {

@@ -2,6 +2,7 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Message, Icon} from 'semantic-ui-react';
 import {Field} from 'formik';
+import {gql} from '@apollo/react-hooks';
 
 import {FieldFile} from '../../components/form';
 import {CancelButton} from '../../components/mandate/CancelButton';
@@ -23,7 +24,7 @@ export const PaperMandateUploadForm: React.FC<PaperMandateUploadFormProps> = ({p
 
     return (
         <MutationFormPage<UploadPaperMandateMutation, IValues>
-            mutation={UploadPaperMandate}
+            mutation={gql(UploadPaperMandate)}
 
             loader={false}
             data={({file}) => {

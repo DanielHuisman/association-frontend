@@ -1,6 +1,10 @@
-# Exaltio Frontend
+# Association Administration System - Frontend
 
-Frontend for the Exaltio website.
+Administration system for associations.
+
+This project consists of two repositories:
+- [Backend](https://github.com/DanielHuisman/association-backend)
+- [Frontend](https://github.com/DanielHuisman/association-frontend)
 
 ## Development
 ### Prerequisites
