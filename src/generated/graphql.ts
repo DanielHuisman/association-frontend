@@ -1454,6 +1454,7 @@ export type MemberWhereUniqueInput = {
 export type Membership = {
   __typename?: 'Membership';
   endedAt?: Maybe<Scalars['Date']>;
+  fee?: Maybe<Scalars['Int']>;
   id: Scalars['String'];
   isAccepted: Scalars['Boolean'];
   member: Member;
@@ -1472,6 +1473,7 @@ export type MembershiptransactionsArgs = {
 
 export type MembershipCreateInput = {
   endedAt?: InputMaybe<Scalars['Date']>;
+  fee?: InputMaybe<Scalars['Float']>;
   id?: InputMaybe<Scalars['String']>;
   isAccepted?: InputMaybe<Scalars['Boolean']>;
   member?: InputMaybe<MemberCreateRelationInput>;
@@ -1577,6 +1579,7 @@ export type MembershipList = {
 
 export type MembershipOrderByInput = {
   endedAt?: InputMaybe<OrderByArg>;
+  fee?: InputMaybe<OrderByArg>;
   id?: InputMaybe<OrderByArg>;
   isAccepted?: InputMaybe<OrderByArg>;
   member?: InputMaybe<MemberOrderByInput>;
@@ -1645,6 +1648,7 @@ export type MembershipTypeWhereUniqueInput = {
 
 export type MembershipUpdateInput = {
   endedAt?: InputMaybe<Scalars['Date']>;
+  fee?: InputMaybe<Scalars['Float']>;
   id?: InputMaybe<Scalars['String']>;
   isAccepted?: InputMaybe<Scalars['Boolean']>;
   member?: InputMaybe<MemberUpdateRelationInput>;
@@ -1663,6 +1667,7 @@ export type MembershipWhereInput = {
   AND?: InputMaybe<Array<MembershipWhereInput>>;
   OR?: InputMaybe<Array<MembershipWhereInput>>;
   endedAt?: InputMaybe<DateTimeFilter>;
+  fee?: InputMaybe<IntFilter>;
   id?: InputMaybe<StringFilter>;
   isAccepted?: InputMaybe<Scalars['Boolean']>;
   member?: InputMaybe<MemberWhereInput>;
@@ -3386,7 +3391,7 @@ export type PaperMandateFragment = { __typename?: 'PaperMandate', generatedFile?
 
 export type MemberFragment = { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null };
 
-export type MembershipFragment = { __typename?: 'Membership', id: string, startedAt: string, endedAt?: string | null, isAccepted: boolean, type: { __typename?: 'MembershipType', id: string, fee: number, isDefault: boolean, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null } } };
+export type MembershipFragment = { __typename?: 'Membership', id: string, startedAt: string, endedAt?: string | null, isAccepted: boolean, fee?: number | null, type: { __typename?: 'MembershipType', id: string, fee: number, isDefault: boolean, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null } } };
 
 export type MembershipTypeFragment = { __typename?: 'MembershipType', id: string, fee: number, isDefault: boolean, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null } };
 
@@ -3453,7 +3458,7 @@ export type EndMembershipMutationVariables = Exact<{
 }>;
 
 
-export type EndMembershipMutation = { __typename?: 'Mutation', updateMembership: { __typename?: 'Membership', id: string, startedAt: string, endedAt?: string | null, isAccepted: boolean, type: { __typename?: 'MembershipType', id: string, fee: number, isDefault: boolean, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null } } } };
+export type EndMembershipMutation = { __typename?: 'Mutation', updateMembership: { __typename?: 'Membership', id: string, startedAt: string, endedAt?: string | null, isAccepted: boolean, fee?: number | null, type: { __typename?: 'MembershipType', id: string, fee: number, isDefault: boolean, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null } } } };
 
 export type InvalidateMandateMutationVariables = Exact<{
   id: Scalars['String'];
@@ -3592,7 +3597,7 @@ export type GetMemberQueryVariables = Exact<{
 }>;
 
 
-export type GetMemberQuery = { __typename?: 'Query', member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, memberships: { __typename?: 'MembershipList', values: Array<{ __typename?: 'Membership', id: string, startedAt: string, endedAt?: string | null, isAccepted: boolean, type: { __typename?: 'MembershipType', id: string, fee: number, isDefault: boolean, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null } } }> }, mandates: { __typename?: 'MandateList', values: Array<{ __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }> }, transactions: { __typename?: 'TransactionList', values: Array<{ __typename?: 'MembershipFeeTransaction', id: string, createdAt: string, updatedAt: string, description: string, amount: number, year: number }> }, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } };
+export type GetMemberQuery = { __typename?: 'Query', member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, memberships: { __typename?: 'MembershipList', values: Array<{ __typename?: 'Membership', id: string, startedAt: string, endedAt?: string | null, isAccepted: boolean, fee?: number | null, type: { __typename?: 'MembershipType', id: string, fee: number, isDefault: boolean, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null } } }> }, mandates: { __typename?: 'MandateList', values: Array<{ __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }> }, transactions: { __typename?: 'TransactionList', values: Array<{ __typename?: 'MembershipFeeTransaction', id: string, createdAt: string, updatedAt: string, description: string, amount: number, year: number }> }, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null } };
 
 export type GetMemberMandatesQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3618,7 +3623,7 @@ export type GetMemberTransactionsQuery = { __typename?: 'Query', member: { __typ
 export type GetMembersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMembersQuery = { __typename?: 'Query', members: { __typename?: 'MemberList', values: Array<{ __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, latestMembership: { __typename?: 'Membership', id: string, startedAt: string, endedAt?: string | null, isAccepted: boolean, type: { __typename?: 'MembershipType', id: string, fee: number, isDefault: boolean, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null } } }, mandates: { __typename?: 'MandateList', values: Array<{ __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }> }, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }> } };
+export type GetMembersQuery = { __typename?: 'Query', members: { __typename?: 'MemberList', values: Array<{ __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, latestMembership: { __typename?: 'Membership', id: string, startedAt: string, endedAt?: string | null, isAccepted: boolean, fee?: number | null, type: { __typename?: 'MembershipType', id: string, fee: number, isDefault: boolean, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null } } }, mandates: { __typename?: 'MandateList', values: Array<{ __typename?: 'DigitalMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null } | { __typename?: 'PaperMandate', id: string, mandateId: string, status: MandateStatus, createdAt: string, acceptedAt?: string | null, bic: string, iban?: string | null, reason: string, isFirstTransaction: boolean, errorMessage?: string | null, generatedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null, uploadedFile?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }> }, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }> } };
 
 export type GetPageQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3649,7 +3654,7 @@ export type GetTransactionQueryVariables = Exact<{
 }>;
 
 
-export type GetTransactionQuery = { __typename?: 'Query', transaction: { __typename?: 'MembershipFeeTransaction', id: string, createdAt: string, updatedAt: string, description: string, amount: number, year: number, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, latestMembership: { __typename?: 'Membership', id: string, startedAt: string, endedAt?: string | null, isAccepted: boolean, type: { __typename?: 'MembershipType', id: string, fee: number, isDefault: boolean, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null } } }, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }, instruction?: { __typename?: 'DirectDebitInstruction', id: string, createdAt: string, updatedAt: string, instructionId: string, description: string, amount: number, batch: { __typename?: 'DirectDebitBatch', id: string, createdAt: string, updatedAt: string, batchId: string, sequenceType: SequenceType, instructionCount: number, amount: number, directDebit: { __typename?: 'DirectDebit', id: string, createdAt: string, updatedAt: string, status: DirectDebitStatus, messageId: string, collectionDate: string, instructionCount: number, amount: number } } } | null } };
+export type GetTransactionQuery = { __typename?: 'Query', transaction: { __typename?: 'MembershipFeeTransaction', id: string, createdAt: string, updatedAt: string, description: string, amount: number, year: number, member: { __typename?: 'Member', id: string, firstName: string, initials: string, lastName: string, email: string, address: string, postalCode: string, city: string, phoneNumber: string, birthdate: string, language: Language, pronouns: Pronouns, studentType: StudentType, isAdmin: boolean, latestMembership: { __typename?: 'Membership', id: string, startedAt: string, endedAt?: string | null, isAccepted: boolean, fee?: number | null, type: { __typename?: 'MembershipType', id: string, fee: number, isDefault: boolean, name: { __typename?: 'ShortTranslatable', en?: string | null, nl?: string | null } } }, image?: { __typename?: 'File', id: string, name: string, url: string, mimeType: string } | null }, instruction?: { __typename?: 'DirectDebitInstruction', id: string, createdAt: string, updatedAt: string, instructionId: string, description: string, amount: number, batch: { __typename?: 'DirectDebitBatch', id: string, createdAt: string, updatedAt: string, batchId: string, sequenceType: SequenceType, instructionCount: number, amount: number, directDebit: { __typename?: 'DirectDebit', id: string, createdAt: string, updatedAt: string, status: DirectDebitStatus, messageId: string, collectionDate: string, instructionCount: number, amount: number } } } | null } };
 
 export const BankFragmentDoc = gql`
     fragment BankFragment on Bank {
@@ -3793,6 +3798,7 @@ export const MembershipFragmentDoc = gql`
   startedAt
   endedAt
   isAccepted
+  fee
   type {
     ...MembershipTypeFragment
   }

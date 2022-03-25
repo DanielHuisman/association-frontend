@@ -142,7 +142,9 @@ export const Overview: React.FC = () => {
                                             }
                                         </Table.Cell>
                                         <Table.Cell><YesNo value={membership.isAccepted} /></Table.Cell>
-                                        <Table.Cell>{formatCurrency(membership.type.fee)}</Table.Cell>
+                                        <Table.Cell>
+                                            {formatCurrency(membership.fee && membership.fee > membership.type.fee ? membership.fee : membership.type.fee)}
+                                        </Table.Cell>
                                     </Table.Row>
                                 ))
                             }

@@ -5,6 +5,7 @@ fragment MembershipFragment on Membership {
     startedAt
     endedAt
     isAccepted
+    fee
 
     type {
         ...MembershipTypeFragment
