@@ -2,13 +2,12 @@ import React from 'react';
 import {FieldProps} from 'formik';
 import {Form, Input, Message} from 'semantic-ui-react';
 
-interface IProps extends FieldProps {
-    type: string;
+interface FieldFileProps extends FieldProps {
     label?: string;
     placeholder?: string;
 }
 
-const FieldInput = ({field, form: {touched, errors, isSubmitting, setFieldValue}, type, label, placeholder, ...props}: IProps) => {
+export const FieldFile: React.FC<FieldFileProps> = ({field, form: {touched, errors, isSubmitting, setFieldValue}, label, placeholder, ...props}) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setFieldValue(field.name, event.currentTarget.files[0]);
 
     return (
@@ -35,5 +34,3 @@ const FieldInput = ({field, form: {touched, errors, isSubmitting, setFieldValue}
         </Form.Field>
     );
 };
-
-export default FieldInput;

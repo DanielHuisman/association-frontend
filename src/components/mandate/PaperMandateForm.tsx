@@ -47,7 +47,7 @@ const FieldIBAN: React.FC<FieldInputProps> = (props) => (
         {...props}
         field={{
             ...props.field,
-            onChange: (event: React.ChangeEvent<any>) => {
+            onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
                 props.field.onChange(event);
 
                 const iban: string = event.target.value.replace(/\s/g, '').toLowerCase();

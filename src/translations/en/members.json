@@ -1,72 +1,67 @@
 {
-  "member": {
-    "address": "Address",
-    "birthdate": "Date of birth",
-    "checkInfo": "This is your membership information, please check if everything is correct. If something is incorrect or you would like to change something, please contact the board.",
-    "city": "City",
-    "details": "Member details",
-    "email": "Email address",
-    "firstName": "First name",
-    "hasMandate": "Has mandate",
-    "initials": "Initials",
-    "isMember": "Is member",
-    "language": "Language",
-    "languages": {
-      "EN": "English",
-      "NL": "Dutch"
+    "member": {
+        "address": "Address",
+        "birthdate": "Date of birth",
+        "checkInfo": "This is your membership information, please check if everything is correct. If something is incorrect or you would like to change something, please contact the board.",
+        "city": "City",
+        "details": "Member details",
+        "email": "Email address",
+        "firstName": "First name",
+        "hasMandate": "Has mandate",
+        "initials": "Initials",
+        "isMember": "Is member",
+        "language": "Language",
+        "languages": {
+            "EN": "English",
+            "NL": "Dutch"
+        },
+        "lastName": "Last name",
+        "name": "Name",
+        "password": "Password",
+        "passwordRepeat": "Repeat password",
+        "phoneNumber": "Phone number",
+        "postalCode": "Postal code",
+        "pronouns": "Prefered pronouns",
+        "pronounTypes": {
+            "HE_HIM": "He/him",
+            "SHE_HER": "She/her",
+            "THEY_THEM": "They/them"
+        },
+        "studentType": "Student type",
+        "studentTypes": {
+            "HBO_OTHER": "Higher Vocational Education (HBO) - Other",
+            "HBO_SAXION": "Higher Vocational Education (HBO) - Saxion",
+            "MBO": "Intermediate Vocational Education (MBO)",
+            "UNIVERSITY_OTHER": "University - Other",
+            "UNIVERSITY_UT": "University - University of Twente",
+            "WORKING": "Working"
+        }
     },
-    "lastName": "Last name",
-    "name": "Name",
-    "password": "Password",
-    "passwordRepeat": "Repeat password",
-    "phoneNumber": "Phone number",
-    "postalCode": "Postal code",
-    "pronounTypes": {
-      "HE_HIM": "He/him",
-      "SHE_HER": "She/her",
-      "THEY_THEM": "They/them"
+    "members": {
+        "header": "Members",
+        "menu": {
+            "current": "Current members",
+            "new": "New members",
+            "old": "Old members"
+        },
+        "withMandate": "Members with mandate:"
     },
-    "pronouns": "Prefered pronouns",
-    "studentType": "Student type",
-    "studentTypes": {
-      "HBO_OTHER": "Higher Vocational Education (HBO) - Other",
-      "HBO_SAXION": "Higher Vocational Education (HBO) - Saxion",
-      "MBO": "Intermediate Vocational Education (MBO)",
-      "UNIVERSITY_OTHER": "University - Other",
-      "UNIVERSITY_UT": "University - University of Twente",
-      "WORKING": "Working"
+    "membership": {
+        "end": {
+            "button": "End membership",
+            "date": "End of membership date",
+            "error": {
+                "header": "Failed to end membership"
+            }
+        },
+        "endedAt": "End of membership",
+        "endedAtNone": "Still a member",
+        "fee": "Membership fee",
+        "isAccepted": "Is accepted",
+        "startedAt": "Start of membership",
+        "type": "Membership type"
+    },
+    "memberships": {
+        "header": "Memberships"
     }
-  },
-  "members": {
-    "header": "Members",
-    "menu": {
-      "current": "Current members",
-      "new": "New members",
-      "old": "Old members"
-    },
-    "withMandate": "Members with mandate:"
-  },
-  "membership": {
-    "end": {
-      "button": "End membership",
-      "date": "End of membership date",
-      "error": {
-        "header": "Failed to end membership"
-      }
-    },
-    "endedAt": "End of membership",
-    "endedAtNone": "Still a member",
-    "fee": "Membership fee",
-    "isAccepted": "Is accepted",
-    "startedAt": "Start of membership",
-    "type": "Membership type",
-    "types": {
-      "extraordinary": "Extraordinary member",
-      "honorary": "Honorary member",
-      "normal": "Regular member"
-    }
-  },
-  "memberships": {
-    "header": "Memberships"
-  }
 }

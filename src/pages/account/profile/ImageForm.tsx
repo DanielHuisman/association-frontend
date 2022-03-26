@@ -4,13 +4,14 @@ import {Field, FormikConfig} from 'formik';
 
 import {Form, SubmitButton, FieldFile} from '../../../components/form';
 import {MemberImage} from '../../../components/member/MemberImage';
+import {MemberFragment} from '../../../generated/graphql';
 
 export interface IValues {
     file: File;
 }
 
 export interface ImageFormProps {
-    profile: any;
+    profile: MemberFragment;
     onSubmit: FormikConfig<IValues>['onSubmit'];
 }
 

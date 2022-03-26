@@ -10,7 +10,7 @@ import pages from './pages.json';
 import transactions from './transactions.json';
 import users from './users.json';
 
-export default {
+export const translations = {
     account,
     auth,
     directDebits,

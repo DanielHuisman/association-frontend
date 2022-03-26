@@ -11,7 +11,7 @@ export interface MemberTableProps {
     members: (MemberFragment & {
         latestMembership: MembershipFragment;
         mandates: {
-            values: MandateFragment[]
+            values: MandateFragment[];
         };
     })[];
 }
@@ -39,7 +39,9 @@ export const MemberTable: React.FC<MemberTableProps> = ({members}) => {
                         <Table.Cell>{member.initials}</Table.Cell>
                         <Table.Cell>{member.lastName}</Table.Cell>
                         <Table.Cell>{member.email}</Table.Cell>
-                        <Table.Cell>{t(`members:member.languages.${member.language}`)}</Table.Cell>
+                        <Table.Cell>
+                            {t(`members:member.languages.${member.language}`)}
+                        </Table.Cell>
                         <Table.Cell>
                             <YesNo value={!member.latestMembership.endedAt && member.latestMembership.isAccepted} />
                         </Table.Cell>

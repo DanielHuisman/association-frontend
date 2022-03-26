@@ -29,8 +29,8 @@ export const List: React.FC<ListProps> = ({filter, showMandatesCounter = false})
 
             {data && (
                 <>
-                    {showMandatesCounter && <p>{
-                        t('members:members.withMandate', 'Members with mandate:')}
+                    {showMandatesCounter && <p>
+                        {t('members:members.withMandate', 'Members with mandate:')}
                         {' '}
                         {members.filter((member) => hasAcceptedMandates(member.mandates.values)).length} / {members.length}
                     </p>}

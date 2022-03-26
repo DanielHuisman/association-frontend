@@ -14,6 +14,7 @@ export const TableSelectableRow: React.FC<TableSelectableRowProps> = ({to, child
 
     const onMouseDown = (event: MouseEvent<HTMLTableRowElement>) => {
         // If the target was an icon, check the parent node (e.g. button)
+        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
         let target: any = event.target;
         if (target && target.tagName.toLowerCase() === 'i' && target.className.includes('icon')) {
             target = target.parentNode;

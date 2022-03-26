@@ -1,11 +1,11 @@
 {
-  "calendar": {
-    "facebook": {
-      "header": "Facebook Agenda"
-    },
-    "google": {
-      "header": "Google Agenda"
-    },
-    "header": "Agenda"
-  }
+    "calendar": {
+        "facebook": {
+            "header": "Facebook Agenda"
+        },
+        "google": {
+            "header": "Google Agenda"
+        },
+        "header": "Agenda"
+    }
 }

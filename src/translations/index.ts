@@ -1,7 +1,7 @@
-import en from './en';
-import nl from './nl';
+import {translations as en} from './en';
+import {translations as nl} from './nl';
 
-export default {
+export const translations = {
     en,
     nl
 };

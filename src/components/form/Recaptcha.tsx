@@ -1,19 +1,25 @@
 import React from 'react';
-import GoogleRecaptcha from 'react-google-recaptcha';
+import {ReCAPTCHA, ReCAPTCHAProps} from 'react-google-recaptcha';
 import {Field, FieldProps} from 'formik';
-import {Form} from 'semantic-ui-react';
+import {Form, FormFieldProps} from 'semantic-ui-react';
 
-import config from '../../config';
+import {config} from '../../config';
 
-const Recaptcha = ({name, inputProps = {}, fieldProps = {}}: {name: string, inputProps?: {[k: string]: any}, fieldProps?: {[k: string]: any}}) => {
+export interface RecaptchaProps {
+    name: string;
+    inputProps?: ReCAPTCHAProps;
+    fieldProps?: FormFieldProps;
+}
 
-    const render = ({field, form}: FieldProps<any>) => {
+export const Recaptcha: React.FC<RecaptchaProps> = ({name, inputProps = {}, fieldProps = {}}) => {
+
+    const render = ({field, form}: FieldProps) => {
         const error = form.touched[field.name] && form.errors[field.name];
         const handleChange = (value: string) => form.setFieldValue(field.name, value || '');
 
         return (
             <Form.Field error={!!error} {...fieldProps}>
-                <GoogleRecaptcha sitekey={config.recaptcha.siteKey} onChange={handleChange} {...inputProps} />
+                <ReCAPTCHA sitekey={config.recaptcha.siteKey} onChange={handleChange} {...inputProps} />
 
                 {error && <span className="error">{form.errors[field.name]}</span>}
             </Form.Field>
@@ -27,5 +33,3 @@ const Recaptcha = ({name, inputProps = {}, fieldProps = {}}: {name: string, inpu
         />
     );
 };
-
-export default Recaptcha;

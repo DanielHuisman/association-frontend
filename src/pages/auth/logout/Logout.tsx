@@ -23,7 +23,7 @@ export const Logout: React.FC = () => {
             // Redirect to index
             navigate('/');
         })();
-    }, []);
+    }, [navigate]);
 
     return (
         <Container>

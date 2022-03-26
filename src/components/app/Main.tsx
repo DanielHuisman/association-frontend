@@ -81,5 +81,3 @@ export const Main: React.FC<MainProps> = ({jumbotron = false}) => {
         </main>
     );
 };
-
-export default Main;

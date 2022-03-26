@@ -1,113 +1,109 @@
 {
-  "mandate": {
-    "acceptedAt": "Accepted at",
-    "bic": "BIC",
-    "createdAt": "Created at",
-    "details": {
-      "address": "Address",
-      "association": "Association details",
-      "city": "City",
-      "creditorId": "Creditor ID",
-      "mandate": "Mandate details",
-      "member": "Member details",
-      "name": "Name",
-      "postalCode": "Postal code"
-    },
-    "error message": "Error message",
-    "generatedFile": "Generated file",
-    "header": "Mandate",
-    "iban": "IBAN",
-    "invalidate": "Invalidate mandate",
-    "isFirstTransaction": "Is first transaction",
-    "mandateId": "Identifier",
-    "member": "Member",
-    "reason": "Reason",
-    "review": {
-      "accept": "Accept",
-      "error": {
-        "header": "Failed to reject mandate"
-      },
-      "reason": "Reason",
-      "reject": "Reject"
-    },
-    "status": "Status",
-    "type": "Type",
-    "types": {
-      "digital": "Digital mandate",
-      "paper": "Paper mandate"
-    },
-    "uploadedFile": "Uploaded file",
-    "viewMember": "View member"
-  },
-  "mandates": {
-    "header": "Mandates",
-    "menu": {
-      "all": "All",
-      "review": "Ready for review"
-    },
-    "none": "Member has no mandates.",
-    "review": {
-      "none": "No mandates to review.",
-      "text": "These mandates need to be reviewed."
-    }
-  },
-  "sign": {
-    "button": "Sign a mandate",
-    "digital": {
-      "bank": "Select a bank",
-      "error": {
-        "button": "Try again",
-        "description": "An error occurred or the mandate was cancelled. Please try again, possibly using a different method. If you continue to have this problem, please contact the board.",
-        "header": "Failed to sign a mandate"
-      },
-      "redirect": {
-        "error": {
-          "description": "An error occurred, try again later or contact the board.",
-          "header": "Failed to redirect to bank"
-        }
-      },
-      "submit": "Continue",
-      "success": {
-        "button": "View mandate details",
-        "description": "Thank you for signing a mandate. You don't need to take any further action.",
-        "header": "Successfully signed a mandate"
-      }
-    },
-    "header": "Sign mandate",
-    "intro": {
-      "digital": "To sign a mandate you will be redirected to your online bank environment. Here you will sign in with the credentials provided by your bank to confirm you want to sign a mandate.",
-      "paper": "To sign a mandate you need to fill in your details, print out the form and reupload it with your signature on it.",
-      "recommended": "RECOMMENDED",
-      "text1": "Once a year J&SV Exaltio will automatically deduct your membership fee from your bank account. You will receive an email notification before the transaction takes place. To do this we use SEPA Direct Debit, for which we require your permission in the form of a SEPA mandate.",
-      "text2": "There are two ways to sign the mandate: via your online bank environment or by printing out a form and reuploading it with your signature. We recommend using method A, because it's the most secure. However, method A only supports most Dutch banks. If your bank is not listed below, please us method B. Unfortunately, some banks are only available during office hours. If signing the mandate fails during the evening, you can try again during office hours or use method B."
-    },
-    "paper": {
-      "download": "Download mandate form",
-      "error": {
-        "description": "An error occurred, try again later or contact the board.",
-        "header": "Failed to create mandate"
-      },
-      "instructions": "You need to download the mandate form, print it out and sign it with your signature. Afterwards, you can make a photo of the form or scan it using a scanner. If you are unable to print, photograph or scan the mandate form, please contact the board.",
-      "none": "You have no pending mandates.",
-      "pending": "Thank you for signing and uploading the mandate form. The board will review it within in few days. You will receive an email when the mandate has been reviewed.",
-      "requirements": {
-        "header": "Requirements",
-        "line1": "Sign the document with a valid signature.",
-        "line2": "Fill in the date and location.",
-        "line3": "The photo or scan has to be clearly readable.",
-        "line4": "The document should take up the entire photo or scan with as little margin as possible.",
-        "line5": "The scan of the photo should be a PDF, PNG or JPG file (maximum size 5 MB)."
-      },
-      "submit": "Continue",
-      "upload": {
-        "error": {
-          "description": "An error occurred, try again later or contact the board.",
-          "header": "Failed to upload mandate form"
+    "mandate": {
+        "acceptedAt": "Accepted at",
+        "bic": "BIC",
+        "createdAt": "Created at",
+        "details": {
+            "address": "Address",
+            "association": "Association details",
+            "city": "City",
+            "creditorId": "Creditor ID",
+            "mandate": "Mandate details",
+            "member": "Member details",
+            "name": "Name",
+            "postalCode": "Postal code"
         },
-        "header": "Upload",
-        "submit": "Upload mandate form"
-      }
+        "error message": "Error message",
+        "generatedFile": "Generated file",
+        "header": "Mandate",
+        "iban": "IBAN",
+        "invalidate": "Invalidate mandate",
+        "isFirstTransaction": "Is first transaction",
+        "mandateId": "Identifier",
+        "member": "Member",
+        "reason": "Reason",
+        "review": {
+            "accept": "Accept",
+            "error": {
+                "header": "Failed to reject mandate"
+            },
+            "reason": "Reason",
+            "reject": "Reject"
+        },
+        "status": "Status",
+        "type": "Type",
+        "types": {
+            "digital": "Digital mandate",
+            "paper": "Paper mandate"
+        },
+        "uploadedFile": "Uploaded file",
+        "viewMember": "View member"
     },
-    "required": "You haven't signed a mandate yet. Please sign a mandate, so J&SV Exaltio will be able to deduct the yearly membership fee from your bank account."
-  }
+    "mandates": {
+        "header": "Mandates",
+        "menu": {
+            "all": "All",
+            "review": "Ready for review"
+        },
+        "none": "Member has no mandates.",
+        "review": {
+            "none": "No mandates to review.",
+            "text": "These mandates need to be reviewed."
+        }
+    },
+    "sign": {
+        "button": "Sign a mandate",
+        "digital": {
+            "bank": "Select a bank",
+            "error": {
+                "button": "Try again",
+                "description": "An error occurred or the mandate was cancelled. Please try again, possibly using a different method. If you continue to have this problem, please contact the board.",
+                "header": "Failed to sign a mandate"
+            },
+            "redirect": {
+                "error": {
+                    "description": "An error occurred, try again later or contact the board.",
+                    "header": "Failed to redirect to bank"
+                }
+            },
+            "submit": "Continue",
+            "success": {
+                "button": "View mandate details",
+                "description": "Thank you for signing a mandate. You don't need to take any further action.",
+                "header": "Successfully signed a mandate"
+            }
+        },
+        "header": "Sign mandate",
+        "intro": {
+            "paper": "To sign a mandate you need to fill in your details, print out the form and reupload it with your signature on it.",
+            "text1": "Once a year J&SV Exaltio will automatically deduct your membership fee from your bank account. You will receive an email notification before the transaction takes place. To do this we use SEPA Direct Debit, for which we require your permission in the form of a SEPA mandate."
+        },
+        "paper": {
+            "download": "Download mandate form",
+            "error": {
+                "description": "An error occurred, try again later or contact the board.",
+                "header": "Failed to create mandate"
+            },
+            "instructions": "You need to download the mandate form, print it out and sign it with your signature. Afterwards, you can make a photo of the form or scan it using a scanner. If you are unable to print, photograph or scan the mandate form, please contact the board.",
+            "pending": "Thank you for signing and uploading the mandate form. The board will review it within in few days. You will receive an email when the mandate has been reviewed.",
+            "requirements": {
+                "header": "Requirements",
+                "line1": "Sign the document with a valid signature.",
+                "line2": "Fill in the date and location.",
+                "line3": "The photo or scan has to be clearly readable.",
+                "line4": "The document should take up the entire photo or scan with as little margin as possible.",
+                "line5": "The scan of the photo should be a PDF, PNG or JPG file (maximum size 5 MB)."
+            },
+            "submit": "Continue",
+            "upload": {
+                "error": {
+                    "description": "An error occurred, try again later or contact the board.",
+                    "header": "Failed to upload mandate form"
+                },
+                "header": "Upload",
+                "submit": "Upload mandate form"
+            }
+        },
+        "required": "You haven't signed a mandate yet. Please sign a mandate, so J&SV Exaltio will be able to deduct the yearly membership fee from your bank account."
+    }
 }

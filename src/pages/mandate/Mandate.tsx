@@ -100,7 +100,7 @@ export const Mandate: React.FC = () => {
                                             <Table.Cell>{t('mandates:mandate.uploadedFile', 'Uploaded file')}</Table.Cell>
                                             <Table.Cell>
                                                 <Button as="a" href={data.mandate.uploadedFile.url} target="file" color="blue" size="tiny">
-                                                {t('general:general.download', 'Download')}
+                                                    {t('general:general.download', 'Download')}
                                                 </Button>
                                             </Table.Cell>
                                         </Table.Row>

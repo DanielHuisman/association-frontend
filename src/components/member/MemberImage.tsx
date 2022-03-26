@@ -6,7 +6,7 @@ import {MemberFragment} from '../../generated/graphql';
 interface IMemberProps {
     member: MemberFragment;
     size?: number;
-    style?: any;
+    style?: Record<string, string>;
 }
 
 export type MemberProps = (Omit<StrictImageProps, 'size'> & IMemberProps) | (Omit<StrictIconProps, 'size'> & IMemberProps);

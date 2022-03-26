@@ -126,7 +126,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({onSubmit}) => {
             <Field
                 component={FieldDropdown}
                 name="pronouns"
-                label={t('members:member.pronouns', 'Pronouns')}
+                label={t('members:member.pronouns', 'Prefered pronouns')}
                 options={Object.values(Pronouns).map((pronoun) => ({
                     key: pronoun,
                     value: pronoun,

@@ -109,7 +109,9 @@ export const Transaction = () => {
                     </Button>
 
                     <Header size="large">{t('directDebits:directDebitInstruction.details', 'Direct debit instruction details')}</Header>
-                    {!data.transaction.instruction && <p>{t('transactions:transaction:noInstruction', 'This transaction is not linked to a direct debit instruction.')}</p>}
+                    {!data.transaction.instruction && (
+                        <p>{t('transactions:transaction:noInstruction', 'This transaction is not linked to a direct debit instruction.')}</p>
+                    )}
                     {data.transaction.instruction && (
                         <>
                             <Table compact definition selectable stackable>
@@ -172,5 +174,3 @@ export const Transaction = () => {
         </Container>
     );
 };
-
-export default Transaction;

@@ -9,7 +9,6 @@ import * as styles from './Navigation.module.css';
 export interface SidebarProps {
     user?: MemberFragment;
     visible: boolean;
-    children: any;
     onHide?: () => void;
 }
 

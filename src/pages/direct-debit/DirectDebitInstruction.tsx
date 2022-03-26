@@ -99,7 +99,7 @@ export const DirectDebitInstruction: React.FC = () => {
                     <Header size="large">{t('mandates:mandate.details.mandate', 'Mandate details')}</Header>
                     <Table compact definition selectable stackable>
                         <Table.Body>
-                        <   Table.Row>
+                            <Table.Row>
                                 <Table.Cell>{t('mandates:mandate.mandateId', 'Identifier')}</Table.Cell>
                                 <Table.Cell>{data.directDebitInstruction.mandate.mandateId}</Table.Cell>
                             </Table.Row>

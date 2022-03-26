@@ -4,11 +4,11 @@ import {Form as SUForm, FormProps as SUFormProps} from 'semantic-ui-react';
 
 export interface FormProps<Values> extends FormikConfig<Values> {
     initialValues: Values;
-    children: any;
+    children?: React.ReactNode;
     formProps?: SUFormProps;
 }
 
-export const Form = <Values extends any = FormikValues>({children, formProps, ...props}: FormProps<Values>): ReturnType<React.FC> => (
+export const Form = <Values = FormikValues>({children, formProps, ...props}: FormProps<Values>): ReturnType<React.FC> => (
     <Formik<Values> {...props}>
         {({isSubmitting, handleSubmit, handleReset}) => (
             <SUForm loading={isSubmitting} onSubmit={handleSubmit} onReset={handleReset} {...formProps}>

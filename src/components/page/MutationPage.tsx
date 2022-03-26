@@ -18,11 +18,12 @@ export interface MutationPageProps<MutationType> {
     children: (
         mutateFn: MutationFunction<MutationType>,
         mutationResult: MutationResult<MutationType>,
-        ...args: any[]
+        ...args: unknown[]
     ) => JSX.Element | null;
 }
 
 // NOTE: The X generic variable is only there so TypeScript doesn't confuse it with JSX
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
 export const MutationPage = <MutationType, X = any>({
     mutation,
     mutationVariables,

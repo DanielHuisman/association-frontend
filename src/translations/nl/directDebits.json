@@ -1,57 +1,56 @@
 {
-  "directDebit": {
-    "amount": "Amount",
-    "batches": "Incassobatches",
-    "collectionDate": "Incassodatum",
-    "createdAt": "Aangemaakt op",
-    "details": "Gegevens incasso",
-    "file": "XML-bestand",
-    "fileInfo": "Dit bestand moet naar de bank geüpload worden.",
-    "header": "Incasso",
-    "instructionCount": "Instructions",
-    "intructions": "Incasso-instructies",
-    "messageId": "Identificatiecode",
-    "noBatches": "Er zijn geen batches.",
-    "noInstructions": "Er zijn geen instructies.",
-    "noWarnings": "Er zijn geen waarschuwingen.",
-    "status": "Status",
-    "updatedAt": "Veranderd op",
-    "warnings": "Incassowaarschuwingen"
-  },
-  "directDebitBatch": {
-    "amount": "Bedrag",
-    "batchId": "Identificatiecode",
-    "createdAt": "Aangemaakt op",
-    "details": "Gegevens incassobatch",
-    "directDebit": "Incasso",
-    "header": "Incassobatch",
-    "instructionCount": "Incasso-instructies",
-    "sequenceType": "Reekstype",
-    "updatedAt": "Veranderd op",
-    "viewDirectDebit": "Bekijk incasso"
-  },
-  "directDebitInstruction": {
-    "amount": "Bedrag",
-    "batch": "Batch",
-    "createdAt": "Aangemaakt op",
-    "description": "Beschrijving",
-    "details": "Gegevens incasso-instructie",
-    "directDebit": "Incasso",
-    "header": "Incasso-instructie",
-    "instructionId": "Identificatiecode",
-    "noTransactions": "Er zijn geen transacties.",
-    "transactions": "Transacties",
-    "updatedAt": "Veranderd op",
-    "viewDirectDebit": "Bebkijk incasso",
-    "viewDirectDebitBatch": "Bekijk incassobatch",
-    "viewMandate": "Bekijk incassomachtiging",
-    "viewMember": "Bekijk lid"
-  },
-  "directDebitWarning": {
-    "description": "Beschrijving",
-    "member": "Lid"
-  },
-  "directDebits": {
-    "header": "Incasso's"
-  }
+    "directDebit": {
+        "amount": "Amount",
+        "batches": "Incassobatches",
+        "collectionDate": "Incassodatum",
+        "createdAt": "Aangemaakt op",
+        "details": "Gegevens incasso",
+        "file": "XML-bestand",
+        "fileInfo": "Dit bestand moet naar de bank geüpload worden.",
+        "header": "Incasso",
+        "instructionCount": "Instructions",
+        "intructions": "Incasso-instructies",
+        "messageId": "Identificatiecode",
+        "noBatches": "Er zijn geen batches.",
+        "noInstructions": "Er zijn geen instructies.",
+        "noWarnings": "Er zijn geen waarschuwingen.",
+        "status": "Status",
+        "updatedAt": "Veranderd op",
+        "warnings": "Incassowaarschuwingen"
+    },
+    "directDebitBatch": {
+        "amount": "Bedrag",
+        "batchId": "Identificatiecode",
+        "createdAt": "Aangemaakt op",
+        "details": "Gegevens incassobatch",
+        "directDebit": "Incasso",
+        "header": "Incassobatch",
+        "instructionCount": "Incasso-instructies",
+        "sequenceType": "Reekstype",
+        "updatedAt": "Veranderd op",
+        "viewDirectDebit": "Bekijk incasso"
+    },
+    "directDebitInstruction": {
+        "amount": "Bedrag",
+        "batch": "Batch",
+        "createdAt": "Aangemaakt op",
+        "description": "Beschrijving",
+        "details": "Gegevens incasso-instructie",
+        "header": "Incasso-instructie",
+        "instructionId": "Identificatiecode",
+        "noTransactions": "Er zijn geen transacties.",
+        "transactions": "Transacties",
+        "updatedAt": "Veranderd op",
+        "viewDirectDebit": "Bebkijk incasso",
+        "viewDirectDebitBatch": "Bekijk incassobatch",
+        "viewMandate": "Bekijk incassomachtiging",
+        "viewMember": "Bekijk lid"
+    },
+    "directDebits": {
+        "header": "Incasso's"
+    },
+    "directDebitWarning": {
+        "description": "Beschrijving",
+        "member": "Lid"
+    }
 }

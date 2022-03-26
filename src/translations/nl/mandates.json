@@ -1,113 +1,109 @@
 {
-  "mandate": {
-    "acceptedAt": "Geaccepteerd op",
-    "bic": "BIC",
-    "createdAt": "Aangemaakt op",
-    "details": {
-      "address": "Adres",
-      "association": "Gegevens vereniging",
-      "city": "Stad",
-      "creditorId": "Crediteur ID",
-      "mandate": "Gegevens incassomachtiging",
-      "member": "Gegevens lid",
-      "name": "Naam",
-      "postalCode": "Postcode"
-    },
-    "error message": "Foutmelding",
-    "generatedFile": "Gegenereerde bestand",
-    "header": "Incassomachtiging",
-    "iban": "IBAN",
-    "invalidate": "Incassomachtiging ongeldig maken",
-    "isFirstTransaction": "Is eerste transactie",
-    "mandateId": "Identificatiecode",
-    "member": "Lid",
-    "reason": "Reden",
-    "review": {
-      "accept": "Accepteren",
-      "error": {
-        "header": "Incassomachtiging weigeren mislukt"
-      },
-      "reason": "Reden",
-      "reject": "Weigeren"
-    },
-    "status": "Status",
-    "type": "Type",
-    "types": {
-      "digital": "Digitale incassomachtiging",
-      "paper": "Papieren incassomachtiging"
-    },
-    "uploadedFile": "Geüploade bestand",
-    "viewMember": "View member"
-  },
-  "mandates": {
-    "header": "Incassomachtigingen",
-    "menu": {
-      "all": "Alle",
-      "review": "Klaar voor beoordeling"
-    },
-    "none": "Lid heeft geen incassomachtigingen.",
-    "review": {
-      "none": "Geen incassomachtiging om te beoordelen.",
-      "text": "De volgende incassomachtigingen moeten worden beoordeeld."
-    }
-  },
-  "sign": {
-    "button": "Teken een incassomachtiging",
-    "digital": {
-      "bank": "Selecteer een bank",
-      "error": {
-        "button": "Try again",
-        "description": "Er is een fout opgetreden of de incassomachtiging is geannuleerd. Probeer het opnieuw, mogelijk met een andere methode. Neem contact op met het bestuur als dit probleem blijft aanhouden.",
-        "header": "Tekenen van incassomachtiging is mislukt"
-      },
-      "redirect": {
-        "error": {
-          "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
-          "header": "Doorsturen naar bank is misukt"
-        }
-      },
-      "submit": "Volgende",
-      "success": {
-        "button": "Bekijk incassomachtiging",
-        "description": "Bedankt voor het tekenen van een incassomachtiging. Je hoeft verder niets meer te doen.",
-        "header": "Incassomachtiging is succesvol getekend"
-      }
-    },
-    "header": "Incassomachtiging tekenen",
-    "intro": {
-      "digital": "Om een incassomachtiging te tekenen word je doorgestuurd naar de online omgeving van je bank. Hier kan je met de inloggegevens van je bank de incassomachtiging bevestigen.",
-      "paper": "Om een incassomachtiging te tekenen dien je jouw gegevens in te vullen, het formulier uit te printen, te ondertekenen, in te scannen en daarna te uploaden",
-      "recommended": "AANBEVOLEN",
-      "text1": "Door een incassomachtiging te tekenen kan J&SV Exaltio automatisch de jaarlijkse contributie afschrijven van je bankrekening. Je ontvangt automatisch een e-mail ter informatie voordat de transactie plaats vindt. Om dit te doen maken we gebruik van een SEPA incasso, waarvoor je toestemming nodig hebben via een incassomachtiging.",
-      "text2": "Er zijn twee methodes om de machtiging te tekenen: Via de online omgeving van je bank (methode A) of door een formulier uit te printen en dan ondertekend te uploaden (methode B). We bevelen je methode A aan gezien deze het meest veiligst is. Echter wordt deze methode enkel ondersteund door Nederlandse banken. Indien je bank er niet tussen staat maak dan gebruik van methode B. Houdt er rekening mee dat een aantal banken alleen tijdens bank uren beschikbaar zijn om digitaal een machtiging te ondertekenen. Indien het tekenen 's avonds faalt maak dan gebruik van methode B of probeer het overdag nogmaals."
-    },
-    "paper": {
-      "download": "Download incassomachtiging",
-      "error": {
-        "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
-        "header": "Incassomachtiging aanmaken is mislukt"
-      },
-      "instructions": "Download het formulier, print het uit en teken het met je handtekening. Maak daarna een foto of scan het formulier in. Als het niet lukt om het formulier te printen, fotograferen of scannen, neem dan contact op met het bestuur.",
-      "none": "You have no pending mandates.",
-      "pending": "Bedankt voor het uploaden van de incassomachtiging. Het bestuur zal de incassomachtiging binnen een paar dagen beoordelen. Je ontvangt een e-mail zodra de incassomachtiging is beoordeeld.",
-      "requirements": {
-        "header": "Vereisten",
-        "line1": "Onderteken het formulier met een geldige handtekening.",
-        "line2": "Vul de datum en locatie in.",
-        "line3": "De foto of scan dient duidelijk leesbaar te zijn.",
-        "line4": "Het document dient voor te komen in de gehele foto of scan met zo min mogelijk marge.",
-        "line5": "De scan of foto dient een PDF, PNG of JPG bestand te zien (maximum grootte 5 MB)."
-      },
-      "submit": "Volgende",
-      "upload": {
-        "error": {
-          "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
-          "header": "Incassomachtiging uploaden is mislukt"
+    "mandate": {
+        "acceptedAt": "Geaccepteerd op",
+        "bic": "BIC",
+        "createdAt": "Aangemaakt op",
+        "details": {
+            "address": "Adres",
+            "association": "Gegevens vereniging",
+            "city": "Stad",
+            "creditorId": "Crediteur ID",
+            "mandate": "Gegevens incassomachtiging",
+            "member": "Gegevens lid",
+            "name": "Naam",
+            "postalCode": "Postcode"
         },
-        "header": "Upload",
-        "submit": "Upload incassomachtiging"
-      }
+        "error message": "Foutmelding",
+        "generatedFile": "Gegenereerde bestand",
+        "header": "Incassomachtiging",
+        "iban": "IBAN",
+        "invalidate": "Incassomachtiging ongeldig maken",
+        "isFirstTransaction": "Is eerste transactie",
+        "mandateId": "Identificatiecode",
+        "member": "Lid",
+        "reason": "Reden",
+        "review": {
+            "accept": "Accepteren",
+            "error": {
+                "header": "Incassomachtiging weigeren mislukt"
+            },
+            "reason": "Reden",
+            "reject": "Weigeren"
+        },
+        "status": "Status",
+        "type": "Type",
+        "types": {
+            "digital": "Digitale incassomachtiging",
+            "paper": "Papieren incassomachtiging"
+        },
+        "uploadedFile": "Geüploade bestand",
+        "viewMember": "View member"
     },
-    "required": "Je hebt nog geen incassomachtiging getekend. Teken een incasosmachtiging zodat J&SV Exaltio de contributie van je bankrekening kan afscrijven."
-  }
+    "mandates": {
+        "header": "Incassomachtigingen",
+        "menu": {
+            "all": "Alle",
+            "review": "Klaar voor beoordeling"
+        },
+        "none": "Lid heeft geen incassomachtigingen.",
+        "review": {
+            "none": "Geen incassomachtiging om te beoordelen.",
+            "text": "De volgende incassomachtigingen moeten worden beoordeeld."
+        }
+    },
+    "sign": {
+        "button": "Teken een incassomachtiging",
+        "digital": {
+            "bank": "Selecteer een bank",
+            "error": {
+                "button": "Try again",
+                "description": "Er is een fout opgetreden of de incassomachtiging is geannuleerd. Probeer het opnieuw, mogelijk met een andere methode. Neem contact op met het bestuur als dit probleem blijft aanhouden.",
+                "header": "Tekenen van incassomachtiging is mislukt"
+            },
+            "redirect": {
+                "error": {
+                    "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
+                    "header": "Doorsturen naar bank is misukt"
+                }
+            },
+            "submit": "Volgende",
+            "success": {
+                "button": "Bekijk incassomachtiging",
+                "description": "Bedankt voor het tekenen van een incassomachtiging. Je hoeft verder niets meer te doen.",
+                "header": "Incassomachtiging is succesvol getekend"
+            }
+        },
+        "header": "Incassomachtiging tekenen",
+        "intro": {
+            "paper": "Om een incassomachtiging te tekenen dien je jouw gegevens in te vullen, het formulier uit te printen, te ondertekenen, in te scannen en daarna te uploaden",
+            "text1": "Door een incassomachtiging te tekenen kan J&SV Exaltio automatisch de jaarlijkse contributie afschrijven van je bankrekening. Je ontvangt automatisch een e-mail ter informatie voordat de transactie plaats vindt. Om dit te doen maken we gebruik van een SEPA incasso, waarvoor je toestemming nodig hebben via een incassomachtiging."
+        },
+        "paper": {
+            "download": "Download incassomachtiging",
+            "error": {
+                "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
+                "header": "Incassomachtiging aanmaken is mislukt"
+            },
+            "instructions": "Download het formulier, print het uit en teken het met je handtekening. Maak daarna een foto of scan het formulier in. Als het niet lukt om het formulier te printen, fotograferen of scannen, neem dan contact op met het bestuur.",
+            "pending": "Bedankt voor het uploaden van de incassomachtiging. Het bestuur zal de incassomachtiging binnen een paar dagen beoordelen. Je ontvangt een e-mail zodra de incassomachtiging is beoordeeld.",
+            "requirements": {
+                "header": "Vereisten",
+                "line1": "Onderteken het formulier met een geldige handtekening.",
+                "line2": "Vul de datum en locatie in.",
+                "line3": "De foto of scan dient duidelijk leesbaar te zijn.",
+                "line4": "Het document dient voor te komen in de gehele foto of scan met zo min mogelijk marge.",
+                "line5": "De scan of foto dient een PDF, PNG of JPG bestand te zien (maximum grootte 5 MB)."
+            },
+            "submit": "Volgende",
+            "upload": {
+                "error": {
+                    "description": "Er iets fout gegaan, probeer het later opnieuw of neem contact op met het bestuur.",
+                    "header": "Incassomachtiging uploaden is mislukt"
+                },
+                "header": "Upload",
+                "submit": "Upload incassomachtiging"
+            }
+        },
+        "required": "Je hebt nog geen incassomachtiging getekend. Teken een incasosmachtiging zodat J&SV Exaltio de contributie van je bankrekening kan afscrijven."
+    }
 }

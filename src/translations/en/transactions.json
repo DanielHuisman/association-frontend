@@ -1,24 +1,24 @@
 {
-  "transaction": {
-    "amount": "Amount",
-    "createdAt": "Created at",
-    "description": "Description",
-    "details": "Transaction details",
-    "header": "Transaction",
-    "membershipFee": {
-      "year": "Membership fee year"
+    "transaction": {
+        "amount": "Amount",
+        "createdAt": "Created at",
+        "description": "Description",
+        "details": "Transaction details",
+        "header": "Transaction",
+        "membershipFee": {
+            "year": "Membership fee year"
+        },
+        "status": "Status",
+        "type": "Type",
+        "types": {
+            "membershipFee": "Membership fee",
+            "other": "Other"
+        },
+        "updatedAt": "Updated at",
+        "viewDirectDebit": "View direct debit",
+        "viewDirectDebitBatch": "View direct debit batch",
+        "viewDirectDebitInstruction": "View direct debit instruction",
+        "viewMember": "View member"
     },
-    "status": "Status",
-    "type": "Type",
-    "types": {
-      "membershipFee": "Membership fee",
-      "other": "Other"
-    },
-    "updatedAt": "Updated at",
-    "viewDirectDebit": "View direct debit",
-    "viewDirectDebitBatch": "View direct debit batch",
-    "viewDirectDebitInstruction": "View direct debit instruction",
-    "viewMember": "View member"
-  },
-  "transaction:noInstruction": "This transaction is not linked to a direct debit instruction."
+    "transaction:noInstruction": "This transaction is not linked to a direct debit instruction."
 }

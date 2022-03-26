@@ -1,50 +1,50 @@
 {
-  "mandates": {
-    "changeBankAccount": "Change bank account",
-    "header": "Mandates"
-  },
-  "profile": {
-    "header": "Profile",
-    "image": {
-      "failure": "Failed to change your profile image.",
-      "header": "Image",
-      "success": "Successfully changed your profile image.",
-      "update": "Update profile image"
+    "mandates": {
+        "changeBankAccount": "Change bank account",
+        "header": "Mandates"
     },
-    "information": {
-      "failure": "Failed to change your profile.",
-      "firstNameRemark": "Preferred first name, not necessarily legal first name.",
-      "header": "Information",
-      "initialsRemark": "Legal initials.",
-      "success": "Successfully changed your profile.",
-      "update": "Update profile information"
+    "profile": {
+        "header": "Profile",
+        "image": {
+            "failure": "Failed to change your profile image.",
+            "header": "Image",
+            "success": "Successfully changed your profile image.",
+            "update": "Update profile image"
+        },
+        "information": {
+            "failure": "Failed to change your profile.",
+            "firstNameRemark": "Preferred first name, not necessarily legal first name.",
+            "header": "Information",
+            "initialsRemark": "Legal initials.",
+            "success": "Successfully changed your profile.",
+            "update": "Update profile information"
+        },
+        "noMandate": {
+            "button": "Sign mandate",
+            "content": "You have not yet signed a mandate, which is required to automatically deduct the yearly membership fee\nfrom your bank account. Please sign one here:",
+            "header": "No mandate signed"
+        }
     },
-    "noMandate": {
-      "button": "Sign mandate",
-      "content": "You have not yet signed a mandate, which is required to automatically deduct the yearly membership fee\nfrom your bank account. Please sign one here:",
-      "header": "No mandate signed"
+    "security": {
+        "email": {
+            "change": "Change email address",
+            "currentEmail": "Current email address",
+            "failure": "Failed to change your email address.",
+            "header": "Email address",
+            "newEmail": "New email address",
+            "success": "Successfully changed your email address."
+        },
+        "header": "Security",
+        "password": {
+            "change": "Change password",
+            "failure": "Failed to change your password.",
+            "header": "Password",
+            "password": "Password",
+            "passwordRepeat": "Repeat password",
+            "success": "Successfully changed your password."
+        }
+    },
+    "transactions": {
+        "header": "Transactions"
     }
-  },
-  "security": {
-    "email": {
-      "change": "Change email address",
-      "currentEmail": "Current email address",
-      "failure": "Failed to change your email address.",
-      "header": "Email address",
-      "newEmail": "New email address",
-      "success": "Successfully changed your email address."
-    },
-    "header": "Security",
-    "password": {
-      "change": "Change password",
-      "failure": "Failed to change your password.",
-      "header": "Password",
-      "password": "Password",
-      "passwordRepeat": "Repeat password",
-      "success": "Successfully changed your password."
-    }
-  },
-  "transactions": {
-    "header": "Transactions"
-  }
 }

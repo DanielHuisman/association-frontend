@@ -1,50 +1,50 @@
 {
-  "mandates": {
-    "changeBankAccount": "Change bank account",
-    "header": "Incassomachtigingen"
-  },
-  "profile": {
-    "header": "Profiel",
-    "image": {
-      "failure": "Profielfoto veranderen is mislukt.",
-      "header": "Foto",
-      "success": "Profielfoto is succesvol veranderd.",
-      "update": "Verander profielfoto"
+    "mandates": {
+        "changeBankAccount": "Change bank account",
+        "header": "Incassomachtigingen"
     },
-    "information": {
-      "failure": "Failed to change your profile.",
-      "firstNameRemark": "Gewenste voornaam, niet noodzakelijk wettelijke voornaam.",
-      "header": "Gegevens",
-      "initialsRemark": "Wettelijke initialen.",
-      "success": "Successfully changed your profile.",
-      "update": "Verander profielgegevens"
+    "profile": {
+        "header": "Profiel",
+        "image": {
+            "failure": "Profielfoto veranderen is mislukt.",
+            "header": "Foto",
+            "success": "Profielfoto is succesvol veranderd.",
+            "update": "Verander profielfoto"
+        },
+        "information": {
+            "failure": "Failed to change your profile.",
+            "firstNameRemark": "Gewenste voornaam, niet noodzakelijk wettelijke voornaam.",
+            "header": "Gegevens",
+            "initialsRemark": "Wettelijke initialen.",
+            "success": "Successfully changed your profile.",
+            "update": "Verander profielgegevens"
+        },
+        "noMandate": {
+            "button": "Teken incassomachtiging",
+            "content": "Je hebt nog geen incassomachtiging getekend. Dit is nodig om automatisch de jaarlijkse contributie af te kunnen schrijven van je bankrekening.\nHier kun je een incassomachtiging tekenen:",
+            "header": "Geen incassomachtiging getekend"
+        }
     },
-    "noMandate": {
-      "button": "Teken incassomachtiging",
-      "content": "Je hebt nog geen incassomachtiging getekend. Dit is nodig om automatisch de jaarlijkse contributie af te kunnen schrijven van je bankrekening.\nHier kun je een incassomachtiging tekenen:",
-      "header": "Geen incassomachtiging getekend"
+    "security": {
+        "email": {
+            "change": "Verander e-mailadres",
+            "currentEmail": "Huidige e-mailadres",
+            "failure": "E-mailadres veranderen is mislukt.",
+            "header": "E-mailadres",
+            "newEmail": "Nieuwe e-mailadres",
+            "success": "E-mailadres is succesvol veranderd."
+        },
+        "header": "Beveiliging",
+        "password": {
+            "change": "Verander wachtwoord",
+            "failure": "Wachtwoord veranderen is mislukt.",
+            "header": "Wachtwoord",
+            "password": "Wachtwoord",
+            "passwordRepeat": "Herhaal wachtwoord",
+            "success": "Wachtwoord is succesvol veranderd."
+        }
+    },
+    "transactions": {
+        "header": "Transacties"
     }
-  },
-  "security": {
-    "email": {
-      "change": "Verander e-mailadres",
-      "currentEmail": "Huidige e-mailadres",
-      "failure": "E-mailadres veranderen is mislukt.",
-      "header": "E-mailadres",
-      "newEmail": "Nieuwe e-mailadres",
-      "success": "E-mailadres is succesvol veranderd."
-    },
-    "header": "Beveiliging",
-    "password": {
-      "change": "Verander wachtwoord",
-      "failure": "Wachtwoord veranderen is mislukt.",
-      "header": "Wachtwoord",
-      "password": "Wachtwoord",
-      "passwordRepeat": "Herhaal wachtwoord",
-      "success": "Wachtwoord is succesvol veranderd."
-    }
-  },
-  "transactions": {
-    "header": "Transacties"
-  }
 }

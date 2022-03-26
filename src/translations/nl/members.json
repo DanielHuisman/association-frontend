@@ -1,72 +1,67 @@
 {
-  "member": {
-    "address": "Adres",
-    "birthdate": "Geboortedatum",
-    "checkInfo": "Dit is je lidmaatschapsinformatie, controleer a.u.b. of alles correct is. Als iets incorrect is of je iets wil wijzigen, kun je contact opnemen met het bestuur.",
-    "city": "Woonplaats",
-    "details": "Gegevens lid",
-    "email": "E-mailadres",
-    "firstName": "Voornaam",
-    "hasMandate": "Heeft incassomachtiging",
-    "initials": "Initialen",
-    "isMember": "Is lid",
-    "language": "Taal",
-    "languages": {
-      "EN": "Engels",
-      "NL": "Nederlands"
+    "member": {
+        "address": "Adres",
+        "birthdate": "Geboortedatum",
+        "checkInfo": "Dit is je lidmaatschapsinformatie, controleer a.u.b. of alles correct is. Als iets incorrect is of je iets wil wijzigen, kun je contact opnemen met het bestuur.",
+        "city": "Woonplaats",
+        "details": "Gegevens lid",
+        "email": "E-mailadres",
+        "firstName": "Voornaam",
+        "hasMandate": "Heeft incassomachtiging",
+        "initials": "Initialen",
+        "isMember": "Is lid",
+        "language": "Taal",
+        "languages": {
+            "EN": "Engels",
+            "NL": "Nederlands"
+        },
+        "lastName": "Achternaam",
+        "name": "Naam",
+        "password": "Wachtwoord",
+        "passwordRepeat": "Herhaal wachtwoord",
+        "phoneNumber": "Telefoonnummer",
+        "postalCode": "Postcode",
+        "pronouns": "Gewenste voornaamwoorden",
+        "pronounTypes": {
+            "HE_HIM": "He/him",
+            "SHE_HER": "She/her",
+            "THEY_THEM": "They/them"
+        },
+        "studentType": "Soort student",
+        "studentTypes": {
+            "HBO_OTHER": "Hoger beroepsonderwijs (HBO) - Overig",
+            "HBO_SAXION": "Hoger beroepsonderwijs (HBO) - Saxion",
+            "MBO": "Middelbaar beroepsonderwijs (MBO)",
+            "UNIVERSITY_OTHER": "Universiteit - Overig",
+            "UNIVERSITY_UT": "Universiteit - Universiteit Twente",
+            "WORKING": "Werkende"
+        }
     },
-    "lastName": "Achternaam",
-    "name": "Naam",
-    "password": "Wachtwoord",
-    "passwordRepeat": "Herhaal wachtwoord",
-    "phoneNumber": "Telefoonnummer",
-    "postalCode": "Postcode",
-    "pronounTypes": {
-      "HE_HIM": "Hij/hem/zijn",
-      "SHE_HER": "Zij/haar/haar",
-      "THEY_THEM": "Hen/hen/hun"
+    "members": {
+        "header": "Leden",
+        "menu": {
+            "current": "Huidige leden",
+            "new": "Nieuwe leden",
+            "old": "Oude leden"
+        },
+        "withMandate": "Leden met incassomachtiging:"
     },
-    "pronouns": "Gewenste voornaamwoorden",
-    "studentType": "Soort student",
-    "studentTypes": {
-      "HBO_OTHER": "Hoger beroepsonderwijs (HBO) - Overig",
-      "HBO_SAXION": "Hoger beroepsonderwijs (HBO) - Saxion",
-      "MBO": "Middelbaar beroepsonderwijs (MBO)",
-      "UNIVERSITY_OTHER": "Universiteit - Overig",
-      "UNIVERSITY_UT": "Universiteit - Universiteit Twente",
-      "WORKING": "Werkende"
+    "membership": {
+        "end": {
+            "button": "Beëindig lidmaatschap",
+            "date": "Einddatum lidmaatschap",
+            "error": {
+                "header": "Lidmaatschap beëindigen mislukt"
+            }
+        },
+        "endedAt": "Einde lidmaatschap",
+        "endedAtNone": "Nog lid",
+        "fee": "Contributie",
+        "isAccepted": "Is geaccepteerd",
+        "startedAt": "Begin lidmaatschap",
+        "type": "Lidmaatschapstype"
+    },
+    "memberships": {
+        "header": "Lidmaatschappen"
     }
-  },
-  "members": {
-    "header": "Leden",
-    "menu": {
-      "current": "Huidige leden",
-      "new": "Nieuwe leden",
-      "old": "Oude leden"
-    },
-    "withMandate": "Leden met incassomachtiging:"
-  },
-  "membership": {
-    "end": {
-      "button": "Beëindig lidmaatschap",
-      "date": "Einddatum lidmaatschap",
-      "error": {
-        "header": "Lidmaatschap beëindigen mislukt"
-      }
-    },
-    "endedAt": "Einde lidmaatschap",
-    "endedAtNone": "Nog lid",
-    "fee": "Contributie",
-    "isAccepted": "Is geaccepteerd",
-    "startedAt": "Begin lidmaatschap",
-    "type": "Lidmaatschapstype",
-    "types": {
-      "extraordinary": "Buitengewoon lid",
-      "honorary": "Erelid",
-      "normal": "Gewoon lid"
-    }
-  },
-  "memberships": {
-    "header": "Lidmaatschappen"
-  }
 }

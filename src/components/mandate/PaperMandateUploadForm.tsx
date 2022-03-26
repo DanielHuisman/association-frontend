@@ -4,9 +4,8 @@ import {Message, Icon} from 'semantic-ui-react';
 import {Field} from 'formik';
 import {gql} from '@apollo/react-hooks';
 
-import {FieldFile} from '../../components/form';
 import {CancelButton} from '../../components/mandate/CancelButton';
-import {Form, SubmitButton} from '../form';
+import {Form, FieldFile, SubmitButton} from '../form';
 import {MutationFormPage} from '../page';
 import {UploadPaperMandateMutation} from '../../generated/graphql';
 import UploadPaperMandate from '../../mutations/UploadPaperMandate.graphql';

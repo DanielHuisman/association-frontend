@@ -6,7 +6,7 @@ import {client} from '../graphql';
 
 import {App} from './app/App';
 
-const Root = () => {
+export const Root = () => {
     return (
         <ApolloProvider client={client}>
             <BrowserRouter>
@@ -15,5 +15,3 @@ const Root = () => {
         </ApolloProvider>
     );
 };
-
-export default Root;

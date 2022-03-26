@@ -1,63 +1,62 @@
 {
-  "administration": {
-    "header": "Administratie"
-  },
-  "association": {
-    "board": {
-      "header": "Bestuur"
+    "administration": {
+        "header": "Administratie"
     },
-    "collaborations": {
-      "header": "Samenwerkingen"
+    "association": {
+        "board": {
+            "header": "Bestuur"
+        },
+        "collaborations": {
+            "header": "Samenwerkingen"
+        },
+        "committees": {
+            "header": "Commissies"
+        },
+        "documents": {
+            "articlesofAssociation": "Statuten",
+            "header": "Documenten",
+            "houseRegulations": "Huishoudelijk reglement",
+            "membershipFeeRegulations": "Contributiereglement",
+            "privacyPolicy": "Privacybeleid"
+        },
+        "header": "Vereniging"
     },
-    "committees": {
-      "header": "Commissies"
+    "backToList": "Terug naar lijst",
+    "cancel": "Annuleren",
+    "contact": {
+        "address": {
+            "email": "E-mailadres",
+            "postal": "Postadres"
+        },
+        "bic": "BIC",
+        "header": "Contact",
+        "iban": "IBAN",
+        "kvk": "Kamer van Koophandel",
+        "other": "Overige gegevens",
+        "social": "Social media"
     },
-    "documents": {
-      "articlesofAssociation": "Statuten",
-      "header": "Documenten",
-      "houseRegulations": "Huishoudelijk reglement",
-      "membershipFeeRegulations": "Contributiereglement",
-      "privacyPolicy": "Privacybeleid"
+    "date": {
+        "never": "Nooit"
     },
-    "header": "Vereniging"
-  },
-  "back": "Terug",
-  "backToList": "Terug naar lijst",
-  "cancel": "Annuleren",
-  "contact": {
-    "address": {
-      "email": "E-mailadres",
-      "postal": "Postadres",
-      "visitors": "Bezoekadres"
+    "general": {
+        "download": "Downloaden",
+        "no": "Nee",
+        "yes": "Ja"
     },
-    "bic": "BIC",
-    "header": "Contact",
-    "iban": "IBAN",
-    "kvk": "Kamer van Koophandel",
-    "other": "Overige gegevens",
-    "social": "Social media"
-  },
-  "date": {
-    "never": "Nooit"
-  },
-  "general": {
-    "download": "Downloaden",
-    "no": "Nee",
-    "yes": "Ja"
-  },
-  "home": {
-    "activities": "Activiteiten",
-    "drinks": "Borrels",
-    "header": "Home",
-    "join": "Word lid"
-  },
-  "join": {
-    "header": "Word lid"
-  },
-  "notFound": {
-    "button": "Ga naar hoofdpagina",
-    "header": "Pagina niet gevonden",
-    "text": "Niet gevonden"
-  },
-  "unknown": "Onbekend"
+    "home": {
+        "activities": "Activiteiten",
+        "drinks": "Borrels",
+        "header": "Home",
+        "join": "Word lid"
+    },
+    "join": {
+        "header": "Word lid"
+    },
+    "no": "No",
+    "notFound": {
+        "button": "Ga naar hoofdpagina",
+        "header": "Pagina niet gevonden",
+        "text": "Niet gevonden"
+    },
+    "yes": "Yes"
 }

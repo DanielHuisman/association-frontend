@@ -12,11 +12,11 @@ export interface PageProps<QueryType, MutationType> extends Omit<MutationPagePro
         queryResult: QueryResult<QueryType>,
         mutateFn: MutationFunction<MutationType>,
         mutationResult: MutationResult<MutationType>,
-        ...args: any[]
+        ...args: unknown[]
     ) => JSX.Element | null;
 }
 
-export const Page = <QueryType, MutationType = any>({
+export const Page = <QueryType, MutationType = unknown>({
     query,
     queryVariables,
     queryProps,

@@ -2,14 +2,14 @@ import React from 'react';
 import {FieldProps} from 'formik';
 import {Form, Dropdown, Message} from 'semantic-ui-react';
 
-interface IProps extends FieldProps {
+export interface FieldDropdownProps extends FieldProps {
     label?: string;
     placeholder?: string;
 }
 
-const FieldDropdown = ({field, form: {touched, errors, isSubmitting, setFieldValue}, label, placeholder, ...props}: IProps) => {
+export const FieldDropdown: React.FC<FieldDropdownProps> = ({field, form: {touched, errors, isSubmitting, setFieldValue}, label, placeholder, ...props}) => {
     const handleBlur = () => undefined;
-    const handleChange = (event: React.ChangeEvent<any>, {value}) => setFieldValue(field.name, value, true);
+    const handleChange = (event: React.ChangeEvent<HTMLElement>, {value}) => setFieldValue(field.name, value, true);
 
     return (
         <Form.Field error={touched[field.name] && !!errors[field.name]}>
@@ -37,5 +37,3 @@ const FieldDropdown = ({field, form: {touched, errors, isSubmitting, setFieldVal
         </Form.Field>
     );
 };
-
-export default FieldDropdown;

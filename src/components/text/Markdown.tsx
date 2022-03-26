@@ -19,7 +19,7 @@ export const Markdown = ({source}) => (
     <ReactMarkdown
         source={source}
         plugins={plugins}
-        // @ts-ignore
+        // @ts-expect-error: strings are also allowed as renderers
         renderers={renderers}
     />
 );

@@ -34,8 +34,8 @@ export const Information: React.FC = () => {
                     }
                 })}
 
-                success={t('account:profile.information.success', 'Successfully changed your profile.')
-                /* TODO: add extra line describing that the board has to approve the membership */}
+                /* TODO: add extra line describing that the board has to approve the membership */
+                success={t('account:profile.information.success', 'Successfully changed your profile.')}
                 failure={t('account:profile.information.failure', 'Failed to change your profile.')}
             >
                 {(handleSubmit, {loading, data}) => (

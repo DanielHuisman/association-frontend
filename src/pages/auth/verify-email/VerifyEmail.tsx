@@ -36,7 +36,7 @@ export const VerifyEmail: React.FC = () => {
                 setError(err);
             }
         })();
-    }, []);
+    }, [params.token]);
 
     return (
         <SmallContainer>

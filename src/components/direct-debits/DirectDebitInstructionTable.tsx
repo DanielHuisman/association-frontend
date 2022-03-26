@@ -12,7 +12,7 @@ export interface DirectDebitInstructionTableProps {
         instructions: EntityList<DirectDebitInstructionFragment & {
             mandate: MandateFragment & {
                 member: MemberFragment;
-            }
+            };
         }>;
     })[];
     showBatch?: boolean;
@@ -31,7 +31,7 @@ export const DirectDebitInstructionTable: React.FC<DirectDebitInstructionTablePr
                     <Table.HeaderCell>{t('directDebits:directDebitInstruction.amount', 'Amount')}</Table.HeaderCell>
                     {showBatch && (
                         <>
-                            <Table.HeaderCell>{t('directDebits:directDebitBatch.sequenceType', 'Batch type')}</Table.HeaderCell>
+                            <Table.HeaderCell>{t('directDebits:directDebitBatch.sequenceType', 'Sequence type')}</Table.HeaderCell>
                         </>
                     )}
                 </Table.Row>

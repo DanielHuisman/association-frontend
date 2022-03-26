@@ -14,7 +14,7 @@ const apiSubscriptionUrls = [
 
 const hostname = window.location.hostname;
 
-export default {
+export const config = {
     apiUrl: process.env.NODE_ENV === 'production' ? apiUrls.find((url) => url.includes(hostname)) : process.env.API_URL,
     apiSubscriptionUrl: process.env.NODE_ENV === 'production' ? apiSubscriptionUrls.find((url) => url.includes(hostname)) : process.env.API_SUBSCRIPTION_URL,
 

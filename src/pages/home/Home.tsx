@@ -80,7 +80,7 @@ export const Home: React.FC = () => {
                 <Container>
                     <Grid stackable>
                         <Grid.Row className={styles.row}>
-                            <Grid.Column width={6}  verticalAlign="middle">
+                            <Grid.Column width={6} verticalAlign="middle">
                                 <Header size="huge" textAlign="center">
                                     {t('general:home.drinks', 'Drinks')}
                                     <div className="rainbow" />

@@ -1,68 +1,62 @@
 {
-  "administration": {
-    "header": "Administration"
-  },
-  "association": {
-    "board": {
-      "header": "Board"
+    "administration": {
+        "header": "Administration"
     },
-    "collaborations": {
-      "header": "Collaborations"
+    "association": {
+        "board": {
+            "header": "Board"
+        },
+        "collaborations": {
+            "header": "Collaborations"
+        },
+        "committees": {
+            "header": "Committees"
+        },
+        "documents": {
+            "articlesofAssociation": "Articles of association",
+            "header": "Documents",
+            "houseRegulations": "House regulations",
+            "membershipFeeRegulations": "Membership fee regulations",
+            "privacyPolicy": "Privacy policy"
+        },
+        "header": "Association"
     },
-    "committees": {
-      "header": "Committees"
+    "backToList": "Back to list",
+    "cancel": "Cancel",
+    "contact": {
+        "address": {
+            "email": "Email address",
+            "postal": "Postal address"
+        },
+        "bic": "BIC",
+        "header": "Contact",
+        "iban": "IBAN",
+        "kvk": "Chamber of Commerce",
+        "other": "Other details",
+        "social": "Social media"
     },
-    "documents": {
-      "articlesofAssociation": "Articles of association",
-      "header": "Documents",
-      "houseRegulations": "House regulations",
-      "membershipFeeRegulations": "Membership fee regulations",
-      "privacyPolicy": "Privacy policy"
+    "date": {
+        "never": "Never"
     },
-    "header": "Association"
-  },
-  "back": "Back",
-  "backToList": "Back to list",
-  "cancel": "Cancel",
-  "contact": {
-    "address": {
-      "email": "Email address",
-      "postal": "Postal address"
+    "general": {
+        "download": "Download",
+        "no": "No",
+        "yes": "Yes"
     },
-    "bic": "BIC",
-    "header": "Contact",
-    "iban": "IBAN",
-    "kvk": "Chamber of Commerce",
-    "other": "Other details",
-    "social": "Social media"
-  },
-  "date": {
-    "never": "Never"
-  },
-  "general": {
-    "download": "Download",
+    "home": {
+        "activities": "Activities",
+        "drinks": "Drinks",
+        "header": "Home",
+        "join": "Become a member"
+    },
+    "join": {
+        "header": "Become a member"
+    },
     "no": "No",
+    "notFound": {
+        "button": "Go to home page",
+        "header": "Page not found",
+        "text": "Not found"
+    },
     "yes": "Yes"
-  },
-  "home": {
-    "activities": "Activities",
-    "drinks": "Drinks",
-    "header": "Home",
-    "join": "Become a member"
-  },
-  "join": {
-    "header": "Become a member"
-  },
-  "login": {
-    "header": "Sign in"
-  },
-  "logout": {
-    "header": "Sign out"
-  },
-  "notFound": {
-    "button": "Go to home page",
-    "header": "Page not found",
-    "text": "Not found"
-  },
-  "unknown": "Unknown"
 }

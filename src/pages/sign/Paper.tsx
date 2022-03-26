@@ -6,7 +6,12 @@ import {Loader, Header, List, Button, Icon} from 'semantic-ui-react';
 
 import {UserContext} from '../../components/authentication/UserContext';
 import {PaperMandateUploadForm} from '../../components/mandate/PaperMandateUploadForm';
-import {GetMemberMandatesQuery, GetMemberMandatesQueryVariables, MandateStatus, MandateFragment_PaperMandate_} from '../../generated/graphql';
+import {
+    GetMemberMandatesQuery,
+    GetMemberMandatesQueryVariables,
+    MandateStatus,
+    MandateFragment_PaperMandate_ as MandateFragmentPaperMandate
+} from '../../generated/graphql';
 import GetMemberMandates from '../../queries/GetMemberMandates.graphql';
 import {getPendingPaperMandates} from '../../util';
 
@@ -23,13 +28,13 @@ export const Paper: React.FC = () => {
         }
     });
 
-    const paperMandate = data ? getPendingPaperMandates(data.member.mandates.values)[0] as MandateFragment_PaperMandate_ : null;
+    const paperMandate = data ? getPendingPaperMandates(data.member.mandates.values)[0] as MandateFragmentPaperMandate : null;
 
     useEffect(() => {
         if (data && !paperMandate) {
             navigate('/sign');
         }
-    }, [paperMandate]);
+    }, [data, paperMandate, navigate]);
 
     if (loading) {
         return <Loader active />;
@@ -76,7 +81,10 @@ export const Paper: React.FC = () => {
                             {t('mandates:sign.paper.requirements.line3', 'The photo or scan has to be clearly readable.')}
                         </List.Item>
                         <List.Item>
-                            {t('mandates:sign.paper.requirements.line4', 'The document should take up the entire photo or scan with as little margin as possible.')}
+                            {t(
+                                'mandates:sign.paper.requirements.line4',
+                                'The document should take up the entire photo or scan with as little margin as possible.'
+                            )}
                         </List.Item>
                         <List.Item>
                             {t('mandates:sign.paper.requirements.line5', 'The scan of the photo should be a PDF, PNG or JPG file (maximum size 5 MB).')}

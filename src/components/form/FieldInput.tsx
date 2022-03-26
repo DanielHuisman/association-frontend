@@ -2,15 +2,13 @@ import React from 'react';
 import {FieldProps} from 'formik';
 import {Form, Input, Message} from 'semantic-ui-react';
 
-interface IProps extends FieldProps {
+export interface FieldInputProps extends FieldProps {
     type: string;
     label?: string;
     placeholder?: string;
 }
 
-export type FieldInputProps = IProps;
-
-const FieldInput = ({field, form: {touched, errors, isSubmitting}, type, label, placeholder, ...props}: IProps) => (
+export const FieldInput: React.FC<FieldInputProps> = ({field, form: {touched, errors, isSubmitting}, type, label, placeholder, ...props}) => (
     <Form.Field error={touched[field.name] && !!errors[field.name]}>
         {label && <label>{label}</label>}
 
@@ -31,5 +29,3 @@ const FieldInput = ({field, form: {touched, errors, isSubmitting}, type, label, 
         )}
     </Form.Field>
 );
-
-export default FieldInput;

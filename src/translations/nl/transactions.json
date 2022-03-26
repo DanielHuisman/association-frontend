@@ -1,24 +1,24 @@
 {
-  "transaction": {
-    "amount": "Bedrag",
-    "createdAt": "Aangemaakt op",
-    "description": "Beschrijving",
-    "details": "Gegevens transactie",
-    "header": "Transactie",
-    "membershipFee": {
-      "year": "Contributiejaar"
+    "transaction": {
+        "amount": "Bedrag",
+        "createdAt": "Aangemaakt op",
+        "description": "Beschrijving",
+        "details": "Gegevens transactie",
+        "header": "Transactie",
+        "membershipFee": {
+            "year": "Contributiejaar"
+        },
+        "status": "Status",
+        "type": "Type",
+        "types": {
+            "membershipFee": "Contributie",
+            "other": "Overig"
+        },
+        "updatedAt": "Veranderd op",
+        "viewDirectDebit": "Bekijk incasso",
+        "viewDirectDebitBatch": "Bekijk incassobatch",
+        "viewDirectDebitInstruction": "Bekijk incasso-instructie",
+        "viewMember": "Bekijk lid"
     },
-    "status": "Status",
-    "type": "Type",
-    "types": {
-      "membershipFee": "Contributie",
-      "other": "Overig"
-    },
-    "updatedAt": "Veranderd op",
-    "viewDirectDebit": "Bekijk incasso",
-    "viewDirectDebitBatch": "Bekijk incassobatch",
-    "viewDirectDebitInstruction": "Bekijk incasso-instructie",
-    "viewMember": "Bekijk lid"
-  },
-  "transaction:noInstruction": "Deze transactie is niet gelinkt aan een incasso-instructie."
+    "transaction:noInstruction": "Deze transactie is niet gelinkt aan een incasso-instructie."
 }

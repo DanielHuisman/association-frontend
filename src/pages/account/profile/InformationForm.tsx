@@ -25,7 +25,7 @@ export interface InformationFormProps {
     profile: MemberFragment & {
         providers: {
             values: ProviderFragment[];
-        }
+        };
     };
     onSubmit: FormikConfig<IValues>['onSubmit'];
 }
@@ -58,7 +58,7 @@ const schema = Yup.object().shape({
         .oneOf(Object.values(Pronouns)),
     studentType: Yup.string()
         .required('This field is required.')
-        .oneOf(Object.values(StudentType)),
+        .oneOf(Object.values(StudentType))
 });
 
 export const InformationForm: React.FC<InformationFormProps> = ({profile, onSubmit}) => {
@@ -99,7 +99,7 @@ export const InformationForm: React.FC<InformationFormProps> = ({profile, onSubm
             <Field
                 component={FieldDropdown}
                 name="pronouns"
-                label={t('members:member.pronouns', 'Pronouns')}
+                label={t('members:member.pronouns', 'Prefered pronouns')}
                 options={Object.values(Pronouns).map((pronoun) => ({
                     key: pronoun,
                     value: pronoun,

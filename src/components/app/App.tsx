@@ -1,4 +1,4 @@
-import i18n from 'i18next';
+import {default as i18n} from 'i18next';
 import React, {useEffect, useState} from 'react';
 import {ErrorBoundary} from 'react-error-boundary';
 import {Helmet} from 'react-helmet';
@@ -43,7 +43,7 @@ export const App: React.FC = () => {
                 i18n.changeLanguage(user.language.toLowerCase());
             }
         }
-    }, [user]);
+    }, [location.pathname, user, navigate]);
 
     return (
         <ErrorBoundary fallback={<div />}>

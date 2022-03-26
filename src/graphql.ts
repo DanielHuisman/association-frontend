@@ -3,7 +3,7 @@ import {InMemoryCache} from '@apollo/client/cache';
 import {setContext} from '@apollo/client/link/context';
 import {createUploadLink} from 'apollo-upload-client';
 
-import config from './config';
+import {config} from './config';
 import {possibleTypes} from './generated/fragmentTypes.json';
 
 // Initialize HTTP / upload link
@@ -12,12 +12,12 @@ const uploadLink = createUploadLink({
 });
 
 // Initialize authentication link
-const authLink = setContext((_, { headers }) => {
+const authLink = setContext((_, {headers}) => {
     const token = localStorage.getItem('token');
     return {
         headers: {
             ...headers,
-            authorization: token ? `Bearer ${token}` : '',
+            authorization: token ? `Bearer ${token}` : ''
         }
     };
 });
