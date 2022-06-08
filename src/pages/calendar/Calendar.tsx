@@ -1,7 +1,7 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import {useTranslation} from 'react-i18next';
-import {Container, Header, Grid} from 'semantic-ui-react';
+import {Container, Header} from 'semantic-ui-react';
 
 import {CALENDARS} from '../../constants';
 import {Text} from '../../components/text/Text';
@@ -16,7 +16,14 @@ export const Calendar: React.FC = () => {
 
             <Text name="calendar" />
 
-            <Grid columns={2} stackable>
+            <iframe
+                src={CALENDARS.google}
+                style={{width: '100%', height: '500px'}}
+                frameBorder="0"
+                scrolling="no"
+            />
+
+            {/* <Grid columns={2} stackable>
                 <Grid.Row>
                     <Grid.Column>
                         <Header>{t('events:calendar.facebook.header', 'Facebook Calendar')}</Header>
@@ -37,7 +44,7 @@ export const Calendar: React.FC = () => {
                         />
                     </Grid.Column>
                 </Grid.Row>
-            </Grid>
+            </Grid> */}
         </Container>
     );
 };
